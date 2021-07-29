@@ -20,12 +20,12 @@ Additional functionalities (if time permits):
 6. Visualise and export reports on historical trends of enrolments and budgets.
 
 
-Client	                Rachel Cardell-Oliver, Head of Department, UWA Computer Science
-Other Stakeholders	    Academic Services staff, Heads of School and Finance
-Special Conditions	    None
-IP Exploitation Model	  The IP exploitation model requested by the Client is: Creative Commons (open source)
-Similar Projects	      Synthetic examples of unit budgets will be provided.
-Restrictions	          None: face-to-face or online groups.
+- Client: Rachel Cardell-Oliver, Head of Department, UWA Computer Science
+- Other Stakeholders: Academic Services staff, Heads of School and Finance
+- Special Conditions: None
+- IP Exploitation Model: The IP exploitation model requested by the Client is: Creative Commons (open source)
+- Similar Projects: Synthetic examples of unit budgets will be provided.
+- Restrictions: None: face-to-face or online groups.
 
 
 # Group Meeting
