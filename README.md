@@ -1,8 +1,8 @@
 # Unit_Budget_Planner
 
-Deliverable 1 15% 10% group. 5% individual. Due **Friday week 5**
-Deliverable 2 25% 25% individual. Due **Friday week 8**
-Deliverable 3 30% 20% group. 10% individual. Due **Friday week 12**
+## Deliverable 1 15% 10% group. 5% individual. Due **Friday week 5**
+## Deliverable 2 25% 25% individual. Due **Friday week 8**
+## Deliverable 3 30% 20% group. 10% individual. Due **Friday week 12**
 
 # Group Meeting
 
