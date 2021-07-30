@@ -2,7 +2,7 @@
 
 ![image info](./Resources/Budget_App.jpeg)
 
-## <span style='color:red'>Client</span>
+## Client
 <b>Rachel Cardell-Oliver</b> - Head of Department, UWA Computer Science
 
 ## Team Member
@@ -12,7 +12,12 @@
 - Yu Zhu 23053734
 - Keli Yin 22450718
 
+<hr>
 
+## Group Meeting
+
+- Schedule
+  - Every Thursday 4pm, details can be accessed [<b> here </b>](./Group_Meeting/Meeting_Record/20210729\ Meeting\ Minutes).
 ## Deliverable 1 15% 10% group. 5% individual. Due **Friday week 5**
 ## Deliverable 2 25% 25% individual. Due **Friday week 8**
 ## Deliverable 3 30% 20% group. 10% individual. Due **Friday week 12**
