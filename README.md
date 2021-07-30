@@ -1,4 +1,17 @@
-# Unit_Budget_Planner
+# CITS5206 Professional Computing Project - Unit Budget Planner
+
+![image info](./Resources/Budget_App.jpeg)
+
+## <span style='color:red'>Client</span>
+<b>Rachel Cardell-Oliver</b> - Head of Department, UWA Computer Science
+
+## Team Member
+- Ethan Chen 23067035
+- Liangbo Jin 23078811
+- Lida Tong 22957193
+- Yu Zhu 23053734
+- Keli Yin 22450718
+
 
 ## Deliverable 1 15% 10% group. 5% individual. Due **Friday week 5**
 ## Deliverable 2 25% 25% individual. Due **Friday week 8**
