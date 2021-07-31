@@ -54,7 +54,3 @@ Deliverable 2b Project Video (individual) (10 marks)
 1.  Clear summary of the project; Demonstration of project functions; Identification of future tasks. (4 marks)
 2.  Individual reflection gives succinct and insightful reflections on the whole project and what you learned from it. (4 marks)
 3.  Quality of the video presentation; Planning by team members on the organisation and topics covered in the team videos. (2 marks)
-
-_Version 0.1 2021-06-30 Semester 2 2021_
-
-##### ![UWA](./CITS5206 Professional Computing 2021_files/logo-full-hor-rev.png)   Department of Computer Science and Software Engineering
