@@ -1,0 +1,23 @@
+Meeting Minutes
+
+Meeting Date and Time: 04/08/2021 7:30-9pm
+Meeting Location: MS Teams
+Participants: Lida Tong (22957193), Liangbo Jin (23078811), Ethan Chen (23067035), Yu Zhu (23053734), Nara Eam (22805226)
+
+Items discussed & action taken:
+1. Documents provided by client - Done
+2. Questions to be asked in the initial meeting with client
+    - Can you walk us through the current process of unit budget planner? 
+    - What is the prioritise of the requirements among all of them?   
+    - Who will be the one using the software?  
+    - What is the expected final deliverable (i.e. software/web application)?  
+    - What additional information are required in the summary report? 
+    - Do we have any data that must be manually provided by client (When generating final report, these data must be fill by yourself)?  
+    - What are the total number of different type sessions? Can you provide a list of sessions for us?  
+    - For one unit, is there any budget information that is only available for users who have certain permissions? How many role types would there be (viewer, admin)? 
+    - Should the various parts of the table (instructions, assessment, unit structure, resourcing, non-salary costs) appear on the same page or should they be distributed in several different tabs  
+    - Does each user need to create a new account for the system? Or is it better to sign on through single sign-on (Pheme)? 
+3. Roles assignment for the initial meeting with client
+    - Nara Eam (22805226) Faciliator
+    - Ethan Chen (23067035) Secretary
+    - Lida Tong (22957193), Liangbo Jin (23078811), Yu Zhu (23053734) Participant
