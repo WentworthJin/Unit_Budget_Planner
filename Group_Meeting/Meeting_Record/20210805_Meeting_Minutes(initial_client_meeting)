@@ -1,0 +1,20 @@
+Meeting Minutes
+
+Meeting Date and Time: 05/08/2021 11:00-11:30am
+Meeting Location: MS Teams
+Participants: Lida Tong (22957193), Liangbo Jin (23078811), Ethan Chen (23067035), Yu Zhu (23053734), Nara Eam (22805226), Rachel Cardell-Oliver(Client)
+
+Items discussed & action taken:
+1. Gathering requirements from the client
+   - Solve the pain point of current process
+   - 1. Unit coordinator need to fill in the excel form at start of each semester(2nd priority)
+   - 2. Check business rule automatically, be able to provide a summary of unit budget with a filter. (highest priority)
+   - 3. Monitor the budget as the semseter progress(3rd priority)
+2. Non-functional requirement
+   - consider the sensitiveness of the data, it need to be a desktop app, not web app. 
+   - All user with database access should be able to access all function of the app, no need for user log in.
+3. Task assign for the week
+   - design the database structure
+   - start thinking about mock-up of the UI for summary section
+4. Next meeting date
+   - 12/08/2021 4:00pm
