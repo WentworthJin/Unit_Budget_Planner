@@ -11,6 +11,7 @@
 - Lida Tong 22957193
 - Yu Zhu 23053734
 - Nara Eam 22805226
+- Keli Yin 22450718
 
 <hr>
 
@@ -19,7 +20,7 @@
 - Schedule
   - Every <b>Thursday 4pm</b>, details can be accessed [<b>here</b>](./Group_Meeting/Meeting_Record/20210729_Meeting_Minutes).
 
-- Meeting Agenda (Accessed [Here](.Group_Meeting/Meeting_Agenda))
+- Meeting Agenda (Accessed [Here](./Group_Meeting))
 - Group Meeting Record, access files [here](./Group_Meeting/Meeting_Record)
 
 <hr>
