@@ -1,6 +1,6 @@
 # CITS5206 Professional Computing Project - Unit Budget Planner
 
-![image info](./Resources/Budget_App.jpeg)
+![image info](./Resources/Prototype.png)
 
 ## Client
 <b>Rachel Cardell-Oliver</b> - Head of Department, UWA Computer Science
