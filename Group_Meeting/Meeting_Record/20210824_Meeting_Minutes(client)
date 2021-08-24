@@ -1,0 +1,22 @@
+Meeting Minutes
+
+Meeting Date and Time: 24/08/2021 03:30-05:00pm
+Meeting Location: MS Teams
+Participants: Liangbo Jin (23078811), Ethan Chen (23067035), Yu Zhu (23053734), Nara Eam (22805226), Keli Yin (22450718), Rachel Cardell-Oliver(Client)
+
+Items discussed & action taken:
+1. Demostrate the prototype and database example queries for the client
+   - Get feedback from client
+   - 1. Users, for example head of department, might upload multiple spreadsheets
+   - 2. Export data
+   - 3. Command line level for upload and download
+   - 4. The time of data uploaded can be added to the database, which will be helpful when re-upload happens
+   - 5. Highlight warnings in form would be better than list them down when uploading the spreadsheets
+2. Contents for next meeting with client
+   - Share contents with client on GitHub and using tools like docker 
+   - User manual
+   - Add upload time in database
+3. Task for next team meeting
+   - Discuss details of report for deliverable 1 (project plan, assignment)
+4. Next team meeting date
+   - 24/08/2021 7:30pm
