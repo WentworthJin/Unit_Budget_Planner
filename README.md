@@ -4,7 +4,7 @@
 Meeting evidences refer to [Here](./Group_Meeting/Meeting_Record)
 
 ## Deliverable 1b
-Meeting on Individual reflection Evidence: [Click here](./Group_Meeting/Meeting_Record/20210819_meeting.docx)
+Meeting on Individual reflection Evidence: [Click here](./Group_Meeting/Meeting_Record/20210819_meeting.pdf)
 
 
 
