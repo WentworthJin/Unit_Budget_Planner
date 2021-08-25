@@ -1,3 +1,13 @@
+# Deliverable 1
+
+## Deliverable 1a
+Meeting evidences refer to ![Here](./Group_Meeting/Meeting_Record)
+
+## Deliverable 1b
+Meeting on Individual reflection Evidence: ![Click here](./Group_Meeting/Meeting_Record/20210819_meeting.docx)
+
+
+
 # CITS5206 Professional Computing Project - Unit Budget Planner
 
 ![image info](./Resources/Prototype.png)
