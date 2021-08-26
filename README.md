@@ -3,6 +3,8 @@
 ## Deliverable 1a
 Meeting evidences refer to [Here](./Group_Meeting)
 
+Team Skill files are accessed [Here](./Team_Skills)
+
 ## Deliverable 1b
 Meeting on Individual reflection Evidence: [Click here](./Group_Meeting/Meeting_Record/20210819_meeting.pdf)
 
