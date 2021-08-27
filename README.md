@@ -61,8 +61,14 @@ The software will:
 - [Deliverable 3](./Project_Details/) 30% ( 20% Group, 10% Individual ) <b>Due: Week 12</b>
 
 ### Client Requirements
-- Good
-- Good
+- The app should be in a desktop format 
+- The system shall allow the user to import the spreadsheet, or group of spreadsheets
+- The system should be able to produce and filter summary report  
+- The system shall allow user to type in their own SQL query
+- The system should be able to store the comment from the spreadsheet  
+- The system should allow the user to pull up the comment and check if there is actual anomaly happen.
+- The system shall be able to track the historical budget for user
+- The system shall provide different interface for different users according to their roles such as Unit Coordinator and Head of department
 
 <hr>
 
