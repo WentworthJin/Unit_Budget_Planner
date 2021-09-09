@@ -72,6 +72,7 @@ The software will:
 
 
 # For using the interface, 
+* **In order to use the interface, will require to install node.js**
 * Change the working directory to Unit Budget
 * npm install 
 * npm start 
