@@ -70,6 +70,12 @@ The software will:
 - The system shall be able to track the historical budget for user
 - The system shall provide different interface for different users according to their roles such as Unit Coordinator and Head of department
 
+
+# For using the interface, 
+* Change the working directory to Unit Budget
+* npm install 
+* npm start 
+
 <hr>
 
 
