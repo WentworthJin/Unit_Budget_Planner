@@ -7,3 +7,7 @@ function myFunction() {
       x.style.display = "block";
     }
   }
+function reply_click(clicked_id)
+{
+    alert(clicked_id);
+}

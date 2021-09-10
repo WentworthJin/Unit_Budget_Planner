@@ -9,18 +9,18 @@
     <link href="../src/style.css" rel="stylesheet">
   </head>
   <body>
-    <h1>Welcome back!</h1>
+    <h1>Welcome back to the Unit Budget Planner!</h1>
     </br>
     <p>Please select your role before action.</p>
     </br>
-    <p><button onclick="myFunction()">Head of Department</button> <button>Unit Coordinator</button> <button>Head of Finance</button></p>
+    <p><button id="Head of Department" onClick="reply_click(this.id)">Head of Department</button> <button onClick=myFunction()>Unit Coordinator</button> <button>Head of Finance</button></p>
     </br>
     <div id="role">
-      You are the Head of Department. 
+      You are the Unit Coordinator. 
     </div>
     </br>
     <p>Click on the "Choose File" button to upload a file:</p>
-    <form method="POST">
+    <form method="POST" action="table.html">
       <input type="file" id="myFile" name="filename">
       <input type="submit" value="Upload"> 
     </form>
