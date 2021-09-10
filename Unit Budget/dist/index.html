@@ -13,13 +13,20 @@
     </br>
     <p>Please select your role before action.</p>
     </br>
-    <p><button>Head of Department</button> <button>Unit Coordinator</button> <button>Head of Finance</button></p>
+    <p><button onclick="myFunction()">Head of Department</button> <button>Unit Coordinator</button> <button>Head of Finance</button></p>
+    </br>
+    <div id="role">
+      You are the Head of Department. 
+    </div>
     </br>
     <p>Click on the "Choose File" button to upload a file:</p>
     <form>
       <input type="file" id="myFile" name="filename">
       <br>
       <input type="submit">
+    <form method="POST">
+      <input type="file" id="myFile" name="filename">
+      <input type="submit" value="Upload"> 
     </form>
     </br>
     <p><button onclick="location.href='result.html';">Summary Report</button></p>
