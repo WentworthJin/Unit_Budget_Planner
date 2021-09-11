@@ -79,4 +79,26 @@ Button.filter {
   font-size: 14pt;
 }
 
+.radio {
+  border: 3px solid black;
+  font-size: 14pt;
+  padding: 10px 20px;
+}
+
+/*--------------------------------------------------------------
+# query
+--------------------------------------------------------------*/
+
+.chart {
+  margin-left: 30px;
+}
+
+#stack.chart {
+  border: 3px solid black;
+}
+
+#barchart.chart {
+  border: 3px solid black;
+}
+
 

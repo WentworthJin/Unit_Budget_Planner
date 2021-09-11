@@ -8,12 +8,34 @@
     <div>
       <h3>Summary Report</h3>
       <div class="query">
-        <button class="filter">Filter</button>
+        <button class="filter" onclick=showAndHide()>Filter</button>
         <input type="text" placeholder="Enter your query" class="search">
         <input type="submit" value="Search" class="enter">
-      </div>  
+        <br><br>
+        <div class="radio" id="radio">
+          <input type="radio" name="semester" value="semester" id="semester"/>
+          <label for="semester">Semester</label>
+          <input type="radio" name="year" value="year" id="year">
+          <label for="year">Year</label>
+          <input type="radio" name="unit" value="unit" id="unit">
+          <label for="unit">Unit</label>
+        </div>
+        <br>
+        <div id="barchart" style="height: 370px; width: 50%;" class="chart"></div>
+        <br>
+        <div id="stack" style="height: 370px; width: 50%;" class="chart"></div> 
+        <div class="tables">
+          <table>
+            <tr>
+              <th>Name</th><th>Unit Code</th>
+            </tr>
+          </table>
+        </div>
+      </div> 
+      <br>
       <Button class="next"><a href="index.html">Back</a></Button>
     </div>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"> </script>
     <script src="../src/index.js"></script>
   </body>
 </html>
