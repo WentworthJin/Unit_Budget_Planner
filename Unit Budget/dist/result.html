@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>Summary Report</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="../src/style.css" rel="stylesheet">
   </head>
   <body>
@@ -11,6 +12,7 @@
         <button class="filter" onclick=showAndHide()>Filter</button>
         <input type="text" placeholder="Enter your query" class="search">
         <input type="submit" value="Search" class="enter">
+        <button class="comment" onclick=showComment()>Comment</button>
         <br><br>
         <div class="radio" id="radio">
           <input type="radio" name="semester" value="semester" id="semester"/>
@@ -21,21 +23,31 @@
           <label for="unit">Unit</label>
         </div>
         <br>
-        <div id="barchart" style="height: 370px; width: 50%;" class="chart"></div>
-        <br>
-        <div id="stack" style="height: 370px; width: 50%;" class="chart"></div> 
-        <div class="tables">
-          <table>
+        <div class="col-s-offset-9 col-s-4">
+          <table class="tables">
             <tr>
-              <th>Name</th><th>Unit Code</th>
+              <th>id</th><th>Name</th><th>Unit Code</th><th>Semester</th><th>Year</th><th>Total Cost</th>
+            </tr>
+            <tr>
+              <td>1</td><td>Lyndon While</td><td>CITS1101</td><td>1</td><td>2021</td><td>0</td>
+            </tr>
+            <tr>
+              <td>2</td><td>Manou Rosenberg</td><td>CITS1101</td><td>1</td><td>2021</td><td>6469</td>
             </tr>
           </table>
         </div>
+        <div id="barchart" style="height: 370px; width: 50%;" class="chart"></div>
+        <br>
+        <div id="stack" style="height: 370px; width: 50%;" class="chart"></div> 
       </div> 
       <br>
-      <Button class="next"><a href="index.html">Back</a></Button>
+    <Button class="next"><a href="index.html">Back</a></Button>
     </div>
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"> </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" 
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" 
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="../src/index.js"></script>
   </body>
 </html>

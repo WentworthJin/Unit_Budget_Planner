@@ -51,7 +51,11 @@ Button.next {
   border-right: 5px solid black;
   border-top: 3px solid black;
   border-bottom: 3px solid black;
+  margin-bottom: 10px;
+  margin-top: 10px;
 }
+
+
 
 
 /*--------------------------------------------------------------
@@ -85,6 +89,12 @@ Button.filter {
   padding: 10px 20px;
 }
 
+Button.comment {
+  float: right;
+  padding: 10px 20px;
+  font-size: 14pt;
+}
+
 /*--------------------------------------------------------------
 # chart
 --------------------------------------------------------------*/
@@ -101,4 +111,34 @@ Button.filter {
   border: 3px solid black;
 }
 
+/*--------------------------------------------------------------
+# table
+--------------------------------------------------------------*/
 
+
+table.tables {
+  width: auto;
+  float: right;
+}
+
+.tables {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.tables td, .tables th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}  
+
+.tables tr:nth-child(even){background-color: #f2f2f2;}
+
+.tables tr:hover {background-color: #ddd;}
+
+.tables th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: white;
+}

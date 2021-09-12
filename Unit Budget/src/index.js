@@ -41,8 +41,14 @@ window.onload = function () {
        { label: "CITS5501", y: 24 }
        ]
      }
-     ]
-   });
+     ],
+    axisY:{
+      prefix: "$",
+      suffix: "K"
+    }     
+    
+  });
+
 
   chart.render();
 }
