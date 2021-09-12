@@ -12,9 +12,9 @@ function reply_click(clicked_id)
     alert("You are the " + clicked_id + ".");
 }
 
-document.getElementById('role1').onclick = function(){
-    this.style.backgroundColor = 'Yellow';
-};
+// document.getElementById('role1').onclick = function(){
+//     this.style.backgroundColor = 'Yellow';
+// };
 
 function showAndHide() {
   const x = document.getElementById("radio");
@@ -52,8 +52,6 @@ window.onload = function () {
     }     
     
   });
-
-
   chart.render();
 }
 
@@ -64,7 +62,7 @@ var stack_chart = new CanvasJS.Chart(stack, {
   theme: "light2",
         
   title:{
-    text: "Fruits sold in First & Second Quarter"              
+    text: "Budget for Semester 1 and 2"              
   },
 
   data: [  //array of dataSeries     
