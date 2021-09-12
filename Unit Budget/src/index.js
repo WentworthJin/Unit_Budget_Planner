@@ -9,8 +9,12 @@ function myFunction() {
   }
 function reply_click(clicked_id)
 {
-    alert(clicked_id);
+    alert("You are the " + clicked_id + ".");
 }
+
+document.getElementById('role1').onclick = function(){
+    this.style.backgroundColor = 'Yellow';
+};
 
 function showAndHide() {
   const x = document.getElementById("radio");
