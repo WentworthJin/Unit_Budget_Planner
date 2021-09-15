@@ -1,16 +1,8 @@
 // This method is for role identification
-function myFunction() {
-    var x = document.getElementById("role");
-    if (x.style.display === "block") {
-      x.style.display = "none";
-    } else {
-      x.style.display = "block";
-    }
+  var el_down = document.getElementById("GFG_DOWN");
+  function GFG_click(clicked) {
+      el_down.innerHTML = "You are the "+clicked+".";
   }
-function reply_click(clicked_id)
-{
-    alert("You are the " + clicked_id + ".");
-}
 
 // document.getElementById('role1').onclick = function(){
 //     this.style.backgroundColor = 'Yellow';
