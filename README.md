@@ -71,7 +71,7 @@ The software will:
 - The system shall provide different interface for different users according to their roles such as Unit Coordinator and Head of department
 
 
-# For using the interface, 
+# For using the interface
 * **In order to use the interface, will require to install node.js at https://nodejs.org/en/download/**
 * Change the working directory to Unit Budget by **cd 'Unit Budget'**
 * npm install 
