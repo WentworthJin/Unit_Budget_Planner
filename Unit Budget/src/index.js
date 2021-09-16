@@ -17,8 +17,27 @@ function showAndHide() {
   }
 }
 
+// get the data from database 
+const getAllData = () => {
+  fetch('http://127.0.0.1:5000/get_all_data', {
+    method:"GET",
+    headers:{
+      headers: {
+        "Content-Type":"application/json"
+      }
+    }
+  })
+  .then(resp => resp.json())
+  .then((data) => 
+    window.onload(data))
+  .catch(error => 
+    console.log(error))
+}
+
+
+// make the data dynamic changing
 // drawing a bar chart 
-window.onload = function () {
+window.onload = function (data) {
   var chart = new CanvasJS.Chart("barchart", {
 
     title:{
@@ -30,11 +49,9 @@ window.onload = function () {
        /*** Change type "column" to "bar", "area", "line" or "pie"***/
        type: "column",
        dataPoints: [
-       { label: "CITS5508", y: 18 },
-       { label: "CITS5503", y: 29 },
-       { label: "CITS5206", y: 40 },                                    
-       { label: "CITS5506", y: 34 },
-       { label: "CITS5501", y: 24 }
+       { label: data[0][0], y: data[0][1] },
+       { label: data[1][0], y: data[1][1] },
+       { label: data[2][0], y: data[2][1] },                                    
        ]
      }
      ],
@@ -46,6 +63,8 @@ window.onload = function () {
   });
   chart.render();
 }
+
+getAllData()
 
 // drawing a stack bar chart 
 var stack = document.getElementById("stack")
