@@ -13,6 +13,13 @@ function createWindow () {
   })
 
   // Initializing the Database
+  const sqlite3 = require('sqlite3').verbose();
+  let db = new sqlite3.Database('./DataBase/Unit_Budget.db', (err) => {
+    if (err) {
+      console.error(err.message);
+   }
+    console.log('Connected to the Unit Budget database.');
+  });
 
   const DBStructurefile = require('child_process').spawn('python',['./Python_file/Create_Table.py']);
     DBStructurefile.stdout.on('data',function(data){
@@ -26,13 +33,6 @@ function createWindow () {
     });
 
   // Test DB Connection
-  const sqlite3 = require('sqlite3').verbose();
-  let db = new sqlite3.Database('./DataBase/Unit_Budget.db', (err) => {
-    if (err) {
-      console.error(err.message);
-   }
-    console.log('Connected to the Unit Budget database.');
-  });
   db.serialize(() => {
     db.each(`SELECT * 
              FROM Unit`, (err, row) => {
