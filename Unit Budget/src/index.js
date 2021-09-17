@@ -35,9 +35,14 @@ const getAllData = () => {
 }
 
 
-// make the data dynamic changing
 // drawing a bar chart 
 window.onload = function (data) {
+  const dataArray = []
+  for(var i = 0; i < data.length; i++){
+    dataArray.push({"label":data[i][0], "y":data[i][7]})
+  } 
+  
+
   var chart = new CanvasJS.Chart("barchart", {
 
     title:{
@@ -48,16 +53,11 @@ window.onload = function (data) {
 
        /*** Change type "column" to "bar", "area", "line" or "pie"***/
        type: "column",
-       dataPoints: [
-       { label: data[0][0], y: data[0][1] },
-       { label: data[1][0], y: data[1][1] },
-       { label: data[2][0], y: data[2][1] },                                    
-       ]
+       dataPoints: dataArray
      }
      ],
     axisY:{
       prefix: "$",
-      suffix: "K"
     }     
     
   });
@@ -65,6 +65,25 @@ window.onload = function (data) {
 }
 
 getAllData()
+
+// get the data to plot the graph 
+const getEmployeeData = () => {
+  fetch('http://127.0.0.1:5000/employee_budget', {
+    method:"GET",
+    headers:{
+      headers: {
+        "Content-Type":"application/json"
+      }
+    }
+  })
+  .then(resp => resp.json())
+  .then((data) =>
+    console.log(data)
+  )
+  .catch(error => 
+    console.log(error))
+}
+
 
 // drawing a stack bar chart 
 var stack = document.getElementById("stack")
