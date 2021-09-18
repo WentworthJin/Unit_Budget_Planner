@@ -21,35 +21,25 @@ def create_table(conn, create_table_sql):
     except Error as f:
         print(f)
 
-#Insert data into Unit table
-def create_unit(conn, unit):
-    sql = ''' INSERT INTO Unit(UnitID,UnitCode,Semester,Year)
-              VALUES(?,?,?,?) '''
-    cur = conn.cursor()
-    cur.execute(sql, unit)
-    conn.commit()
-    return cur.lastrowid
-
-
 def main():
-    database = "./DataBase/Unit_Budget.db"
+    database = "Unit_Budget.db"
 
     FirstRun = True
 
     sql_create_unit_table = """ CREATE TABLE IF NOT EXISTS Unit (
-                                      UnitID INT PRIMARY KEY,
+                                      UnitID INTEGER PRIMARY KEY AUTOINCREMENT,
                                       UnitCode VARCHAR (10),
-                                      Semester INT (1),
+                                      Semester VARCHAR (10),
                                       Year INT (4) 
                                 );"""
 
     sql_create_teachingcode_table = """ CREATE TABLE IF NOT EXISTS TeachingCode (
-                                              TeachingCode INT PRIMARY KEY,
+                                              TeachingCode INTEGER PRIMARY KEY AUTOINCREMENT,
                                               TeachingName VARCHAR (50)
                                         );"""
     
     sql_create_staff_table = """ CREATE TABLE IF NOT EXISTS Staff (
-                                      StaffID INT PRIMARY KEY,
+                                      StaffID INTEGER PRIMARY KEY AUTOINCREMENT,
                                       TeachingID INT REFERENCES TeachingCode (TeachingCode) ON DELETE RESTRICT ON UPDATE CASCADE,
                                       Name VARCHAR (50),
                                       Position  VARCHAR (30),
@@ -61,13 +51,13 @@ def main():
                                   );"""
 
     sql_create_session_table = """ CREATE TABLE IF NOT EXISTS Session (
-                                        SessionID INT PRIMARY KEY,
+                                        SessionID INTEGER PRIMARY KEY AUTOINCREMENT,
                                         SessionName VARCHAR (50) UNIQUE,
                                         SessionType VARCHAR (10) 
                                   );"""
 
     sql_create_nonsalarycost_table = """ CREATE TABLE IF NOT EXISTS NonSalaryCosts (
-                                              NSCID PRIMARY KEY,
+                                              NSCID INTEGER PRIMARY KEY AUTOINCREMENT,
                                               NSCName VARCHAR (50),
                                               Hours INT,
                                               CostPerHour INT,
@@ -80,13 +70,13 @@ def main():
                                           );"""
 
     sql_create_othercost_table = """ CREATE TABLE IF NOT EXISTS OtherCost (
-                                          OCID PRIMARY KEY,
+                                          OCID INTEGER PRIMARY KEY AUTOINCREMENT,
                                           NSCID INT REFERENCES NonSalaryCosts (NSCID) ON DELETE RESTRICT ON UPDATE CASCADE,
                                           UnitID INT REFERENCES Unit (UnitID) ON DELETE RESTRICT ON UPDATE CASCADE
                                       );"""
 
     sql_create_enrollment_table = """ CREATE TABLE IF NOT EXISTS Enrolment (
-                                            EnrolmentID INT PRIMARY KEY,
+                                            EnrolmentID INTEGER PRIMARY KEY AUTOINCREMENT,
                                             UnitID INT REFERENCES Unit (UnitID) ON DELETE RESTRICT ON UPDATE CASCADE,
                                             EnrolmentNumber INT,
                                             IsEstimated VARCHAR (3),
@@ -94,7 +84,7 @@ def main():
                                       );"""
 
     sql_create_budget_table = """ CREATE TABLE IF NOT EXISTS Budget (
-                                        BudgetID INT PRIMARY KEY,
+                                        BudgetID INTEGER PRIMARY KEY AUTOINCREMENT,
                                         UnitID INT REFERENCES Unit (UnitID) ON DELETE RESTRICT ON UPDATE CASCADE,
                                         Cost INT,
                                         IsEstimated VARCHAR (3),
@@ -102,7 +92,7 @@ def main():
                                   );"""
 
     sql_create_activities_table = """ CREATE TABLE IF NOT EXISTS Activities (
-                                            ActivitiesID INT PRIMARY KEY,
+                                            ActivitiesID INTEGER PRIMARY KEY AUTOINCREMENT,
                                             UnitID INT REFERENCES Unit (UnitID) ON DELETE RESTRICT ON UPDATE CASCADE,
                                             StaffID INT REFERENCES Staff (StaffID) ON DELETE RESTRICT ON UPDATE CASCADE,
                                             SessionID  INT REFERENCES Session (SessionID) ON DELETE RESTRICT ON UPDATE CASCADE,

@@ -24,21 +24,27 @@
         <br>
           <table class="tables">
             <tr>
-              <th>id</th><th>Name</th><th>Unit Code</th><th>Semester</th><th>Year</th><th>Total Cost</th>
+              <th>{{names[0]}}</th><th>{{names[1]}}</th>
+              <th>{{names[2]}}</th><th>{{names[3]}}</th><th>{{names[4]}}</th>
+              <th>{{names[5]}}</th><th>{{names[6]}}</th><th>{{names[7]}}</th>
+              <th>{{names[8]}}</th><th>{{names[9]}}</th><th>{{names[10]}}</th>
             </tr>
+            {% for row in rows %}
             <tr>
-              <td>1</td><td>Lyndon While</td><td>CITS1101</td><td>1</td><td>2021</td><td>0</td>
+              <td>{{row[0]}}</td><td>{{row[1]}}</td><td>{{row[2]}}</td><td>{{row[3]}}</td>
+              <td>{{row[4]}}</td><td>{{row[5]}}</td><td>{{row[6]}}</td><td>{{row[7]}}</td>
+              <td>{{row[8]}}</td><td>{{row[9]}}</td><td>{{row[10]}}</td>
             </tr>
-            <tr>
-              <td>2</td><td>Manou Rosenberg</td><td>CITS1101</td><td>1</td><td>2021</td><td>6469</td>
-            </tr>
+            {% endfor %}
           </table>
-        <div id="barchart" style="height: 370px; width: 50%;" class="chart"></div>
+        <div id="barchart" style="height: 370px; width: 70%;" class="chart"></div>
         <br>
-        <div id="stack" style="height: 370px; width: 50%;" class="chart"></div> 
+        <div id="stack" style="height: 370px; width: 70%;" class="chart"></div> 
+        <br>
+        <div id="horizontal" style="height: 370px; width: 70%;" class="chart"></div>
       </div> 
       <br>
-    <Button class="next"><a href="index.html">Back</a></Button>
+    <Button class="next"><a href="http://127.0.0.1:5000/">Back</a></Button>
     </div>
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"> </script>
     <script src="../src/index.js"></script>

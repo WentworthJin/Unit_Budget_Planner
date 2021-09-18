@@ -38,11 +38,11 @@ a {
 
 
 Button.next a {
-  color:white;
+  color:black;
 }
 
 Button.next {
-  background-color: #4CAF50;;
+  background-color: #04AA6D;
   padding: 15px 32px;
   float:right;
   font-size: 14pt;
@@ -50,8 +50,8 @@ Button.next {
   border-right: 5px solid black;
   border-top: 3px solid black;
   border-bottom: 3px solid black;
-  margin-bottom: 10px;
-  margin-top: 10px;
+  margin-bottom: 30px;
+  margin-left: 10px;
 }
 
 
@@ -99,7 +99,8 @@ Button.comment {
 --------------------------------------------------------------*/
 
 .chart {
-  margin-left: 30px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #stack.chart {
@@ -110,19 +111,19 @@ Button.comment {
   border: 3px solid black;
 }
 
+#horizontal.chart {
+  border: 3px solid black;
+}
+
 /*--------------------------------------------------------------
 # table, need to change size of table according to size of screen 
 --------------------------------------------------------------*/
 
 
-table.tables {
-  width: auto;
-  float: right;
-}
-
 .tables {
   border-collapse: collapse;
   width: 100%;
+  margin-bottom: 20px;
 }
 
 .tables td, .tables th {

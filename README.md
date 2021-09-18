@@ -1,13 +1,25 @@
-# Deliverable 1
+# Deliverable 2
 
-## Deliverable 1a
-Meeting evidences refer to [Here](./Group_Meeting)
+## How to Launch the Application
 
-Team Skill files are accessed [Here](./Team_Skills)
+<b>1. Set up<b>
 
-## Deliverable 1b
-Meeting on Individual reflection Evidence: [Click here](./Group_Meeting/Meeting_Record/20210819_meeting.pdf)
+**In order to use the interface, will require to install node.js at https://nodejs.org/en/download/**
 
+You need to install the packages inside the [<b>requirements.txt<b>](./Unit_Budget/Python_File/requirements.txt). Run the following codes.
+<pre>
+
+pip3 install -r ./Unit_Budget/Python_File/requirements.txt
+
+cd Unit_Budget
+
+npm install
+
+npm start
+
+</pre>
+
+<hr>
 
 
 # CITS5206 Professional Computing Project - Unit Budget Planner
@@ -71,11 +83,6 @@ The software will:
 - The system shall provide different interface for different users according to their roles such as Unit Coordinator and Head of department
 
 
-# For using the interface
-* **In order to use the interface, will require to install node.js at https://nodejs.org/en/download/**
-* Change the working directory to Unit Budget by **cd 'Unit Budget'**
-* npm install 
-* npm start 
 
 <hr>
 

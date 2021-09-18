@@ -17,8 +17,31 @@ function showAndHide() {
   }
 }
 
+// get the data from database 
+const getAllData = () => {
+  fetch('http://127.0.0.1:5000/get_all_data', {
+    method:"GET",
+    headers:{
+      headers: {
+        "Content-Type":"application/json"
+      }
+    }
+  })
+  .then(resp => resp.json())
+  .then((data) => 
+    window.onload(data))
+  .catch(error => 
+    console.log(error))
+}
+
+
 // drawing a bar chart 
-window.onload = function () {
+window.onload = function (data) {
+  const dataArray = []
+  for(var i = 0; i < data.length; i++){
+    dataArray.push({"label":data[i][0], "y":data[i][7]})
+  } 
+  
   var chart = new CanvasJS.Chart("barchart", {
 
     title:{
@@ -29,27 +52,70 @@ window.onload = function () {
 
        /*** Change type "column" to "bar", "area", "line" or "pie"***/
        type: "column",
-       dataPoints: [
-       { label: "CITS5508", y: 18 },
-       { label: "CITS5503", y: 29 },
-       { label: "CITS5206", y: 40 },                                    
-       { label: "CITS5506", y: 34 },
-       { label: "CITS5501", y: 24 }
-       ]
+       dataPoints: dataArray
      }
      ],
     axisY:{
       prefix: "$",
-      suffix: "K"
     }     
     
   });
   chart.render();
 }
 
+
+// get the data to plot the graph 
+const getEmployeeData = () => {
+  fetch('http://127.0.0.1:5000/employee_budget', {
+    method:"GET",
+    headers:{
+      headers: {
+        "Content-Type":"application/json"
+      }
+    }
+  })
+  .then(resp => resp.json())
+  .then((data) =>
+    horizontalbarchart(data)
+  )
+  .catch(error => 
+    console.log(error))
+}
+
+const horizontalbarchart = function (data) {
+  const dataArray = []
+  for(var i = 0; i < data.length; i++){
+    dataArray.push({"y":data[i][4], "label":data[i][0]})
+  };
+
+  var horizontal = document.getElementById("horizontal")
+  var bar_chart = new CanvasJS.Chart(horizontal, {
+    title:{
+      text: "Budget for each employees"              
+    },
+    data: [//array of dataSeries              
+      { //dataSeries object
+
+       /*** Change type "column" to "bar", "area", "line" or "pie"***/
+       type: "column",
+       dataPoints: dataArray
+      }
+    ],
+    axisY:{
+      prefix: "$",
+    }     
+    
+  });
+  bar_chart.render();
+}
+
+
+
 // drawing a stack bar chart 
-var stack = document.getElementById("stack")
-var stack_chart = new CanvasJS.Chart(stack, {
+
+const graphing =  function() {
+  var stack = document.getElementById("stack")
+  var stack_chart = new CanvasJS.Chart(stack, {
 
   theme: "light2",
         
@@ -94,3 +160,12 @@ var stack_chart = new CanvasJS.Chart(stack, {
 });
 
 stack_chart.render()
+}
+
+getAllData()
+getEmployeeData()
+graphing()
+
+
+
+

@@ -1,5 +1,6 @@
 import sqlite3
 import sys
+import pandas as pd
 from sqlite3 import Error
 
 #create a database connection to a SQLite database
@@ -13,15 +14,15 @@ def create_connection(db_file):
     
     return conn
 
-#Insert data into Unit table
-def create_unit(conn, unit):
-    sql = ''' INSERT INTO Unit(UnitID,UnitCode,Semester,Year)
-              VALUES(?,?,?,?) '''
+#Insert data into TeachingCode table
+def insert_teachingcode(conn, TeachingCode):
+    sql = ''' Insert into TeachingCode(TeachingName)
+              VALUES(?) '''
     cur = conn.cursor()
-    data_check=cur.execute(sql, unit)
+    data_check=cur.execute(sql, TeachingCode)
     # Check if data already exist
     if data_check is None:
-      cur.execute(sql, unit)
+      cur.execute(sql, TeachingCode)
       conn.commit()
       return cur.lastrowid
 
@@ -29,25 +30,22 @@ def create_unit(conn, unit):
 def main():
 
   try:
-    database = "./DataBase/Unit_Budget.db"
+    database = "Unit_Budget.db"
 
     #Create a database connection
     conn = create_connection(database)
 
     #Insert Data
     with conn:
-      Unit1 = ('1','CITS5503','2','2020')
-      Unit2 = ('2','CITS4401','1','2020')
-      Unit3 = ('3','CITS1101','1','2021')
 
-      create_unit(conn,Unit1)
-      create_unit(conn,Unit2)
-      create_unit(conn,Unit3)
+      TeachingCode = ["TeachingName"]
+
+      insert_teachingcode(conn,TeachingCode)
 
     print("Dummy Unit data has been inserted")
 
-  except Error:
-    print("Some of the data has already been entered, please check again")
+  except Error as e:
+    print(e)
 
 if __name__ == '__main__':
   main()

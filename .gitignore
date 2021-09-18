@@ -4,3 +4,6 @@ venv/
 node_modules/
 package-lock.json/
 package-lock.json
+venv
+BudgetSample (1).db
+Unit_Budget.db
