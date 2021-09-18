@@ -98,7 +98,8 @@ def get_details(file):
   unit_detail = pd.read_excel(file,usecols ="A:B",header =8,nrows=5)
   unit_strcture = pd.read_excel(file,usecols ="A:J",header =29,nrows=13)
   resourcing = pd.read_excel(file,usecols ="A:L",header =46,nrows=9)
-  return unit_detail,unit_strcture,resourcing
+  NSC = pd.read_excel(file,usecols ="A:F",header =62,nrows=4)
+  return unit_detail,unit_strcture,resourcing,NSC
 
 
 def check_session(SessionName):
@@ -114,6 +115,7 @@ def main():
   pd.set_option("max_columns", 10)
   excel_file ="CITS1001_Sem1,2021 budget v3.xlsx"
   unit_detail,unit_strcture,resourcing = get_details(excel_file)
+
   UnitCode =unit_detail.iloc[0,1]
   Semester=unit_detail.iloc[1,1]
   Year =unit_detail.iloc[4,1]
@@ -122,6 +124,10 @@ def main():
 
   sessionNames =unit_strcture.iloc[0:12,0]
 
+  NSCNames = NSC.iloc[:3,0]
+  NSCHours = NSC.iloc[:3,3]
+  NSCRates = NSC.iloc[:3,4]
+  NSCCost = NSC.iloc[:3,5]
 
   try:
     database = "Unit_Budget.db"
@@ -145,11 +151,16 @@ def main():
         SessionType = check_session(SessionName)
         session = (SessionName,SessionType)
         insert_session(conn,session)
-        
+
 
       #Insert NonSalaryCost table
-      #nsc = (NSCName,Hours,CostPerHour,TotalCost)
-      insert_nsc(conn,nsc)
+      for i in range(len(NSCCost)):
+        NSCName = NSCNames[i]
+        Hours = NSCHours[i]
+        CostPerHour = NSCRates[i]
+        TotalCost = NSCCost[i]
+        nsc = (NSCName,Hours,CostPerHour,TotalCost)
+        insert_nsc(conn,nsc)
 
       #Insert Enrolment table
       #enrol = (UnitID,EnrolmentNumber,IsEstimated,IsLastSemester)
