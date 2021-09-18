@@ -11,7 +11,7 @@ You need to install the packages inside the [<b>requirements.txt<b>](./Unit_Budg
 
 pip3 install -r requirements.txt
 
-cd Unit\ Budget
+cd Unit_Budget
 
 npm install
 
