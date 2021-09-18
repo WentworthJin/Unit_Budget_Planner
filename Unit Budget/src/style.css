@@ -111,6 +111,10 @@ Button.comment {
   border: 3px solid black;
 }
 
+#horizontal.chart {
+  border: 3px solid black;
+}
+
 /*--------------------------------------------------------------
 # table, need to change size of table according to size of screen 
 --------------------------------------------------------------*/

@@ -42,7 +42,6 @@ window.onload = function (data) {
     dataArray.push({"label":data[i][0], "y":data[i][7]})
   } 
   
-
   var chart = new CanvasJS.Chart("barchart", {
 
     title:{
@@ -64,7 +63,6 @@ window.onload = function (data) {
   chart.render();
 }
 
-getAllData()
 
 // get the data to plot the graph 
 const getEmployeeData = () => {
@@ -78,16 +76,46 @@ const getEmployeeData = () => {
   })
   .then(resp => resp.json())
   .then((data) =>
-    console.log(data)
+    horizontalbarchart(data)
   )
   .catch(error => 
     console.log(error))
 }
 
+const horizontalbarchart = function (data) {
+  const dataArray = []
+  for(var i = 0; i < data.length; i++){
+    dataArray.push({"y":data[i][4], "label":data[i][0]})
+  };
+
+  var horizontal = document.getElementById("horizontal")
+  var bar_chart = new CanvasJS.Chart(horizontal, {
+    title:{
+      text: "Budget for each employees"              
+    },
+    data: [//array of dataSeries              
+      { //dataSeries object
+
+       /*** Change type "column" to "bar", "area", "line" or "pie"***/
+       type: "column",
+       dataPoints: dataArray
+      }
+    ],
+    axisY:{
+      prefix: "$",
+    }     
+    
+  });
+  bar_chart.render();
+}
+
+
 
 // drawing a stack bar chart 
-var stack = document.getElementById("stack")
-var stack_chart = new CanvasJS.Chart(stack, {
+
+const graphing =  function() {
+  var stack = document.getElementById("stack")
+  var stack_chart = new CanvasJS.Chart(stack, {
 
   theme: "light2",
         
@@ -132,3 +160,12 @@ var stack_chart = new CanvasJS.Chart(stack, {
 });
 
 stack_chart.render()
+}
+
+getAllData()
+getEmployeeData()
+graphing()
+
+
+
+
