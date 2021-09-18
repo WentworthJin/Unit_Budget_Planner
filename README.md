@@ -2,7 +2,7 @@
 
 ## How to Launch the Application
 
-1. Set up
+<b>1. Set up<b>
 
 **In order to use the interface, will require to install node.js at https://nodejs.org/en/download/**
 
