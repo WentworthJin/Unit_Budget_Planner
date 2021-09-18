@@ -94,7 +94,32 @@ def insert_budget(conn, budget):
       conn.commit()
       return cur.lastrowid
 
+def get_details(file):
+  unit_detail = pd.read_excel(file,usecols ="A:B",header =8,nrows=5)
+  unit_strcture = pd.read_excel(file,usecols ="A:J",header =29,nrows=13)
+  resourcing = pd.read_excel(file,usecols ="A:L",header =46,nrows=9)
+  return unit_detail,unit_strcture,resourcing
+
+
+def check_session(SessionName):
+  if 'mark' in SessionName.lower():
+    return 'M'
+  else:
+    return 'NM'
+
+
+
+
 def main():
+  pd.set_option("max_columns", 10)
+  folder ="CITS1001_Sem1,2021 budget v3.xlsx"
+  unit_detail,unit_strcture,resourcing = get_details(folder)
+  UnitCode =unit_detail.iloc[0,1]
+  Semester=unit_detail.iloc[1,1]
+  Year =unit_detail.iloc[4,1]
+
+  teachingcodes = resourcing.iloc[0:7,3]
+
 
   try:
     database = "Unit_Budget.db"
@@ -105,15 +130,16 @@ def main():
     with conn:
 
       #Insert Unit table
-      #Unit = (UnitCode,Semester,Year)
+      Unit = (UnitCode,Semester,Year)
       insert_unit(conn,Unit)
 
       #Insert TeachingCode table
-      #TeachingCode = (TeachingName)
-      insert_teachingcode(conn,TeachingCode)
+      for TeachingName in teachingcodes:
+        TeachingCode = (TeachingName)
+        insert_teachingcode(conn,TeachingCode)
 
       #Insert Session table
-      #session = (SessionName,SessionType)
+      session = (SessionName,SessionType)
       insert_session(conn,session)
 
       #Insert NonSalaryCost table
