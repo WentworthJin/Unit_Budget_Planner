@@ -14,9 +14,9 @@ def create_connection(db_file):
     return conn
 
 #Insert data into Unit table
-def create_unit(conn, unit):
-    sql = ''' INSERT INTO Unit(UnitID,UnitCode,Semester,Year)
-              VALUES(?,?,?,?) '''
+def insert_unit(conn, unit):
+    sql = ''' INSERT INTO Unit(UnitCode,Semester,Year)
+              VALUES(?,?,?) '''
     cur = conn.cursor()
     data_check=cur.execute(sql, unit)
     # Check if data already exist
@@ -26,28 +26,24 @@ def create_unit(conn, unit):
       return cur.lastrowid
 
 
-def main():
+def main(UnitCode,Semester,Year):
 
   try:
-    database = "./DataBase/Unit_Budget.db"
+    database = "Unit_Budget.db"
 
     #Create a database connection
     conn = create_connection(database)
 
     #Insert Data
     with conn:
-      Unit1 = ('1','CITS5503','2','2020')
-      Unit2 = ('2','CITS4401','1','2020')
-      Unit3 = ('3','CITS1101','1','2021')
+      Unit = (UnitCode,Semester,Year)
 
-      create_unit(conn,Unit1)
-      create_unit(conn,Unit2)
-      create_unit(conn,Unit3)
+      insert_unit(conn,Unit)
 
     print("Dummy Unit data has been inserted")
 
-  except Error:
-    print("Some of the data has already been entered, please check again")
+  except Error as e:
+    print(e)
 
 if __name__ == '__main__':
   main()
