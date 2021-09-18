@@ -40,7 +40,7 @@ def main():
     #Create a database connection
     conn = create_connection(database)
 
-    #Insert Data
+    #Insert Datas
     with conn:
 
       select_all_tasks(conn)

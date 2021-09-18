@@ -143,7 +143,7 @@ def main():
 
       #Insert TeachingCode table
       for TeachingName in teachingcodes:
-        TeachingCode = (TeachingName)
+        TeachingCode = [TeachingName]
         insert_teachingcode(conn,TeachingCode)
 
       #Insert Session table
@@ -158,17 +158,17 @@ def main():
         NSCName = NSCNames[i]
         Hours = NSCHours[i]
         CostPerHour = NSCRates[i]
-        TotalCost = NSCCost[i]
+        TotalCost = int(NSCCost[i])
         nsc = (NSCName,Hours,CostPerHour,TotalCost)
         insert_nsc(conn,nsc)
 
       #Insert Enrolment table
-      enrol = (UnitID,EnrolmentNumber,IsEstimated,IsLastSemester)
-      insert_enrolment(conn,enrol)
+      #enrol = (UnitID,EnrolmentNumber,IsEstimated,IsLastSemester)
+      #insert_enrolment(conn,enrol)
 
       #Insert Budget table
       #budget = (UnitID,Cost,IsEstimated,IsLastSemester)
-      insert_budget(conn,budget)
+      #insert_budget(conn,budget)
 
     print("Dummy Unit data has been inserted")
 
