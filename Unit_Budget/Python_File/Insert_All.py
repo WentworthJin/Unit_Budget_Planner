@@ -114,7 +114,7 @@ def check_session(SessionName):
 def main():
   pd.set_option("max_columns", 10)
   excel_file ="CITS1001_Sem1,2021 budget v3.xlsx"
-  unit_detail,unit_strcture,resourcing = get_details(excel_file)
+  unit_detail,unit_strcture,resourcing,NSC = get_details(excel_file)
 
   UnitCode =unit_detail.iloc[0,1]
   Semester=unit_detail.iloc[1,1]
@@ -163,7 +163,7 @@ def main():
         insert_nsc(conn,nsc)
 
       #Insert Enrolment table
-      #enrol = (UnitID,EnrolmentNumber,IsEstimated,IsLastSemester)
+      enrol = (UnitID,EnrolmentNumber,IsEstimated,IsLastSemester)
       insert_enrolment(conn,enrol)
 
       #Insert Budget table
