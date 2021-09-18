@@ -14,7 +14,7 @@ def create_connection(db_file):
     
     return conn
 
-#Insert data into Unit table
+#Insert data into TeachingCode table
 def insert_teachingcode(conn, TeachingCode):
     sql = ''' Insert into TeachingCode(TeachingName)
               VALUES(?) '''

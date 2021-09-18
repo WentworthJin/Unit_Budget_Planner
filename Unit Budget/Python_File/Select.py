@@ -3,7 +3,11 @@ import sys
 import pandas as pd
 from sqlite3 import Error
 
-query = '''Select UnitID From Unit Where UnitCode = "CITS2021" '''
+Input1 = "UnitID"
+Input2 = "Unit"
+Input3 = '''Where UnitCode="CITS2021"'''
+QueryTemplate = '''Select {0} From {1} {2};'''
+query = QueryTemplate.format(Input1,Input2,Input3)
 
 #create a database connection to a SQLite database
 def create_connection(db_file):

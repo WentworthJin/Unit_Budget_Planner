@@ -14,7 +14,7 @@ def create_connection(db_file):
     
     return conn
 
-#Insert data into Unit table
+#Insert data into Budget table
 def insert_budget(conn, budget):
     sql = ''' Insert into Budget(UnitID,Cost,IsEstimated,IsLastSemester)
               VALUES(?,?,?,?) '''

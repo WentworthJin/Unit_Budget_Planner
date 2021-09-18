@@ -14,7 +14,7 @@ def create_connection(db_file):
     
     return conn
 
-#Insert data into Unit table
+#Insert data into NonSalaryCosts table
 def insert_nsc(conn, nsc):
     sql = ''' Insert into NonSalaryCosts(NSCName,Hours,CostPerHour,TotalCost)
               VALUES(?,?,?,?) '''
