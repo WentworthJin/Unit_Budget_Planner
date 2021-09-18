@@ -112,13 +112,15 @@ def check_session(SessionName):
 
 def main():
   pd.set_option("max_columns", 10)
-  folder ="CITS1001_Sem1,2021 budget v3.xlsx"
-  unit_detail,unit_strcture,resourcing = get_details(folder)
+  excel_file ="CITS1001_Sem1,2021 budget v3.xlsx"
+  unit_detail,unit_strcture,resourcing = get_details(excel_file)
   UnitCode =unit_detail.iloc[0,1]
   Semester=unit_detail.iloc[1,1]
   Year =unit_detail.iloc[4,1]
 
   teachingcodes = resourcing.iloc[0:7,3]
+
+  sessionNames =unit_strcture.iloc[0:12,0]
 
 
   try:
@@ -139,8 +141,11 @@ def main():
         insert_teachingcode(conn,TeachingCode)
 
       #Insert Session table
-      session = (SessionName,SessionType)
-      insert_session(conn,session)
+      for SessionName in sessionNames:
+        SessionType = check_session(SessionName)
+        session = (SessionName,SessionType)
+        insert_session(conn,session)
+        
 
       #Insert NonSalaryCost table
       #nsc = (NSCName,Hours,CostPerHour,TotalCost)
