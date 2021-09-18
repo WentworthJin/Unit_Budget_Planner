@@ -1,5 +1,6 @@
 import sqlite3
 import sys
+import pandas as pd
 from sqlite3 import Error
 
 #create a database connection to a SQLite database
@@ -26,7 +27,13 @@ def insert_unit(conn, unit):
       return cur.lastrowid
 
 
-def main(UnitCode,Semester,Year):
+def main():
+  pd.set_option("max_columns", 10)
+  folder ="CITS1001_Sem1,2021 budget v3.xlsx"
+  unit_detail = pd.read_excel(folder,usecols ="A:B",header =8,nrows=5)
+  UnitCode =unit_detail.iloc[0,1]
+  Semester=unit_detail.iloc[1,1]
+  Year =unit_detail.iloc[4,1]
 
   try:
     database = "Unit_Budget.db"
