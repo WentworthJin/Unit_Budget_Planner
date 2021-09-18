@@ -6,7 +6,7 @@
 
 **In order to use the interface, will require to install node.js at https://nodejs.org/en/download/**
 
-You need to install the packages inside the [<b>requirements.txt<b>](./Unit_Budget/Python_File/requirements.txt), and run the following codes.
+You need to install the packages inside the [<b>requirements.txt<b>](./Unit_Budget/Python_File/requirements.txt). Run the following codes.
 <pre>
 
 pip3 install -r requirements.txt
