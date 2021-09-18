@@ -1,0 +1,144 @@
+/*--------------------------------------------------------------
+# General
+--------------------------------------------------------------*/
+body {
+  color: #030303;
+  text-align: center;
+}
+
+a {
+  color: #48def8;
+  text-decoration: none;
+}
+
+/*--------------------------------------------------------------
+# Tables
+--------------------------------------------------------------*/
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-1wig{font-weight:bold;text-align:left;vertical-align:top}
+.tg .tg-mcqj{font-weight:bold;text-align:left;vertical-align:top}
+.tg .tg-0lax{text-align:left;vertical-align:top}
+.tg .tg-73oq{text-align:left;vertical-align:top}
+@media screen and (max-width: 2000px) {.tg {width: auto !important;}.tg col {width: auto !important;}.tg-wrap {overflow-x: auto;-webkit-overflow-scrolling: touch;}}
+
+/*--------------------------------------------------------------
+# Roles
+--------------------------------------------------------------*/
+.dabutton:focus {
+  background-color:yellow;
+}
+
+/*--------------------------------------------------------------
+# For Button
+--------------------------------------------------------------*/
+
+
+Button.next a {
+  color:black;
+}
+
+Button.next {
+  background-color: #04AA6D;
+  padding: 15px 32px;
+  float:right;
+  font-size: 14pt;
+  border-left: 5px solid black;
+  border-right: 5px solid black;
+  border-top: 3px solid black;
+  border-bottom: 3px solid black;
+  margin-bottom: 30px;
+  margin-left: 10px;
+}
+
+
+
+
+/*--------------------------------------------------------------
+# query
+--------------------------------------------------------------*/
+Button.filter {
+  float: left;
+  padding: 10px 20px;
+  font-size: 14pt;
+}
+
+.query {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.search {
+  padding: 10px 20px;
+  font-size: 14pt;
+  background-color: burlywood;
+}
+
+.enter {
+  padding: 10px 20px;
+  font-size: 14pt;
+}
+
+.radio {
+  border: 3px solid black;
+  font-size: 14pt;
+  padding: 10px 20px;
+}
+
+Button.comment {
+  float: right;
+  padding: 10px 20px;
+  font-size: 14pt;
+}
+
+/*--------------------------------------------------------------
+# chart
+--------------------------------------------------------------*/
+
+.chart {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#stack.chart {
+  border: 3px solid black;
+}
+
+#barchart.chart {
+  border: 3px solid black;
+}
+
+#horizontal.chart {
+  border: 3px solid black;
+}
+
+/*--------------------------------------------------------------
+# table, need to change size of table according to size of screen 
+--------------------------------------------------------------*/
+
+
+.tables {
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.tables td, .tables th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}  
+
+.tables tr:nth-child(even){background-color: #f2f2f2;}
+
+.tables tr:hover {background-color: #ddd;}
+
+.tables th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: white;
+}
