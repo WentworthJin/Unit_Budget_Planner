@@ -95,10 +95,9 @@ const horizontalbarchart = function (data) {
     },
     data: [//array of dataSeries              
       { //dataSeries object
-
-       /*** Change type "column" to "bar", "area", "line" or "pie"***/
        type: "column",
-       dataPoints: dataArray
+       dataPoints: dataArray,
+       axisYType: "secondary",
       }
     ],
     axisY:{
