@@ -3,6 +3,8 @@ import sys
 import pandas as pd
 from sqlite3 import Error
 
+query = '''Select UnitID From Unit Where UnitCode = "CITS2021" '''
+
 #create a database connection to a SQLite database
 def create_connection(db_file):
     conn = None
@@ -14,17 +16,14 @@ def create_connection(db_file):
     
     return conn
 
-#Insert data into Session table
-def insert_session(conn, session):
-    sql = ''' Insert into Session(SessionName,SessionType)
-              VALUES(?,?) '''
+def select_all_tasks(conn):
+
     cur = conn.cursor()
-    data_check=cur.execute(sql, session)
-    # Check if data already exist
-    if data_check is None:
-      cur.execute(sql, session)
-      conn.commit()
-      return cur.lastrowid
+    cur.execute(query)
+
+    rows = cur.fetchall()
+
+    print(rows[0][0])
 
 
 def main():
@@ -38,14 +37,11 @@ def main():
     #Insert Data
     with conn:
 
-      session = ["Lecture","Non-Mark"]
-
-      insert_session(conn,session)
-
-    print("Dummy Unit data has been inserted")
+      select_all_tasks(conn)
 
   except Error as e:
     print(e)
 
 if __name__ == '__main__':
   main()
+
