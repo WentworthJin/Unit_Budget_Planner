@@ -15,7 +15,7 @@ def query():
         if x:
             s.append(x)
     sql1 = ' and '.join(s)
-    sql = '''select * from Activities A JOIN Staff S USING (StaffID)
+    sql = '''select *, A.HourlyRate*A.Hour AS TotalCost from Activities A JOIN Staff S USING (StaffID)
                                JOIN Session E USING (SessionID)
                                JOIN Unit U USING (UnitID) where ''' + sql1
     print(sql)
@@ -38,6 +38,7 @@ def query():
 @app.route('/sqlquery', methods=['POST'])
 def sqlquery():
     try:
+        print(request.form.to_dict())
         sql = request.form['sql']
         conn = sqlite3.connect('BudgetSample.db')
         c = conn.cursor()
