@@ -43,7 +43,7 @@ window.onload = function (data) {
   } 
   
   var chart = new CanvasJS.Chart("barchart", {
-
+    animationEnabled: true,
     title:{
       text: "Unit Budget"              
     },
@@ -88,16 +88,16 @@ const horizontalbarchart = function (data) {
     dataArray.push({"y":data[i][4], "label":data[i][0]})
   };
 
+
   var horizontal = document.getElementById("horizontal")
   var bar_chart = new CanvasJS.Chart(horizontal, {
     title:{
       text: "Budget for each employees"              
     },
+    animationEnabled: true,
     data: [//array of dataSeries              
-      { //dataSeries object
-
-       /*** Change type "column" to "bar", "area", "line" or "pie"***/
-       type: "column",
+      { 
+       type: "bar",
        dataPoints: dataArray
       }
     ],
@@ -118,7 +118,7 @@ const graphing =  function() {
   var stack_chart = new CanvasJS.Chart(stack, {
 
   theme: "light2",
-        
+  animationEnabled: true,
   title:{
     text: "Budget for Semester 1 and 2"              
   },

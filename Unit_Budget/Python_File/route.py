@@ -5,7 +5,7 @@ import os.path
 app = Flask(__name__,template_folder='../dist',static_folder='../src')
 
 # get the absolute path for the current directory
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = os.path.dirname(os.path.abspath(__file__)) 
 # get the whole path to database
 db_path = os.path.join(BASE_DIR, "BudgetSample (1).db")
 
