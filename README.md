@@ -9,9 +9,15 @@
 You need to install the packages inside the [<b>requirements.txt<b>](./Unit_Budget/Python_File/requirements.txt). Run the following codes.
 <pre>
 
-pip3 install -r ./Unit_Budget/Python_File/requirements.txt
+**Install virtual Environment**
 
 cd Unit_Budget
+
+python3 -m venv venv 
+
+source venv/bin/activate
+
+pip3 install -r ./Unit_Budget/Python_File/requirements.txt
 
 npm install
 
