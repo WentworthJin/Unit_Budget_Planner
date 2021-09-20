@@ -126,7 +126,7 @@ def get_employee_budget():
   result = cur.fetchall()
   return jsonify(result)
 
-# get workload data for year 2020 and 2021
+# get workload and total cost for each unit 
 @app.route("/workload", methods=["GET"])
 def get_semester_budget():
   con = sqlite3.connect(db_path)
