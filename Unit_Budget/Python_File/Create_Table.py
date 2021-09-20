@@ -21,7 +21,7 @@ def create_table(conn, create_table_sql):
     except Error as f:
         print(f)
 
-def main():
+def Schema():
     database = "Unit_Budget.db"
 
     FirstRun = True
@@ -131,4 +131,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    Schema()
