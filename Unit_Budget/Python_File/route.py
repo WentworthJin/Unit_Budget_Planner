@@ -13,6 +13,7 @@ db_path = os.path.join(BASE_DIR, "BudgetSample (1).db")
 def render():
   return render_template("index.html")
 
+# get data for the default table for summary report
 @app.route("/get", methods=["GET"])
 def get_all_data():
   
@@ -63,6 +64,7 @@ def get_all_data():
   
   return render_template("result.html", rows=rows, names=names)
 
+# get all data for graphing the main summary report
 @app.route("/get_all_data", methods=["GET"])
 def get_main_data():
   con = sqlite3.connect(db_path)
@@ -112,6 +114,20 @@ def get_employee_budget():
                 JOIN Session E USING (SessionID) \
                 JOIN Unit U USING (UnitID) \
               Group by S.StaffID ") 
+  result = cur.fetchall()
+  return jsonify(result)
+
+# get workload data for year 2020 and 2021
+@app.route("/workload", methods=["GET"])
+def get_semester_budget():
+  con = sqlite3.connect(db_path)
+  cur = con.cursor()
+  cur.execute("Select U.UnitCode, SUM(A.Hour) AS TotalLoad, SUM(A.Hour * A.HourlyRate) AS StaffCost \
+              From Activities A JOIN Staff S USING (StaffID) \
+                JOIN Session E USING (SessionID) \
+                JOIN Unit U USING (UnitID) \
+              Group By U.UnitID \
+              ")
   result = cur.fetchall()
   return jsonify(result)
   
