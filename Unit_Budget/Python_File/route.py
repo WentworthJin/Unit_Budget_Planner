@@ -126,6 +126,19 @@ def get_employee_budget():
   result = cur.fetchall()
   return jsonify(result)
 
+# get workload data for year 2020 and 2021
+@app.route("/workload", methods=["GET"])
+def get_semester_budget():
+  con = sqlite3.connect(db_path)
+  cur = con.cursor()
+  cur.execute("Select U.UnitCode, SUM(A.Hour) AS TotalLoad, SUM(A.Hour * A.HourlyRate) AS StaffCost \
+              From Activities A JOIN Staff S USING (StaffID) \
+                JOIN Session E USING (SessionID) \
+                JOIN Unit U USING (UnitID) \
+              Group By U.UnitID \
+              ")
+  result = cur.fetchall()
+  return jsonify(result)
 
 def allowed_file(filename):
     return '.' in filename and \
