@@ -165,7 +165,3 @@ stack_chart.render()
 getAllData()
 getEmployeeData()
 graphing()
-
-
-
-

@@ -1,8 +1,12 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, request, redirect, url_for
+from werkzeug.utils import secure_filename
+import Create_Table
 import sqlite3 
 import os.path
 
+
 app = Flask(__name__,template_folder='../dist',static_folder='../src')
+app.config['./Upload_file']
 
 # get the absolute path for the current directory
 BASE_DIR = os.path.dirname(os.path.abspath(__file__)) 
@@ -12,6 +16,7 @@ db_path = os.path.join(BASE_DIR, "BudgetSample (1).db")
 @app.route("/", methods=["GET"])
 def render():
   return render_template("index.html")
+
 
 @app.route("/get", methods=["GET"])
 def get_all_data():
@@ -114,11 +119,13 @@ def get_employee_budget():
               Group by S.StaffID ") 
   result = cur.fetchall()
   return jsonify(result)
-  
+
+@app.route("/table",methods=['GET','POST'])
+def gettable():
+  return render_template("table.html")
 
 if __name__=="__main__":
   app.run(host='127.0.0.1', port=5000,debug=True)
-
 
 
   
