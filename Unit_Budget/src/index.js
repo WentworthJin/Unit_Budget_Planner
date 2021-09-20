@@ -173,12 +173,9 @@ stack_chart.render()
 getAllData()
 getWorkLoadData()
 getEmployeeData()
-<<<<<<< HEAD
 graphing()
-=======
 
 
 
 
 
->>>>>>> 2d75713550cd9e932d35271f2c6b63852d544b3e

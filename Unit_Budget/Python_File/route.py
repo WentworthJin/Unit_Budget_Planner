@@ -4,8 +4,10 @@ import Create_Table
 import sqlite3 
 import os.path
 
+# File Type Limit
 ALLOWED_EXTENSIONS = {'xlsx'}
 
+# Specify Path
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 UPLOAD_FOLDER = os.path.join(APP_ROOT, './uploads')
 
@@ -21,11 +23,7 @@ db_path = os.path.join(BASE_DIR, "BudgetSample (1).db")
 def render():
   return render_template("index.html")
 
-<<<<<<< HEAD
 
-=======
-# get data for the default table for summary report
->>>>>>> 2d75713550cd9e932d35271f2c6b63852d544b3e
 @app.route("/get", methods=["GET"])
 def get_all_data():
   
@@ -76,7 +74,6 @@ def get_all_data():
   
   return render_template("result.html", rows=rows, names=names)
 
-# get all data for graphing the main summary report
 @app.route("/get_all_data", methods=["GET"])
 def get_main_data():
   con = sqlite3.connect(db_path)
@@ -129,21 +126,6 @@ def get_employee_budget():
   result = cur.fetchall()
   return jsonify(result)
 
-# get workload data for year 2020 and 2021
-@app.route("/workload", methods=["GET"])
-def get_semester_budget():
-  con = sqlite3.connect(db_path)
-  cur = con.cursor()
-  cur.execute("Select U.UnitCode, SUM(A.Hour) AS TotalLoad, SUM(A.Hour * A.HourlyRate) AS StaffCost \
-              From Activities A JOIN Staff S USING (StaffID) \
-                JOIN Session E USING (SessionID) \
-                JOIN Unit U USING (UnitID) \
-              Group By U.UnitID \
-              ")
-  result = cur.fetchall()
-  return jsonify(result)
-  
->>>>>>> 2d75713550cd9e932d35271f2c6b63852d544b3e
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -164,7 +146,7 @@ def upload_file():
         return render_template('table.html')
   except:
     return render()
-    
+
 if __name__=="__main__":
   app.run(host='127.0.0.1', port=5000,debug=True)
 
