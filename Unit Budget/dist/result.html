@@ -14,12 +14,22 @@
         <button class="comment" onclick=showComment()>Comment</button>
         <br><br>
         <div class="radio" id="radio">
-          <input type="radio" name="semester" value="semester" id="semester"/>
-          <label for="semester">Semester</label>
-          <input type="radio" name="year" value="year" id="year">
           <label for="year">Year</label>
-          <input type="radio" name="unit" value="unit" id="unit">
-          <label for="unit">Unit</label>
+          <select name="year" id="_year">
+            <option value="">All</option>
+            <option value="2021">2021</option>
+            <option value="2020">2020</option>
+            <option value="2019">2019</option>
+            <option value="2018">2018</option>
+          </select>
+          <label for="year">Semester</label>
+          <select name="semester" id="_semester">
+            <option value="">All</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+          </select>   
+          <label for="unit">Unit</label>      
+           <input type="text" name="unit" id="_unit">
         </div>
         <br>
           <table class="tables">
