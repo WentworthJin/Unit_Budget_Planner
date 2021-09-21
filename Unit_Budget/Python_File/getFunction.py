@@ -1,6 +1,6 @@
 import sqlite3
 import sys
-import pandas as pd
+import numbers
 from sqlite3 import Error
 
 def create_connection(db_file):
@@ -12,7 +12,6 @@ def create_connection(db_file):
         print(e)
     
     return conn
-
 
 def select_StaffID(conn,Name):
 
@@ -27,7 +26,6 @@ def select_StaffID(conn,Name):
 
   return rows[0][0]
 
-
 def select_TeachingCode(conn,TeachingName):
 
   QueryTemplate = '''Select TeachingCode From TeachingCode Where TeachingName = {0};'''
@@ -41,6 +39,18 @@ def select_TeachingCode(conn,TeachingName):
 
   return rows[0][0]
 
+def select_NSCID(conn,NSCName):
+
+  QueryTemplate = '''Select NSCID From NonSalaryCosts Where NSCName = {0};'''
+
+  query = QueryTemplate.format(NSCName)
+
+  cur = conn.cursor()
+  cur.execute(query)
+
+  rows = cur.fetchall()
+
+  return rows[0][0]
 
 def main():
 
@@ -59,8 +69,6 @@ def main():
   except Error as e:
     print(e)
 
-
 if __name__ == '__main__':
   main()
-
 

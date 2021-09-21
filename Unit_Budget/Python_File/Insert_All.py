@@ -119,7 +119,7 @@ def insert_otherCost(conn, otherCost):
 
 #Insert data into Staff table
 def insert_staff(conn, staff):
-    sql = ''' Insert into Staff(TeachingID,Name,Postion)
+    sql = ''' Insert into Staff(TeachingID,Name,Position)
               VALUES(?,?,?) '''
     cur = conn.cursor()
     data_check=cur.execute(sql, staff)
