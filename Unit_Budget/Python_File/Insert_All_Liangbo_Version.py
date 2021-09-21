@@ -74,6 +74,7 @@ def insert_nsc(conn, nsc):
       cur.execute(sql, nsc)
       conn.commit()
     else:
+      conn.commit()
       return cur.lastrowid
 
 #Insert data into Enrolment table
@@ -87,6 +88,7 @@ def insert_enrolment(conn, enrol):
       cur.execute(sql, enrol)
       conn.commit()
     else:
+      conn.commit()
       return cur.lastrowid
 
 #Insert data into Budget table
@@ -100,6 +102,7 @@ def insert_budget(conn, budget):
       cur.execute(sql, budget)
       conn.commit()
     else:
+      conn.commit()
       return cur.lastrowid
 
 #Insert data into Activities table
@@ -113,6 +116,7 @@ def insert_activities(conn, activities):
       cur.execute(sql, activities)
       conn.commit()
     else:
+      conn.commit()
       return cur.lastrowid
 
 #Insert data into OtherCost table
@@ -126,6 +130,7 @@ def insert_oc(conn, oc):
       cur.execute(sql, oc)
       conn.commit()
     else:
+      conn.commit()
       return cur.lastrowid
 
 #Insert data into Staff table
@@ -139,6 +144,7 @@ def insert_staff(conn, staff):
       cur.execute(sql, staff)
       conn.commit()
     else:
+      conn.commit()
       return cur.lastrowid
 
 def main():
@@ -175,6 +181,7 @@ def main():
       #budget = (UnitID,Cost,IsEstimated,IsLastSemester)
       insert_budget(conn,budget)
 
+      insert_staff(conn,staff)
     print("Dummy Unit data has been inserted")
 
   except Error as e:

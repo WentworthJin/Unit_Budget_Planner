@@ -4,12 +4,15 @@ import Create_Table
 import getFunction
 import sqlite3
 import sys
+import os
 from sqlite3 import Error
 
-'''This test can only be run once, because the Primary Key is automatically generated 
-   upon each insertion. If you don't delet the db file, there will be error in the 
-   database. If you want to run this test again, please delete the db file in the same
-   directory
+'''
+   The Test will automatically delete the db file it created 
+
+   *** The test is based on the Insert_All_Liangbo_Version.py, just for convenience ***
+   *** However, the functions inside this file is exactly same as the Insert_All.py ***
+
 '''
 
 Create_Table.Schema()
@@ -80,6 +83,10 @@ class TestCreate(unittest.TestCase):
     result = Insert_All_Liangbo_Version.insert_staff(conn,sample_staff)
     self.assertEqual(result,1)
   
+
+  @classmethod
+  def tearDownClass(cls):
+    os.remove('Unit_Budget.db')
 
 if __name__ == '__main__':
   unittest.main()

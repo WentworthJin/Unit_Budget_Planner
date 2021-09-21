@@ -4,10 +4,12 @@ import Create_Table
 import getFunction
 import sqlite3
 import sys
+import os
 from sqlite3 import Error
 
-''' Before run this test, it's better to delete the existing db file. However, if you want to 
-    run this test stright away, the test can still work.
+''' 
+    The Test will automatically delete the db file it created 
+
 '''
 
 Create_Table.Schema()
@@ -16,7 +18,8 @@ Insert_All_Liangbo_Version.main()
 
 
 class TestCreate(unittest.TestCase):
-
+  
+      
   # Test if StaffID can be selected
   # The function Returens the StaffID based on the Staff name provided
   def test_get_staffid(self):
@@ -38,6 +41,9 @@ class TestCreate(unittest.TestCase):
     result = getFunction.select_NSCID(conn,sample_nscname)
     self.assertEqual(result,1)
 
+  @classmethod
+  def tearDownClass(cls):
+    os.remove('Unit_Budget.db')
 
 if __name__ == '__main__':
   unittest.main()
