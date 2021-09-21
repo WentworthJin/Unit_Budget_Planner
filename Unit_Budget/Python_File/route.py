@@ -17,7 +17,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 # get the absolute path for the current directory
 BASE_DIR = os.path.dirname(os.path.abspath(__file__)) 
 # get the whole path to database
-db_path = os.path.join(BASE_DIR, "BudgetSample (1).db")
+db_path = os.path.join(BASE_DIR, "BudgetSample.db")
 
 @app.route("/", methods=["GET"])
 def render():
@@ -116,13 +116,26 @@ def get_main_data():
 # route to get each employees in each unit budget
 @app.route("/employee_budget", methods=["GET"])
 def get_employee_budget():
+  data = request.args.to_dict()
+  params = data.keys()
+  s1 = 'U.UnitCode ="{}" '.format(data['unitcode']) if 'unitcode' in params else ''
+  s2 = 'U.Year = ' + data['year'] if 'year' in params else ''
+  s3 = 'U.Semester = ' + data['semester'] if 'semester' in params else ''
+  s = list()
+  for x in [s1, s2, s3]:
+      if x:
+          s.append(x)
+  queryStrings = ' and '.join(s)
+  print("111" + queryStrings)
   con = sqlite3.connect(db_path)
   cur = con.cursor()
-  cur.execute("Select S.Name, U.UnitCode, U.Semester, U.Year, SUM(A.Hour*A.HourlyRate) AS TotalCost \
-              From Activities A JOIN Staff S USING (StaffID) \
-                JOIN Session E USING (SessionID) \
-                JOIN Unit U USING (UnitID) \
-              Group by S.StaffID ") 
+  sql = "Select S.Name, U.UnitCode, U.Semester, U.Year, SUM(A.Hour*A.HourlyRate) AS TotalCost \
+        From Activities A JOIN Staff S USING (StaffID) \
+        JOIN Session E USING (SessionID) \
+        JOIN Unit U USING (UnitID) "
+  if queryStrings:
+    sql = sql + ''' where ''' + queryStrings         
+  cur.execute(sql + " Group by S.StaffID ") 
   result = cur.fetchall()
   return jsonify(result)
 
@@ -159,6 +172,26 @@ def upload_file():
         return render_template('table.html')
   except:
     return render()
+
+@app.route('/customSqlQuery', methods=['POST'])
+def sqlquery():
+    try:
+        print(request.form.to_dict())
+        sql = request.form['sql']
+        conn = sqlite3.connect(db_path)
+        c = conn.cursor()
+        c.execute(sql)
+        col_name_list = [tuple[0] for tuple in c.description]
+        content = c.fetchall()
+        conn.commit()
+        conn.close()
+        r = {'success':'ture','data':list()}
+        for row in content:
+            d = dict(zip(col_name_list, row))
+            r['data'].append(d)
+        return jsonify(r)
+    except:
+        return {'success':'false'}    
 
 if __name__=="__main__":
   app.run(host='127.0.0.1', port=5000,debug=True)
