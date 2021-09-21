@@ -20,12 +20,12 @@
     </p>
     </br>
     <p>Click on the "Choose File" button to upload a file:</p>
-    <form method="POST" action="table.html">
+    <form method="POST" action="http://127.0.0.1:5000/table" enctype="multipart/form-data">
       <input type="file" id="myFile" name="filename">
       <input type="submit" value="Upload"> 
     </form>
     </br>
-    <p><button onclick="location.href='result.html';">Summary Report</button></p>
+    <p><button onclick="location.href='http://127.0.0.1:5000/get';">Summary Report</button></p>
     <p><button onclick="">Get Unit details</button></p>
 
     <!-- You can also require other files to run in this process -->
