@@ -1,12 +1,18 @@
-from flask import Flask, render_template, jsonify, request, redirect, url_for
+from flask import Flask, render_template, jsonify, request, redirect, url_for, flash
 from werkzeug.utils import secure_filename
 import Create_Table
 import sqlite3 
 import os.path
 
+# File Type Limit
+ALLOWED_EXTENSIONS = {'xlsx'}
+
+# Specify Path
+APP_ROOT = os.path.dirname(os.path.abspath(__file__))
+UPLOAD_FOLDER = os.path.join(APP_ROOT, './uploads')
 
 app = Flask(__name__,template_folder='../dist',static_folder='../src')
-app.config['./Upload_file']
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 # get the absolute path for the current directory
 BASE_DIR = os.path.dirname(os.path.abspath(__file__)) 
@@ -120,9 +126,39 @@ def get_employee_budget():
   result = cur.fetchall()
   return jsonify(result)
 
+# get workload and total cost for each unit 
+@app.route("/workload", methods=["GET"])
+def get_semester_budget():
+  con = sqlite3.connect(db_path)
+  cur = con.cursor()
+  cur.execute("Select U.UnitCode, SUM(A.Hour) AS TotalLoad, SUM(A.Hour * A.HourlyRate) AS StaffCost \
+              From Activities A JOIN Staff S USING (StaffID) \
+                JOIN Session E USING (SessionID) \
+                JOIN Unit U USING (UnitID) \
+              Group By U.UnitID \
+              ")
+  result = cur.fetchall()
+  return jsonify(result)
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
 @app.route("/table",methods=['GET','POST'])
-def gettable():
-  return render_template("table.html")
+def upload_file():
+  try:
+    if request.method == 'POST':
+      if 'filename' not in request.files:
+        return render()
+      file = request.files['filename']
+      if file.filename == '':
+            return render()
+      if file and allowed_file(file.filename):
+        filename = secure_filename(file.filename)
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        return render_template('table.html')
+  except:
+    return render()
 
 if __name__=="__main__":
   app.run(host='127.0.0.1', port=5000,debug=True)

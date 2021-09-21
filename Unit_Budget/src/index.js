@@ -109,53 +109,61 @@ const horizontalbarchart = function (data) {
   bar_chart.render();
 }
 
-
+const getWorkLoadData = function () {
+  fetch('http://127.0.0.1:5000/workload', {
+    method:"GET",
+    headers:{
+      headers: {
+        "Content-Type":"application/json"
+      }
+    }
+  })
+  .then(resp => resp.json())
+  .then((data) =>
+    graphing(data)
+  )
+  .catch(error => 
+    console.log(error))
+}
 
 // drawing a stack bar chart 
+const graphing =  function(data) {
+  const workload = []
+  const staffCost = []
+  for(var i = 0; i < data.length; i++){
+    workload.push({"label":data[i][0], "y":data[i][1]})
+    staffCost.push({"label":data[i][0], "y":data[i][2]})
+  };
 
-const graphing =  function() {
+
   var stack = document.getElementById("stack")
   var stack_chart = new CanvasJS.Chart(stack, {
 
   theme: "light2",
   animationEnabled: true,
   title:{
-    text: "Budget for Semester 1 and 2"              
+    text: "Workload VS Total Cost"              
   },
 
   data: [  //array of dataSeries     
-  { //dataSeries - first quarter
-/*** Change type "column" to "bar", "area", "line" or "pie"***/        
+  {     
     type: "column",
-    name: "First Semester",
+    name: "Workload",
     showInLegend: true,
-    dataPoints: [
-    { label: "CITS5508", y: 58 },
-    { label: "CITS5503", y: 69 },
-    { label: "CITS5206", y: 80 },                                    
-    { label: "CITS5506", y: 74 },
-    { label: "CITS5501", y: 64 }
-    ]
+    dataPoints: workload
   },
 
   { //dataSeries - second quarter
 
   type: "column",
-  name: "Second Semester", 
+  name: "StaffCost", 
   showInLegend: true,               
-  dataPoints: [
-  { label: "CITS5508", y: 63 },
-  { label: "CITS5503", y: 73 },
-  { label: "CITS5206", y: 88 },                                    
-  { label: "CITS5506", y: 77 },
-  { label: "CITS5501", y: 60 }
-  ]
+  dataPoints: staffCost
 }
 ],
 /** Set axisY properties here*/
   axisY:{
     prefix: "$",
-    suffix: "K"
   }    
 });
 
@@ -163,5 +171,11 @@ stack_chart.render()
 }
 
 getAllData()
+getWorkLoadData()
 getEmployeeData()
 graphing()
+
+
+
+
+
