@@ -1,0 +1,22 @@
+Meeting Minutes
+
+Meeting Data and Time: 19/08/2021 7:30pm - 8:00pm
+Meeting Location: MS Teams
+Participants: Lida Tong (22957193), Liangbo Jin (23078811), Ethan Chen (23067035), Yu Zhu (23053734), Nara Eam (22805226), Keli Yin (22450718)
+
+Items discussed:
+
+1. Features solved: 
+	We have finished workable feature in our MVP, based on the primary requirements from client, which includes file upload, database creation, desktop framework, and summary report creation
+2. Features need to be done soon: 
+	We need to finalise the data insertion, customise query support, and the filter
+3. Features need to be improved or fixed:
+	Majority of the decisions need to wait until we conduct the MVP meeting with the client, however, we have identified several functionalities need to be improved, such as app layout, summary design and login feature
+
+Item completed:
+1. Successfully combined individuals feature into the whole workable MVP
+2. Scheduled the meeting with the client to demonstrate our MVP 
+
+Items to be completed after the meeting:
+1. Fix current functionalities
+2. Keep building non-key requirement's feature 
