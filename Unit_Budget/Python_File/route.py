@@ -1,8 +1,14 @@
 from flask import Flask, render_template, jsonify, request, redirect, url_for, flash
 from werkzeug.utils import secure_filename
-import Create_Table
+from Create_Table import Schema
+from Insert_All_Liangbo_Version import sample_insert
 import sqlite3 
 import os.path
+
+# Initilize the Database
+Schema()
+
+# Insert mock data
 
 # File Type Limit
 ALLOWED_EXTENSIONS = {'xlsx'}
@@ -156,6 +162,7 @@ def upload_file():
       if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        sample_insert()
         return render_template('table.html')
   except:
     return render()

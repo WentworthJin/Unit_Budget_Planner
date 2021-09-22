@@ -147,7 +147,7 @@ def insert_staff(conn, staff):
       conn.commit()
       return cur.lastrowid
 
-def main():
+def sample_insert():
 
   try:
     database = "Unit_Budget.db"
@@ -181,12 +181,23 @@ def main():
       #budget = (UnitID,Cost,IsEstimated,IsLastSemester)
       insert_budget(conn,budget)
 
+      # Insert Activities table
+      # activities = (UnitID, StaffID, SessionID, HourlyRate, Hour)
+      insert_activities(conn, activities)
+
+      # Insert Staff table
+      # staff = (TeachingID, Name, Position)
       insert_staff(conn,staff)
-    print("Dummy Unit data has been inserted")
+
+      # Insert Other Cost table
+      # oc = (NSCID, UnitID)
+      insert_oc(conn, oc)
+
+    print("All Dummy data has been inserted")
 
   except Error as e:
     print(e)
 
 if __name__ == '__main__':
-  main()
+  sample_insert()
 
