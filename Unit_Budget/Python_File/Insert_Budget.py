@@ -24,6 +24,7 @@ def insert_budget(conn, budget):
     if data_check is None:
       cur.execute(sql, budget)
       conn.commit()
+    else:
       return cur.lastrowid
 
 

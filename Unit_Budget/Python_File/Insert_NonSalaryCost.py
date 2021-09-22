@@ -24,6 +24,7 @@ def insert_nsc(conn, nsc):
     if data_check is None:
       cur.execute(sql, nsc)
       conn.commit()
+    else:
       return cur.lastrowid
 
 

@@ -24,6 +24,7 @@ def insert_unit(conn, unit):
     if data_check is None:
       cur.execute(sql, unit)
       conn.commit()
+    else:
       return cur.lastrowid
 
 

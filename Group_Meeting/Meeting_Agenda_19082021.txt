@@ -1,0 +1,9 @@
+Meeting Agenda
+Date & Time: 19/08/2021 7:30pm - 8:00pm
+Meeting Location: MS Teams
+
+Items to be discussed
+1. Each Team member demonstrate their code and functionalities. 
+2. Discuss what feature should be presented to the client
+3. Combining everyone's part to build to MVP
+4. Next Meeting details and goals

@@ -24,6 +24,7 @@ def insert_enrolment(conn, enrol):
     if data_check is None:
       cur.execute(sql, enrol)
       conn.commit()
+    else:
       return cur.lastrowid
 
 
