@@ -3,6 +3,30 @@
   <head>
     <title>Summary Report</title>
     <link href="../src/style.css" rel="stylesheet">
+    <script src="../src/index.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+      const updateReportList = async() => {
+        const list = $("#report_list");
+        list.empty();
+        const yearValue = $("#_year").val().toString();
+        const semesterValue = $("#_semester").val().toString();
+        const unitValue = $("#_unit").val().toString();
+        const reports = await getAllData(yearValue, semesterValue, unitValue);
+
+        const buildRow = (report) => report.map(i => `<td>${i}</td>`)
+        
+        const rows = reports.map(r => `<tr>${buildRow(r)}</tr>`)
+        rows.map(r => list.append(r))
+      }
+
+      const handleUnitCode = (e)=>{
+        console.log(e.keyCode)
+        if(e.keyCode === 13){
+          updateReportList()
+        }
+    }
+    </script>
   </head>
   <body>
     <div>
@@ -15,7 +39,7 @@
         <br><br>
         <div class="radio" id="radio">
           <label for="year">Year</label>
-          <select name="year" id="_year">
+          <select name="year" id="_year" onchange="updateReportList()">
             <option value="">All</option>
             <option value="2021">2021</option>
             <option value="2020">2020</option>
@@ -23,22 +47,23 @@
             <option value="2018">2018</option>
           </select>
           <label for="year">Semester</label>
-          <select name="semester" id="_semester">
+          <select name="semester" id="_semester" onchange="updateReportList()">
             <option value="">All</option>
             <option value="1">1</option>
             <option value="2">2</option>
           </select>   
           <label for="unit">Unit</label>      
-           <input type="text" name="unit" id="_unit">
+           <input type="text" name="unit" id="_unit" onkeypress="handleUnitCode(event)">
         </div>
         <br>
-          <table class="tables">
-            <tr>
+          <table class="tables" name="_tables">
+            <thead>
               <th>{{names[0]}}</th><th>{{names[1]}}</th>
               <th>{{names[2]}}</th><th>{{names[3]}}</th><th>{{names[4]}}</th>
               <th>{{names[5]}}</th><th>{{names[6]}}</th><th>{{names[7]}}</th>
               <th>{{names[8]}}</th><th>{{names[9]}}</th><th>{{names[10]}}</th>
-            </tr>
+            </thead>
+            <tbody id="report_list">
             {% for row in rows %}
             <tr>
               <td>{{row[0]}}</td><td>{{row[1]}}</td><td>{{row[2]}}</td><td>{{row[3]}}</td>
@@ -46,6 +71,7 @@
               <td>{{row[8]}}</td><td>{{row[9]}}</td><td>{{row[10]}}</td>
             </tr>
             {% endfor %}
+          </tbody>
           </table>
         <div id="barchart" style="height: 370px; width: 80%;" class="chart"></div>
         <br>
@@ -57,7 +83,6 @@
     <Button class="next"><a href="http://127.0.0.1:5000/">Back</a></Button>
     </div>
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"> </script>
-    <script src="../src/index.js"></script>
   </body>
 </html>
 

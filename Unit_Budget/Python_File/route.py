@@ -79,8 +79,13 @@ def get_main_data():
   data = request.args.to_dict()
   params = data.keys()
   s1 = 'U.UnitCode ="{}" '.format(data['unitcode']) if 'unitcode' in params else ''
-  s2 = 'U.Year = ' + data['year'] if 'year' in params else ''
-  s3 = 'U.Semester = ' + data['semester'] if 'semester' in params else ''
+  s2 = 'U.Year ="{}" '.format(data['year']) if 'year' in params else ''
+  s3 = 'U.Semester ="{}" '.format(data['semester']) if 'semester' in params else ''
+  print(s1)
+  print(s2)
+
+  print(s3)
+
   s = list()
   for x in [s1, s2, s3]:
       if x:
@@ -121,7 +126,9 @@ def get_main_data():
                                                     JOIN Unit U USING (UnitID) \
                       '
   if queryStrings:
-    sql = sql + ''' where ''' + queryStrings         
+    sql = sql + ''' where ''' + queryStrings    
+
+  print(sql)       
   cur.execute(sql + " Group By U.UnitID ") 
   result = cur.fetchall()
   return jsonify(result)

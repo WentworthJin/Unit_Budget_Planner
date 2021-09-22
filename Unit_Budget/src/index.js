@@ -17,31 +17,45 @@ function showAndHide() {
   }
 }
 
+const test = () => {
+  const a = $( ".tables" );
+  console.log(a.name)
+}
+
 // get the data from database 
-const getAllData = () => {
-  fetch('http://127.0.0.1:5000/get_all_data', {
+const getAllData = async(year, semester, unitcode) => {
+  const queryParams = new URLSearchParams();
+  if(year) {
+    queryParams.append("year", year);
+  }
+  if(semester) {
+    queryParams.append("semester", semester);
+  }
+  if(unitcode) {
+    queryParams.append("unitcode", unitcode);
+  }
+  const result = await fetch('http://127.0.0.1:5000/get_all_data?' + queryParams, {
     method:"GET",
     headers:{
       headers: {
         "Content-Type":"application/json"
       }
     }
-  })
-  .then(resp => resp.json())
-  .then((data) => 
-    window.onload(data))
-  .catch(error => 
-    console.log(error))
+  });
+  const data = await result.json();
+  console.log(data)
+  window.onload(data);
+  return data;
 }
 
 
 // drawing a bar chart 
 window.onload = function (data) {
+  console.log(data, "on load data...")
   const dataArray = []
   for(var i = 0; i < data.length; i++){
     dataArray.push({"label":data[i][0], "y":data[i][7]})
   } 
-  
   var chart = new CanvasJS.Chart("barchart", {
     animationEnabled: true,
     title:{
