@@ -27,6 +27,11 @@ def render():
 @app.route("/get", methods=["GET"])
 def get_all_data():
   
+  """The function is used to get the summary data from database and send to client side 
+
+   Parameters: There is no parameter needed for this one. 
+   """
+  
   query = 'Select U.UnitCode, SUM(A.Hour) AS TotalLoad, U.Semester,U.Year, \
           (Select COUNT(DISTINCT P.Name) \
           From Activities A JOIN Staff P USING (StaffID) \
@@ -76,6 +81,11 @@ def get_all_data():
 
 @app.route("/get_all_data", methods=["GET"])
 def get_main_data():
+  
+  """The function is used to get the  main data from database and send to client side 
+
+   Parameters: There is no parameter needed for this one. 
+   """
   con = sqlite3.connect(db_path)
   cur = con.cursor()
   cur.execute('Select U.UnitCode, SUM(A.Hour) AS TotalLoad, U.Semester,U.Year, \
@@ -116,6 +126,11 @@ def get_main_data():
 # route to get each employees in each unit budget
 @app.route("/employee_budget", methods=["GET"])
 def get_employee_budget():
+  
+  """The function is used to get the employees budget data from database and send to client side 
+
+   Parameters: There is no parameter needed for this one. 
+   """
   con = sqlite3.connect(db_path)
   cur = con.cursor()
   cur.execute("Select S.Name, U.UnitCode, U.Semester, U.Year, SUM(A.Hour*A.HourlyRate) AS TotalCost \
@@ -129,6 +144,11 @@ def get_employee_budget():
 # get workload and total cost for each unit 
 @app.route("/workload", methods=["GET"])
 def get_semester_budget():
+  
+  """The function is used to get the workload and budget data from database and send to client side 
+
+   Parameters: There is no parameter needed for this one. 
+   """
   con = sqlite3.connect(db_path)
   cur = con.cursor()
   cur.execute("Select U.UnitCode, SUM(A.Hour) AS TotalLoad, SUM(A.Hour * A.HourlyRate) AS StaffCost \
