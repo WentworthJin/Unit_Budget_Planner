@@ -24,6 +24,7 @@ def insert_session(conn, session):
     if data_check is None:
       cur.execute(sql, session)
       conn.commit()
+    else:
       return cur.lastrowid
 
 

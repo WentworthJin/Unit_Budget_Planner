@@ -24,6 +24,7 @@ def insert_teachingcode(conn, TeachingCode):
     if data_check is None:
       cur.execute(sql, TeachingCode)
       conn.commit()
+    else:
       return cur.lastrowid
 
 

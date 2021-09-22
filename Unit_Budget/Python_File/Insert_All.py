@@ -33,6 +33,7 @@ def insert_unit(conn, unit):
     if data_check is None:
       cur.execute(sql, unit)
       conn.commit()
+    else:
       return cur.lastrowid
 
 #Insert data into TeachingCode table
@@ -45,6 +46,7 @@ def insert_teachingcode(conn, TeachingCode):
     if data_check is None:
       cur.execute(sql, TeachingCode)
       conn.commit()
+    else:
       return cur.lastrowid
 
 #Insert data into Session table
@@ -57,6 +59,7 @@ def insert_session(conn, session):
     if data_check is None:
       cur.execute(sql, session)
       conn.commit()
+    else:
       return cur.lastrowid
 
 #Insert data into NonSalaryCosts table
@@ -69,6 +72,7 @@ def insert_nsc(conn, nsc):
     if data_check is None:
       cur.execute(sql, nsc)
       conn.commit()
+    else:
       return cur.lastrowid
 
 #Insert data into Enrolment table
@@ -81,6 +85,7 @@ def insert_enrolment(conn, enrol):
     if data_check is None:
       cur.execute(sql, enrol)
       conn.commit()
+    else:
       return cur.lastrowid
 
 #Insert data into Budget table
@@ -93,6 +98,7 @@ def insert_budget(conn, budget):
     if data_check is None:
       cur.execute(sql, budget)
       conn.commit()
+    else:
       return cur.lastrowid
 
 
@@ -106,13 +112,14 @@ def insert_otherCost(conn, otherCost):
     if data_check is None:
       cur.execute(sql, otherCost)
       conn.commit()
+    else:
       return cur.lastrowid
 
 
 
 #Insert data into Staff table
 def insert_staff(conn, staff):
-    sql = ''' Insert into Staff(TeachingID,Name,Postion)
+    sql = ''' Insert into Staff(TeachingID,Name,Position)
               VALUES(?,?,?) '''
     cur = conn.cursor()
     data_check=cur.execute(sql, staff)
@@ -120,6 +127,7 @@ def insert_staff(conn, staff):
     if data_check is None:
       cur.execute(sql, staff)
       conn.commit()
+    else:
       return cur.lastrowid
 
 # retrieve information from excel file to dataframe 
