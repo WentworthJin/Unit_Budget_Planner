@@ -8,9 +8,10 @@ import os
 from sqlite3 import Error
 
 '''
-   The Test will automatically delete the db file it created 
+   *** The Test will automatically delete the db file it created ***
 
-   *** The test is based on the Insert_All_Liangbo_Version.py, just for convenience ***
+   *** The test is based on my own version:Insert_All_Liangbo_Version.py, just for convenience ***
+
    *** However, the functions inside this file is exactly same as the Insert_All.py ***
 
 '''

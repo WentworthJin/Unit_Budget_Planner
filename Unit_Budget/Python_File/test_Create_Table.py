@@ -7,8 +7,8 @@ from sqlite3 import Error
 
 
 '''
-    The Test will automatically delete the db file it created 
-    
+    *** The Test will automatically delete the db file it created ***
+
 '''
 class TestCreate(unittest.TestCase):
 
