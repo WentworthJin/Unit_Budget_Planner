@@ -12,6 +12,8 @@
 
 **assuming that user venv virtual environment still activate**
 
+assume that user are in Unit_Budget directory
+
 cd Unit_Budget/Python_File
 
 python3 testing_backend.py
@@ -21,6 +23,8 @@ python3 testing_backend.py
 <pre>
 
 **For All User (automate testing front end)**
+
+assume that user are in Unit_Budget_Planner directory
 
 cd Unit_Budget
 
