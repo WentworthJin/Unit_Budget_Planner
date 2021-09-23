@@ -187,11 +187,6 @@ const graphing =  function(data) {
 stack_chart.render()
 }
 
-getAllData()
-getWorkLoadData()
-getEmployeeData()
-graphing()
-
 
 
 
