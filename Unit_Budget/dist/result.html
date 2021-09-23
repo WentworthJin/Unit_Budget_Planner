@@ -6,26 +6,31 @@
     <script src="../src/index.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
+      // Get all reports and dynamically add to the table.
       const updateReportList = async() => {
+        const buildRow = (report) => report.map(i => `<td>${i}</td>`);
+
         const list = $("#report_list");
-        list.empty();
+        list.empty(); // Clear out all records first.
+
         const yearValue = $("#_year").val().toString();
         const semesterValue = $("#_semester").val().toString();
         const unitValue = $("#_unit").val().toString();
         const reports = await getAllData(yearValue, semesterValue, unitValue);
+        const rows = reports.map(r => `<tr>${buildRow(r)}</tr>`);
+        rows.map(r => list.append(r));
 
-        const buildRow = (report) => report.map(i => `<td>${i}</td>`)
-        
-        const rows = reports.map(r => `<tr>${buildRow(r)}</tr>`)
-        rows.map(r => list.append(r))
+        getEmployeeData(yearValue, semesterValue, unitValue);
+        getWorkLoadData(yearValue, semesterValue, unitValue);
       }
 
+      // Handler for the Unit code input. Fire 'updateReportList' when 
+      // 'Enter' is pressed.
       const handleUnitCode = (e)=>{
-        console.log(e.keyCode)
         if(e.keyCode === 13){
           updateReportList()
         }
-    }
+      }
     </script>
   </head>
   <body>

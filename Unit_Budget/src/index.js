@@ -1,12 +1,8 @@
 // This method is for role identification
-  var el_down = document.getElementById("GFG_DOWN");
-  function GFG_click(clicked) {
-      el_down.innerHTML = "You are the "+clicked+".";
-  }
-
-// document.getElementById('role1').onclick = function(){
-//     this.style.backgroundColor = 'Yellow';
-// };
+var el_down = document.getElementById("GFG_DOWN");
+function GFG_click(clicked) {
+     el_down.innerHTML = "You are the "+clicked+".";
+}
 
 function showAndHide() {
   const x = document.getElementById("radio");
@@ -17,13 +13,7 @@ function showAndHide() {
   }
 }
 
-const test = () => {
-  const a = $( ".tables" );
-  console.log(a.name)
-}
-
-// get the data from database 
-const getAllData = async(year, semester, unitcode) => {
+const buildSearchParams = (year, semester, unitcode) => {
   const queryParams = new URLSearchParams();
   if(year) {
     queryParams.append("year", year);
@@ -34,6 +24,18 @@ const getAllData = async(year, semester, unitcode) => {
   if(unitcode) {
     queryParams.append("unitcode", unitcode);
   }
+
+  return queryParams;
+}
+/**
+ * List all reports.
+ * 
+ * @param {*} year The year when the report is created.
+ * @param {*} semester The semester which the report targets to.
+ * @param {*} unitcode The Unit code which the report targets to.
+ */ 
+const getAllData = async(year, semester, unitcode) => {
+  const queryParams = buildSearchParams(year, semester, unitcode);
   const result = await fetch('http://127.0.0.1:5000/get_all_data?' + queryParams, {
     method:"GET",
     headers:{
@@ -42,8 +44,8 @@ const getAllData = async(year, semester, unitcode) => {
       }
     }
   });
+
   const data = await result.json();
-  console.log(data)
   window.onload(data);
   return data;
 }
@@ -51,7 +53,6 @@ const getAllData = async(year, semester, unitcode) => {
 
 // drawing a bar chart 
 window.onload = function (data) {
-  console.log(data, "on load data...")
   const dataArray = []
   for(var i = 0; i < data.length; i++){
     dataArray.push({"label":data[i][0], "y":data[i][7]})
@@ -79,8 +80,9 @@ window.onload = function (data) {
 
 
 // get the data to plot the graph 
-const getEmployeeData = () => {
-  fetch('http://127.0.0.1:5000/employee_budget', {
+const getEmployeeData = (year, semester, unitcode) => {
+  const queryParams = buildSearchParams(year, semester, unitcode);
+  fetch('http://127.0.0.1:5000/employee_budget?' + queryParams, {
     method:"GET",
     headers:{
       headers: {
@@ -123,8 +125,9 @@ const horizontalbarchart = function (data) {
   bar_chart.render();
 }
 
-const getWorkLoadData = function () {
-  fetch('http://127.0.0.1:5000/workload', {
+const getWorkLoadData = function (year, semester, unitcode) {
+  const queryParams = buildSearchParams(year, semester, unitcode);
+  fetch('http://127.0.0.1:5000/workload?' + queryParams, {
     method:"GET",
     headers:{
       headers: {

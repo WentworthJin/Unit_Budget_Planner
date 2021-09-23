@@ -23,6 +23,20 @@ db_path = os.path.join(BASE_DIR, "BudgetSample.db")
 def render():
   return render_template("index.html")
 
+def buildWhereClause(data): 
+  data = request.args.to_dict()
+  params = data.keys()
+  s1 = 'U.UnitCode ="{}" '.format(data['unitcode']) if 'unitcode' in params else ''
+  s2 = 'U.Year = ' + data['year'] if 'year' in params else ''
+  s3 = 'U.Semester = ' + data['semester'] if 'semester' in params else ''
+  s = list()
+  for x in [s1, s2, s3]:
+      if x:
+          s.append(x)
+  queryStrings = ' and '.join(s) 
+  return queryStrings
+
+
 
 @app.route("/get", methods=["GET"])
 def get_all_data():
@@ -76,21 +90,7 @@ def get_all_data():
 
 @app.route("/get_all_data", methods=["GET"])
 def get_main_data():
-  data = request.args.to_dict()
-  params = data.keys()
-  s1 = 'U.UnitCode ="{}" '.format(data['unitcode']) if 'unitcode' in params else ''
-  s2 = 'U.Year ="{}" '.format(data['year']) if 'year' in params else ''
-  s3 = 'U.Semester ="{}" '.format(data['semester']) if 'semester' in params else ''
-  print(s1)
-  print(s2)
-
-  print(s3)
-
-  s = list()
-  for x in [s1, s2, s3]:
-      if x:
-          s.append(x)
-  queryStrings = ' and '.join(s)
+  queryStrings = buildWhereClause(request.args.to_dict())
   con = sqlite3.connect(db_path)
   cur = con.cursor()
   sql = 'Select U.UnitCode, SUM(A.Hour) AS TotalLoad, U.Semester,U.Year, \
@@ -128,7 +128,6 @@ def get_main_data():
   if queryStrings:
     sql = sql + ''' where ''' + queryStrings    
 
-  print(sql)       
   cur.execute(sql + " Group By U.UnitID ") 
   result = cur.fetchall()
   return jsonify(result)
@@ -136,16 +135,7 @@ def get_main_data():
 # route to get each employees in each unit budget
 @app.route("/employee_budget", methods=["GET"])
 def get_employee_budget():
-  data = request.args.to_dict()
-  params = data.keys()
-  s1 = 'U.UnitCode ="{}" '.format(data['unitcode']) if 'unitcode' in params else ''
-  s2 = 'U.Year = ' + data['year'] if 'year' in params else ''
-  s3 = 'U.Semester = ' + data['semester'] if 'semester' in params else ''
-  s = list()
-  for x in [s1, s2, s3]:
-      if x:
-          s.append(x)
-  queryStrings = ' and '.join(s)
+  queryStrings = buildWhereClause(request.args.to_dict())
   con = sqlite3.connect(db_path)
   cur = con.cursor()
   sql = "Select S.Name, U.UnitCode, U.Semester, U.Year, SUM(A.Hour*A.HourlyRate) AS TotalCost \
@@ -161,14 +151,18 @@ def get_employee_budget():
 # get workload and total cost for each unit 
 @app.route("/workload", methods=["GET"])
 def get_semester_budget():
+  queryStrings = buildWhereClause(request.args.to_dict())
   con = sqlite3.connect(db_path)
   cur = con.cursor()
-  cur.execute("Select U.UnitCode, SUM(A.Hour) AS TotalLoad, SUM(A.Hour * A.HourlyRate) AS StaffCost \
+  sql = "Select U.UnitCode, SUM(A.Hour) AS TotalLoad, SUM(A.Hour * A.HourlyRate) AS StaffCost \
               From Activities A JOIN Staff S USING (StaffID) \
                 JOIN Session E USING (SessionID) \
                 JOIN Unit U USING (UnitID) \
-              Group By U.UnitID \
-              ")
+              "
+  if queryStrings:
+    sql = sql + ''' where ''' + queryStrings
+  sql = sql + " Group By U.UnitID "
+  cur.execute(sql)
   result = cur.fetchall()
   return jsonify(result)
 
