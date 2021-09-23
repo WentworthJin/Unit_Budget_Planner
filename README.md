@@ -16,7 +16,6 @@ You need to install the packages inside the [<b>requirements.txt<b>](./Unit_Budg
 
 **For MacOS and Linux User**
 
-
 cd Unit_Budget
 
 python3 -m venv venv 
@@ -46,7 +45,6 @@ npm start
 </pre>
 
 <hr>
-
 
 # CITS5206 Professional Computing Project - Unit Budget Planner
 
