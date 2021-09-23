@@ -17,6 +17,12 @@ function showAndHide() {
   }
 }
 
+/**Used to get data from server side 
+ * @param does not have parameter 
+ * function fetch the data and return a response of an array of data 
+ * pass into the window.onload for plot the bar graph
+*/
+
 // get the data from database 
 const getAllData = () => {
   fetch('http://127.0.0.1:5000/get_all_data', {
@@ -34,6 +40,10 @@ const getAllData = () => {
     console.log(error))
 }
 
+/**Plot a bar graph 
+ * @param data type=array, receive data from server 
+ * plot the data dynamically based on data from database 
+*/
 
 // drawing a bar chart 
 window.onload = function (data) {
@@ -64,7 +74,11 @@ window.onload = function (data) {
 }
 
 
-// get the data to plot the graph 
+/**Used to get data from server side 
+ * @param does not have parameter 
+ * function fetch the data and return a response of an array of data 
+ * pass into the horizontal bar chart for plot the horizontal bar chart
+*/
 const getEmployeeData = () => {
   fetch('http://127.0.0.1:5000/employee_budget', {
     method:"GET",
@@ -82,6 +96,11 @@ const getEmployeeData = () => {
     console.log(error))
 }
 
+
+/**Plot the horizontal bar graph 
+ * @param data, type=array, receive data from server 
+ * plot the data dynamically based on data from database 
+*/
 const horizontalbarchart = function (data) {
   const dataArray = []
   for(var i = 0; i < data.length; i++){
@@ -109,6 +128,11 @@ const horizontalbarchart = function (data) {
   bar_chart.render();
 }
 
+/**Used to get data from server side 
+ * @param does not have parameter 
+ * function fetch the data and return a response of an array of data 
+ * pass into the graphing for plot the cluster bar chart
+*/
 const getWorkLoadData = function () {
   fetch('http://127.0.0.1:5000/workload', {
     method:"GET",
@@ -126,7 +150,10 @@ const getWorkLoadData = function () {
     console.log(error))
 }
 
-// drawing a stack bar chart 
+/**Plot the cluster bar graph 
+ * @param data, type=array, receive data from server 
+ * plot the data dynamically based on data from database 
+*/ 
 const graphing =  function(data) {
   const workload = []
   const staffCost = []
