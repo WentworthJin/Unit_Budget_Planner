@@ -4,12 +4,17 @@
 
 <b>1. Set up<b>
 
-**In order to use the interface, will require to install node.js at https://nodejs.org/en/download/**
+### Requirement 
+
+**In order to use the interface, will require to install node.js at https://nodejs.org/en/download/ and install python3 (require to have python(3.5 and above), can be find at https://www.python.org/downloads/**
 
 You need to install the packages inside the [<b>requirements.txt<b>](./Unit_Budget/Python_File/requirements.txt). Run the following codes.
 <pre>
 
 **Install virtual Environment**
+
+**For MacOS and Linux User**
+
 
 cd Unit_Budget
 
@@ -17,7 +22,22 @@ python3 -m venv venv
 
 source venv/bin/activate
 
-pip3 install -r ./Unit_Budget/Python_File/requirements.txt
+pip3 install -r ./Python_File/requirements.txt
+
+npm install
+
+npm start
+
+**For Window User**
+
+
+cd Unit_Budget
+
+python3 -m venv venv 
+
+venv/Scripts/activate
+
+pip3 install -r ./Python_File/requirements.txt
 
 npm install
 
