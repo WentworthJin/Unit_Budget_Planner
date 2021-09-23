@@ -150,7 +150,6 @@ def get_upload():
                                         JOIN Session E USING (SessionID) \
                                         JOIN Unit U USING (UnitID) \
           Group By U.UnitID'
-  # connect to database 
   con = sqlite3.connect(db_path) 
   cur = con.cursor()
   cur.execute(query)
