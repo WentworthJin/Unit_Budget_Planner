@@ -13,6 +13,13 @@ function showAndHide() {
   }
 }
 
+/**
+ * Build SearchParams to include supplied queries.
+ * 
+ * @param {*} year The year when a report is created.
+ * @param {*} semester The semester a report targets to.
+ * @param {*} unitcode The Unit code a report targets to.
+ */
 const buildSearchParams = (year, semester, unitcode) => {
   const queryParams = new URLSearchParams();
   if(year) {
@@ -27,6 +34,7 @@ const buildSearchParams = (year, semester, unitcode) => {
 
   return queryParams;
 }
+
 /**
  * List all reports.
  * 
@@ -79,7 +87,13 @@ window.onload = function (data) {
 }
 
 
-// get the data to plot the graph 
+/**
+ * Retrieve employee budget data.
+ * 
+ * @param {*} year The year when the report is created.
+ * @param {*} semester The semester which the report targets to.
+ * @param {*} unitcode The Unit code which the report targets to.
+ */ 
 const getEmployeeData = (year, semester, unitcode) => {
   const queryParams = buildSearchParams(year, semester, unitcode);
   fetch('http://127.0.0.1:5000/employee_budget?' + queryParams, {
@@ -125,6 +139,13 @@ const horizontalbarchart = function (data) {
   bar_chart.render();
 }
 
+/**
+ * Retrieve workload data.
+ * 
+ * @param {*} year The year when the report is created.
+ * @param {*} semester The semester which the report targets to.
+ * @param {*} unitcode The Unit code which the report targets to.
+ */ 
 const getWorkLoadData = function (year, semester, unitcode) {
   const queryParams = buildSearchParams(year, semester, unitcode);
   fetch('http://127.0.0.1:5000/workload?' + queryParams, {
