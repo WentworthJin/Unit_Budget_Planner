@@ -1,14 +1,14 @@
 # Deliverable 2
 
-##Why this branch
+#Why this branch
 
 This branch concentrates on the implementation of the feature of filtering summary reports. However, in order to avoid potential conflicts, master branch may merge into this branch when needed. 
 
-##What is this feature?
+#What is this feature?
 
 Users can choose options (Year, Semester, Unit Code) on the menu filter, which makes the users can see specific information such as budget for semester 1 2020 budget for specific unit. 
 
-##How to use this feature ？
+#How to use this feature ？
 
 step 1:  refer to How to Launch the Application
 
