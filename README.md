@@ -1,20 +1,20 @@
 # Deliverable 2
 
-#Why this branch
+**Why this branch**
 
 This branch concentrates on the implementation of the feature of filtering summary reports. However, in order to avoid potential conflicts, master branch may merge into this branch when needed. 
 
-#What is this feature?
+**What is this feature?**
 
 Users can choose options (Year, Semester, Unit Code) on the menu filter, which makes the users can see specific information such as budget for semester 1 2020 budget for specific unit. 
 
-#How to use this feature ？
+**How to use this feature ？**
 
-step 1:  refer to How to Launch the Application
+**step 1:**  refer to How to Launch the Application
 
-step 2:  click the "Summary Report" button.
+**step 2: ** click the "Summary Report" button.
 
-step 3:  you can see the dropdown box to choose the year and the semester and the edit box to input the unit code. Make some change on the three fields and you can see the different information and bar charts. For example, if you choose 2020, you can only see the information about 2020. If you input CITS5503 in the edit box, you can only see the information about CITS5503.
+**step 3:**  you can see the dropdown box to choose the year and the semester and the edit box to input the unit code. Make some change on the three fields and you can see the different information and bar charts. For example, if you choose 2020, you can only see the information about 2020. If you input CITS5503 in the edit box, you can only see the information about CITS5503.
 
 
 ## How to Launch the Application
