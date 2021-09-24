@@ -12,6 +12,21 @@ activities = [1,6,3,50,12]
 oc = [1,6]
 staff = [1,"Racheal","Lecture"]
 
+'''
+    Functionality: The Insert_All_Liangbo_Version.py.py is a framework that provides various functions for other users 
+                   to use, in order to insert data into the database. 
+    
+    You can run this file by: Import the functions inside this file
+    
+    Parameters: Table data
+    
+    Result: Insert the Table data into the database
+
+    Testing: Refer to the " test_Insert_All.py " testing file, in order to test if the function can 
+             correctly insert data into the Unit_Budget.db.
+
+'''
+
 #create a database connection to a SQLite database
 def create_connection(db_file):
     conn = None
