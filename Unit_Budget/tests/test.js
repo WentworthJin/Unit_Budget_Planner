@@ -82,4 +82,41 @@ describe('Application Launch', function () {
     })
     .catch(err => done(err))
   })
+
+  /**create a test to check whether when it click, the button of Head of Department turns yellow and desciption appears
+   * @param done, which is used for asynchronouse, call done when the function is finished, 
+   * return a promise 
+  */
+   it("select role as Head of Department", function (done)  {
+    app.client.$('#Head of Department').then (function (element) {
+      element.click()
+      done()
+    })
+    .catch(err => done(err))
+  })
+
+  /**create a test to check whether when it click, the button of Unit Coordinator turns yellow and desciption appears
+   * @param done, which is used for asynchronouse, call done when the function is finished, 
+   * return a promise 
+  */
+   it("select role as Unit Coordinator", function (done)  {
+    app.client.$('#Unit Coordinator').then (function (element) {
+      element.click()
+      done()
+    })
+    .catch(err => done(err))
+  })
+
+  /**create a test to check whether when it click, the button of Head of Finance turns yellow and desciption appears
+   * @param done, which is used for asynchronouse, call done when the function is finished, 
+   * return a promise 
+  */
+   it("select role as Head of Finance", function (done)  {
+    app.client.$('#Head of Finance').then (function (element) {
+      element.click()
+      done()
+    })
+    .catch(err => done(err))
+  })
 });
+  
