@@ -61,8 +61,8 @@ upload file to the system
 This test is testing the "Upload" button, when click without "Choose file", i.e. the display is "No file chosen", the "Upload" button will not be redirect to the table.html. 
 
 Manual test steps: 
-1. Start the application (refer to README.md at)
-2. Download the unit budget spreadsheet at:
+1. Start the application (refer to README.md at Unit_Budget_Planner/README.md)
+2. Download the unit budget spreadsheet at https://github.com/WentworthJin/Unit_Budget_Planner/raw/master/Unit_Budget/tests/CITS4401_Sem1%202021%20budgetv3.xlsx
 2. Click "Choose file" and select the "CITS4401_Sem1 2021 budgetv3"
 3. Click the "Upload" button
 
