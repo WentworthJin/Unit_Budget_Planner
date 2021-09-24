@@ -12,12 +12,14 @@
 
 ### II. How to run this code
 - You can execute this file directly in the terminal( *Presuming you are in the [<b>Python_File<b>](./Python_File) directory)
+  
   <pre>
   python3 Create_Table.py
   </pre>
 
 ### III. Resut
 - You will get the 'Unit_Budget.db' created at the currect directory
+  
   <pre>
   ***
   DB has been initialized
@@ -32,11 +34,13 @@
 - There is a [<b>testing<b>](./Python_File/test_Create_Table.py) file available for this functionality. 
 - This file will test whether the function can successfully create the database name 'Unit_Budget.db'
 - To run the testing file, you need to be in the [<b>Python_File<b>](./Python_File) directory
+  
   <pre>
   python3 -m test_Create_Table
   </pre>
   
   And the testing result should be
+  
   <pre>
   incomplete input
   .DB has been initialized
@@ -59,6 +63,7 @@ order to insert data into the database.
 - The file comes with mock data, so that you can execute this file directly in the terminal ( *Presuming you are in the [<b>Python_File<b>](./Python_File) directory)
 
 - The mock data can be viewed [<b>here<b>](./Python_File/Insert_All_Liangbo_Version.py#L5-L13)
+  
   <pre>
   python3 Create_Table.py
   python3 Insert_All_Liangbo_Version.py
@@ -66,6 +71,7 @@ order to insert data into the database.
 
 ### III. Resut
 - You will be notified that all data has been inserted
+  
   <pre>
   ***
   All Dummy data has been inserted
@@ -76,11 +82,13 @@ order to insert data into the database.
 - There is a [<b>testing<b>](./Python_File/test_Insert_All.py) file available for this functionality. 
 - This file will test whether the function can successfully load the mock data into the database 'Unit_Budget.db'
 - To run the testing file, you need to be in the [<b>Python_File<b>](./Python_File) directory
+  
   <pre>
   python3 -m test_Insert_All
   </pre>
   
   And the testing result should be
+  
   <pre>
   DB has been initialized
   .........
@@ -105,6 +113,7 @@ primary key of Staff, TeachingCode, and Non-Salary Cost table.
 ( *Presuming you are in the [<b>Python_File<b>](./Python_File) directory)
 
 - The mock data can be viewed [<b>here<b>](./Python_File/getFunction.py#L66)
+  
   <pre>
   python3 Create_Table.py
   python3 Insert_All_Liangbo_Version.py
@@ -113,6 +122,7 @@ primary key of Staff, TeachingCode, and Non-Salary Cost table.
 
 ### III. Resut
 - You will get the primary Key for that mock staff
+  
   <pre>
   ***
   1
@@ -123,11 +133,13 @@ primary key of Staff, TeachingCode, and Non-Salary Cost table.
 - There is a [<b>testing<b>](./Python_File/test_getID.py) file available for this functionality. 
 - This file will test whether the function can successfully return the primary key regarding to the input
 - To run the testing file, you need to be in the [<b>Python_File<b>](./Python_File) directory
+  
   <pre>
   python3 -m test_getID
   </pre>
   
   And the testing result should be
+  
   <pre>
   DB has been initialized
   All Dummy data has been inserted
