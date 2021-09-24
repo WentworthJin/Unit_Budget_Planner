@@ -164,5 +164,5 @@ the uploaded file into the directory [<b>uploads<b>(./Python_File/uploads)
 - The instructions can be viewed [<b>Here<b>](../README.md#L5-L45)
 
 ### III. Testing
-- You can check if the file appeared in the [<b>uploads<b>(./Python_File/uploads) folder
+- You can check if the file appeared in the [<b>uploads<b>](./Python_File/uploads) folder
 
