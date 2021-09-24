@@ -22,6 +22,7 @@ python3 testing_backend.py
 
 <pre>
 
+**In order to start the automate test, it requires to comment out mainWindow.webContents.openDevTools() in main.js, as this open development tools which could affect the testing**
 **For All User (automate testing front end)**
 
 assume that user are in Unit_Budget_Planner directory
