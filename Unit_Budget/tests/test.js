@@ -43,23 +43,35 @@ describe('Application Launch', function () {
   */
   it('opens a window', function (done) {
     app.client.getWindowCount().then(function (count) {
-      assert.equal(count, 2);
+      assert.equal(count, 1);
       done();
     })
     .catch(err => done(err))
   })
 
+  it('title', function () {
+    return app.client.getTitle().should.eventually.equal('Unit Budget Planner');
+   });
+
   /**create a test to check whether element of id summary in HTML is Summary Report
    * @param done, which is used for asynchronouse, call done when the function is finised, 
    * return a promise 
   */
-  it('Navigate to Summary report', function (done) {
+  it('get the element name', function (done) {
     app.client.$('#summary').then(function (element) {
       element.getText().then(function (text) {
-        (text,"Summary Report")
+        assert.equal(text,"Summary Report")
       })
       done()
     })
     .catch(err => done(err))
   })  
+
+  it("navigate to summary report", function (done)  {
+    app.client.$('#summary').then (function (element) {
+      element.click()
+      done()
+    })
+    .catch(err => done(err))
+  })
 });
