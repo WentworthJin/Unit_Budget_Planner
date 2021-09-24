@@ -23,6 +23,12 @@ def create_connection(db_file):
     return conn
 
 
+def select_query(conn,query):
+  cur = conn.cursor()
+  cur.execute(query)
+  return cur.fetchall()
+
+
 #Insert data into Unit table
 def insert_unit(conn, unit):
     sql = ''' INSERT INTO Unit(UnitCode,Semester,Year)
