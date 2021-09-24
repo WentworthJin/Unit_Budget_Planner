@@ -28,11 +28,13 @@ npm install
 
 npm start
 
-**For Window User**
+**For Windows User**
 
 cd Unit_Budget
 
-python3 -m venv venv 
+python3 -m venv venv OR py -m venv venv
+
+Set-ExecutionPolicy Unrestricted -Scope Process
 
 venv/Scripts/activate
 

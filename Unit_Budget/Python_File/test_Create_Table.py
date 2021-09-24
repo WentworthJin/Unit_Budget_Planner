@@ -10,7 +10,6 @@ from sqlite3 import Error
     *** The Test will automatically delete the database file it created ***
 
 '''
-os.remove('Unit_Budget.db')
 
 class TestCreate(unittest.TestCase):
 
