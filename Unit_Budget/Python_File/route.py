@@ -9,6 +9,7 @@ import os.path
 Schema()
 
 # Insert mock data
+sample_insert()
 
 # File Type Limit
 ALLOWED_EXTENSIONS = {'xlsx'}
@@ -183,7 +184,6 @@ def upload_file():
         filename = secure_filename(file.filename)
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
     # Insert mock data
-    # sample_insert()
     return render_template('table.html')
   except:
     return render()
