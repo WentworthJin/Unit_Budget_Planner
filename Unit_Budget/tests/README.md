@@ -23,6 +23,7 @@ python3 testing_backend.py
 <pre>
 
 **In order to start the automate test, it requires to comment out mainWindow.webContents.openDevTools() in main.js, as this open development tools which could affect the testing**
+
 **For All User (automate testing front end)**
 
 assume that user are in Unit_Budget_Planner directory
@@ -59,16 +60,18 @@ OK
 **For All User (automate testing front end)**
 
 > electron-quick-start@1.0.0 test:e2e /Users/sameam/Desktop/OneDrive/Desktop/Professional/project1/Unit_Budget_Planner/Unit_Budget
-> ./node_modules/mocha/bin/mocha tests/test.js  --timeout 10000
+> ./node_modules/mocha/bin/mocha tests/test.js  --timeout 30000
 
 
 
   Application Launch
     ✔ opens a window
-    ✔ Navigate to Summary report (5061ms)
+    ✔ title
+    ✔ get the element name
+    ✔ navigate to summary report
 
 
-  2 passing (18s)
+  4 passing (14s)
 
 </pre>
 
