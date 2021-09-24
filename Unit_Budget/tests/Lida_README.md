@@ -78,7 +78,7 @@ Manual test steps:
 
 It will be redirect to the table.html. 
 
-This functionality will be further improved to automatically store the data in the database and extract the database result and display in the tables. 
+This functionality will be further improved to only accept spreadsheet files, automatically store the data in the database and extract the database result and display in the tables. 
 
 </pre>
 
