@@ -9,7 +9,7 @@ import os.path
 Schema()
 
 # Insert mock data
-sample_insert()
+# sample_insert()
 
 # File Type Limit
 ALLOWED_EXTENSIONS = {'xlsx'}
