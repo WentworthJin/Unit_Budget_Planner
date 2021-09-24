@@ -17,7 +17,7 @@
   python3 Create_Table.py
   </pre>
 
-### III. Resut
+### III. Result
 - You will get the 'Unit_Budget.db' created at the currect directory
   
   <pre>
@@ -69,7 +69,7 @@ order to insert data into the database.
   python3 Insert_All_Liangbo_Version.py
   </pre>
 
-### III. Resut
+### III. Result
 - You will be notified that all data has been inserted
   
   <pre>
@@ -120,7 +120,7 @@ primary key of Staff, TeachingCode, and Non-Salary Cost table.
   python3 getFunction.py
   </pre>
 
-### III. Resut
+### III. Result
 - You will get the primary Key for that mock staff
   
   <pre>
