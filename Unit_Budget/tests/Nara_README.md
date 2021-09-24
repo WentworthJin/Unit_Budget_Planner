@@ -23,6 +23,7 @@ python3 testing_backend.py
 <pre>
 
 **In order to start the automate test, it requires to comment out mainWindow.webContents.openDevTools() in main.js, as this open development tools which could affect the testing**
+https://github.com/WentworthJin/Unit_Budget_Planner/blob/master/Unit_Budget/main.js#L5 link to main.js
 
 **For All User (automate testing front end)**
 
@@ -31,6 +32,15 @@ assume that user are in Unit_Budget_Planner directory
 cd Unit_Budget
 
 npm run test:e2e
+
+<pre>
+Tests that I have created: 
+opens a window
+title
+get the element name
+navigate to summary report
+</pre>
+
 </pre>
 
 <hr>
@@ -69,9 +79,10 @@ OK
     ✔ title
     ✔ get the element name
     ✔ navigate to summary report
+    ✔ select role as Head of Finance (5033ms)
 
 
-  4 passing (14s)
+  5 passing (29s)
 
 </pre>
 
