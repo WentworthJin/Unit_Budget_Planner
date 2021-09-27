@@ -197,6 +197,30 @@ const graphing =  function(data) {
 stack_chart.render()
 }
 
+// function to check whether file has a specific extension 
+function checkFile(send) {
+  const extension = new Array('.xlsx','.xls'); 
+  var fileExtension = send.value;
+  // get the file extension 
+  fileExtension = fileExtension.substring(fileExtension.lastIndexOf('.'));
+  if (!extension.includes(fileExtension)) {
+    alert("Invalid file selected, valid files are of " +extension.toString() + " types.")
+    send.value='';
+    return false;
+  }
+  else {
+    return true
+  }
+
+}
+
+// click to show user information 
+function sampleInformation() {
+  alert('Excel files includes files that have extension .xlsx and .xls. \
+  For example: "file1.xlsx" or "file1.xls"')
+}
+
+
 getAllData()
 getWorkLoadData()
 getEmployeeData()

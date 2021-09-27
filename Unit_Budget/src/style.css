@@ -36,6 +36,9 @@ a {
 # For Button
 --------------------------------------------------------------*/
 
+button.dabutton {
+  padding: 15px 32px;
+} 
 
 Button.next a {
   color:black;
@@ -54,7 +57,47 @@ Button.next {
   margin-left: 10px;
 }
 
+#myFile {
+  font-size: 1.25em;
+  font-weight: 700;
+  color: black;
+  display: inline-block;
+  align-items: center;
+  padding: 8px 12px; 
+  cursor: pointer;
+  border-radius: 4px;
+  background-color: #b9c4c9;
+  font-size: 16px;
+}
 
+#bttn {
+  padding: 6px;
+  font-size: 12pt;
+  background-color: #cfdbce;
+}
+
+#summary {
+  padding: 6px;
+  background-color: #cfdbce;
+  font-size: 12pt;
+}
+
+
+/*--------------------------------------------------------------
+# for upload function
+--------------------------------------------------------------*/
+.upload {
+  border: 4px solid black;
+  margin-left: 120px;
+  margin-right: 120px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background-color: #cedadb;
+}
+
+.text {
+  font-size: 15pt;
+}
 
 
 /*--------------------------------------------------------------
