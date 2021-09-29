@@ -22,7 +22,7 @@ python3 -m venv venv
 
 source venv/bin/activate
 
-pip3 install -r ./Python_File/requirements.txt
+pip3 install -r ./Python_File/requirements.txt / pip install -r ./Python_File/requirements.txt
 
 npm install
 
@@ -38,7 +38,7 @@ Set-ExecutionPolicy Unrestricted -Scope Process
 
 venv/Scripts/activate
 
-pip3 install -r ./Python_File/requirements.txt
+pip3 install -r ./Python_File/requirements.txt / pip install -r ./Python_File/requirements.txt
 
 npm install
 
