@@ -49,7 +49,7 @@ const getAllData = () => {
 window.onload = function (data) {
   const dataArray = []
   for(var i = 0; i < data.length; i++){
-    dataArray.push({"label":data[i][0], "y":data[i][7]})
+    dataArray.push({"label":data[i][0], "y":data[i][12]})
   } 
   
   var chart = new CanvasJS.Chart("barchart", {
@@ -57,16 +57,15 @@ window.onload = function (data) {
     title:{
       text: "Unit Budget"              
     },
-    data: [//array of dataSeries              
-      { //dataSeries object
-
-       /*** Change type "column" to "bar", "area", "line" or "pie"***/
+    data: [              
+      { 
        type: "column",
        dataPoints: dataArray
      }
      ],
     axisY:{
-      prefix: "$",
+      prefix: "$ ",
+      suffix:"/student"
     }     
     
   });
@@ -161,8 +160,6 @@ const graphing =  function(data) {
     workload.push({"label":data[i][0], "y":data[i][1]})
     staffCost.push({"label":data[i][0], "y":data[i][2]})
   };
-
-
   var stack = document.getElementById("stack")
   var stack_chart = new CanvasJS.Chart(stack, {
 
@@ -171,30 +168,39 @@ const graphing =  function(data) {
   title:{
     text: "Workload VS Total Cost"              
   },
+  data: [    
+    {     
+      type: "column",
+      axisYIndex: 0,
+      axisYType: "secondary", // used this one as 
+      name:"Workload",
+      showInLegend: true,
+      dataPoints: workload
+    },
 
-  data: [  //array of dataSeries     
-  {     
-    type: "column",
-    name: "Workload",
-    showInLegend: true,
-    dataPoints: workload
-  },
+    { //dataSeries - second quarter
 
-  { //dataSeries - second quarter
-
-  type: "column",
-  name: "StaffCost", 
-  showInLegend: true,               
-  dataPoints: staffCost
-}
-],
+      type: "column",
+      axisYIndex: 0,
+      name:"StaffCost", 
+      showInLegend: true,               
+      dataPoints: staffCost
+    }
+  ],
 /** Set axisY properties here*/
-  axisY:{
-    prefix: "$",
-  }    
-});
+    axisY:[
+      {
+        title: "StaffCost",
+        prefix: "$",
+      }
+    ],
+    axisY2:[{
+      suffix:"Hour",
+      title: "Workload",
+    }]   
+  });
 
-stack_chart.render()
+  stack_chart.render()
 }
 
 // function to check whether file has a specific extension 

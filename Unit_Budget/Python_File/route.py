@@ -65,7 +65,14 @@ def get_all_data():
           (Select SUM(A.Hour) \
           From Activities A JOIN Unit N USING (UnitID) \
           Where N.UnitID = U.UnitID \
-          Group by N.UnitID) AS Total_WorkLoad \
+          Group by N.UnitID) AS Total_WorkLoad, \
+          (Select En.EnrolmentNumber \
+          FROM Enrolment En \
+          JOIN Budget B USING (UnitID) \
+          Where En.IsEstimated = "YES" and En.IsLastSemester = "NO" and En.UnitID = U.UnitID ) AS Enrolment_number, \
+          (Select B.cost / En.EnrolmentNumber from Budget B JOIN Enrolment En USING (UnitID) \
+          Where B.IsEstimated="YES" and B.IsLastSemester="NO" and En.IsEstimated="YES" \
+          and En.IsLastSemester="NO" and En.UnitID = U.UnitID) AS Cost_per_student \
           From Activities A JOIN Staff S USING (StaffID)  \
                                         JOIN Session E USING (SessionID) \
                                         JOIN Unit U USING (UnitID) \
@@ -121,10 +128,17 @@ def get_main_data():
                       (Select SUM(A.Hour) \
                       From Activities A JOIN Unit N USING (UnitID) \
                       Where N.UnitID = U.UnitID \
-                      Group by N.UnitID) AS Total_WorkLoad \
+                      Group by N.UnitID) AS Total_WorkLoad, \
+                      (Select En.EnrolmentNumber \
+                      FROM Enrolment En \
+                      JOIN Budget B USING (UnitID) \
+                      Where En.IsEstimated = "YES" and En.IsLastSemester = "NO" and En.UnitID = U.UnitID ) AS Enrolment_number, \
+                      (Select B.cost / En.EnrolmentNumber from Budget B JOIN Enrolment En USING (UnitID) \
+                      Where B.IsEstimated="YES" and B.IsLastSemester="NO" and En.IsEstimated="YES" \
+                      and En.IsLastSemester="NO" and En.UnitID = U.UnitID) AS Cost_per_student \
                       From Activities A JOIN Staff S USING (StaffID)  \
-                                                    JOIN Session E USING (SessionID) \
-                                                    JOIN Unit U USING (UnitID) \
+                                JOIN Session E USING (SessionID) \
+                                JOIN Unit U USING (UnitID) \
                       Group By U.UnitID')
   result = cur.fetchall()
   return jsonify(result)
