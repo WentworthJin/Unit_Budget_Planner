@@ -10,11 +10,11 @@
 
 You need to install the packages inside the [<b>requirements.txt<b>](./Unit_Budget/Python_File/requirements.txt). Run the following codes.
 
+### Install virtual Environment
+
+#### For MacOS and Linux User
+
 <pre>
-
-**Install virtual Environment**
-
-**For MacOS and Linux User**
 
 cd Unit_Budget
 
@@ -28,7 +28,11 @@ npm install
 
 npm start
 
-**For Windows User**
+</pre>
+  
+#### For Windows User
+
+<pre>
 
 cd Unit_Budget
 
