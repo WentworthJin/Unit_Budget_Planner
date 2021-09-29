@@ -8,11 +8,9 @@
 
 **In order to use the interface, will require to install node.js at https://nodejs.org/en/download/ and install python3 (require to have python(3.5 and above), can be find at https://www.python.org/downloads/**
 
-You need to install the packages inside the [<b>requirements.txt<b>](./Unit_Budget/Python_File/requirements.txt). Run the following codes.
-
 ### Install virtual Environment
 
-#### For MacOS and Linux User
+#### * For MacOS and Linux User
 
 <pre>
 
@@ -22,7 +20,25 @@ python3 -m venv venv
 
 source venv/bin/activate
 
-pip3 install -r ./Python_File/requirements.txt ***or*** pip install -r ./Python_File/requirements.txt
+</pre>
+
+You need to install the packages inside the [<b>requirements.txt<b>](./Unit_Budget/Python_File/requirements.txt). Run the following code.
+
+<pre>
+
+pip3 install -r ./Python_File/requirements.txt
+
+</pre>
+or 
+<pre>
+
+pip install -r ./Python_File/requirements.txt
+
+</pre>
+
+Then start the application
+  
+<pre>
 
 npm install
 
@@ -30,7 +46,7 @@ npm start
 
 </pre>
   
-#### For Windows User
+#### * For Windows User
 
 <pre>
 
@@ -42,7 +58,25 @@ Set-ExecutionPolicy Unrestricted -Scope Process
 
 venv/Scripts/activate
 
-pip3 install -r ./Python_File/requirements.txt ***or*** pip install -r ./Python_File/requirements.txt
+</pre>
+
+You need to install the packages inside the [<b>requirements.txt<b>](./Unit_Budget/Python_File/requirements.txt). Run the following code.
+
+<pre>
+
+pip3 install -r ./Python_File/requirements.txt
+
+</pre>
+or 
+<pre>
+
+pip install -r ./Python_File/requirements.txt
+
+</pre>
+
+Then start the application
+  
+<pre>
 
 npm install
 
