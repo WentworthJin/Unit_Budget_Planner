@@ -1,12 +1,8 @@
 // This method is for role identification
-  var el_down = document.getElementById("GFG_DOWN");
-  function GFG_click(clicked) {
-      el_down.innerHTML = "You are the "+clicked+".";
-  }
-
-// document.getElementById('role1').onclick = function(){
-//     this.style.backgroundColor = 'Yellow';
-// };
+var el_down = document.getElementById("GFG_DOWN");
+function GFG_click(clicked) {
+     el_down.innerHTML = "You are the "+clicked+".";
+}
 
 function showAndHide() {
   const x = document.getElementById("radio");
@@ -17,41 +13,62 @@ function showAndHide() {
   }
 }
 
-/**Used to get data from server side 
- * @param does not have parameter 
+/**
+ * Build SearchParams to include supplied queries.
+ * 
+ * @param year The year when a report is created.
+ * @param semester The semester a report targets to.
+ * @param unitcode The Unit code a report targets to.
+ */
+const buildSearchParams = (year, semester, unitcode) => {
+  const queryParams = new URLSearchParams();
+  if(year) {
+    queryParams.append("year", year);
+  }
+  if(semester) {
+    queryParams.append("semester", semester);
+  }
+  if(unitcode) {
+    queryParams.append("unitcode", unitcode);
+  }
+
+  return queryParams;
+}
+
+/**
  * function fetch the data and return a response of an array of data 
  * pass into the window.onload for plot the bar graph
-*/
-
-// get the data from database 
-const getAllData = () => {
-  fetch('http://127.0.0.1:5000/get_all_data', {
+ * 
+ * @param {*} year The year when the report is created.
+ * @param {*} semester The semester which the report targets to.
+ * @param {*} unitcode The Unit code which the report targets to.
+ */ 
+const getAllData = async(year, semester, unitcode) => {
+  const queryParams = buildSearchParams(year, semester, unitcode);
+  const result = await fetch('http://127.0.0.1:5000/get_all_data?' + queryParams, {
     method:"GET",
     headers:{
       headers: {
         "Content-Type":"application/json"
       }
     }
-  })
-  .then(resp => resp.json())
-  .then((data) => 
-    window.onload(data))
-  .catch(error => 
-    console.log(error))
+  });
+
+  const data = await result.json();
+  window.onload(data);
+  return data;
 }
 
-/**Plot a bar graph 
+/**
+ * Plot a bar graph 
  * @param data type=array, receive data from server 
  * plot the data dynamically based on data from database 
-*/
-
-// drawing a bar chart 
+ */
 window.onload = function (data) {
   const dataArray = []
   for(var i = 0; i < data.length; i++){
     dataArray.push({"label":data[i][0], "y":data[i][7]})
   } 
-  
   var chart = new CanvasJS.Chart("barchart", {
     animationEnabled: true,
     title:{
@@ -74,13 +91,17 @@ window.onload = function (data) {
 }
 
 
-/**Used to get data from server side 
- * @param does not have parameter 
+/**
  * function fetch the data and return a response of an array of data 
  * pass into the horizontal bar chart for plot the horizontal bar chart
-*/
-const getEmployeeData = () => {
-  fetch('http://127.0.0.1:5000/employee_budget', {
+ * 
+ * @param year The year when the report is created.
+ * @param semester The semester which the report targets to.
+ * @param unitcode The Unit code which the report targets to.
+ */ 
+const getEmployeeData = (year, semester, unitcode) => {
+  const queryParams = buildSearchParams(year, semester, unitcode);
+  fetch('http://127.0.0.1:5000/employee_budget?' + queryParams, {
     method:"GET",
     headers:{
       headers: {
@@ -97,10 +118,11 @@ const getEmployeeData = () => {
 }
 
 
-/**Plot the horizontal bar graph 
+/**
+ * Plot the horizontal bar graph 
  * @param data, type=array, receive data from server 
  * plot the data dynamically based on data from database 
-*/
+ */
 const horizontalbarchart = function (data) {
   const dataArray = []
   for(var i = 0; i < data.length; i++){
@@ -128,13 +150,17 @@ const horizontalbarchart = function (data) {
   bar_chart.render();
 }
 
-/**Used to get data from server side 
- * @param does not have parameter 
+/**
  * function fetch the data and return a response of an array of data 
- * pass into the graphing for plot the cluster bar chart
-*/
-const getWorkLoadData = function () {
-  fetch('http://127.0.0.1:5000/workload', {
+ * pass into the graphing for plot the cluster bar chart 
+ *
+ * @param year The year when the report is created.
+ * @param semester The semester which the report targets to.
+ * @param unitcode The Unit code which the report targets to.
+ */ 
+const getWorkLoadData = function (year, semester, unitcode) {
+  const queryParams = buildSearchParams(year, semester, unitcode);
+  fetch('http://127.0.0.1:5000/workload?' + queryParams, {
     method:"GET",
     headers:{
       headers: {
@@ -150,10 +176,11 @@ const getWorkLoadData = function () {
     console.log(error))
 }
 
-/**Plot the cluster bar graph 
+/**
+ * Plot the cluster bar graph 
  * @param data, type=array, receive data from server 
  * plot the data dynamically based on data from database 
-*/ 
+ */ 
 const graphing =  function(data) {
   const workload = []
   const staffCost = []
@@ -196,13 +223,3 @@ const graphing =  function(data) {
 
 stack_chart.render()
 }
-
-getAllData()
-getWorkLoadData()
-getEmployeeData()
-graphing()
-
-
-
-
-
