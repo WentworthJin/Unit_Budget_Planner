@@ -1,30 +1,16 @@
-# Deliverable 2
-
-**Why this branch?**
-
-This branch concentrates on the implementation of the feature of filtering summary reports. However, in order to avoid potential conflicts, master branch may merge into this branch when needed. 
-
-**What is this feature?**
-
-Users can choose options (Year, Semester, Unit Code) on the menu filter, which makes the users can see specific information such as budget for semester 1 2020 budget for specific unit. 
-
-**How to use this feature?**
-
-**step 1:**  refer to How to Launch the Application
-
-**step 2:** click the "Summary Report" button.
-
-**step 3:**  you can see the dropdown box to choose the year and the semester and the edit box to input the unit code. Make some change on the three fields and you can see the different information and bar charts. For example, if you choose 2020, you can only see the information about 2020. If you input CITS5503 in the edit box, you can only see the information about CITS5503.
-
-
 ## How to Launch the Application
 
-**In order to use the interface, will require to install node.js at https://nodejs.org/en/download/**
+### Requirement 
+
+**In order to use the interface, will require to install node.js at https://nodejs.org/en/download/ and install python3 (require to have python(3.5 and above), can be find at https://www.python.org/downloads/**
 
 You need to install the packages inside the [<b>requirements.txt<b>](./Unit_Budget/Python_File/requirements.txt). Run the following codes.
+
 <pre>
 
 **Install virtual Environment**
+
+**For MacOS and Linux User**
 
 cd Unit_Budget
 
@@ -32,7 +18,23 @@ python3 -m venv venv
 
 source venv/bin/activate
 
-pip3 install -r ./Unit_Budget/Python_File/requirements.txt
+pip3 install -r ./Python_File/requirements.txt
+
+npm install
+
+npm start
+
+**For Windows User**
+
+cd Unit_Budget
+
+python3 -m venv venv OR py -m venv venv
+
+Set-ExecutionPolicy Unrestricted -Scope Process
+
+venv/Scripts/activate
+
+pip3 install -r ./Python_File/requirements.txt
 
 npm install
 
@@ -42,3 +44,66 @@ npm start
 
 <hr>
 
+# CITS5206 Professional Computing Project - Unit Budget Planner
+
+![image info](./Resources/Prototype.png)
+
+## Client
+<b>Rachel Cardell-Oliver</b> - Head of Department, UWA Computer Science
+
+## Team Member
+- Ethan Chen 23067035
+- Liangbo Jin 23078811
+- Lida Tong 22957193
+- Yu Zhu 23053734
+- Nara Eam 22805226
+- Keli Yin 22450718
+
+<hr>
+
+## Group Meeting
+
+- Schedule
+  - Every <b>Thursday 4pm</b>, details can be accessed [<b>here</b>](./Group_Meeting/Meeting_Record/20210729_Meeting_Minutes).
+
+- Meeting Agenda (Accessed [Here](./Group_Meeting))
+- Group Meeting Record, access files [here](./Group_Meeting/Meeting_Record)
+
+<hr>
+
+## Resources
+
+### Project Details
+
+Every unit taught in the School of PMC has a unit budget each semester to document the hours allocated to preparation and delivery of teaching activities and marking. It also documents casual salary costs and any software or hardware costs. The current system is based on individual spreadsheets for each unit. The spreadsheet system is cumbersome to set up for every unit each semester and it is difficult to break down the hours and costs of different types of activities for delivering units. Summary reports are needed in order to understand the costs in workload hours and paid casual teaching, for comparing the budgets of different groups of units and to track budget expenditure during the semester.
+
+The software will:
+
+- Create a database for managing current and historical unit budgets.
+- Create a user interface for entering or updating unit budget information.
+- Enable managers to produce summary reports for a group of units and the breakdown of their costs.
+- Additional functionalities (if time permits):
+
+- Import enrolment numbers in order to update automatically budget items that depend on class size.
+- Import cost information in order to track unit expenditure against the budget.
+- Visualise and export reports on historical trends of enrolments and budgets.
+
+### Marking Criteria
+
+- [Deliverable 1](./Project_Details/Deliverable_1_Details.docx) 15% ( 10% Group, 5% Individual ) <b>Due: 27/08/2021</b>
+- [Deliverable 2](./Project_Details/) 25% ( 25% Individual ) <b>Due: Week 8</b>
+- [Deliverable 3](./Project_Details/) 30% ( 20% Group, 10% Individual ) <b>Due: Week 12</b>
+
+### Client Requirements
+- The app should be in a desktop format 
+- The system shall allow the user to import the spreadsheet, or group of spreadsheets
+- The system should be able to produce and filter summary report  
+- The system shall allow user to type in their own SQL query
+- The system should be able to store the comment from the spreadsheet  
+- The system should allow the user to pull up the comment and check if there is actual anomaly happen.
+- The system shall be able to track the historical budget for user
+- The system shall provide different interface for different users according to their roles such as Unit Coordinator and Head of department
+
+
+
+<hr>

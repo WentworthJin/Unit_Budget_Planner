@@ -16,9 +16,9 @@ function showAndHide() {
 /**
  * Build SearchParams to include supplied queries.
  * 
- * @param {*} year The year when a report is created.
- * @param {*} semester The semester a report targets to.
- * @param {*} unitcode The Unit code a report targets to.
+ * @param year The year when a report is created.
+ * @param semester The semester a report targets to.
+ * @param unitcode The Unit code a report targets to.
  */
 const buildSearchParams = (year, semester, unitcode) => {
   const queryParams = new URLSearchParams();
@@ -36,7 +36,8 @@ const buildSearchParams = (year, semester, unitcode) => {
 }
 
 /**
- * List all reports.
+ * function fetch the data and return a response of an array of data 
+ * pass into the window.onload for plot the bar graph
  * 
  * @param {*} year The year when the report is created.
  * @param {*} semester The semester which the report targets to.
@@ -58,8 +59,11 @@ const getAllData = async(year, semester, unitcode) => {
   return data;
 }
 
-
-// drawing a bar chart 
+/**
+ * Plot a bar graph 
+ * @param data type=array, receive data from server 
+ * plot the data dynamically based on data from database 
+ */
 window.onload = function (data) {
   const dataArray = []
   for(var i = 0; i < data.length; i++){
@@ -88,11 +92,12 @@ window.onload = function (data) {
 
 
 /**
- * Retrieve employee budget data.
+ * function fetch the data and return a response of an array of data 
+ * pass into the horizontal bar chart for plot the horizontal bar chart
  * 
- * @param {*} year The year when the report is created.
- * @param {*} semester The semester which the report targets to.
- * @param {*} unitcode The Unit code which the report targets to.
+ * @param year The year when the report is created.
+ * @param semester The semester which the report targets to.
+ * @param unitcode The Unit code which the report targets to.
  */ 
 const getEmployeeData = (year, semester, unitcode) => {
   const queryParams = buildSearchParams(year, semester, unitcode);
@@ -112,6 +117,12 @@ const getEmployeeData = (year, semester, unitcode) => {
     console.log(error))
 }
 
+
+/**
+ * Plot the horizontal bar graph 
+ * @param data, type=array, receive data from server 
+ * plot the data dynamically based on data from database 
+ */
 const horizontalbarchart = function (data) {
   const dataArray = []
   for(var i = 0; i < data.length; i++){
@@ -140,11 +151,12 @@ const horizontalbarchart = function (data) {
 }
 
 /**
- * Retrieve workload data.
- * 
- * @param {*} year The year when the report is created.
- * @param {*} semester The semester which the report targets to.
- * @param {*} unitcode The Unit code which the report targets to.
+ * function fetch the data and return a response of an array of data 
+ * pass into the graphing for plot the cluster bar chart 
+ *
+ * @param year The year when the report is created.
+ * @param semester The semester which the report targets to.
+ * @param unitcode The Unit code which the report targets to.
  */ 
 const getWorkLoadData = function (year, semester, unitcode) {
   const queryParams = buildSearchParams(year, semester, unitcode);
@@ -164,7 +176,11 @@ const getWorkLoadData = function (year, semester, unitcode) {
     console.log(error))
 }
 
-// drawing a stack bar chart 
+/**
+ * Plot the cluster bar graph 
+ * @param data, type=array, receive data from server 
+ * plot the data dynamically based on data from database 
+ */ 
 const graphing =  function(data) {
   const workload = []
   const staffCost = []
@@ -207,8 +223,3 @@ const graphing =  function(data) {
 
 stack_chart.render()
 }
-
-
-
-
-

@@ -8,13 +8,12 @@ import os
 from sqlite3 import Error
 
 ''' 
-    *** The Test will automatically delete the db file it created ***
+    *** The Test will automatically delete the database file it created ***
 
 '''
-
 Create_Table.Schema()
 conn = sqlite3.connect("Unit_Budget.db")
-Insert_All_Liangbo_Version.main()
+Insert_All_Liangbo_Version.sample_insert()
 
 
 class TestCreate(unittest.TestCase):

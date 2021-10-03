@@ -3,6 +3,21 @@ import sys
 import numbers
 from sqlite3 import Error
 
+'''
+    Functionality: The getFuction.py is also a framework that provides some functions for other users to use, and 
+                   enable them to get the primary key of Staff, TeachingCode, and Non-Salary Cost table. 
+    
+    You can run this file by: Calling the functions inside this file
+
+    Parameters: Certain Table attribute
+    
+    Result: Return the primary key of the attribute provided
+
+    Testing: Refer to the " test_getID.py " testing file, in order to test if the function can 
+             correctly return the primary key of that attribute.
+
+'''
+
 def create_connection(db_file):
     conn = None
     try:

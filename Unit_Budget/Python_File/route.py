@@ -1,8 +1,15 @@
 from flask import Flask, render_template, jsonify, request, redirect, url_for, flash
 from werkzeug.utils import secure_filename
-import Create_Table
+from Create_Table import Schema
+from Insert_All_Liangbo_Version import sample_insert
 import sqlite3 
 import os.path
+
+# Initilize the Database
+Schema()
+
+# Insert mock data
+# sample_insert()
 
 # File Type Limit
 ALLOWED_EXTENSIONS = {'xlsx'}
@@ -40,6 +47,11 @@ def buildWhereClause(data):
 
 @app.route("/get", methods=["GET"])
 def get_all_data():
+  
+  """The function is used to get the summary data from database and send to client side 
+
+   Parameters: There is no parameter needed for this one. 
+   """
   
   query = 'Select U.UnitCode, SUM(A.Hour) AS TotalLoad, U.Semester,U.Year, \
           (Select COUNT(DISTINCT P.Name) \
@@ -90,6 +102,10 @@ def get_all_data():
 
 @app.route("/get_all_data", methods=["GET"])
 def get_main_data():
+  """The function is used to get the  main data from database and send to client side 
+
+   Parameters: There is no parameter needed for this one. 
+   """
   queryStrings = buildWhereClause(request.args.to_dict())
   con = sqlite3.connect(db_path)
   cur = con.cursor()
@@ -135,6 +151,10 @@ def get_main_data():
 # route to get each employees in each unit budget
 @app.route("/employee_budget", methods=["GET"])
 def get_employee_budget():
+  """The function is used to get the employees budget data from database and send to client side 
+
+   Parameters: There is no parameter needed for this one. 
+   """
   queryStrings = buildWhereClause(request.args.to_dict())
   con = sqlite3.connect(db_path)
   cur = con.cursor()
@@ -151,6 +171,10 @@ def get_employee_budget():
 # get workload and total cost for each unit 
 @app.route("/workload", methods=["GET"])
 def get_semester_budget():
+  """The function is used to get the workload and budget data from database and send to client side 
+
+   Parameters: There is no parameter needed for this one. 
+   """
   queryStrings = buildWhereClause(request.args.to_dict())
   con = sqlite3.connect(db_path)
   cur = con.cursor()
@@ -182,7 +206,8 @@ def upload_file():
       if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        return render_template('table.html')
+    # Insert mock data
+    return render_template('table.html')
   except:
     return render()
 

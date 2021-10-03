@@ -12,6 +12,21 @@ activities = [1,6,3,50,12]
 oc = [1,6]
 staff = [1,"Racheal","Lecture"]
 
+'''
+    Functionality: The Insert_All_Liangbo_Version.py.py is a framework that provides various functions for other users 
+                   to use, in order to insert data into the database. 
+    
+    You can run this file by: Import the functions inside this file
+    
+    Parameters: Table data
+    
+    Result: Insert the Table data into the database
+
+    Testing: Refer to the " test_Insert_All.py " testing file, in order to test if the function can 
+             correctly insert data into the Unit_Budget.db.
+
+'''
+
 #create a database connection to a SQLite database
 def create_connection(db_file):
     conn = None
@@ -147,7 +162,7 @@ def insert_staff(conn, staff):
       conn.commit()
       return cur.lastrowid
 
-def main():
+def sample_insert():
 
   try:
     database = "Unit_Budget.db"
@@ -181,12 +196,23 @@ def main():
       #budget = (UnitID,Cost,IsEstimated,IsLastSemester)
       insert_budget(conn,budget)
 
+      # Insert Activities table
+      # activities = (UnitID, StaffID, SessionID, HourlyRate, Hour)
+      insert_activities(conn, activities)
+
+      # Insert Staff table
+      # staff = (TeachingID, Name, Position)
       insert_staff(conn,staff)
-    print("Dummy Unit data has been inserted")
+
+      # Insert Other Cost table
+      # oc = (NSCID, UnitID)
+      insert_oc(conn, oc)
+
+    print("All Dummy data has been inserted")
 
   except Error as e:
     print(e)
 
 if __name__ == '__main__':
-  main()
+  sample_insert()
 

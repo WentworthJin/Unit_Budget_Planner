@@ -2,6 +2,25 @@ import sqlite3
 import sys
 from sqlite3 import Error
 
+'''
+    Functionality: The Create_Table.py aims to create a database named: Unit_Budget.db at the current directory. 
+    
+    You can run this file by: 
+        1. Execute the file directly, for example, run " python3 Create_Table.py " on terminal
+        2. Import the function "Schema()" from this file, and execute that function 
+            " import Create_Table
+                     Create_Table.Schema()
+            "
+    Parameters: None
+    
+    Result: Create Unit_Budget.db at Current_Directory/Unit_Budget.db
+
+    Testing: Refer to the " test_Create_Table.py " testing file, in order to test if the function can 
+             correctly create the Unit_Budget.db.
+
+'''
+
+
 #create a database connection to a SQLite database
 def create_connection(db_file):
     conn = None
@@ -13,7 +32,8 @@ def create_connection(db_file):
     
     return conn
 
-#Create a table from the create_table_sql statement
+# Create a table from the create_table_sql statement
+# The create_table_sql variable can be customized
 def create_table(conn, create_table_sql):
     try:
         c = conn.cursor()
@@ -22,9 +42,13 @@ def create_table(conn, create_table_sql):
         print(f)
 
 def Schema():
+
+    # The name of database
     database = "Unit_Budget.db"
 
     FirstRun = True
+
+    # This is the Database schema command lines
 
     sql_create_unit_table = """ CREATE TABLE IF NOT EXISTS Unit (
                                       UnitID INTEGER PRIMARY KEY AUTOINCREMENT,
