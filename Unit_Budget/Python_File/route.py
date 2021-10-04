@@ -184,7 +184,46 @@ def upload_file():
         filename = secure_filename(file.filename)
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
     # Insert mock data
-    return render_template('table.html')
+    ID = 'CITS4401'
+    con = sqlite3.connect(db_path)
+    cur = con.cursor()
+    cur.execute('Select U.UnitCode, SUM(A.Hour) AS TotalLoad, U.Semester,U.Year, \
+                      (Select COUNT(DISTINCT P.Name) \
+                      From Activities A JOIN Staff P USING (StaffID) \
+                      JOIN Unit R USING (UnitID) \
+                      Where R.UnitCode = U.UnitCode \
+                      ) AS Num_of_Staff, \
+                      SUM(A.Hour * A.HourlyRate) AS StaffCost, \
+                      (Select SUM(N.TotalCost) \
+                      From OtherCost O JOIN NonSalaryCosts N USING (NSCID) \
+                      JOIN UNIT Z USING (UnitID) \
+                      Where Z.UnitID = U.UnitID \
+                      Group by Z.UnitID) AS NonSalaryCost, \
+                      (Select B.Cost \
+                      From Unit G JOIN Budget B USING (UnitID) \
+                      Where IsEstimated = "YES" and B.IsLastSemester = "NO" and G.UnitID = U.UnitID ) AS Budget, \
+                      (Select COUNT(*) \
+                      From Activities A JOIN Unit P USING (UnitID) \
+                      Where P.UnitID = U.UnitID \
+                      Group by P.UnitID) AS TotalActivities, \
+                      (Select COUNT(*) \
+                      From OtherCost O JOIN Unit L USING (UnitID) \
+                      JOIN NonSalaryCosts USING (NSCID) \
+                      Where L.UnitID = U.UnitID \
+                      Group by L.UnitID) AS Total_Number_of_NSC, \
+                      (Select SUM(A.Hour) \
+                      From Activities A JOIN Unit N USING (UnitID) \
+                      Where N.UnitID = U.UnitID \
+                      Group by N.UnitID) AS Total_WorkLoad \
+                      From Activities A JOIN Staff S USING (StaffID)  \
+                                                    JOIN Session E USING (SessionID) \
+                                                    JOIN Unit U USING (UnitID) \
+                      Group By U.UnitID')
+    rows = cur.fetchall()
+    for row in rows:
+      if row[0] == ID:
+        data = row
+    return render_template('table.html',data = data)
   except:
     return render()
 
