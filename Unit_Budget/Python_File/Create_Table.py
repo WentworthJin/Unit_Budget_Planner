@@ -67,7 +67,7 @@ def Schema():
     
     sql_create_staff_table = """ CREATE TABLE IF NOT EXISTS Staff (
                                         StaffID INTEGER PRIMARY KEY AUTOINCREMENT,
-                                        TeachingID INT REFERENCES TeachingCode (TeachingCode) ON DELETE RESTRICT ON UPDATE CASCADE,
+                                        TeachingCode INT REFERENCES TeachingCode (TeachingCode) ON DELETE RESTRICT ON UPDATE CASCADE,
                                         Name VARCHAR (50),
                                         Position  VARCHAR (30),
                                         UNIQUE (Name, Position)ON CONFLICT FAIL

@@ -131,7 +131,7 @@ def insert_session(conn, session):
 #Insert data into Staff table
 staff = [1,"Racheal","Lecture"]
 def insert_staff(conn, staff):
-    sql = ''' Insert into Staff(TeachingID,Name,Position)
+    sql = ''' Insert into Staff(TeachingCode,Name,Position)
               VALUES(?,?,?) '''
     cur = conn.cursor()
     data_check=cur.execute(sql, staff)
