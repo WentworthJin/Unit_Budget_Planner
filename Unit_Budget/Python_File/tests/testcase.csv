@@ -1,0 +1,1194 @@
+url, params, expect
+http://127.0.0.1:5000/query,"{'a': 1, 'b': 1,}","{""success"": ""false""}"
+http://127.0.0.1:5000/query,{'year':2020},"{
+  ""data"": [
+    {
+      ""ActivitiesID"": 1,
+      ""Hour"": 24,
+      ""HourlyRate"": 0,
+      ""Name"": ""David Glance"",
+      ""Position"": ""Academic staff"",
+      ""Semester"": 2,
+      ""SessionID"": 1,
+      ""SessionName"": ""Lectures"",
+      ""SessionType"": ""NM"",
+      ""StaffID"": 1,
+      ""TeachingID"": 4,
+      ""TotalCost"": 0,
+      ""UnitCode"": ""CITS5503"",
+      ""UnitID"": 1,
+      ""Year"": 2020
+    },
+    {
+      ""ActivitiesID"": 2,
+      ""Hour"": 22,
+      ""HourlyRate"": 0,
+      ""Name"": ""David Glance"",
+      ""Position"": ""Academic staff"",
+      ""Semester"": 2,
+      ""SessionID"": 4,
+      ""SessionName"": ""Laboratories"",
+      ""SessionType"": ""NM"",
+      ""StaffID"": 1,
+      ""TeachingID"": 4,
+      ""TotalCost"": 0,
+      ""UnitCode"": ""CITS5503"",
+      ""UnitID"": 1,
+      ""Year"": 2020
+    },
+    {
+      ""ActivitiesID"": 3,
+      ""Hour"": 15,
+      ""HourlyRate"": 0,
+      ""Name"": ""David Glance"",
+      ""Position"": ""Academic staff"",
+      ""Semester"": 2,
+      ""SessionID"": 24,
+      ""SessionName"": ""Marking"",
+      ""SessionType"": ""M"",
+      ""StaffID"": 1,
+      ""TeachingID"": 4,
+      ""TotalCost"": 0,
+      ""UnitCode"": ""CITS5503"",
+      ""UnitID"": 1,
+      ""Year"": 2020
+    },
+    {
+      ""ActivitiesID"": 4,
+      ""Hour"": 24,
+      ""HourlyRate"": 0,
+      ""Name"": ""David Glance"",
+      ""Position"": ""Academic staff"",
+      ""Semester"": 2,
+      ""SessionID"": 20,
+      ""SessionName"": ""Other"",
+      ""SessionType"": ""NM"",
+      ""StaffID"": 1,
+      ""TeachingID"": 4,
+      ""TotalCost"": 0,
+      ""UnitCode"": ""CITS5503"",
+      ""UnitID"": 1,
+      ""Year"": 2020
+    },
+    {
+      ""ActivitiesID"": 5,
+      ""Hour"": 22,
+      ""HourlyRate"": 58,
+      ""Name"": ""Facilitator 1"",
+      ""Position"": ""Casual teaching"",
+      ""Semester"": 2,
+      ""SessionID"": 4,
+      ""SessionName"": ""Laboratories"",
+      ""SessionType"": ""NM"",
+      ""StaffID"": 4,
+      ""TeachingID"": 2,
+      ""TotalCost"": 1276,
+      ""UnitCode"": ""CITS5503"",
+      ""UnitID"": 1,
+      ""Year"": 2020
+    },
+    {
+      ""ActivitiesID"": 6,
+      ""Hour"": 11,
+      ""HourlyRate"": 58,
+      ""Name"": ""Facilitator 1"",
+      ""Position"": ""Casual teaching"",
+      ""Semester"": 2,
+      ""SessionID"": 26,
+      ""SessionName"": ""Preparation"",
+      ""SessionType"": ""NM"",
+      ""StaffID"": 4,
+      ""TeachingID"": 2,
+      ""TotalCost"": 638,
+      ""UnitCode"": ""CITS5503"",
+      ""UnitID"": 1,
+      ""Year"": 2020
+    },
+    {
+      ""ActivitiesID"": 7,
+      ""Hour"": 35,
+      ""HourlyRate"": 58,
+      ""Name"": ""Facilitator 1"",
+      ""Position"": ""Casual teaching"",
+      ""Semester"": 2,
+      ""SessionID"": 24,
+      ""SessionName"": ""Marking"",
+      ""SessionType"": ""M"",
+      ""StaffID"": 4,
+      ""TeachingID"": 2,
+      ""TotalCost"": 2030,
+      ""UnitCode"": ""CITS5503"",
+      ""UnitID"": 1,
+      ""Year"": 2020
+    },
+    {
+      ""ActivitiesID"": 8,
+      ""Hour"": 2,
+      ""HourlyRate"": 58,
+      ""Name"": ""Facilitator 1"",
+      ""Position"": ""Casual teaching"",
+      ""Semester"": 2,
+      ""SessionID"": 20,
+      ""SessionName"": ""Other"",
+      ""SessionType"": ""NM"",
+      ""StaffID"": 4,
+      ""TeachingID"": 2,
+      ""TotalCost"": 116,
+      ""UnitCode"": ""CITS5503"",
+      ""UnitID"": 1,
+      ""Year"": 2020
+    },
+    {
+      ""ActivitiesID"": 9,
+      ""Hour"": 24,
+      ""HourlyRate"": 0,
+      ""Name"": ""Rachel Cardell-Oliver"",
+      ""Position"": ""Academic staff"",
+      ""Semester"": 1,
+      ""SessionID"": 1,
+      ""SessionName"": ""Lectures"",
+      ""SessionType"": ""NM"",
+      ""StaffID"": 2,
+      ""TeachingID"": 4,
+      ""TotalCost"": 0,
+      ""UnitCode"": ""CITS4401"",
+      ""UnitID"": 2,
+      ""Year"": 2020
+    },
+    {
+      ""ActivitiesID"": 10,
+      ""Hour"": 24,
+      ""HourlyRate"": 0,
+      ""Name"": ""Rachel Cardell-Oliver"",
+      ""Position"": ""Academic staff"",
+      ""Semester"": 1,
+      ""SessionID"": 21,
+      ""SessionName"": ""Practical sessions"",
+      ""SessionType"": ""NM"",
+      ""StaffID"": 2,
+      ""TeachingID"": 4,
+      ""TotalCost"": 0,
+      ""UnitCode"": ""CITS4401"",
+      ""UnitID"": 2,
+      ""Year"": 2020
+    },
+    {
+      ""ActivitiesID"": 11,
+      ""Hour"": 36,
+      ""HourlyRate"": 0,
+      ""Name"": ""Rachel Cardell-Oliver"",
+      ""Position"": ""Academic staff"",
+      ""Semester"": 1,
+      ""SessionID"": 26,
+      ""SessionName"": ""Preparation"",
+      ""SessionType"": ""NM"",
+      ""StaffID"": 2,
+      ""TeachingID"": 4,
+      ""TotalCost"": 0,
+      ""UnitCode"": ""CITS4401"",
+      ""UnitID"": 2,
+      ""Year"": 2020
+    },
+    {
+      ""ActivitiesID"": 12,
+      ""Hour"": 26,
+      ""HourlyRate"": 0,
+      ""Name"": ""Rachel Cardell-Oliver"",
+      ""Position"": ""Academic staff"",
+      ""Semester"": 1,
+      ""SessionID"": 24,
+      ""SessionName"": ""Marking"",
+      ""SessionType"": ""M"",
+      ""StaffID"": 2,
+      ""TeachingID"": 4,
+      ""TotalCost"": 0,
+      ""UnitCode"": ""CITS4401"",
+      ""UnitID"": 2,
+      ""Year"": 2020
+    },
+    {
+      ""ActivitiesID"": 13,
+      ""Hour"": 16,
+      ""HourlyRate"": 0,
+      ""Name"": ""Rachel Cardell-Oliver"",
+      ""Position"": ""Academic staff"",
+      ""Semester"": 1,
+      ""SessionID"": 20,
+      ""SessionName"": ""Other"",
+      ""SessionType"": ""NM"",
+      ""StaffID"": 2,
+      ""TeachingID"": 4,
+      ""TotalCost"": 0,
+      ""UnitCode"": ""CITS4401"",
+      ""UnitID"": 2,
+      ""Year"": 2020
+    },
+    {
+      ""ActivitiesID"": 14,
+      ""Hour"": 34,
+      ""HourlyRate"": 65,
+      ""Name"": ""Jingbo Sun"",
+      ""Position"": ""Casual teaching"",
+      ""Semester"": 1,
+      ""SessionID"": 21,
+      ""SessionName"": ""Practical sessions"",
+      ""SessionType"": ""NM"",
+      ""StaffID"": 5,
+      ""TeachingID"": 3,
+      ""TotalCost"": 2210,
+      ""UnitCode"": ""CITS4401"",
+      ""UnitID"": 2,
+      ""Year"": 2020
+    },
+    {
+      ""ActivitiesID"": 15,
+      ""Hour"": 12,
+      ""HourlyRate"": 65,
+      ""Name"": ""Jingbo Sun"",
+      ""Position"": ""Casual teaching"",
+      ""Semester"": 1,
+      ""SessionID"": 26,
+      ""SessionName"": ""Preparation"",
+      ""SessionType"": ""NM"",
+      ""StaffID"": 5,
+      ""TeachingID"": 3,
+      ""TotalCost"": 780,
+      ""UnitCode"": ""CITS4401"",
+      ""UnitID"": 2,
+      ""Year"": 2020
+    },
+    {
+      ""ActivitiesID"": 16,
+      ""Hour"": 60,
+      ""HourlyRate"": 65,
+      ""Name"": ""Jingbo Sun"",
+      ""Position"": ""Casual teaching"",
+      ""Semester"": 1,
+      ""SessionID"": 24,
+      ""SessionName"": ""Marking"",
+      ""SessionType"": ""M"",
+      ""StaffID"": 5,
+      ""TeachingID"": 3,
+      ""TotalCost"": 3900,
+      ""UnitCode"": ""CITS4401"",
+      ""UnitID"": 2,
+      ""Year"": 2020
+    },
+    {
+      ""ActivitiesID"": 17,
+      ""Hour"": 0,
+      ""HourlyRate"": 0,
+      ""Name"": ""Guest Lecture"",
+      ""Position"": ""Other"",
+      ""Semester"": 1,
+      ""SessionID"": 27,
+      ""SessionName"": ""No Activities"",
+      ""SessionType"": ""NM"",
+      ""StaffID"": 6,
+      ""TeachingID"": 4,
+      ""TotalCost"": 0,
+      ""UnitCode"": ""CITS4401"",
+      ""UnitID"": 2,
+      ""Year"": 2020
+    }
+  ],
+  ""success"": ""ture""
+}"
+http://127.0.0.1:5000/query,"{'year':2020,'semester':1}"," {
+  ""data"": [
+    {
+      ""ActivitiesID"": 9,
+      ""Hour"": 24,
+      ""HourlyRate"": 0,
+      ""Name"": ""Rachel Cardell-Oliver"",
+      ""Position"": ""Academic staff"",
+      ""Semester"": 1,
+      ""SessionID"": 1,
+      ""SessionName"": ""Lectures"",
+      ""SessionType"": ""NM"",
+      ""StaffID"": 2,
+      ""TeachingID"": 4,
+      ""TotalCost"": 0,
+      ""UnitCode"": ""CITS4401"",
+      ""UnitID"": 2,
+      ""Year"": 2020
+    },
+    {
+      ""ActivitiesID"": 10,
+      ""Hour"": 24,
+      ""HourlyRate"": 0,
+      ""Name"": ""Rachel Cardell-Oliver"",
+      ""Position"": ""Academic staff"",
+      ""Semester"": 1,
+      ""SessionID"": 21,
+      ""SessionName"": ""Practical sessions"",
+      ""SessionType"": ""NM"",
+      ""StaffID"": 2,
+      ""TeachingID"": 4,
+      ""TotalCost"": 0,
+      ""UnitCode"": ""CITS4401"",
+      ""UnitID"": 2,
+      ""Year"": 2020
+    },
+    {
+      ""ActivitiesID"": 11,
+      ""Hour"": 36,
+      ""HourlyRate"": 0,
+      ""Name"": ""Rachel Cardell-Oliver"",
+      ""Position"": ""Academic staff"",
+      ""Semester"": 1,
+      ""SessionID"": 26,
+      ""SessionName"": ""Preparation"",
+      ""SessionType"": ""NM"",
+      ""StaffID"": 2,
+      ""TeachingID"": 4,
+      ""TotalCost"": 0,
+      ""UnitCode"": ""CITS4401"",
+      ""UnitID"": 2,
+      ""Year"": 2020
+    },
+    {
+      ""ActivitiesID"": 12,
+      ""Hour"": 26,
+      ""HourlyRate"": 0,
+      ""Name"": ""Rachel Cardell-Oliver"",
+      ""Position"": ""Academic staff"",
+      ""Semester"": 1,
+      ""SessionID"": 24,
+      ""SessionName"": ""Marking"",
+      ""SessionType"": ""M"",
+      ""StaffID"": 2,
+      ""TeachingID"": 4,
+      ""TotalCost"": 0,
+      ""UnitCode"": ""CITS4401"",
+      ""UnitID"": 2,
+      ""Year"": 2020
+    },
+    {
+      ""ActivitiesID"": 13,
+      ""Hour"": 16,
+      ""HourlyRate"": 0,
+      ""Name"": ""Rachel Cardell-Oliver"",
+      ""Position"": ""Academic staff"",
+      ""Semester"": 1,
+      ""SessionID"": 20,
+      ""SessionName"": ""Other"",
+      ""SessionType"": ""NM"",
+      ""StaffID"": 2,
+      ""TeachingID"": 4,
+      ""TotalCost"": 0,
+      ""UnitCode"": ""CITS4401"",
+      ""UnitID"": 2,
+      ""Year"": 2020
+    },
+    {
+      ""ActivitiesID"": 14,
+      ""Hour"": 34,
+      ""HourlyRate"": 65,
+      ""Name"": ""Jingbo Sun"",
+      ""Position"": ""Casual teaching"",
+      ""Semester"": 1,
+      ""SessionID"": 21,
+      ""SessionName"": ""Practical sessions"",
+      ""SessionType"": ""NM"",
+      ""StaffID"": 5,
+      ""TeachingID"": 3,
+      ""TotalCost"": 2210,
+      ""UnitCode"": ""CITS4401"",
+      ""UnitID"": 2,
+      ""Year"": 2020
+    },
+    {
+      ""ActivitiesID"": 15,
+      ""Hour"": 12,
+      ""HourlyRate"": 65,
+      ""Name"": ""Jingbo Sun"",
+      ""Position"": ""Casual teaching"",
+      ""Semester"": 1,
+      ""SessionID"": 26,
+      ""SessionName"": ""Preparation"",
+      ""SessionType"": ""NM"",
+      ""StaffID"": 5,
+      ""TeachingID"": 3,
+      ""TotalCost"": 780,
+      ""UnitCode"": ""CITS4401"",
+      ""UnitID"": 2,
+      ""Year"": 2020
+    },
+    {
+      ""ActivitiesID"": 16,
+      ""Hour"": 60,
+      ""HourlyRate"": 65,
+      ""Name"": ""Jingbo Sun"",
+      ""Position"": ""Casual teaching"",
+      ""Semester"": 1,
+      ""SessionID"": 24,
+      ""SessionName"": ""Marking"",
+      ""SessionType"": ""M"",
+      ""StaffID"": 5,
+      ""TeachingID"": 3,
+      ""TotalCost"": 3900,
+      ""UnitCode"": ""CITS4401"",
+      ""UnitID"": 2,
+      ""Year"": 2020
+    },
+    {
+      ""ActivitiesID"": 17,
+      ""Hour"": 0,
+      ""HourlyRate"": 0,
+      ""Name"": ""Guest Lecture"",
+      ""Position"": ""Other"",
+      ""Semester"": 1,
+      ""SessionID"": 27,
+      ""SessionName"": ""No Activities"",
+      ""SessionType"": ""NM"",
+      ""StaffID"": 6,
+      ""TeachingID"": 4,
+      ""TotalCost"": 0,
+      ""UnitCode"": ""CITS4401"",
+      ""UnitID"": 2,
+      ""Year"": 2020
+    }
+  ],
+  ""success"": ""ture""
+}"
+http://127.0.0.1:5000/query,"{'year':2020,'semester':1,'unitcode':'CITS5503'}","{
+  ""data"": [],
+  ""success"": ""ture""
+}"
+http://127.0.0.1:5000/query,"{'year':2020,'semester':2,'unitcode':'CITS5503'}","{
+  ""data"": [
+    {
+      ""ActivitiesID"": 1,
+      ""Hour"": 24,
+      ""HourlyRate"": 0,
+      ""Name"": ""David Glance"",
+      ""Position"": ""Academic staff"",
+      ""Semester"": 2,
+      ""SessionID"": 1,
+      ""SessionName"": ""Lectures"",
+      ""SessionType"": ""NM"",
+      ""StaffID"": 1,
+      ""TeachingID"": 4,
+      ""TotalCost"": 0,
+      ""UnitCode"": ""CITS5503"",
+      ""UnitID"": 1,
+      ""Year"": 2020
+    },
+    {
+      ""ActivitiesID"": 2,
+      ""Hour"": 22,
+      ""HourlyRate"": 0,
+      ""Name"": ""David Glance"",
+      ""Position"": ""Academic staff"",
+      ""Semester"": 2,
+      ""SessionID"": 4,
+      ""SessionName"": ""Laboratories"",
+      ""SessionType"": ""NM"",
+      ""StaffID"": 1,
+      ""TeachingID"": 4,
+      ""TotalCost"": 0,
+      ""UnitCode"": ""CITS5503"",
+      ""UnitID"": 1,
+      ""Year"": 2020
+    },
+    {
+      ""ActivitiesID"": 3,
+      ""Hour"": 15,
+      ""HourlyRate"": 0,
+      ""Name"": ""David Glance"",
+      ""Position"": ""Academic staff"",
+      ""Semester"": 2,
+      ""SessionID"": 24,
+      ""SessionName"": ""Marking"",
+      ""SessionType"": ""M"",
+      ""StaffID"": 1,
+      ""TeachingID"": 4,
+      ""TotalCost"": 0,
+      ""UnitCode"": ""CITS5503"",
+      ""UnitID"": 1,
+      ""Year"": 2020
+    },
+    {
+      ""ActivitiesID"": 4,
+      ""Hour"": 24,
+      ""HourlyRate"": 0,
+      ""Name"": ""David Glance"",
+      ""Position"": ""Academic staff"",
+      ""Semester"": 2,
+      ""SessionID"": 20,
+      ""SessionName"": ""Other"",
+      ""SessionType"": ""NM"",
+      ""StaffID"": 1,
+      ""TeachingID"": 4,
+      ""TotalCost"": 0,
+      ""UnitCode"": ""CITS5503"",
+      ""UnitID"": 1,
+      ""Year"": 2020
+    },
+    {
+      ""ActivitiesID"": 5,
+      ""Hour"": 22,
+      ""HourlyRate"": 58,
+      ""Name"": ""Facilitator 1"",
+      ""Position"": ""Casual teaching"",
+      ""Semester"": 2,
+      ""SessionID"": 4,
+      ""SessionName"": ""Laboratories"",
+      ""SessionType"": ""NM"",
+      ""StaffID"": 4,
+      ""TeachingID"": 2,
+      ""TotalCost"": 1276,
+      ""UnitCode"": ""CITS5503"",
+      ""UnitID"": 1,
+      ""Year"": 2020
+    },
+    {
+      ""ActivitiesID"": 6,
+      ""Hour"": 11,
+      ""HourlyRate"": 58,
+      ""Name"": ""Facilitator 1"",
+      ""Position"": ""Casual teaching"",
+      ""Semester"": 2,
+      ""SessionID"": 26,
+      ""SessionName"": ""Preparation"",
+      ""SessionType"": ""NM"",
+      ""StaffID"": 4,
+      ""TeachingID"": 2,
+      ""TotalCost"": 638,
+      ""UnitCode"": ""CITS5503"",
+      ""UnitID"": 1,
+      ""Year"": 2020
+    },
+    {
+      ""ActivitiesID"": 7,
+      ""Hour"": 35,
+      ""HourlyRate"": 58,
+      ""Name"": ""Facilitator 1"",
+      ""Position"": ""Casual teaching"",
+      ""Semester"": 2,
+      ""SessionID"": 24,
+      ""SessionName"": ""Marking"",
+      ""SessionType"": ""M"",
+      ""StaffID"": 4,
+      ""TeachingID"": 2,
+      ""TotalCost"": 2030,
+      ""UnitCode"": ""CITS5503"",
+      ""UnitID"": 1,
+      ""Year"": 2020
+    },
+    {
+      ""ActivitiesID"": 8,
+      ""Hour"": 2,
+      ""HourlyRate"": 58,
+      ""Name"": ""Facilitator 1"",
+      ""Position"": ""Casual teaching"",
+      ""Semester"": 2,
+      ""SessionID"": 20,
+      ""SessionName"": ""Other"",
+      ""SessionType"": ""NM"",
+      ""StaffID"": 4,
+      ""TeachingID"": 2,
+      ""TotalCost"": 116,
+      ""UnitCode"": ""CITS5503"",
+      ""UnitID"": 1,
+      ""Year"": 2020
+    }
+  ],
+  ""success"": ""ture""
+}"
+http://127.0.0.1:5000/sqlquery,"{'sql':'Select S.Name,U.UnitCode, U.Semester, U.Year, E.SessionName, A.Hour,A.HourlyRate*A.Hour AS TotalCost From Activities A JOIN Staff S USING (StaffID) JOIN Session E USING (SessionID)  JOIN Unit U USING (UnitID)'}","{
+  ""data"": [
+    {
+      ""Hour"": 24,
+      ""Name"": ""David Glance"",
+      ""Semester"": 2,
+      ""SessionName"": ""Lectures"",
+      ""TotalCost"": 0,
+      ""UnitCode"": ""CITS5503"",
+      ""Year"": 2020
+    },
+    {
+      ""Hour"": 22,
+      ""Name"": ""David Glance"",
+      ""Semester"": 2,
+      ""SessionName"": ""Laboratories"",
+      ""TotalCost"": 0,
+      ""UnitCode"": ""CITS5503"",
+      ""Year"": 2020
+    },
+    {
+      ""Hour"": 15,
+      ""Name"": ""David Glance"",
+      ""Semester"": 2,
+      ""SessionName"": ""Marking"",
+      ""TotalCost"": 0,
+      ""UnitCode"": ""CITS5503"",
+      ""Year"": 2020
+    },
+    {
+      ""Hour"": 24,
+      ""Name"": ""David Glance"",
+      ""Semester"": 2,
+      ""SessionName"": ""Other"",
+      ""TotalCost"": 0,
+      ""UnitCode"": ""CITS5503"",
+      ""Year"": 2020
+    },
+    {
+      ""Hour"": 22,
+      ""Name"": ""Facilitator 1"",
+      ""Semester"": 2,
+      ""SessionName"": ""Laboratories"",
+      ""TotalCost"": 1276,
+      ""UnitCode"": ""CITS5503"",
+      ""Year"": 2020
+    },
+    {
+      ""Hour"": 11,
+      ""Name"": ""Facilitator 1"",
+      ""Semester"": 2,
+      ""SessionName"": ""Preparation"",
+      ""TotalCost"": 638,
+      ""UnitCode"": ""CITS5503"",
+      ""Year"": 2020
+    },
+    {
+      ""Hour"": 35,
+      ""Name"": ""Facilitator 1"",
+      ""Semester"": 2,
+      ""SessionName"": ""Marking"",
+      ""TotalCost"": 2030,
+      ""UnitCode"": ""CITS5503"",
+      ""Year"": 2020
+    },
+    {
+      ""Hour"": 2,
+      ""Name"": ""Facilitator 1"",
+      ""Semester"": 2,
+      ""SessionName"": ""Other"",
+      ""TotalCost"": 116,
+      ""UnitCode"": ""CITS5503"",
+      ""Year"": 2020
+    },
+    {
+      ""Hour"": 24,
+      ""Name"": ""Rachel Cardell-Oliver"",
+      ""Semester"": 1,
+      ""SessionName"": ""Lectures"",
+      ""TotalCost"": 0,
+      ""UnitCode"": ""CITS4401"",
+      ""Year"": 2020
+    },
+    {
+      ""Hour"": 24,
+      ""Name"": ""Rachel Cardell-Oliver"",
+      ""Semester"": 1,
+      ""SessionName"": ""Practical sessions"",
+      ""TotalCost"": 0,
+      ""UnitCode"": ""CITS4401"",
+      ""Year"": 2020
+    },
+    {
+      ""Hour"": 36,
+      ""Name"": ""Rachel Cardell-Oliver"",
+      ""Semester"": 1,
+      ""SessionName"": ""Preparation"",
+      ""TotalCost"": 0,
+      ""UnitCode"": ""CITS4401"",
+      ""Year"": 2020
+    },
+    {
+      ""Hour"": 26,
+      ""Name"": ""Rachel Cardell-Oliver"",
+      ""Semester"": 1,
+      ""SessionName"": ""Marking"",
+      ""TotalCost"": 0,
+      ""UnitCode"": ""CITS4401"",
+      ""Year"": 2020
+    },
+    {
+      ""Hour"": 16,
+      ""Name"": ""Rachel Cardell-Oliver"",
+      ""Semester"": 1,
+      ""SessionName"": ""Other"",
+      ""TotalCost"": 0,
+      ""UnitCode"": ""CITS4401"",
+      ""Year"": 2020
+    },
+    {
+      ""Hour"": 34,
+      ""Name"": ""Jingbo Sun"",
+      ""Semester"": 1,
+      ""SessionName"": ""Practical sessions"",
+      ""TotalCost"": 2210,
+      ""UnitCode"": ""CITS4401"",
+      ""Year"": 2020
+    },
+    {
+      ""Hour"": 12,
+      ""Name"": ""Jingbo Sun"",
+      ""Semester"": 1,
+      ""SessionName"": ""Preparation"",
+      ""TotalCost"": 780,
+      ""UnitCode"": ""CITS4401"",
+      ""Year"": 2020
+    },
+    {
+      ""Hour"": 60,
+      ""Name"": ""Jingbo Sun"",
+      ""Semester"": 1,
+      ""SessionName"": ""Marking"",
+      ""TotalCost"": 3900,
+      ""UnitCode"": ""CITS4401"",
+      ""Year"": 2020
+    },
+    {
+      ""Hour"": 0,
+      ""Name"": ""Guest Lecture"",
+      ""Semester"": 1,
+      ""SessionName"": ""No Activities"",
+      ""TotalCost"": 0,
+      ""UnitCode"": ""CITS4401"",
+      ""Year"": 2020
+    },
+    {
+      ""Hour"": 72,
+      ""Name"": ""Lyndon While"",
+      ""Semester"": 1,
+      ""SessionName"": ""Lectures"",
+      ""TotalCost"": 0,
+      ""UnitCode"": ""CITS1101"",
+      ""Year"": 2021
+    },
+    {
+      ""Hour"": 36,
+      ""Name"": ""Lyndon While"",
+      ""Semester"": 1,
+      ""SessionName"": ""Workshops"",
+      ""TotalCost"": 0,
+      ""UnitCode"": ""CITS1101"",
+      ""Year"": 2021
+    },
+    {
+      ""Hour"": 21,
+      ""Name"": ""Lyndon While"",
+      ""Semester"": 1,
+      ""SessionName"": ""Mtgs, consult and invigil."",
+      ""TotalCost"": 0,
+      ""UnitCode"": ""CITS1101"",
+      ""Year"": 2021
+    },
+    {
+      ""Hour"": 17,
+      ""Name"": ""Lyndon While"",
+      ""Semester"": 1,
+      ""SessionName"": ""Marking"",
+      ""TotalCost"": 0,
+      ""UnitCode"": ""CITS1101"",
+      ""Year"": 2021
+    },
+    {
+      ""Hour"": 61,
+      ""Name"": ""Manou Rosenberg"",
+      ""Semester"": 1,
+      ""SessionName"": ""Laboratories"",
+      ""TotalCost"": 3538,
+      ""UnitCode"": ""CITS1101"",
+      ""Year"": 2021
+    },
+    {
+      ""Hour"": 9,
+      ""Name"": ""Manou Rosenberg"",
+      ""Semester"": 1,
+      ""SessionName"": ""Mtgs, consult and invigil."",
+      ""TotalCost"": 522,
+      ""UnitCode"": ""CITS1101"",
+      ""Year"": 2021
+    },
+    {
+      ""Hour"": 39,
+      ""Name"": ""Manou Rosenberg"",
+      ""Semester"": 1,
+      ""SessionName"": ""Marking"",
+      ""TotalCost"": 2262,
+      ""UnitCode"": ""CITS1101"",
+      ""Year"": 2021
+    },
+    {
+      ""Hour"": 3,
+      ""Name"": ""Manou Rosenberg"",
+      ""Semester"": 1,
+      ""SessionName"": ""Training"",
+      ""TotalCost"": 174,
+      ""UnitCode"": ""CITS1101"",
+      ""Year"": 2021
+    },
+    {
+      ""Hour"": 61,
+      ""Name"": ""Casual 2"",
+      ""Semester"": 1,
+      ""SessionName"": ""Laboratories"",
+      ""TotalCost"": 3294,
+      ""UnitCode"": ""CITS1101"",
+      ""Year"": 2021
+    },
+    {
+      ""Hour"": 9,
+      ""Name"": ""Casual 2"",
+      ""Semester"": 1,
+      ""SessionName"": ""Mtgs, consult and invigil."",
+      ""TotalCost"": 486,
+      ""UnitCode"": ""CITS1101"",
+      ""Year"": 2021
+    },
+    {
+      ""Hour"": 39,
+      ""Name"": ""Casual 2"",
+      ""Semester"": 1,
+      ""SessionName"": ""Marking"",
+      ""TotalCost"": 2106,
+      ""UnitCode"": ""CITS1101"",
+      ""Year"": 2021
+    },
+    {
+      ""Hour"": 3,
+      ""Name"": ""Casual 2"",
+      ""Semester"": 1,
+      ""SessionName"": ""Training"",
+      ""TotalCost"": 162,
+      ""UnitCode"": ""CITS1101"",
+      ""Year"": 2021
+    },
+    {
+      ""Hour"": 61,
+      ""Name"": ""Casual 3"",
+      ""Semester"": 1,
+      ""SessionName"": ""Laboratories"",
+      ""TotalCost"": 3294,
+      ""UnitCode"": ""CITS1101"",
+      ""Year"": 2021
+    },
+    {
+      ""Hour"": 9,
+      ""Name"": ""Casual 3"",
+      ""Semester"": 1,
+      ""SessionName"": ""Mtgs, consult and invigil."",
+      ""TotalCost"": 486,
+      ""UnitCode"": ""CITS1101"",
+      ""Year"": 2021
+    },
+    {
+      ""Hour"": 39,
+      ""Name"": ""Casual 3"",
+      ""Semester"": 1,
+      ""SessionName"": ""Marking"",
+      ""TotalCost"": 2106,
+      ""UnitCode"": ""CITS1101"",
+      ""Year"": 2021
+    },
+    {
+      ""Hour"": 3,
+      ""Name"": ""Casual 3"",
+      ""Semester"": 1,
+      ""SessionName"": ""Training"",
+      ""TotalCost"": 162,
+      ""UnitCode"": ""CITS1101"",
+      ""Year"": 2021
+    },
+    {
+      ""Hour"": 61,
+      ""Name"": ""Casual 4"",
+      ""Semester"": 1,
+      ""SessionName"": ""Laboratories"",
+      ""TotalCost"": 3294,
+      ""UnitCode"": ""CITS1101"",
+      ""Year"": 2021
+    },
+    {
+      ""Hour"": 7,
+      ""Name"": ""Casual 4"",
+      ""Semester"": 1,
+      ""SessionName"": ""Mtgs, consult and invigil."",
+      ""TotalCost"": 378,
+      ""UnitCode"": ""CITS1101"",
+      ""Year"": 2021
+    },
+    {
+      ""Hour"": 22,
+      ""Name"": ""Casual 4"",
+      ""Semester"": 1,
+      ""SessionName"": ""Marking"",
+      ""TotalCost"": 1188,
+      ""UnitCode"": ""CITS1101"",
+      ""Year"": 2021
+    },
+    {
+      ""Hour"": 3,
+      ""Name"": ""Casual 4"",
+      ""Semester"": 1,
+      ""SessionName"": ""Training"",
+      ""TotalCost"": 162,
+      ""UnitCode"": ""CITS1101"",
+      ""Year"": 2021
+    },
+    {
+      ""Hour"": 61,
+      ""Name"": ""Casual 5"",
+      ""Semester"": 1,
+      ""SessionName"": ""Laboratories"",
+      ""TotalCost"": 3294,
+      ""UnitCode"": ""CITS1101"",
+      ""Year"": 2021
+    },
+    {
+      ""Hour"": 7,
+      ""Name"": ""Casual 5"",
+      ""Semester"": 1,
+      ""SessionName"": ""Mtgs, consult and invigil."",
+      ""TotalCost"": 378,
+      ""UnitCode"": ""CITS1101"",
+      ""Year"": 2021
+    },
+    {
+      ""Hour"": 22,
+      ""Name"": ""Casual 5"",
+      ""Semester"": 1,
+      ""SessionName"": ""Marking"",
+      ""TotalCost"": 1188,
+      ""UnitCode"": ""CITS1101"",
+      ""Year"": 2021
+    },
+    {
+      ""Hour"": 3,
+      ""Name"": ""Casual 5"",
+      ""Semester"": 1,
+      ""SessionName"": ""Training"",
+      ""TotalCost"": 162,
+      ""UnitCode"": ""CITS1101"",
+      ""Year"": 2021
+    }
+  ],
+  ""success"": ""ture""
+}"
+http://127.0.0.1:5000/sqlquery,"{'sql':'Select S.Name, U.UnitCode, U.Semester, U.Year, SUM(A.Hour*A.HourlyRate) AS TotalCost From Activities A JOIN Staff S USING (StaffID) JOIN Session E USING (SessionID) JOIN Unit U USING (UnitID) Group by S.StaffID'}","{
+  ""data"": [
+    {
+      ""Name"": ""David Glance"",
+      ""Semester"": 2,
+      ""TotalCost"": 0,
+      ""UnitCode"": ""CITS5503"",
+      ""Year"": 2020
+    },
+    {
+      ""Name"": ""Rachel Cardell-Oliver"",
+      ""Semester"": 1,
+      ""TotalCost"": 0,
+      ""UnitCode"": ""CITS4401"",
+      ""Year"": 2020
+    },
+    {
+      ""Name"": ""Lyndon While"",
+      ""Semester"": 1,
+      ""TotalCost"": 0,
+      ""UnitCode"": ""CITS1101"",
+      ""Year"": 2021
+    },
+    {
+      ""Name"": ""Facilitator 1"",
+      ""Semester"": 2,
+      ""TotalCost"": 4060,
+      ""UnitCode"": ""CITS5503"",
+      ""Year"": 2020
+    },
+    {
+      ""Name"": ""Jingbo Sun"",
+      ""Semester"": 1,
+      ""TotalCost"": 6890,
+      ""UnitCode"": ""CITS4401"",
+      ""Year"": 2020
+    },
+    {
+      ""Name"": ""Guest Lecture"",
+      ""Semester"": 1,
+      ""TotalCost"": 0,
+      ""UnitCode"": ""CITS4401"",
+      ""Year"": 2020
+    },
+    {
+      ""Name"": ""Manou Rosenberg"",
+      ""Semester"": 1,
+      ""TotalCost"": 6496,
+      ""UnitCode"": ""CITS1101"",
+      ""Year"": 2021
+    },
+    {
+      ""Name"": ""Casual 2"",
+      ""Semester"": 1,
+      ""TotalCost"": 6048,
+      ""UnitCode"": ""CITS1101"",
+      ""Year"": 2021
+    },
+    {
+      ""Name"": ""Casual 3"",
+      ""Semester"": 1,
+      ""TotalCost"": 6048,
+      ""UnitCode"": ""CITS1101"",
+      ""Year"": 2021
+    },
+    {
+      ""Name"": ""Casual 4"",
+      ""Semester"": 1,
+      ""TotalCost"": 5022,
+      ""UnitCode"": ""CITS1101"",
+      ""Year"": 2021
+    },
+    {
+      ""Name"": ""Casual 5"",
+      ""Semester"": 1,
+      ""TotalCost"": 5022,
+      ""UnitCode"": ""CITS1101"",
+      ""Year"": 2021
+    }
+  ],
+  ""success"": ""ture""
+}"
+http://127.0.0.1:5000/sqlquery,"{'sql':'Select U.UnitCode,N.NSCName, N.TotalCost From OtherCost O JOIN NonSalaryCosts N USING (NSCID) JOIN Unit U USING (UnitID) Order by U.UnitCode'}","{
+  ""data"": [
+    {
+      ""NSCName"": ""Workshop/technician time"",
+      ""TotalCost"": null,
+      ""UnitCode"": ""CITS1101""
+    },
+    {
+      ""NSCName"": ""Teaching technician time"",
+      ""TotalCost"": null,
+      ""UnitCode"": ""CITS1101""
+    },
+    {
+      ""NSCName"": ""Marking mid-semester test"",
+      ""TotalCost"": 400,
+      ""UnitCode"": ""CITS1101""
+    },
+    {
+      ""NSCName"": ""Workshop/technician time"",
+      ""TotalCost"": null,
+      ""UnitCode"": ""CITS4401""
+    },
+    {
+      ""NSCName"": ""Teaching technician time"",
+      ""TotalCost"": null,
+      ""UnitCode"": ""CITS4401""
+    },
+    {
+      ""NSCName"": ""Materials & consumables"",
+      ""TotalCost"": null,
+      ""UnitCode"": ""CITS4401""
+    },
+    {
+      ""NSCName"": ""Field trips"",
+      ""TotalCost"": null,
+      ""UnitCode"": ""CITS4401""
+    },
+    {
+      ""NSCName"": ""Other"",
+      ""TotalCost"": null,
+      ""UnitCode"": ""CITS4401""
+    },
+    {
+      ""NSCName"": ""Software"",
+      ""TotalCost"": null,
+      ""UnitCode"": ""CITS4401""
+    },
+    {
+      ""NSCName"": ""Workshop/technician time"",
+      ""TotalCost"": null,
+      ""UnitCode"": ""CITS5503""
+    },
+    {
+      ""NSCName"": ""Teaching technician time"",
+      ""TotalCost"": null,
+      ""UnitCode"": ""CITS5503""
+    },
+    {
+      ""NSCName"": ""Materials & consumables"",
+      ""TotalCost"": null,
+      ""UnitCode"": ""CITS5503""
+    },
+    {
+      ""NSCName"": ""Software-$500/month consumables amazon web services"",
+      ""TotalCost"": 1500,
+      ""UnitCode"": ""CITS5503""
+    },
+    {
+      ""NSCName"": ""Field trips"",
+      ""TotalCost"": null,
+      ""UnitCode"": ""CITS5503""
+    },
+    {
+      ""NSCName"": ""Other"",
+      ""TotalCost"": null,
+      ""UnitCode"": ""CITS5503""
+    }
+  ],
+  ""success"": ""ture""
+}"
+http://127.0.0.1:5000/sqlquery,"{'sql':'Select S.Name, U.UnitCode, U.Semester,U.Year,SUM(A.Hour) AS WorkLoad From Activities A JOIN Staff S USING (StaffID) JOIN Unit U USING (UnitID) JOIN Session E USING (SessionID) Where U.Year = 2020 Group by S.StaffID Having WorkLoad >= 100'}","{
+  ""data"": [
+    {
+      ""Name"": ""Rachel Cardell-Oliver"",
+      ""Semester"": 1,
+      ""UnitCode"": ""CITS4401"",
+      ""WorkLoad"": 126,
+      ""Year"": 2020
+    },
+    {
+      ""Name"": ""Jingbo Sun"",
+      ""Semester"": 1,
+      ""UnitCode"": ""CITS4401"",
+      ""WorkLoad"": 106,
+      ""Year"": 2020
+    }
+  ],
+  ""success"": ""ture""
+}"
+http://127.0.0.1:5000/sqlquery,"{'sql':'Select S.Name, U.UnitCode, U.Semester,U.Year,SUM(A.Hour) AS WorkLoad From Activities A JOIN Staff S USING (StaffID) JOIN Unit U USING (UnitID) JOIN Session E USING (SessionID) Where U.Year = 2020 Group by S.StaffID Order by WorkLoad DESC'}","{
+  ""data"": [
+    {
+      ""Name"": ""Rachel Cardell-Oliver"",
+      ""Semester"": 1,
+      ""UnitCode"": ""CITS4401"",
+      ""WorkLoad"": 126,
+      ""Year"": 2020
+    },
+    {
+      ""Name"": ""Jingbo Sun"",
+      ""Semester"": 1,
+      ""UnitCode"": ""CITS4401"",
+      ""WorkLoad"": 106,
+      ""Year"": 2020
+    },
+    {
+      ""Name"": ""David Glance"",
+      ""Semester"": 2,
+      ""UnitCode"": ""CITS5503"",
+      ""WorkLoad"": 85,
+      ""Year"": 2020
+    },
+    {
+      ""Name"": ""Facilitator 1"",
+      ""Semester"": 2,
+      ""UnitCode"": ""CITS5503"",
+      ""WorkLoad"": 70,
+      ""Year"": 2020
+    },
+    {
+      ""Name"": ""Guest Lecture"",
+      ""Semester"": 1,
+      ""UnitCode"": ""CITS4401"",
+      ""WorkLoad"": 0,
+      ""Year"": 2020
+    }
+  ],
+  ""success"": ""ture""
+}"

@@ -51,53 +51,49 @@ def Schema():
     # This is the Database schema command lines
 
     sql_create_unit_table = """ CREATE TABLE IF NOT EXISTS Unit (
-                                      UnitID INTEGER PRIMARY KEY AUTOINCREMENT,
-                                      UnitCode VARCHAR (10),
-                                      Semester VARCHAR (10),
-                                      Year INT (4) 
+                                        UnitID INTEGER PRIMARY KEY AUTOINCREMENT,
+                                        UnitName VARCHAR (100),
+                                        UnitCode VARCHAR (10),
+                                        Semester VARCHAR (10),
+                                        Year INT (4),
+                                        Comment VARCHAR (300)
                                 );"""
 
     sql_create_teachingcode_table = """ CREATE TABLE IF NOT EXISTS TeachingCode (
-                                              TeachingCode INTEGER PRIMARY KEY AUTOINCREMENT,
-                                              TeachingName VARCHAR (50)
+                                                TeachingCode INTEGER PRIMARY KEY AUTOINCREMENT,
+                                                TeachingName VARCHAR (50) UNIQUE,
+                                                PayRate REAL
                                         );"""
     
     sql_create_staff_table = """ CREATE TABLE IF NOT EXISTS Staff (
-                                      StaffID INTEGER PRIMARY KEY AUTOINCREMENT,
-                                      TeachingID INT REFERENCES TeachingCode (TeachingCode) ON DELETE RESTRICT ON UPDATE CASCADE,
-                                      Name VARCHAR (50),
-                                      Position  VARCHAR (30),
-                                      UNIQUE (
-                                                Name,
-                                                Position
-                                      )
-                                      ON CONFLICT FAIL
-                                  );"""
+                                        StaffID INTEGER PRIMARY KEY AUTOINCREMENT,
+                                        TeachingCode INT REFERENCES TeachingCode (TeachingCode) ON DELETE RESTRICT ON UPDATE CASCADE,
+                                        Name VARCHAR (50),
+                                        Position  VARCHAR (30),
+                                        UNIQUE (Name, Position)ON CONFLICT FAIL
+                                );"""
 
     sql_create_session_table = """ CREATE TABLE IF NOT EXISTS Session (
                                         SessionID INTEGER PRIMARY KEY AUTOINCREMENT,
                                         SessionName VARCHAR (50) UNIQUE,
                                         SessionType VARCHAR (10) 
-                                  );"""
+                                );"""
 
     sql_create_nonsalarycost_table = """ CREATE TABLE IF NOT EXISTS NonSalaryCosts (
-                                              NSCID INTEGER PRIMARY KEY AUTOINCREMENT,
-                                              NSCName VARCHAR (50),
-                                              Hours INT,
-                                              CostPerHour INT,
-                                              TotalCost INT,
-                                              UNIQUE (
-                                                        NSCName,
-                                                        CostPerHour
-                                                      )
-                                                ON CONFLICT FAIL
-                                          );"""
+                                                NSCID INTEGER PRIMARY KEY AUTOINCREMENT,
+                                                NSCName VARCHAR (50),
+                                                Hours REAL,
+                                                CostPerHour REAL,
+                                                TotalCost REAL,
+                                                UNIQUE (NSCName, CostPerHour) ON CONFLICT FAIL
+                                        );"""
 
     sql_create_othercost_table = """ CREATE TABLE IF NOT EXISTS OtherCost (
-                                          OCID INTEGER PRIMARY KEY AUTOINCREMENT,
-                                          NSCID INT REFERENCES NonSalaryCosts (NSCID) ON DELETE RESTRICT ON UPDATE CASCADE,
-                                          UnitID INT REFERENCES Unit (UnitID) ON DELETE RESTRICT ON UPDATE CASCADE
-                                      );"""
+                                            OCID INTEGER PRIMARY KEY AUTOINCREMENT,
+                                            NSCID INT REFERENCES NonSalaryCosts (NSCID) ON DELETE RESTRICT ON UPDATE CASCADE,
+                                            UnitID INT REFERENCES Unit (UnitID) ON DELETE RESTRICT ON UPDATE CASCADE,
+                                            Comment VARCHAR (300)
+                                    );"""
 
     sql_create_enrollment_table = """ CREATE TABLE IF NOT EXISTS Enrolment (
                                             EnrolmentID INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -105,7 +101,7 @@ def Schema():
                                             EnrolmentNumber INT,
                                             IsEstimated VARCHAR (3),
                                             IsLastSemester VARCHAR (3) 
-                                      );"""
+                                    );"""
 
     sql_create_budget_table = """ CREATE TABLE IF NOT EXISTS Budget (
                                         BudgetID INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -113,16 +109,18 @@ def Schema():
                                         Cost INT,
                                         IsEstimated VARCHAR (3),
                                         IsLastSemester VARCHAR (3) 
-                                  );"""
+                                );"""
 
     sql_create_activities_table = """ CREATE TABLE IF NOT EXISTS Activities (
-                                            ActivitiesID INTEGER PRIMARY KEY AUTOINCREMENT,
-                                            UnitID INT REFERENCES Unit (UnitID) ON DELETE RESTRICT ON UPDATE CASCADE,
-                                            StaffID INT REFERENCES Staff (StaffID) ON DELETE RESTRICT ON UPDATE CASCADE,
-                                            SessionID  INT REFERENCES Session (SessionID) ON DELETE RESTRICT ON UPDATE CASCADE,
-                                            HourlyRate NUMERIC,
-                                            Hour INT
-                                      );"""
+                                        ActivitiesID INTEGER PRIMARY KEY AUTOINCREMENT,
+                                        UnitID INT REFERENCES Unit (UnitID) ON DELETE RESTRICT ON UPDATE CASCADE,
+                                        StaffID INT REFERENCES Staff (StaffID) ON DELETE RESTRICT ON UPDATE CASCADE,
+                                        SessionID INT REFERENCES Session (SessionID) ON DELETE RESTRICT ON UPDATE CASCADE,
+                                        HourPerSession INT,
+                                        MarkingHourPS REAL,
+                                        Hour REAL,
+                                        Comment VARCHAR (300) 
+                                    );"""
 
     # create a database connection
     conn = create_connection(database)

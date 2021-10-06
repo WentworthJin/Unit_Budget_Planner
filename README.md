@@ -1,8 +1,4 @@
-# Deliverable 2
-
 ## How to Launch the Application
-
-<b>1. Set up<b>
 
 ### Requirement 
 
@@ -149,5 +145,3 @@ The software will:
 
 
 <hr>
-
-
