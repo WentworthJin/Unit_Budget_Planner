@@ -153,8 +153,7 @@ def get_main_data():
                       and En.IsLastSemester="NO" and En.UnitID = U.UnitID) AS Cost_per_student \
                       From Activities A JOIN Staff S USING (StaffID)  \
                           JOIN Session E USING (SessionID) \
-                          JOIN Unit U USING (UnitID) \
-                      ‘          
+                          JOIN Unit U USING (UnitID) \ '         
   if queryStrings:
     sql = sql + ''' where ''' + queryStrings    
 
