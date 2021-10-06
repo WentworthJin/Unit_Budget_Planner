@@ -1,4 +1,4 @@
-// This method is for role identification
+// This method is for role identification and have different graphical Interface 
 var el_down = document.getElementById("GFG_DOWN");
 function GFG_click(clicked) {
   el_down.innerHTML = "You are the "+clicked+".";
@@ -116,8 +116,9 @@ const getEmployeeData = () => {
 const horizontalbarchart = function (data) {
   const dataArray = []
   for(var i = 0; i < data.length; i++){
-    dataArray.push({"y":data[i][4], "label":data[i][0]})
+    if (data[i][4]!==0) {dataArray.push({"y":data[i][4], "label":data[i][0]}) }
   };
+
 
 
   var horizontal = document.getElementById("horizontal")
