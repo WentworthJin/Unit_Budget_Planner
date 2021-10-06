@@ -1,8 +1,26 @@
-// This method is for role identification
+
+// This method is for role identification and have different graphical Interface 
 var el_down = document.getElementById("GFG_DOWN");
 function GFG_click(clicked) {
-     el_down.innerHTML = "You are the "+clicked+".";
+  el_down.innerHTML = "You are the "+clicked+".";
+  if (clicked=="Head of Department") {
+    document.getElementById('text').innerHTML="Please Upload an Excel Folder"
+    document.getElementById('text1').innerHTML="Please Choose the Folder"
+    document.getElementById('myFile1').style.display="inline-block"
+    document.getElementById('myFile').style.display="none"
+  }
+  else {
+    document.getElementById('text').innerHTML="Please Upload Excel File"
+    document.getElementById('text1').innerHTML="Please Select the correct file format"
+    document.getElementById('myFile').style.display="inline-block"
+    document.getElementById('myFile1').style.display="none"
+  }
 }
+
+// document.getElementById('role1').onclick = function(){
+//     this.style.backgroundColor = 'Yellow';
+// };
+
 
 function showAndHide() {
   const x = document.getElementById("radio");
@@ -67,23 +85,23 @@ const getAllData = async(year, semester, unitcode) => {
 window.onload = function (data) {
   const dataArray = []
   for(var i = 0; i < data.length; i++){
-    dataArray.push({"label":data[i][0], "y":data[i][7]})
+    dataArray.push({"label":data[i][0], "y":data[i][12]})
   } 
   var chart = new CanvasJS.Chart("barchart", {
     animationEnabled: true,
     title:{
       text: "Unit Budget"              
     },
-    data: [//array of dataSeries              
-      { //dataSeries object
-
-       /*** Change type "column" to "bar", "area", "line" or "pie"***/
+    data: [              
+      { 
        type: "column",
        dataPoints: dataArray
      }
      ],
     axisY:{
-      prefix: "$",
+      minimum: 0,
+      prefix: "$ ",
+      suffix:"/student"
     }     
     
   });
@@ -126,8 +144,9 @@ const getEmployeeData = (year, semester, unitcode) => {
 const horizontalbarchart = function (data) {
   const dataArray = []
   for(var i = 0; i < data.length; i++){
-    dataArray.push({"y":data[i][4], "label":data[i][0]})
+    if (data[i][4]!==0) {dataArray.push({"y":data[i][4], "label":data[i][0]}) }
   };
+
 
 
   var horizontal = document.getElementById("horizontal")
@@ -143,6 +162,7 @@ const horizontalbarchart = function (data) {
       }
     ],
     axisY:{
+      minimum:0,
       prefix: "$",
     }     
     
@@ -188,8 +208,6 @@ const graphing =  function(data) {
     workload.push({"label":data[i][0], "y":data[i][1]})
     staffCost.push({"label":data[i][0], "y":data[i][2]})
   };
-
-
   var stack = document.getElementById("stack")
   var stack_chart = new CanvasJS.Chart(stack, {
 
@@ -198,28 +216,73 @@ const graphing =  function(data) {
   title:{
     text: "Workload VS Total Cost"              
   },
+  data: [    
+    {     
+      type: "column",
+      axisYIndex: 0,
+      name:"StaffCost",
+      showInLegend: true,
+      dataPoints: staffCost
+    },
+    { //dataSeries - second quarter
 
-  data: [  //array of dataSeries     
-  {     
-    type: "column",
-    name: "Workload",
-    showInLegend: true,
-    dataPoints: workload
-  },
-
-  { //dataSeries - second quarter
-
-  type: "column",
-  name: "StaffCost", 
-  showInLegend: true,               
-  dataPoints: staffCost
-}
-],
+      type: "column",
+      axisYIndex: 0,
+      axisYType: "secondary",
+      name:"Workload", 
+      showInLegend: true,               
+      dataPoints: workload
+    }
+  ],
 /** Set axisY properties here*/
-  axisY:{
-    prefix: "$",
-  }    
-});
+    axisY:[
+      {
+        title: "StaffCost",
+        minimum:0,
+        prefix: "$",
+      }
+    ],
+    axisY2:[{
+      suffix:"Hour",
+      minimum:0,
+      title: "Workload",
+    }]   
+  });
 
-stack_chart.render()
+  stack_chart.render()
 }
+
+// function to check whether file has a specific extension 
+function checkFile(send) {
+  const extension = new Array('.xlsx','.xls'); 
+  var fileExtension = send.value;
+  // get the file extension 
+  fileExtension = fileExtension.substring(fileExtension.lastIndexOf('.'));
+  if (!extension.includes(fileExtension)) {
+    alert("Invalid file selected, valid files are of " +extension.toString() + " types.")
+    send.value='';
+    return false;
+  }
+  else {
+    return true
+  }
+
+}
+
+// click to show user information 
+function sampleInformation() {
+  alert('Excel files includes files that have extension .xlsx and .xls. \
+  For example: "file1.xlsx" or "file1.xls"')
+}
+
+
+
+getAllData()
+getWorkLoadData()
+getEmployeeData()
+graphing()
+
+
+
+
+
