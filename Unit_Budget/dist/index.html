@@ -21,10 +21,11 @@
     </br>
     <!-- Upload file function -->
     <div class="upload">
-      <p class="text">Please Upload Excel File</p>
+      <p class="text" id="text">Please Upload Excel File</p>
       <form method="POST" action="http://127.0.0.1:5000/table" enctype="multipart/form-data">
-        <input type="file" id="myFile" name="filename" onchange="checkFile(this);" >
-        <p class='text'>Please Select the correct file format</p>
+        <input type="file" id="myFile" name="filename" onchange="checkFile(this);"/>
+        <input type="file" id="myFile1" name="filename" onchange="checkFile(this);" webkitdirectory mozdirectory/>
+        <p class='text' id="text1">Please Select the correct file format</p>
         <input type="submit" value="Upload" id='bttn'> 
         <input type="button" value="Not Sure?" id='bttn' onclick="sampleInformation();"> 
       </form>

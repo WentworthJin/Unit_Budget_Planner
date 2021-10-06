@@ -1,8 +1,20 @@
 // This method is for role identification
-  var el_down = document.getElementById("GFG_DOWN");
-  function GFG_click(clicked) {
-      el_down.innerHTML = "You are the "+clicked+".";
+var el_down = document.getElementById("GFG_DOWN");
+function GFG_click(clicked) {
+  el_down.innerHTML = "You are the "+clicked+".";
+  if (clicked=="Head of Department") {
+    document.getElementById('text').innerHTML="Please Upload an Excel Folder"
+    document.getElementById('text1').innerHTML="Please Choose the Folder"
+    document.getElementById('myFile1').style.display="inline-block"
+    document.getElementById('myFile').style.display="none"
   }
+  else {
+    document.getElementById('text').innerHTML="Please Upload Excel File"
+    document.getElementById('text1').innerHTML="Please Select the correct file format"
+    document.getElementById('myFile').style.display="inline-block"
+    document.getElementById('myFile1').style.display="none"
+  }
+}
 
 // document.getElementById('role1').onclick = function(){
 //     this.style.backgroundColor = 'Yellow';
@@ -64,6 +76,7 @@ window.onload = function (data) {
      }
      ],
     axisY:{
+      minimum: 0,
       prefix: "$ ",
       suffix:"/student"
     }     
@@ -120,6 +133,7 @@ const horizontalbarchart = function (data) {
       }
     ],
     axisY:{
+      minimum:0,
       prefix: "$",
     }     
     
@@ -172,30 +186,31 @@ const graphing =  function(data) {
     {     
       type: "column",
       axisYIndex: 0,
-      axisYType: "secondary", // used this one as 
-      name:"Workload",
+      name:"StaffCost",
       showInLegend: true,
-      dataPoints: workload
+      dataPoints: staffCost
     },
-
     { //dataSeries - second quarter
 
       type: "column",
       axisYIndex: 0,
-      name:"StaffCost", 
+      axisYType: "secondary",
+      name:"Workload", 
       showInLegend: true,               
-      dataPoints: staffCost
+      dataPoints: workload
     }
   ],
 /** Set axisY properties here*/
     axisY:[
       {
         title: "StaffCost",
+        minimum:0,
         prefix: "$",
       }
     ],
     axisY2:[{
       suffix:"Hour",
+      minimum:0,
       title: "Workload",
     }]   
   });
