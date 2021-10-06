@@ -4,11 +4,11 @@
 
 ## User Guide
 
-[DB Structure](##1.db_structure)
+[DB Structure](#db_structure)
 
 
 
 <hr><br>
 
-## 1.DB_Structure
+## DB_Structure
 ![image info](./Resources/DBStructure_V2.png)
