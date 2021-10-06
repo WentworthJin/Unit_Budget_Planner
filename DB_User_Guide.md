@@ -16,6 +16,8 @@
   - [TeachingCode](#teachingcode)
   - [Unit](#unit)
 - [View Tables](#viewtable)
+  - [Staff Detail View Tables](#staffdetail_view)
+  - [Unit Detail View Tables](#unitdetail_view)
 
 <hr><br>
 
@@ -524,3 +526,174 @@ def insert_unit(conn, unit):
 </pre>
 
 ## ViewTable
+
+### StaffDetail_View
+![image info](./Resources/Staff_Detail_view.png)
+
+- Structure
+
+<pre>
+
+Table Name: StaffDetail
+- UnitName
+- UnitCode
+- Semester
+- Year
+- Staff_Name
+- Staff_Position
+- Number_of_Sessions_Teached
+- PayRate
+- NonMarking_Workload_Hour
+- Marking_Workload_Hour
+- Total_Workload_Hour
+- Total_Cost
+
+</pre>
+
+- Sample Query
+
+<pre>
+
+Select * From StaffDetail Where UnitCode = "CITS1101";
+
+</pre>
+
+- Schema
+
+<pre>
+
+CREATE VIEW StaffDetail
+AS
+Select UnitName, UnitCode, Semester, Year, T1.Name AS Staff_Name, T1.Position AS Staff_Position, 
+(Select COUNT(T1.StaffID) AS Total_Sessions_Teached
+From Activities A5 JOIN Session S5 USING (SessionID)
+                JOIN Staff T5 USING (StaffID)
+                JOIN Unit U5 USING (UnitID)
+                JOIN TeachingCode P5 USING (TeachingCode)
+Where A5.StaffID = A1.StaffID
+Group By T5.StaffID) AS Number_of_Sessions_Teached
+,PayRate, 
+(Select SUM(Hour) as NonMarking_Workload
+From Activities A2 JOIN Session S2 USING (SessionID)
+                JOIN Staff T2 USING (StaffID)
+                JOIN Unit U2 USING (UnitID)
+                JOIN TeachingCode P2 USING (TeachingCode)
+Where S2.SessionType = "NM" and A2.StaffID = A1.StaffID
+Group by T2.StaffID) AS NonMarking_Workload_Hour,
+(Select SUM(Hour) as NonMarking_Workload
+From Activities A3 JOIN Session S3 USING (SessionID)
+                JOIN Staff T3 USING (StaffID)
+                JOIN Unit U3 USING (UnitID)
+                JOIN TeachingCode P3 USING (TeachingCode)
+Where S3.SessionType = "M" and A3.StaffID = A1.StaffID
+Group by T3.StaffID) AS Marking_Workload_Hour,
+SUM(Hour) as Total_WorkLoad_Hour, PayRate*SUM(Hour) AS Total_Cost
+From Activities A1 JOIN Session S1 USING (SessionID)
+                JOIN Staff T1 USING (StaffID)
+                JOIN Unit U1 USING (UnitID)
+                JOIN TeachingCode P1 USING (TeachingCode)
+Group by T1.StaffID
+
+</pre>
+
+
+### UnitDetail_View
+
+![image info](./Resources/Unit_Detail_view.png)
+
+- Structure
+
+<pre>
+
+Table Name: UnitDetail
+- UnitCode
+- UnitName
+- Semester
+- Year
+- Staff_Number
+- Estimate_StudentNumber
+- Total_NonSalaryCost
+- Total_SalaryCost
+- TotalCost
+- Estimate_Budget
+- Number_of_Assigned_Session
+- Total_Number_of_NSC
+- Total_Staff_WorkLoad
+
+</pre>
+
+- Sample Query
+
+<pre>
+
+Select * From UnitDetail Where UnitCode = "CITS1101";
+
+</pre>
+
+- Schema
+
+<pre>
+
+CREATE VIEW UnitDetail
+AS
+Select U.UnitCode, U.UnitName,U.Semester,U.Year,
+(Select COUNT(DISTINCT P.Name)
+From Activities A JOIN Staff P USING (StaffID)
+JOIN Unit R USING (UnitID)
+Where R.UnitCode = U.UnitCode
+) AS Staff_Number,
+(Select EnrolmentNumber
+From Enrolment JOIN Unit USING (UnitID)
+Where IsEstimated = "YES" and IsLastSemester = "NO" and Unit.UnitID = U.UnitID) AS Estimate_StudentNumber,
+(Select SUM(N.TotalCost) 
+From OtherCost O JOIN NonSalaryCosts N USING (NSCID)
+JOIN UNIT Z USING (UnitID)
+Where Z.UnitID = U.UnitID
+Group by Z.UnitID) AS Total_NonSalaryCost,
+(Select SUM(PayRate*Hour) AS Total_Cost
+From Activities A1 JOIN Session S1 USING (SessionID)
+                JOIN Staff T1 USING (StaffID)
+                JOIN Unit U1 USING (UnitID)
+                JOIN TeachingCode P1 USING (TeachingCode)
+Where U1.UnitID = U.UnitID
+Group by U1.UnitID ) AS Total_SalaryCost
+,
+(Select SUM(N.TotalCost) 
+From OtherCost O JOIN NonSalaryCosts N USING (NSCID)
+JOIN UNIT Z USING (UnitID)
+Where Z.UnitID = U.UnitID
+Group by Z.UnitID)
++(Select SUM(PayRate*Hour) AS Total_Cost
+From Activities A1 JOIN Session S1 USING (SessionID)
+                JOIN Staff T1 USING (StaffID)
+                JOIN Unit U1 USING (UnitID)
+                JOIN TeachingCode P1 USING (TeachingCode)
+Where U1.UnitID = U.UnitID
+Group by U1.UnitID ) AS Total_Cost
+,
+(Select B.Cost
+From Unit G JOIN Budget B USING (UnitID)
+Where IsEstimated = "YES" and B.IsLastSemester = "NO" and G.UnitID = U.UnitID ) AS Estimate_Budget,
+(Select COUNT(DISTINCT(SessionID))
+From Activities
+Where Activities.UnitID = U.UnitID
+Group BY UnitID) AS Number_of_Assigned_Seesion,
+(Select COUNT(*) 
+From OtherCost O JOIN Unit L USING (UnitID)
+JOIN NonSalaryCosts USING (NSCID)
+Where L.UnitID = U.UnitID
+Group by L.UnitID) AS Total_Number_of_NSC,
+(Select SUM(A.Hour)
+From Activities A JOIN Unit N USING (UnitID)
+Where N.UnitID = U.UnitID
+Group by N.UnitID) AS Total_Staff_WorkLoad
+From Activities A JOIN Staff S USING (StaffID) 
+                              JOIN Session E USING (SessionID)
+                              JOIN Unit U USING (UnitID)
+Group By U.UnitID
+
+
+</pre>
+
+
+
