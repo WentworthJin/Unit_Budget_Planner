@@ -4,7 +4,7 @@
 
 ## User Guide
 
-[DB Structure](#1.DB_Structure)
+[DB Structure](#1.db_structure)
 
 
 
