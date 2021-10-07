@@ -102,6 +102,7 @@ def get_all_data():
   names = [description[0] for description in cursor.description]
   cur.execute(query)
   rows = cur.fetchall()
+  print(rows)
   # clost the connection to database
   con.close()
   
@@ -275,7 +276,7 @@ def sqlquery():
         content = c.fetchall()
         conn.commit()
         conn.close()
-        r = {'success':'ture','data':list()}
+        r = {'success':'true','data':list()}
         for row in content:
             d = dict(zip(col_name_list, row))
             r['data'].append(d)

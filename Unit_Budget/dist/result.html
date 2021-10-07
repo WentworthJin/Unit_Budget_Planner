@@ -21,7 +21,9 @@
           reports[i].splice(1,1)
           reports[i].splice(10,1)
         }
-        const rows = reports.map(r => `<tr>${buildRow(r)}</tr>`);
+
+
+        const rows = reports.map(r => `<tr>${buildRow(r)}</tr>`)
         rows.map(r => list.append(r));
 
         getEmployeeData(yearValue, semesterValue, unitValue);
