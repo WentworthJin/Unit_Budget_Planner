@@ -85,7 +85,7 @@ const getAllData = async(year, semester, unitcode) => {
  window.onload = function (data) {
   const dataArray = []
   for(var i = 0; i < data.length; i++){
-    dataArray.push({"label":data[i][0], "y":data[i][7]})
+    dataArray.push({"label":data[i][0], "y":data[i][12]})
   } 
   var chart = new CanvasJS.Chart("barchart", {
     animationEnabled: true,
@@ -101,6 +101,7 @@ const getAllData = async(year, semester, unitcode) => {
      }
      ],
     axisY:{
+      minimum:0,
       prefix: "$",
     }     
     
