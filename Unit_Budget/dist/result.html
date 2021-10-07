@@ -17,7 +17,12 @@
         const semesterValue = $("#_semester").val().toString();
         const unitValue = $("#_unit").val().toString();
         const reports = await getAllData(yearValue, semesterValue, unitValue);
-        const rows = reports.map(r => `<tr>${buildRow(r)}</tr>`);
+        for (var i=0; i< reports.length; i++) {
+          reports[i].splice(1,1)
+          reports[i].splice(10,1)
+        }
+        console.log(reports)
+        const rows = reports.map(r => `<tr>${buildRow(r)}</tr>`)
         rows.map(r => list.append(r));
 
         getEmployeeData(yearValue, semesterValue, unitValue);
@@ -74,14 +79,12 @@
               <th>{{names[9]}}</th><th>{{names[11]}}</th><th>{{names[12]}}</th>
             </thead>
             <tbody id="report_list">
-            {% for row in rows %}
-            <tr>
-              <td>{{row[0]}}</td><td>{{row[2]}}</td><td>{{row[3]}}</td><td>{{row[4]}}</td>
-              <td>{{row[5]}}</td><td>{{row[6]}}</td><td>{{row[7]}}</td><td>{{row[8]}}</td>
-              <td>{{row[9]}}</td><td>{{row[11]}}</td><td>{{row[12]}}</td>
-            </tr>
-            {% endfor %}
-          </tbody>
+                {% for row in rows %}
+                <td>{{row[0]}}</td><td>{{row[2]}}</td><td>{{row[3]}}</td><td>{{row[4]}}</td>
+                <td>{{row[5]}}</td><td>{{row[6]}}</td><td>{{row[7]}}</td><td>{{row[8]}}</td>
+                <td>{{row[9]}}</td><td>{{row[11]}}</td><td>{{row[12]}}</td>
+                {% endfor %}
+            </tbody>
           </table>
         <div id="barchart" style="height: 370px; width: 80%;" class="chart"></div>
         <br>
