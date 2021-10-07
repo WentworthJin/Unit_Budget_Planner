@@ -17,6 +17,10 @@
         const semesterValue = $("#_semester").val().toString();
         const unitValue = $("#_unit").val().toString();
         const reports = await getAllData(yearValue, semesterValue, unitValue);
+        for (var i=0; i< reports.length; i++) {
+          reports[i].splice(1,1)
+          reports[i].splice(10,1)
+        }
         const rows = reports.map(r => `<tr>${buildRow(r)}</tr>`);
         rows.map(r => list.append(r));
 
@@ -66,23 +70,21 @@
            <input type="text" name="unit" id="_unit" onkeypress="handleUnitCode(event)">
         </div>
         <br>
-          <table class="tables" name="_tables">
-            <thead>
-              <th>{{names[0]}}</th><th>{{names[2]}}</th>
-              <th>{{names[3]}}</th><th>{{names[4]}}</th><th>{{names[5]}}</th>
-              <th>{{names[6]}}</th><th>{{names[7]}}</th><th>{{names[8]}}</th>
-              <th>{{names[9]}}</th><th>{{names[11]}}</th><th>{{names[12]}}</th>
-            </thead>
-            <tbody id="report_list">
-            {% for row in rows %}
-            <tr>
+        <table class="tables" name="_tables">
+          <thead>
+            <th>{{names[0]}}</th><th>{{names[2]}}</th>
+            <th>{{names[3]}}</th><th>{{names[4]}}</th><th>{{names[5]}}</th>
+            <th>{{names[6]}}</th><th>{{names[7]}}</th><th>{{names[8]}}</th>
+            <th>{{names[9]}}</th><th>{{names[11]}}</th><th>{{names[12]}}</th>
+          </thead>
+          <tbody id="report_list">
+              {% for row in rows %}
               <td>{{row[0]}}</td><td>{{row[2]}}</td><td>{{row[3]}}</td><td>{{row[4]}}</td>
               <td>{{row[5]}}</td><td>{{row[6]}}</td><td>{{row[7]}}</td><td>{{row[8]}}</td>
               <td>{{row[9]}}</td><td>{{row[11]}}</td><td>{{row[12]}}</td>
-            </tr>
-            {% endfor %}
+              {% endfor %}
           </tbody>
-          </table>
+        </table>
         <div id="barchart" style="height: 370px; width: 80%;" class="chart"></div>
         <br>
         <div id="stack" style="height: 370px; width: 80%;" class="chart"></div> 
