@@ -71,13 +71,13 @@
            <input type="text" name="unit" id="_unit" onkeypress="handleUnitCode(event)">
         </div>
         <br>
-          <table class="tables">
-            <tr>
+          <table class="tables" name="_tables">
+            <thead>
               <th>{{names[0]}}</th><th>{{names[2]}}</th>
               <th>{{names[3]}}</th><th>{{names[4]}}</th><th>{{names[5]}}</th>
               <th>{{names[6]}}</th><th>{{names[7]}}</th><th>{{names[8]}}</th>
               <th>{{names[9]}}</th><th>{{names[11]}}</th><th>{{names[12]}}</th>
-            </tr>
+            </thead>
             <tbody id="report_list">
                 {% for row in rows %}
                 <td>{{row[0]}}</td><td>{{row[2]}}</td><td>{{row[3]}}</td><td>{{row[4]}}</td>

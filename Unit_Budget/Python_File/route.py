@@ -161,6 +161,7 @@ def get_main_data():
   result = cur.fetchall()
   return jsonify(result)
 
+
 # route to get each employees in each unit budget
 @app.route("/employee_budget", methods=["GET"])
 def get_employee_budget():
