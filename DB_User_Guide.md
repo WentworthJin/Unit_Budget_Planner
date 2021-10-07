@@ -55,7 +55,7 @@ INSERT INTO Activities(UnitID, StaffID, SessionID, HourPerSession, MarkingHourPS
 
 <b>***Sample Insert***</b>
 
-INSERT INTO Activities (UnitID, StaffID, SessionID, HourPerSession, MarkingHourPS, Hour, Comment) VALUES(1, 1, 1, 4, 0.25, 30,40, "Good");
+INSERT INTO Activities (UnitID, StaffID, SessionID, HourPerSession, MarkingHourPS, PayRate, Hour, Comment) VALUES(1, 1, 1, 4, 0.25, 30,40, "Good");
 
 </pre>
 
@@ -75,7 +75,7 @@ WHERE
 
 <pre>
 
-activity = [1,1,1,4,0.25,30, 60,"Good"]
+activity = [1,1,1,4,0.25,30,60,"Good"]
 
 def insert_activities(conn, act):
     sql = ''' INSERT INTO Activities (UnitID, StaffID, SessionID, HourPerSession, MarkingHourPS, PayRate,Hour, Comment) 
@@ -562,7 +562,7 @@ From Activities A5 JOIN Session S5 USING (SessionID)
                 JOIN TeachingCode P5 USING (TeachingCode)
 Where A5.StaffID = A1.StaffID
 Group By T5.StaffID) AS Number_of_Sessions_Teached
-,PayRate, 
+,A1.PayRate, 
 (Select SUM(Hour) as NonMarking_Workload
 From Activities A2 JOIN Session S2 USING (SessionID)
                 JOIN Staff T2 USING (StaffID)
@@ -577,7 +577,7 @@ From Activities A3 JOIN Session S3 USING (SessionID)
                 JOIN TeachingCode P3 USING (TeachingCode)
 Where S3.SessionType = "M" and A3.StaffID = A1.StaffID
 Group by T3.StaffID) AS Marking_Workload_Hour,
-SUM(Hour) as Total_WorkLoad_Hour, PayRate*SUM(Hour) AS Total_Cost
+SUM(Hour) as Total_WorkLoad_Hour, A1.PayRate*SUM(Hour) AS Total_Cost
 From Activities A1 JOIN Session S1 USING (SessionID)
                 JOIN Staff T1 USING (StaffID)
                 JOIN Unit U1 USING (UnitID)
@@ -640,7 +640,7 @@ From OtherCost O JOIN NonSalaryCosts N USING (NSCID)
 JOIN UNIT Z USING (UnitID)
 Where Z.UnitID = U.UnitID
 Group by Z.UnitID) AS Total_NonSalaryCost,
-(Select SUM(PayRate*Hour) AS Total_Cost
+(Select SUM(A1.PayRate*Hour) AS Total_Cost
 From Activities A1 JOIN Session S1 USING (SessionID)
                 JOIN Staff T1 USING (StaffID)
                 JOIN Unit U1 USING (UnitID)
@@ -653,7 +653,7 @@ From OtherCost O JOIN NonSalaryCosts N USING (NSCID)
 JOIN UNIT Z USING (UnitID)
 Where Z.UnitID = U.UnitID
 Group by Z.UnitID)
-+(Select SUM(PayRate*Hour) AS Total_Cost
++(Select SUM(A1.PayRate*Hour) AS Total_Cost
 From Activities A1 JOIN Session S1 USING (SessionID)
                 JOIN Staff T1 USING (StaffID)
                 JOIN Unit U1 USING (UnitID)
