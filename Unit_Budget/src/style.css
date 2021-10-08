@@ -9,6 +9,7 @@ body {
   color: #030303;
   text-align: center;
   font-family: 'Bebas Neue', cursive;
+  background-color: #DDE4E6;
 }
 
 a {
@@ -157,7 +158,27 @@ Button.filter {
   border: 3px solid black;
   font-size: 14pt;
   padding: 10px 20px;
+  display: none;
+  background-color: #d7d6d6;
 }
+
+#_year {
+  margin: 6px;
+  padding: 5px;
+}
+
+
+#_semester {
+  margin: 6px;
+  padding: 5px;
+}
+
+#_unit {
+  padding: 5px;
+  font-size: 10pt;
+  margin: 6px;
+}
+
 
 Button.comment {
   float: right;
@@ -228,13 +249,17 @@ Button.comment {
   display:none;
   font-size: 12pt;
   padding: 6px;
+  margin-top: 10px;
   margin-left: 5px;
+  margin-bottom: 5px;
   align-items: center;
   background-color: blanchedalmond;
 }
 
 #unitcodelabel {
   display:none;
-  font-size: 16pt;
+  font-size: 17pt;
+  margin-top: 5px;
+  margin-bottom: 5px;
   align-items: center;
 }

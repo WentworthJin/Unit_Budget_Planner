@@ -49,17 +49,9 @@
         <input type="text" placeholder="Enter your query" class="search">
         <input type="submit" value="Search" class="enter">
         <button class="comment" id="comment">Comment</button>
-        <table class='tables' id="table_comment">
-          <br>
-          <label for="unit" id="unitcodelabel">Unit</label>      
-          <input type="text" name="unit" id="unitcode" placeholder="Please Enter your unit number">
-          <thead>
-            <th>Unit Code</th><th>Comment</th>
-          </thead>
-        </table>
         <br><br>
         <div class="radio" id="radio">
-          <label for="year">Year</label>
+          <label for="year" id="yearlabel">Year</label>
           <select name="year" id="_year" onchange="updateReportList()">
             <option value="">All</option>
             <option value="2021">2021</option>
@@ -76,7 +68,16 @@
           <label for="unit">Unit</label>      
            <input type="text" name="unit" id="_unit" onkeypress="handleUnitCode(event)">
         </div>
-        <br>
+        <hr>
+        <table class='tables' id="table_comment">
+          <br>
+          <label for="unit" id="unitcodelabel">Unit</label>      
+          <input type="text" name="unit" id="unitcode" placeholder="Unit Code">
+          <thead>
+            <th>Unit Code</th><th>Comment</th>
+          </thead>
+        </table>
+        <br><hr>
           <table class="tables" name="_tables">
             <thead>
               <th>{{names[0]}}</th><th>{{names[2]}}</th>

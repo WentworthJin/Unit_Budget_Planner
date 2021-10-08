@@ -24,7 +24,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 # get the absolute path for the current directory
 BASE_DIR = os.path.dirname(os.path.abspath(__file__)) 
 # get the whole path to database
-db_path = os.path.join(BASE_DIR, "BudgetSample(4).db")
+db_path = os.path.join(BASE_DIR, "BudgetSample.db")
 
 @app.route("/", methods=["GET"])
 def render():
@@ -217,7 +217,7 @@ def get_comment(unit):
   sql = "Select U.UnitCode, A.Comment \
         from Activities A \
         JOIN Unit U USING (UnitID) \
-        WHERE U.UnitCode='{0}'".format(unit)
+        WHERE U.UnitCode='{0}' and A.Comment IS NOT NULL".format(unit)
   cur.execute(sql)
   result = cur.fetchall()
   con.close()
