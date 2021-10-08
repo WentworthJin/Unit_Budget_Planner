@@ -59,7 +59,7 @@ def get_all_data():
           JOIN Unit R USING (UnitID) \
           Where R.UnitCode = U.UnitCode \
           ) AS Num_of_Staff, \
-          SUM(A.Hour * A.HourlyRate) AS StaffCost, \
+          SUM(A.Hour * A.PayRate) AS StaffCost, \
           (Select SUM(N.TotalCost) \
           From OtherCost O JOIN NonSalaryCosts N USING (NSCID) \
           JOIN UNIT Z USING (UnitID) \
@@ -122,7 +122,7 @@ def get_main_data():
                       JOIN Unit R USING (UnitID) \
                       Where R.UnitCode = U.UnitCode \
                       ) AS Num_of_Staff, \
-                      SUM(A.Hour * A.HourlyRate) AS StaffCost, \
+                      SUM(A.Hour * A.PayRate) AS StaffCost, \
                       (Select SUM(N.TotalCost) \
                       From OtherCost O JOIN NonSalaryCosts N USING (NSCID) \
                       JOIN UNIT Z USING (UnitID) \
@@ -172,7 +172,7 @@ def get_employee_budget():
   queryStrings = buildWhereClause(request.args.to_dict())
   con = sqlite3.connect(db_path)
   cur = con.cursor()
-  sql = "Select S.Name, U.UnitCode, U.Semester, U.Year, SUM(A.Hour*A.HourlyRate) AS TotalCost \
+  sql = "Select S.Name, U.UnitCode, U.Semester, U.Year, SUM(A.Hour*A.PayRate) AS TotalCost \
         From Activities A JOIN Staff S USING (StaffID) \
         JOIN Session E USING (SessionID) \
         JOIN Unit U USING (UnitID) "
@@ -192,7 +192,7 @@ def get_semester_budget():
   queryStrings = buildWhereClause(request.args.to_dict())
   con = sqlite3.connect(db_path)
   cur = con.cursor()
-  sql = "Select U.UnitCode, SUM(A.Hour) AS TotalLoad, SUM(A.Hour * A.HourlyRate) AS StaffCost \
+  sql = "Select U.UnitCode, SUM(A.Hour) AS TotalLoad, SUM(A.Hour * A.PayRate) AS StaffCost \
               From Activities A JOIN Staff S USING (StaffID) \
                 JOIN Session E USING (SessionID) \
                 JOIN Unit U USING (UnitID) \
