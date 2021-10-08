@@ -24,7 +24,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 # get the absolute path for the current directory
 BASE_DIR = os.path.dirname(os.path.abspath(__file__)) 
 # get the whole path to database
-db_path = os.path.join(BASE_DIR, "BudgetSample.db")
+db_path = os.path.join(BASE_DIR, "BudgetSample (1).db")
 
 @app.route("/", methods=["GET"])
 def render():
@@ -59,7 +59,7 @@ def get_all_data():
           JOIN Unit R USING (UnitID) \
           Where R.UnitCode = U.UnitCode \
           ) AS Num_of_Staff, \
-          SUM(A.Hour * A.HourlyRate) AS StaffCost, \
+          SUM(A.Hour * A.PayRate) AS StaffCost, \
           (Select SUM(N.TotalCost) \
           From OtherCost O JOIN NonSalaryCosts N USING (NSCID) \
           JOIN UNIT Z USING (UnitID) \
@@ -122,7 +122,7 @@ def get_main_data():
                       JOIN Unit R USING (UnitID) \
                       Where R.UnitCode = U.UnitCode \
                       ) AS Num_of_Staff, \
-                      SUM(A.Hour * A.HourlyRate) AS StaffCost, \
+                      SUM(A.Hour * A.PayRate) AS StaffCost, \
                       (Select SUM(N.TotalCost) \
                       From OtherCost O JOIN NonSalaryCosts N USING (NSCID) \
                       JOIN UNIT Z USING (UnitID) \
@@ -172,7 +172,7 @@ def get_employee_budget():
   queryStrings = buildWhereClause(request.args.to_dict())
   con = sqlite3.connect(db_path)
   cur = con.cursor()
-  sql = "Select S.Name, U.UnitCode, U.Semester, U.Year, SUM(A.Hour*A.HourlyRate) AS TotalCost \
+  sql = "Select S.Name, U.UnitCode, U.Semester, U.Year, SUM(A.Hour*A.PayRate) AS TotalCost \
         From Activities A JOIN Staff S USING (StaffID) \
         JOIN Session E USING (SessionID) \
         JOIN Unit U USING (UnitID) "
@@ -192,7 +192,7 @@ def get_semester_budget():
   queryStrings = buildWhereClause(request.args.to_dict())
   con = sqlite3.connect(db_path)
   cur = con.cursor()
-  sql = "Select U.UnitCode, SUM(A.Hour) AS TotalLoad, SUM(A.Hour * A.HourlyRate) AS StaffCost \
+  sql = "Select U.UnitCode, SUM(A.Hour) AS TotalLoad, SUM(A.Hour * A.PayRate) AS StaffCost \
               From Activities A JOIN Staff S USING (StaffID) \
                 JOIN Session E USING (SessionID) \
                 JOIN Unit U USING (UnitID) \
@@ -219,9 +219,10 @@ def upload_file():
             return render()
       if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
+        Unit_ID = filename[0:8]
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
     # Insert mock data
-    ID = 'CITS4401'
+    ID = Unit_ID
     con = sqlite3.connect(db_path)
     cur = con.cursor()
     cur.execute('Select U.UnitCode, SUM(A.Hour) AS TotalLoad, U.Semester,U.Year, \
@@ -230,7 +231,7 @@ def upload_file():
                       JOIN Unit R USING (UnitID) \
                       Where R.UnitCode = U.UnitCode \
                       ) AS Num_of_Staff, \
-                      SUM(A.Hour * A.HourlyRate) AS StaffCost, \
+                      SUM(A.Hour * A.PayRate) AS StaffCost, \
                       (Select SUM(N.TotalCost) \
                       From OtherCost O JOIN NonSalaryCosts N USING (NSCID) \
                       JOIN UNIT Z USING (UnitID) \
