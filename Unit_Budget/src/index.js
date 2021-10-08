@@ -276,12 +276,59 @@ function sampleInformation() {
   For example: "file1.xlsx" or "file1.xls"')
 }
 
+$('#comment').on('click', function(event) {
+  event.preventDefault()
+  $('#table_comment').toggle();
+  $('#unitcode').toggle();
+  $('#unitcodelabel').toggle();
+})
+
+
+function sendComment(unit) {
+  fetch('http://127.0.0.1:5000/comment/' + unit, {
+    method:"GET",
+    headers:{
+      headers: {
+        "Content-Type":"application/json"
+      }
+    }
+  })
+  .then(resp => resp.json())
+  .then((data) =>
+    create_table(data)
+  )
+  .catch(error => 
+    console.log(error))
+}
+
+$('#unitcode').on("input", function() {
+  var input = this.value;
+  sendComment(input)
+  if (input.length === 0) {
+    $("#table_comment tr>td").remove(); 
+  }
+})  
+
+function create_table(data) {
+  const name = document.getElementById('table_comment')
+  for(var i = 0; i < data.length; i++)
+  {
+    var newRow = name.insertRow(name.length);
+    for(var j = 0; j < data[i].length; j++) {
+      var cell = newRow.insertCell(j);
+      cell.innerHTML = data[i][j]
+    }
+  }
+}
 
 
 getAllData()
 getWorkLoadData()
 getEmployeeData()
 graphing()
+
+
+
 
 
 

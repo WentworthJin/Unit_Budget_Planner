@@ -24,7 +24,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 # get the absolute path for the current directory
 BASE_DIR = os.path.dirname(os.path.abspath(__file__)) 
 # get the whole path to database
-db_path = os.path.join(BASE_DIR, "BudgetSample.db")
+db_path = os.path.join(BASE_DIR, "BudgetSample(4).db")
 
 @app.route("/", methods=["GET"])
 def render():
@@ -59,7 +59,7 @@ def get_all_data():
           JOIN Unit R USING (UnitID) \
           Where R.UnitCode = U.UnitCode \
           ) AS Num_of_Staff, \
-          SUM(A.Hour * A.HourlyRate) AS StaffCost, \
+          SUM(A.Hour * A.Payrate) AS StaffCost, \
           (Select SUM(N.TotalCost) \
           From OtherCost O JOIN NonSalaryCosts N USING (NSCID) \
           JOIN UNIT Z USING (UnitID) \
@@ -102,7 +102,6 @@ def get_all_data():
   names = [description[0] for description in cursor.description]
   cur.execute(query)
   rows = cur.fetchall()
-  print(rows)
   # clost the connection to database
   con.close()
   
@@ -122,7 +121,7 @@ def get_main_data():
                       JOIN Unit R USING (UnitID) \
                       Where R.UnitCode = U.UnitCode \
                       ) AS Num_of_Staff, \
-                      SUM(A.Hour * A.HourlyRate) AS StaffCost, \
+                      SUM(A.Hour * A.PayRate) AS StaffCost, \
                       (Select SUM(N.TotalCost) \
                       From OtherCost O JOIN NonSalaryCosts N USING (NSCID) \
                       JOIN UNIT Z USING (UnitID) \
@@ -159,6 +158,7 @@ def get_main_data():
     sql = sql + ''' where ''' + queryStrings    
   cur.execute(sql + " Group by U.UnitID ") 
   result = cur.fetchall()
+  con.close()
   return jsonify(result)
 
 
@@ -172,7 +172,7 @@ def get_employee_budget():
   queryStrings = buildWhereClause(request.args.to_dict())
   con = sqlite3.connect(db_path)
   cur = con.cursor()
-  sql = "Select S.Name, U.UnitCode, U.Semester, U.Year, SUM(A.Hour*A.HourlyRate) AS TotalCost \
+  sql = "Select S.Name, U.UnitCode, U.Semester, U.Year, SUM(A.Hour*A.PayRate) AS TotalCost \
         From Activities A JOIN Staff S USING (StaffID) \
         JOIN Session E USING (SessionID) \
         JOIN Unit U USING (UnitID) "
@@ -180,6 +180,7 @@ def get_employee_budget():
     sql = sql + ''' where ''' + queryStrings         
   cur.execute(sql + " Group by S.StaffID ") 
   result = cur.fetchall()
+  con.close()
   return jsonify(result)
 
 # get workload and total cost for each unit 
@@ -192,7 +193,7 @@ def get_semester_budget():
   queryStrings = buildWhereClause(request.args.to_dict())
   con = sqlite3.connect(db_path)
   cur = con.cursor()
-  sql = "Select U.UnitCode, SUM(A.Hour) AS TotalLoad, SUM(A.Hour * A.HourlyRate) AS StaffCost \
+  sql = "Select U.UnitCode, SUM(A.Hour) AS TotalLoad, SUM(A.Hour * A.PayRate) AS StaffCost \
               From Activities A JOIN Staff S USING (StaffID) \
                 JOIN Session E USING (SessionID) \
                 JOIN Unit U USING (UnitID) \
@@ -202,11 +203,25 @@ def get_semester_budget():
   sql = sql + " Group By U.UnitID "
   cur.execute(sql)
   result = cur.fetchall()
+  con.close()
   return jsonify(result)
 
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+           
+@app.route("/comment/<unit>", methods=["GET"])
+def get_comment(unit):
+  con = sqlite3.connect(db_path)
+  cur = con.cursor()
+  sql = "Select U.UnitCode, A.Comment \
+        from Activities A \
+        JOIN Unit U USING (UnitID) \
+        WHERE U.UnitCode='{0}'".format(unit)
+  cur.execute(sql)
+  result = cur.fetchall()
+  con.close()
+  return jsonify(result)
 
 @app.route("/table",methods=['GET','POST'])
 def upload_file():
@@ -230,7 +245,7 @@ def upload_file():
                       JOIN Unit R USING (UnitID) \
                       Where R.UnitCode = U.UnitCode \
                       ) AS Num_of_Staff, \
-                      SUM(A.Hour * A.HourlyRate) AS StaffCost, \
+                      SUM(A.Hour * A.PayRate) AS StaffCost, \
                       (Select SUM(N.TotalCost) \
                       From OtherCost O JOIN NonSalaryCosts N USING (NSCID) \
                       JOIN UNIT Z USING (UnitID) \
