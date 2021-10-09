@@ -159,6 +159,7 @@ def get_main_data():
     sql = sql + ''' where ''' + queryStrings    
   cur.execute(sql + " Group by U.UnitID ") 
   result = cur.fetchall()
+  con.close()
   return jsonify(result)
 
 
@@ -180,6 +181,7 @@ def get_employee_budget():
     sql = sql + ''' where ''' + queryStrings         
   cur.execute(sql + " Group by S.StaffID ") 
   result = cur.fetchall()
+  con.close()
   return jsonify(result)
 
 # get workload and total cost for each unit 
@@ -202,11 +204,25 @@ def get_semester_budget():
   sql = sql + " Group By U.UnitID "
   cur.execute(sql)
   result = cur.fetchall()
+  con.close()
   return jsonify(result)
 
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+           
+@app.route("/comment/<unit>", methods=["GET"])
+def get_comment(unit):
+  con = sqlite3.connect(db_path)
+  cur = con.cursor()
+  sql = "Select U.UnitCode, A.Comment \
+        from Activities A \
+        JOIN Unit U USING (UnitID) \
+        WHERE U.UnitCode='{0}' and A.Comment IS NOT NULL".format(unit)
+  cur.execute(sql)
+  result = cur.fetchall()
+  con.close()
+  return jsonify(result)
 
 @app.route("/table",methods=['GET','POST'])
 def upload_file():

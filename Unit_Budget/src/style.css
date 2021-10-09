@@ -1,9 +1,15 @@
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
+
+/* Font decoration */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
 body {
   color: #030303;
   text-align: center;
+  font-family: 'Bebas Neue', cursive;
+  background-color: #DDE4E6;
 }
 
 a {
@@ -32,7 +38,10 @@ a {
   background-color:#DCD8D0;
 }
 
+.dabutton {
+  border-radius: 12px;
 
+}
 
 
 /*--------------------------------------------------------------
@@ -48,16 +57,17 @@ Button.next a {
 }
 
 Button.next {
-  background-color: #04AA6D;
+  background-color: #76a291;
   padding: 15px 32px;
   float:right;
   font-size: 14pt;
-  border-left: 5px solid black;
-  border-right: 5px solid black;
+  border-left: 3px solid black;
+  border-right: 3px solid black;
   border-top: 3px solid black;
   border-bottom: 3px solid black;
   margin-bottom: 30px;
   margin-left: 10px;
+  border-radius: 12px;
 }
 
 #myFile {
@@ -96,6 +106,8 @@ Button.next {
   padding: 6px;
   background-color: #cfdbce;
   font-size: 12pt;
+  border-radius: 12px;
+  font-family: 'Bebas Neue', cursive;
 }
 
 
@@ -123,6 +135,7 @@ Button.filter {
   float: left;
   padding: 10px 20px;
   font-size: 14pt;
+  border-radius: 12px;
 }
 
 .query {
@@ -145,12 +158,33 @@ Button.filter {
   border: 3px solid black;
   font-size: 14pt;
   padding: 10px 20px;
+  display: none;
+  background-color: #d7d6d6;
 }
+
+#_year {
+  margin: 6px;
+  padding: 5px;
+}
+
+
+#_semester {
+  margin: 6px;
+  padding: 5px;
+}
+
+#_unit {
+  padding: 5px;
+  font-size: 10pt;
+  margin: 6px;
+}
+
 
 Button.comment {
   float: right;
   padding: 10px 20px;
   font-size: 14pt;
+  border-radius: 12px;
 }
 
 /*--------------------------------------------------------------
@@ -164,14 +198,17 @@ Button.comment {
 
 #stack.chart {
   border: 3px solid black;
+  border-radius: 4px;
 }
 
 #barchart.chart {
   border: 3px solid black;
+  border-radius: 4px;
 }
 
 #horizontal.chart {
   border: 3px solid black;
+  border-radius: 4px;
 }
 
 /*--------------------------------------------------------------
@@ -200,4 +237,29 @@ Button.comment {
   text-align: left;
   background-color: #04AA6D;
   color: white;
+}
+
+#table_comment {
+  display:none;
+  margin-top: 5px;
+  margin-bottom: 0px;
+}
+
+#unitcode {
+  display:none;
+  font-size: 12pt;
+  padding: 6px;
+  margin-top: 10px;
+  margin-left: 5px;
+  margin-bottom: 5px;
+  align-items: center;
+  background-color: blanchedalmond;
+}
+
+#unitcodelabel {
+  display:none;
+  font-size: 17pt;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  align-items: center;
 }
