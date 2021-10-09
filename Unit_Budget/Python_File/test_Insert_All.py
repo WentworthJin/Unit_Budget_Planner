@@ -19,12 +19,22 @@ from sqlite3 import Error
 Create_Table.Schema()
 conn = sqlite3.connect("Unit_Budget.db")
 
+activity = [1,1,1,4,0.25,30,60,"Good"]
+budget = [1,30000,'YES','NO']
+enrol = [1,200,'Yes','No']
+nsc = ["Lecture",6,10,60]
+oc = [1,6,"Good"]
+session = ["Lecture","NM"]
+staff = [1,"Racheal","Lecture"]
+TeachingCode = ["ORAA"]
+Unit = ["Computing","CITS2021","SEM-2",2020,"Fail"]
+
 class TestCreate(unittest.TestCase):
 
   # Test if insert_unit function works.
   # The function returns the ID for the unit inserted
   def test_insert_unit(self):
-    sample_unit = ["CITS2021","SEN-2",2020]
+    sample_unit = ["Computing","CITS2021","SEM-2",2020,"Fail"]
     result = Insert_All_Liangbo_Version.insert_unit(conn,sample_unit)
     self.assertEqual(result,1)
 
@@ -38,7 +48,7 @@ class TestCreate(unittest.TestCase):
   # Test if insert_session function works.
   # The function returns the ID for the Session inserted.
   def test_insert_session(self):
-    sample_session = ["Lecture","Non-Mark"]
+    sample_session = ["Lecture","NM"]
     result = Insert_All_Liangbo_Version.insert_session(conn,sample_session)
     self.assertEqual(result,1)
   
@@ -66,14 +76,14 @@ class TestCreate(unittest.TestCase):
   # Test if insert_activities works.
   # The function returns the ID for the Activities inserted.
   def test_insert_activities(self):
-    sample_activity = [1,6,3,50,12]
+    sample_activity = [1,1,1,4,0.25,30,60,"Good"]
     result = Insert_All_Liangbo_Version.insert_activities(conn,sample_activity)
     self.assertEqual(result,1)
 
   # Test if insert_othercost works.
   # The function returns the ID for the Othercost inserted.
   def test_insert_oc(self):
-    sample_oc = [1,6]
+    sample_oc = [1,6,"Good"]
     result = Insert_All_Liangbo_Version.insert_oc(conn,sample_oc)
     self.assertEqual(result,1)
   

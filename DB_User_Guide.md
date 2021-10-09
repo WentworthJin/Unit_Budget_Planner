@@ -41,6 +41,7 @@ CREATE TABLE IF NOT EXISTS Activities (
     SessionID INT REFERENCES Session (SessionID) ON DELETE RESTRICT ON UPDATE CASCADE,
     HourPerSession INT,
     MarkingHourPS REAL,
+    PayRate REAL,
     Hour REAL,
     Comment VARCHAR (300) 
 );
@@ -50,11 +51,11 @@ CREATE TABLE IF NOT EXISTS Activities (
 
 <pre>
 
-INSERT INTO Activities(UnitID, StaffID, SessionID, HourPerSession, MarkingHourPS, Hour, Comment) VALUES(UnitID, StaffID, SessionID, HourPerSession, MarkingHourPS, Hour, Comment);
+INSERT INTO Activities(UnitID, StaffID, SessionID, HourPerSession, MarkingHourPS, PayRate, Hour, Comment) VALUES(UnitID, StaffID, SessionID, HourPerSession, MarkingHourPS, PayRate, Hour, Comment);
 
 <b>***Sample Insert***</b>
 
-INSERT INTO Activities (UnitID, StaffID, SessionID, HourPerSession, MarkingHourPS, Hour, Comment) VALUES(1, 1, 1, 4, 0.25, 40, "Good");
+INSERT INTO Activities (UnitID, StaffID, SessionID, HourPerSession, MarkingHourPS, PayRate, Hour, Comment) VALUES(1, 1, 1, 4, 0.25, 30,40, "Good");
 
 </pre>
 
@@ -74,11 +75,11 @@ WHERE
 
 <pre>
 
-activity = [1,1,1,4,0.25,60,"Good"]
+activity = [1,1,1,4,0.25,30,60,"Good"]
 
 def insert_activities(conn, act):
-    sql = ''' INSERT INTO Activities (UnitID, StaffID, SessionID, HourPerSession, MarkingHourPS, Hour, Comment) 
-    VALUES(?, ?, ?, ?, ?, ?, ?);'''
+    sql = ''' INSERT INTO Activities (UnitID, StaffID, SessionID, HourPerSession, MarkingHourPS, PayRate,Hour, Comment) 
+    VALUES(?, ?, ?, ?, ?, ?, ?, ?);'''
     cur = conn.cursor()
     data_check=cur.execute(sql, act)
     # Check if data already exist
@@ -430,8 +431,7 @@ def insert_staff(conn, staff):
 
 CREATE TABLE IF NOT EXISTS TeachingCode (
         TeachingCode INTEGER PRIMARY KEY AUTOINCREMENT,
-        TeachingName VARCHAR (50) UNIQUE,
-        PayRate REAL
+        TeachingName VARCHAR (50) UNIQUE
 );
 </pre>
 
@@ -439,33 +439,23 @@ CREATE TABLE IF NOT EXISTS TeachingCode (
 
 <pre>
 
-INSERT INTO TeachingCode(TeachingName, PayRate) VALUES (TeachingName, PayRate);
+INSERT INTO TeachingCode(TeachingName) VALUES (TeachingName);
 
 <b>***Sample Insert***</b>
 
-INSERT INTO TeachingCode(TeachingName, PayRate) VALUES ("ORAA", 54);
+INSERT INTO TeachingCode(TeachingName) VALUES ("ORAA");
 
-</pre>
-
-- Update Data DDL
-
-<pre>
-
-UPDATE TeachingCode
-SET PayRate = 1000
-WHERE
-    TeachingName = "ORAA";
 </pre>
 
 - Insert Data Python Code
 
 <pre>
 
-TeachingCode = ["ORAA",100]
+TeachingCode = ["ORAA"]
 
 def insert_teachingcode(conn, TeachingCode):
-    sql = ''' Insert into TeachingCode(TeachingName, PayRate)
-              VALUES(?,?) '''
+    sql = ''' Insert into TeachingCode(TeachingName)
+              VALUES(?) '''
     cur = conn.cursor()
     data_check=cur.execute(sql, TeachingCode)
     # Check if data already exist
@@ -572,7 +562,7 @@ From Activities A5 JOIN Session S5 USING (SessionID)
                 JOIN TeachingCode P5 USING (TeachingCode)
 Where A5.StaffID = A1.StaffID
 Group By T5.StaffID) AS Number_of_Sessions_Teached
-,PayRate, 
+,A1.PayRate, 
 (Select SUM(Hour) as NonMarking_Workload
 From Activities A2 JOIN Session S2 USING (SessionID)
                 JOIN Staff T2 USING (StaffID)
@@ -587,7 +577,7 @@ From Activities A3 JOIN Session S3 USING (SessionID)
                 JOIN TeachingCode P3 USING (TeachingCode)
 Where S3.SessionType = "M" and A3.StaffID = A1.StaffID
 Group by T3.StaffID) AS Marking_Workload_Hour,
-SUM(Hour) as Total_WorkLoad_Hour, PayRate*SUM(Hour) AS Total_Cost
+SUM(Hour) as Total_WorkLoad_Hour, A1.PayRate*SUM(Hour) AS Total_Cost
 From Activities A1 JOIN Session S1 USING (SessionID)
                 JOIN Staff T1 USING (StaffID)
                 JOIN Unit U1 USING (UnitID)
@@ -650,7 +640,7 @@ From OtherCost O JOIN NonSalaryCosts N USING (NSCID)
 JOIN UNIT Z USING (UnitID)
 Where Z.UnitID = U.UnitID
 Group by Z.UnitID) AS Total_NonSalaryCost,
-(Select SUM(PayRate*Hour) AS Total_Cost
+(Select SUM(A1.PayRate*Hour) AS Total_Cost
 From Activities A1 JOIN Session S1 USING (SessionID)
                 JOIN Staff T1 USING (StaffID)
                 JOIN Unit U1 USING (UnitID)
@@ -663,7 +653,7 @@ From OtherCost O JOIN NonSalaryCosts N USING (NSCID)
 JOIN UNIT Z USING (UnitID)
 Where Z.UnitID = U.UnitID
 Group by Z.UnitID)
-+(Select SUM(PayRate*Hour) AS Total_Cost
++(Select SUM(A1.PayRate*Hour) AS Total_Cost
 From Activities A1 JOIN Session S1 USING (SessionID)
                 JOIN Staff T1 USING (StaffID)
                 JOIN Unit U1 USING (UnitID)
