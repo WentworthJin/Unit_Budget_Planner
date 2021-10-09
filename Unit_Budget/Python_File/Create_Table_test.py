@@ -2,7 +2,7 @@ import unittest
 from Create_Table import Schema,create_connection,create_table
 import os
 
-db = 'test.db'
+db = 'Unit_Budget.db'
 
 class TestCreateTable(unittest.TestCase):
     def setUp(self):
