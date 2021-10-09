@@ -3,7 +3,6 @@
   <head>
     <title>Summary Report</title>
     <link href="../src/style.css" rel="stylesheet">
-    <script src="../src/index.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
       // Get all reports and dynamically add to the table.
@@ -21,8 +20,6 @@
           reports[i].splice(1,1)
           reports[i].splice(10,1)
         }
-
-
         const rows = reports.map(r => `<tr>${buildRow(r)}</tr>`)
         rows.map(r => list.append(r));
 
@@ -51,10 +48,10 @@
         <button class="filter" onclick=showAndHide()>Filter</button>
         <input type="text" placeholder="Enter your query" class="search">
         <input type="submit" value="Search" class="enter">
-        <button class="comment" onclick=showComment()>Comment</button>
+        <button class="comment" id="comment">Comment</button>
         <br><br>
         <div class="radio" id="radio">
-          <label for="year">Year</label>
+          <label for="year" id="yearlabel">Year</label>
           <select name="year" id="_year" onchange="updateReportList()">
             <option value="">All</option>
             <option value="2021">2021</option>
@@ -71,22 +68,31 @@
           <label for="unit">Unit</label>      
            <input type="text" name="unit" id="_unit" onkeypress="handleUnitCode(event)">
         </div>
-        <br>
-        <table class="tables" name="_tables">
+        <hr>
+        <table class='tables' id="table_comment">
+          <br>
+          <label for="unit" id="unitcodelabel">Unit</label>      
+          <input type="text" name="unit" id="unitcode" placeholder="Unit Code">
           <thead>
-            <th>{{names[0]}}</th><th>{{names[2]}}</th>
-            <th>{{names[3]}}</th><th>{{names[4]}}</th><th>{{names[5]}}</th>
-            <th>{{names[6]}}</th><th>{{names[7]}}</th><th>{{names[8]}}</th>
-            <th>{{names[9]}}</th><th>{{names[11]}}</th><th>{{names[12]}}</th>
+            <th>Unit Code</th><th>Comment</th>
           </thead>
-          <tbody id="report_list">
-              {% for row in rows %}
-              <td>{{row[0]}}</td><td>{{row[2]}}</td><td>{{row[3]}}</td><td>{{row[4]}}</td>
-              <td>{{row[5]}}</td><td>{{row[6]}}</td><td>{{row[7]}}</td><td>{{row[8]}}</td>
-              <td>{{row[9]}}</td><td>{{row[11]}}</td><td>{{row[12]}}</td>
-              {% endfor %}
-          </tbody>
         </table>
+        <br><hr>
+          <table class="tables" name="_tables">
+            <thead>
+              <th>{{names[0]}}</th><th>{{names[2]}}</th>
+              <th>{{names[3]}}</th><th>{{names[4]}}</th><th>{{names[5]}}</th>
+              <th>{{names[6]}}</th><th>{{names[7]}}</th><th>{{names[8]}}</th>
+              <th>{{names[9]}}</th><th>{{names[11]}}</th><th>{{names[12]}}</th>
+            </thead>
+            <tbody id="report_list">
+                {% for row in rows %}
+                <td>{{row[0]}}</td><td>{{row[2]}}</td><td>{{row[3]}}</td><td>{{row[4]}}</td>
+                <td>{{row[5]}}</td><td>{{row[6]}}</td><td>{{row[7]}}</td><td>{{row[8]}}</td>
+                <td>{{row[9]}}</td><td>{{row[11]}}</td><td>{{row[12]}}</td>
+                {% endfor %}
+            </tbody>
+          </table>
         <div id="barchart" style="height: 370px; width: 80%;" class="chart"></div>
         <br>
         <div id="stack" style="height: 370px; width: 80%;" class="chart"></div> 
@@ -97,6 +103,7 @@
     <Button class="next"><a href="http://127.0.0.1:5000/">Back</a></Button>
     </div>
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"> </script>
+    <script src="../src/index.js"></script>
   </body>
 </html>
 
