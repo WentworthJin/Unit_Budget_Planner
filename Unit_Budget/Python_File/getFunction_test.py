@@ -5,16 +5,9 @@ import Insert_All_Liangbo_Version,Create_Table
 import sqlite3
 
 db = 'Unit_Budget.db'
+Create_Table.Schema()
 
 class Test_get_Function(unittest.TestCase):
-    def setUp(self):
-        print("Prepare to test...")
-        Create_Table.Schema()
-
-    def tearDown(self):
-        print("call teardown")
-        os.remove(db)
-
     def test_select_NSCID(self):
         Insert_All_Liangbo_Version.sample_insert()
         sample_NSCName = ''   
@@ -32,6 +25,10 @@ class Test_get_Function(unittest.TestCase):
         sample_TeachingName = ''   
         conn = sqlite3.connect(db)
         self.assertEqual(select_TeachingCode(conn,sample_TeachingName),'')
+
+    @classmethod
+    def tearDownClass(cls):
+        os.remove(db)
 
 if __name__ == '__main__':
     unittest.main() 

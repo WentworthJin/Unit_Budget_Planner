@@ -5,23 +5,20 @@ import unittest
 import sqlite3
 
 db = 'Unit_Budget.db'
+Create_Table.Schema()
 
 class TestCreateTable(unittest.TestCase):
-    def setUp(self):
-        print("Prepare to test...")
-        Create_Table.Schema()
-
-    def tearDown(self):
-        print("call teardown")
-        os.remove(db)
-
     def test_update_unit(self):
         Insert_All_Liangbo_Version.sample_insert()
         conn = sqlite3.connect(db)
         c = conn.cursor()
-        test_unit = []
+        test_unit = ["CITS2021","SEM-2",2021,"1"]
         update_unit(conn, test_unit)
-        self.assertEqual(len(c.execute('SELECT * FROM Unit WHERE UnitId = ?',('',)),''))
+        self.assertEqual(list(c.execute('SELECT YEAR FROM Unit WHERE UNITCODE = ?',('CITS2021',))),[(2021,)])
+
+    @classmethod
+    def tearDownClass(cls):
+        os.remove(db)
 
 if __name__ == '__main__':
     unittest.main()   

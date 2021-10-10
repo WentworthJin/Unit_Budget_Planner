@@ -7,6 +7,7 @@ import sys
 import io
 
 db = 'Unit_Budget.db'
+Create_Table.Schema()
 
 def stub_stdout(testcase_inst):
 	stderr = sys.stderr
@@ -36,6 +37,11 @@ class TestSelect(unittest.TestCase):
         stub_stdout(self) 
         select_all_tasks(conn) 
         self.assertEqual(str(sys.stdout.getvalue()), sample_data)  
+
+    
+    @classmethod
+    def tearDownClass(cls):
+        os.remove(db)
 
 if __name__ == '__main__':
     unittest.main()        
