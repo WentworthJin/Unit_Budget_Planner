@@ -24,8 +24,8 @@
         const rows = reports.map(r => `<tr>${buildRow(r)}</tr>`)
         rows.map(r => list.append(r));
 
-        getEmployeeData(yearValue, semesterValue, unitValue);
-        getWorkLoadData(yearValue, semesterValue, unitValue);
+        getEmployeeData(yearValue, semesterValue, unitValue, unitLevelValue);
+        getWorkLoadData(yearValue, semesterValue, unitValue, unitLevelValue);
       }
 
       // Handler for the Unit code input. Fire 'updateReportList' when 
