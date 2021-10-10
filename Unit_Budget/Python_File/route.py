@@ -37,13 +37,11 @@ def buildWhereClause(data):
   s2 = 'U.Year = ' + data['year'] if 'year' in params else ''
   s3 = 'U.Semester = ' + data['semester'] if 'semester' in params else ''
   s4 = 'substr(U.UnitCode, 5, 1) ="{}" '.format(data['unitLevel']) if 'unitLevel' in params else '' 
-  print(s4)
   s = list()
   for x in [s1, s2, s3, s4]:
       if x:
           s.append(x)
   queryStrings = ' and '.join(s) 
-  print(queryStrings)
   return queryStrings
 
 
@@ -160,7 +158,6 @@ def get_main_data():
                       '
   if queryStrings:
     sql = sql + ''' where ''' + queryStrings    
-  print(sql)  
   cur.execute(sql + " Group by U.UnitID ") 
   result = cur.fetchall()
   con.close()
