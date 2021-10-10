@@ -23,12 +23,6 @@ def create_connection(db_file):
     return conn
 
 
-def select_query(conn,query):
-  cur = conn.cursor()
-  cur.execute(query)
-  return cur.fetchall()
-
-
 #Insert data into Unit table
 def insert_unit(conn, unit):
     sql = ''' INSERT INTO Unit(UnitCode,Semester,Year)
@@ -232,7 +226,12 @@ def main():
 
 
       #Insert Staff table
-
+      for i in range(len(teachingcodes)):
+        teachingID = select_StaffID(conn,resourcing.iloc[0:7,3][i])
+        teacherName = resourcing.iloc[0:7,0][i]
+        teacherPostion = resourcing.iloc[0:7,1][i]
+        staff = (teachingID,teacherName,teacherPostion)
+        insert_session(conn,staff)
 
 
       #Insert Session table
@@ -252,7 +251,7 @@ def main():
         NSCID = insert_nsc(conn,nsc)
 
         otherCost = (NSCID,UnitID)
-        insert_otherCost(conn,otherCost)
+        insert_session(conn,otherCost)
 
       #Insert Enrolment table & Budget Table
       for i in range(len(thisyear_detail.index)):
