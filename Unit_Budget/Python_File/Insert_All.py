@@ -2,14 +2,9 @@ import sqlite3
 import sys
 import pandas as pd
 import numbers
+import Configure
 from sqlite3 import Error
 
-TeachingCode = ["TeachingName"]
-Unit = ["CITS2021","SEN-2",2020]
-session = ["Lecture","Non-Mark"]
-nsc = ["Lecture",6,10,60]
-enrol = [1,200,'Yes','No']
-budget = [1,6,"Yes","No"]
 
 #create a database connection to a SQLite database
 def create_connection(db_file):
@@ -136,13 +131,7 @@ def insert_staff(conn, staff):
     else:
       return cur.lastrowid
 
-# retrieve information from excel file to dataframe 
-def get_details(file):
-  unit_detail = pd.read_excel(file,usecols ="A:L",header =8,nrows=5)
-  unit_strcture = pd.read_excel(file,usecols ="A:J",header =29,nrows=13)
-  resourcing = pd.read_excel(file,usecols ="A:L",header =46,nrows=9)
-  NSC = pd.read_excel(file,usecols ="A:F",header =62,nrows=4)
-  return unit_detail,unit_strcture,resourcing,NSC
+
 
 # check if a session is makring session or not 
 def check_session(SessionName):
@@ -192,8 +181,8 @@ def select_TeachingCode(conn,TeachingName):
 
 def main():
   pd.set_option("max_columns", 10)
-  excel_file ="CITS1001_Sem1,2021 budget v3.xlsx"
-  unit_detail,unit_strcture,resourcing,NSC = get_details(excel_file)
+  excel_file ="New Template v0.2.xlsx"
+  unit_detail,unit_strcture,resourcing,NSC = Configure.get_details(excel_file)
 
   thisyear_detail = unit_detail.iloc[:,3:7]
 
