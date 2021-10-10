@@ -15,7 +15,8 @@
         const yearValue = $("#_year").val().toString();
         const semesterValue = $("#_semester").val().toString();
         const unitValue = $("#_unit").val().toString();
-        const reports = await getAllData(yearValue, semesterValue, unitValue);
+        const unitLevelValue = $("#_level").val().toString();
+        const reports = await getAllData(yearValue, semesterValue, unitValue, unitLevelValue);
         for (var i=0; i< reports.length; i++) {
           reports[i].splice(1,1)
           reports[i].splice(10,1)
@@ -67,7 +68,16 @@
           </select>   
           <label for="unit">Unit</label>      
            <input type="text" name="unit" id="_unit" onkeypress="handleUnitCode(event)">
-        </div>
+           <label for="level">Unit level</label>
+           <select name="level" id="_level" onchange="updateReportList()">
+             <option value="">All</option>
+             <option value="1">1</option>
+             <option value="2">2</option>
+             <option value="3">3</option>
+             <option value="4">4</option>
+             <option value="5">5</option>
+           </select>  
+          </div>
         <hr>
         <table class='tables' id="table_comment">
           <br>
