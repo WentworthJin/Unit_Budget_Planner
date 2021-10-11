@@ -342,6 +342,26 @@ const handleClick = (e)=>{
   }
 }
 
+const unit= document.getElementById('unitcode');
+const year = document.getElementById('years')
+const semester = document.getElementById('semester')
+unit.onkeydown = function() {
+    var key = event.keyCode || event.charCode
+    if( key == 8 || key == 46 )
+      $("#table_comment tr>td").remove();
+};
+year.onkeydown = function() {
+  var key = event.keyCode || event.charCode
+  if( key == 8 || key == 46 )
+    $("#table_comment tr>td").remove();
+};
+semester.onkeydown = function() {
+  var key = event.keyCode || event.charCode
+  if( key == 8 || key == 46 )
+    $("#table_comment tr>td").remove();
+};
+
+
 
 getAllData()
 getWorkLoadData()
