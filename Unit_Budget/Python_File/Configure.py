@@ -2,8 +2,7 @@
 
 
 
-# the max number of teaching staff and Non Salary Cost item
-max_teacher=10
+# the max number of Non Salary Cost item
 max_NSC = 6
 
 
@@ -18,10 +17,11 @@ max_NSC = 6
 '''
 
 def get_details(file):
-  unit_detail = pd.read_excel(file,usecols ="A:L",header =8,nrows=5)
-  unit_strcture = pd.read_excel(file,usecols ="A:J",header =29,nrows=13)
-  resourcing = pd.read_excel(file,usecols ="A:L",header =46,nrows=9)
-  NSC = pd.read_excel(file,usecols ="A:F",header =62,nrows=4)
-  return unit_detail,unit_strcture,resourcing,NSC
+  unit_detail = pd.read_excel(file,usecols ="A:F",header =5,nrows=6)
+  teaching_team = pd.read_excel(file,usecols ="A:Z",header =15,nrows=4)
+  unit_strcture = pd.read_excel(file,usecols ="A:Z",header =24,nrows=16)
+  resourcing = pd.read_excel(file,usecols ="A:Z",header =43,nrows=6)
+  NSC = pd.read_excel(file,usecols ="A:Z",header =53,nrows=6)
+  return unit_detail,teaching_team,unit_strcture,resourcing,NSC
 
 

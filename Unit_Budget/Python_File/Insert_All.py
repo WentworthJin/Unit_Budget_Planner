@@ -24,56 +24,31 @@ def select_query(conn,query):
   return cur.fetchall()
 
 
-#Insert data into Unit table
-def insert_unit(conn, unit):
-    sql = ''' INSERT INTO Unit(UnitCode,Semester,Year)
-              VALUES(?,?,?) '''
+def insert_activities(conn, act):
+    sql = '''INSERT INTO Activities (UnitID, StaffID, SessionID, HourPerSession, MarkingHourPS, PayRate, Hour) 
+    VALUES(?, ?, ?, ?, ?, ?, ?);'''
     cur = conn.cursor()
-    data_check=cur.execute(sql, unit)
+    data_check=cur.execute(sql, act)
     # Check if data already exist
     if data_check is None:
-      cur.execute(sql, unit)
+      cur.execute(sql, act)
       conn.commit()
     else:
+      conn.commit()
       return cur.lastrowid
 
-#Insert data into TeachingCode table
-def insert_teachingcode(conn, TeachingCode):
-    sql = ''' Insert into TeachingCode(TeachingName)
-              VALUES(?) '''
+#Insert data into Budget table
+def insert_budget(conn, budget):
+    sql = ''' INSERT INTO Budget(UnitID, Cost, IsEstimated, IsLastSemester) 
+    VALUES(?,?,?,?); '''
     cur = conn.cursor()
-    data_check=cur.execute(sql, TeachingCode)
+    data_check=cur.execute(sql, budget)
     # Check if data already exist
     if data_check is None:
-      cur.execute(sql, TeachingCode)
+      cur.execute(sql, budget)
       conn.commit()
     else:
-      return cur.lastrowid
-
-#Insert data into Session table
-def insert_session(conn, session):
-    sql = ''' Insert into Session(SessionName,SessionType)
-              VALUES(?,?) '''
-    cur = conn.cursor()
-    data_check=cur.execute(sql, session)
-    # Check if data already exist
-    if data_check is None:
-      cur.execute(sql, session)
       conn.commit()
-    else:
-      return cur.lastrowid
-
-#Insert data into NonSalaryCosts table
-def insert_nsc(conn, nsc):
-    sql = ''' Insert into NonSalaryCosts(NSCName,Hours,CostPerHour,TotalCost)
-              VALUES(?,?,?,?) '''
-    cur = conn.cursor()
-    data_check=cur.execute(sql, nsc)
-    # Check if data already exist
-    if data_check is None:
-      cur.execute(sql, nsc)
-      conn.commit()
-    else:
       return cur.lastrowid
 
 #Insert data into Enrolment table
@@ -87,40 +62,53 @@ def insert_enrolment(conn, enrol):
       cur.execute(sql, enrol)
       conn.commit()
     else:
+      conn.commit()
       return cur.lastrowid
 
-#Insert data into Budget table
-def insert_budget(conn, budget):
-    sql = ''' Insert into Budget(UnitID,Cost,IsEstimated,IsLastSemester)
+#Insert data into NonSalaryCosts table
+def insert_nsc(conn, nsc):
+    sql = ''' Insert into NonSalaryCosts(NSCName,Hours,CostPerHour,TotalCost)
               VALUES(?,?,?,?) '''
     cur = conn.cursor()
-    data_check=cur.execute(sql, budget)
+    data_check=cur.execute(sql, nsc)
     # Check if data already exist
     if data_check is None:
-      cur.execute(sql, budget)
+      cur.execute(sql, nsc)
       conn.commit()
     else:
+      conn.commit()
       return cur.lastrowid
-
 
 #Insert data into OtherCost table
-def insert_otherCost(conn, otherCost):
-    sql = ''' Insert into OtherCost(NSCID,UnitID)
-              VALUES(?,?) '''
+def insert_oc(conn, oc):
+    sql = ''' INSERT INTO OtherCost(NSCID, UnitID) 
+    VALUES (?,?); '''
     cur = conn.cursor()
-    data_check=cur.execute(sql, otherCost)
+    data_check=cur.execute(sql, oc)
     # Check if data already exist
     if data_check is None:
-      cur.execute(sql, otherCost)
+      cur.execute(sql, oc)
       conn.commit()
     else:
+      conn.commit()
       return cur.lastrowid
 
-
+#Insert data into Session table
+def insert_session(conn, session):
+    sql = ''' Insert into Session(SessionName,SessionType)
+              VALUES(?,?) '''
+    cur = conn.cursor()
+    data_check=cur.execute(sql, session)
+    # Check if data already exist
+    if data_check is None:
+      cur.execute(sql, session)
+    else:
+      conn.commit()
+      return cur.lastrowid
 
 #Insert data into Staff table
 def insert_staff(conn, staff):
-    sql = ''' Insert into Staff(TeachingID,Name,Position)
+    sql = ''' Insert into Staff(TeachingCode,Name,Position)
               VALUES(?,?,?) '''
     cur = conn.cursor()
     data_check=cur.execute(sql, staff)
@@ -129,8 +117,34 @@ def insert_staff(conn, staff):
       cur.execute(sql, staff)
       conn.commit()
     else:
+      conn.commit()
       return cur.lastrowid
 
+#Insert data into TeachingCode table
+def insert_teachingcode(conn, TeachingCode):
+    sql = ''' Insert into TeachingCode(TeachingName)
+              VALUES(?) '''
+    cur = conn.cursor()
+    data_check=cur.execute(sql, TeachingCode)
+    # Check if data already exist
+    if data_check is None:
+      cur.execute(sql, TeachingCode)
+    else:
+      conn.commit()
+      return cur.lastrowid
+
+#Insert data into Unit table
+def insert_unit(conn, unit):
+    sql = ''' INSERT INTO Unit(UnitName,UnitCode,Semester,Year)
+              VALUES(?,?,?,?) '''
+    cur = conn.cursor()
+    data_check=cur.execute(sql, unit)
+    # Check if data already exist
+    if data_check is None:
+      cur.execute(sql, unit)
+    else:
+      conn.commit()
+      return cur.lastrowid
 
 
 # check if a session is makring session or not 
@@ -182,16 +196,20 @@ def select_TeachingCode(conn,TeachingName):
 def main():
   pd.set_option("max_columns", 10)
   excel_file ="New Template v0.2.xlsx"
-  unit_detail,unit_strcture,resourcing,NSC = Configure.get_details(excel_file)
-
-  thisyear_detail = unit_detail.iloc[:,3:7]
-
-  lastyear_detail = unit_detail.iloc[:,8:12]
+  unit_detail,teaching_team,unit_strcture,resourcing,NSC = Configure.get_details(excel_file)
 
 
+  UnitName = unit_detail.iloc[2,1]
   UnitCode =unit_detail.iloc[0,1]
   Semester=unit_detail.iloc[1,1]
   Year =unit_detail.iloc[4,1]
+
+  thisyear_detail = unit_detail.iloc[:,2:4]
+  lastyear_detail = unit_detail.iloc[:,4:6]
+
+
+  
+  
 
   teachingcodes = resourcing.iloc[0:7,3]
 
@@ -211,7 +229,7 @@ def main():
     with conn:
 
       #Insert Unit table
-      Unit = (UnitCode,Semester,Year)
+      Unit = (UnitName,UnitCode,Semester,Year)
       UnitID = insert_unit(conn,Unit)
 
       #Insert TeachingCode table
