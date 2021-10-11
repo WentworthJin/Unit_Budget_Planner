@@ -102,7 +102,6 @@ def get_all_data():
   names = [description[0] for description in cursor.description]
   cur.execute(query)
   rows = cur.fetchall()
-  print(rows)
   # clost the connection to database
   con.close()
   
@@ -211,14 +210,17 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
            
-@app.route("/comment/<unit>", methods=["GET"])
-def get_comment(unit):
+@app.route("/comment", methods=["GET"])
+def get_comment():
+  queryStrings = buildWhereClause(request.args.to_dict())
   con = sqlite3.connect(db_path)
   cur = con.cursor()
   sql = "Select U.UnitCode, A.Comment \
         from Activities A \
-        JOIN Unit U USING (UnitID) \
-        WHERE U.UnitCode='{0}' and A.Comment IS NOT NULL".format(unit)
+        JOIN Unit U USING (UnitID)"
+  if queryStrings:
+    sql = sql + ''' where ''' + queryStrings 
+  sql = sql + " and A.Comment IS NOT NULL"
   cur.execute(sql)
   result = cur.fetchall()
   con.close()

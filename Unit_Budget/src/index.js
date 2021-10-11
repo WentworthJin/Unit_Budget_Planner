@@ -148,8 +148,6 @@ const horizontalbarchart = function (data) {
     if (data[i][4]!==0) {dataArray.push({"y":data[i][4], "label":data[i][0]}) }
   };
 
-
-
   var horizontal = document.getElementById("horizontal")
   var bar_chart = new CanvasJS.Chart(horizontal, {
     title:{
@@ -276,16 +274,24 @@ function sampleInformation() {
   For example: "file1.xlsx" or "file1.xls"')
 }
 
+
+// handle the hidden and show of the comment function 
 $('#comment').on('click', function(event) {
   event.preventDefault()
   $('#table_comment').toggle();
   $('#unitcode').toggle();
   $('#unitcodelabel').toggle();
+  $('#years').toggle();
+  $('#yearlabels').toggle();
+  $('.clear').toggle();
+  $('#semester').toggle();
+  $('#semesterlabel').toggle();
 })
 
-
-function sendComment(unit) {
-  fetch('http://127.0.0.1:5000/comment/' + unit, {
+// get comment pass parameter into the url 
+const sendComment = async(year,semester, unitcode) => {
+  const queryParams = buildSearchParams(year, semester, unitcode);
+  const result = await fetch('http://127.0.0.1:5000/comment?' + queryParams , {
     method:"GET",
     headers:{
       headers: {
@@ -293,22 +299,21 @@ function sendComment(unit) {
       }
     }
   })
-  .then(resp => resp.json())
-  .then((data) =>
-    create_table(data)
-  )
-  .catch(error => 
-    console.log(error))
+  const data = await result.json()
+  create_table(data)
+  return data;
+
 }
 
-$('#unitcode').on("input", function() {
-  var input = this.value;
-  sendComment(input)
-  if (input.length === 0) {
-    $("#table_comment tr>td").remove(); 
-  }
-})  
+// function to clear input field and table 
+function clearFunction() {
+  $("#table_comment tr>td").remove();
+  document.getElementById('unitcode').value='';
+  document.getElementById('years').value='';
+  document.getElementById('semester').value='';
+}
 
+// function to create the table and insert the data into the table 
 function create_table(data) {
   const name = document.getElementById('table_comment')
   for(var i = 0; i < data.length; i++)
@@ -318,6 +323,22 @@ function create_table(data) {
       var cell = newRow.insertCell(j);
       cell.innerHTML = data[i][j]
     }
+  }
+}  
+
+// function to get the data when the user field the input variable and pass into the send comment function 
+const updateComment = async() => {
+  const yearValue = $("#years").val().toString();
+  const semesterValue = $("#semester").val().toString();
+  const unitValue = $("#unitcode").val().toString();
+
+  sendComment(yearValue,semesterValue,unitValue)
+}
+
+// handle click function 
+const handleClick = (e)=>{
+  if(e.keyCode === 13){
+    updateComment()
   }
 }
 
