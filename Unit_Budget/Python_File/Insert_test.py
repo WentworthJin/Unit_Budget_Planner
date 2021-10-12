@@ -4,8 +4,8 @@ import unittest
 import sqlite3
 
 db = 'Unit_Budget.db'
-conn = sqlite3.connect(db)
 Create_Table.Schema()
+conn = sqlite3.connect(db)
 
 class Test_Insert(unittest.TestCase):
     def test_Insert_Unit(self):

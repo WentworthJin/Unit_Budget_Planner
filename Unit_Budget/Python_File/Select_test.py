@@ -31,12 +31,11 @@ class TestSelect(unittest.TestCase):
         os.remove(db)
 
     def test_select_all_tasks(self):
-        Insert_All_Liangbo_Version.sample_insert()
-        sample_data = []   
+        Insert_All_Liangbo_Version.sample_insert()  
         conn = sqlite3.connect(db) 
         stub_stdout(self) 
         select_all_tasks(conn) 
-        self.assertEqual(str(sys.stdout.getvalue()), sample_data)  
+        self.assertEqual(str(sys.stdout.getvalue()), '1\n')  
 
     
     @classmethod
