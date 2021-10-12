@@ -86,6 +86,20 @@
           <thead>
             <th>Unit Code</th><th>Comment</th>
           </thead>
+        </div>
+        <hr>
+        <table class='tables' id="table_comment">
+          <br>
+          <label for="semester" id="semesterlabel">Semester</label>      
+          <input type="text" name="semester" id="semester" placeholder="Enter Semester" onkeypress="handleClick(event)">
+          <label for="year" id="yearlabels">Year</label>      
+          <input type="text" name="year" id="years" placeholder="Enter Year" onkeypress="handleClick(event)">
+          <label for="unit" id="unitcodelabel">Unit</label>      
+          <input type="text" name="unit" id="unitcode" placeholder="Unit Code" onkeypress="handleClick(event)">
+          <thead>
+            <th>Unit Code</th><th>Comment</th>
+          </thead>
+          <button class='clear' onclick="clearFunction()">Clear</button>
         </table>
         <br><hr>
           <table class="tables" name="_tables">

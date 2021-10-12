@@ -138,6 +138,14 @@ Button.filter {
   border-radius: 12px;
 }
 
+Button.clear {
+  float: right;
+  padding: 10px 20px;
+  font-size: 14pt;
+  border-radius: 12px;
+  display:none
+}
+
 .query {
   margin-left: auto;
   margin-right: auto;
@@ -262,4 +270,49 @@ Button.comment {
   margin-top: 5px;
   margin-bottom: 5px;
   align-items: center;
+  margin-left: 10px;
+  margin-right: 10px;
 }
+
+#years {
+  display:none;
+  font-size: 12pt;
+  padding: 6px;
+  margin-top: 10px;
+  margin-left: 5px;
+  margin-bottom: 5px;
+  align-items: center;
+  background-color: blanchedalmond;
+}
+
+#yearlabels {
+  display:none;
+  font-size: 17pt;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  align-items: center;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+#semesterlabel {
+  display:none;
+  font-size: 17pt;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  align-items: center;
+  margin-right: 10px;
+}
+
+
+#semester {
+  display:none;
+  font-size: 12pt;
+  padding: 6px;
+  margin-top: 10px;
+  margin-left: 5px;
+  margin-bottom: 5px;
+  align-items: center;
+  background-color: blanchedalmond;
+}
+

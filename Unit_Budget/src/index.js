@@ -154,8 +154,6 @@ const horizontalbarchart = function (data) {
     if (data[i][4]!==0) {dataArray.push({"y":data[i][4], "label":data[i][0]}) }
   };
 
-
-
   var horizontal = document.getElementById("horizontal")
   var bar_chart = new CanvasJS.Chart(horizontal, {
     title:{
@@ -327,6 +325,93 @@ function create_table(data) {
     }
   }
 }
+
+// handle the hidden and show of the comment function 
+$('#comment').on('click', function(event) {
+  event.preventDefault()
+  $('#table_comment').toggle();
+  $('#unitcode').toggle();
+  $('#unitcodelabel').toggle();
+  $('#years').toggle();
+  $('#yearlabels').toggle();
+  $('.clear').toggle();
+  $('#semester').toggle();
+  $('#semesterlabel').toggle();
+})
+
+// get comment pass parameter into the url 
+const sendComment = async(year,semester, unitcode) => {
+  const queryParams = buildSearchParams(year, semester, unitcode);
+  const result = await fetch('http://127.0.0.1:5000/comment?' + queryParams , {
+    method:"GET",
+    headers:{
+      headers: {
+        "Content-Type":"application/json"
+      }
+    }
+  })
+  const data = await result.json()
+  create_table(data)
+  return data;
+
+}
+
+// function to clear input field and table 
+function clearFunction() {
+  $("#table_comment tr>td").remove();
+  document.getElementById('unitcode').value='';
+  document.getElementById('years').value='';
+  document.getElementById('semester').value='';
+}
+
+// function to create the table and insert the data into the table 
+function create_table(data) {
+  const name = document.getElementById('table_comment')
+  for(var i = 0; i < data.length; i++)
+  {
+    var newRow = name.insertRow(name.length);
+    for(var j = 0; j < data[i].length; j++) {
+      var cell = newRow.insertCell(j);
+      cell.innerHTML = data[i][j]
+    }
+  }
+}  
+
+// function to get the data when the user field the input variable and pass into the send comment function 
+const updateComment = async() => {
+  const yearValue = $("#years").val().toString();
+  const semesterValue = $("#semester").val().toString();
+  const unitValue = $("#unitcode").val().toString();
+
+  sendComment(yearValue,semesterValue,unitValue)
+}
+
+// handle click function 
+const handleClick = (e)=>{
+  if(e.keyCode === 13){
+    updateComment()
+  }
+}
+
+const unit= document.getElementById('unitcode');
+const year = document.getElementById('years')
+const semester = document.getElementById('semester')
+unit.onkeydown = function() {
+    var key = event.keyCode || event.charCode
+    if( key == 8 || key == 46 )
+      $("#table_comment tr>td").remove();
+};
+year.onkeydown = function() {
+  var key = event.keyCode || event.charCode
+  if( key == 8 || key == 46 )
+    $("#table_comment tr>td").remove();
+};
+semester.onkeydown = function() {
+  var key = event.keyCode || event.charCode
+  if( key == 8 || key == 46 )
+    $("#table_comment tr>td").remove();
+};
+
 
 
 getAllData()
