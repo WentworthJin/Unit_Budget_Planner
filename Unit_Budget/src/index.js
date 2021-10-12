@@ -37,8 +37,9 @@ function showAndHide() {
  * @param year The year when a report is created.
  * @param semester The semester a report targets to.
  * @param unitcode The Unit code a report targets to.
+ * @param unitLevel Level of the unit.
  */
-const buildSearchParams = (year, semester, unitcode) => {
+const buildSearchParams = (year, semester, unitcode, unitLevel) => {
   const queryParams = new URLSearchParams();
   if(year) {
     queryParams.append("year", year);
@@ -49,6 +50,9 @@ const buildSearchParams = (year, semester, unitcode) => {
   if(unitcode) {
     queryParams.append("unitcode", unitcode);
   }
+  if(unitLevel) {
+    queryParams.append("unitLevel", unitLevel);
+  }
 
   return queryParams;
 }
@@ -57,12 +61,13 @@ const buildSearchParams = (year, semester, unitcode) => {
  * function fetch the data and return a response of an array of data 
  * pass into the window.onload for plot the bar graph
  * 
- * @param {*} year The year when the report is created.
- * @param {*} semester The semester which the report targets to.
- * @param {*} unitcode The Unit code which the report targets to.
+ * @param year The year when the report is created.
+ * @param semester The semester which the report targets to.
+ * @param unitcode The Unit code which the report targets to.
+ * @param unitLevel Level of the unit.
  */ 
-const getAllData = async(year, semester, unitcode) => {
-  const queryParams = buildSearchParams(year, semester, unitcode);
+const getAllData = async(year, semester, unitcode, unitLevel) => {
+  const queryParams = buildSearchParams(year, semester, unitcode, unitLevel);
   const result = await fetch('http://127.0.0.1:5000/get_all_data?' + queryParams, {
     method:"GET",
     headers:{
@@ -117,9 +122,10 @@ const getAllData = async(year, semester, unitcode) => {
  * @param year The year when the report is created.
  * @param semester The semester which the report targets to.
  * @param unitcode The Unit code which the report targets to.
+ * @param unitLevel Level of the unit.
  */ 
-const getEmployeeData = (year, semester, unitcode) => {
-  const queryParams = buildSearchParams(year, semester, unitcode);
+const getEmployeeData = (year, semester, unitcode, unitLevel) => {
+  const queryParams = buildSearchParams(year, semester, unitcode, unitLevel);
   fetch('http://127.0.0.1:5000/employee_budget?' + queryParams, {
     method:"GET",
     headers:{
@@ -178,9 +184,10 @@ const horizontalbarchart = function (data) {
  * @param year The year when the report is created.
  * @param semester The semester which the report targets to.
  * @param unitcode The Unit code which the report targets to.
- */ 
-const getWorkLoadData = function (year, semester, unitcode) {
-  const queryParams = buildSearchParams(year, semester, unitcode);
+ * @param unitLevel Level of the unit.
+*/ 
+const getWorkLoadData = function (year, semester, unitcode, unitLevel) {
+  const queryParams = buildSearchParams(year, semester, unitcode, unitLevel);
   fetch('http://127.0.0.1:5000/workload?' + queryParams, {
     method:"GET",
     headers:{
