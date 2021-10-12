@@ -214,7 +214,6 @@ def allowed_file(filename):
 @app.route("/comment", methods=["GET"])
 def get_comment():
   queryStrings = buildWhereClause(request.args.to_dict())
->>>>>>> testing
   con = sqlite3.connect(db_path)
   cur = con.cursor()
   sql = "Select U.UnitCode, A.Comment \
@@ -223,7 +222,6 @@ def get_comment():
   if queryStrings:
     sql = sql + ''' where ''' + queryStrings 
   sql = sql + " and A.Comment IS NOT NULL"
->>>>>>> testing
   cur.execute(sql)
   result = cur.fetchall()
   con.close()
