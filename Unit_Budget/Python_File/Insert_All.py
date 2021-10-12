@@ -25,134 +25,88 @@ def select_query(conn,query):
 
 
 def insert_activities(conn, act):
-    sql = '''INSERT INTO Activities (UnitID, StaffID, SessionID, HourPerSession, MarkingHourPS, PayRate, Hour) 
+    sql = '''INSERT OR IGNORE INTO Activities (UnitID, StaffID, SessionID, HourPerSession, MarkingHourPS, PayRate, Hour) 
     VALUES(?, ?, ?, ?, ?, ?, ?);'''
     cur = conn.cursor()
-    data_check=cur.execute(sql, act)
-    # Check if data already exist
-    if data_check is None:
-      cur.execute(sql, act)
-      conn.commit()
-    else:
-      conn.commit()
-      return cur.lastrowid
+    cur.execute(sql, act)
+    conn.commit()
+    #return cur.lastrowid
 
 #Insert data into Budget table
 def insert_budget(conn, budget):
-    sql = ''' INSERT INTO Budget(UnitID, Cost, IsEstimated, IsLastSemester) 
+    sql = ''' INSERT OR IGNORE INTO Budget(UnitID, Cost, IsEstimated, IsLastSemester) 
     VALUES(?,?,?,?); '''
     cur = conn.cursor()
-    data_check=cur.execute(sql, budget)
-    # Check if data already exist
-    if data_check is None:
-      cur.execute(sql, budget)
-      conn.commit()
-    else:
-      conn.commit()
-      return cur.lastrowid
+    cur.execute(sql, budget)
+    conn.commit()
+
 
 #Insert data into Enrolment table
 def insert_enrolment(conn, enrol):
-    sql = ''' Insert into Enrolment(UnitID,EnrolmentNumber,IsEstimated,IsLastSemester)
+    sql = ''' Insert OR IGNORE into Enrolment(UnitID,EnrolmentNumber,IsEstimated,IsLastSemester)
               VALUES(?,?,?,?) '''
     cur = conn.cursor()
-    data_check=cur.execute(sql, enrol)
-    # Check if data already exist
-    if data_check is None:
-      cur.execute(sql, enrol)
-      conn.commit()
-    else:
-      conn.commit()
-      return cur.lastrowid
+    cur.execute(sql, enrol)
+    conn.commit()
+
 
 #Insert data into NonSalaryCosts table
 def insert_nsc(conn, nsc):
-    sql = ''' Insert into NonSalaryCosts(NSCName,Hours,CostPerHour,TotalCost)
+    sql = ''' Insert OR IGNORE into NonSalaryCosts(NSCName,Hours,CostPerHour,TotalCost)
               VALUES(?,?,?,?) '''
     cur = conn.cursor()
-    data_check=cur.execute(sql, nsc)
-    # Check if data already exist
-    if data_check is None:
-      cur.execute(sql, nsc)
-      conn.commit()
-    else:
-      conn.commit()
-      return cur.lastrowid
+    cur.execute(sql, nsc)
+    conn.commit()
+
 
 #Insert data into OtherCost table
 def insert_oc(conn, oc):
-    sql = ''' INSERT INTO OtherCost(NSCID, UnitID) 
+    sql = ''' INSERT OR IGNORE INTO OtherCost(NSCID, UnitID) 
     VALUES (?,?); '''
     cur = conn.cursor()
-    data_check=cur.execute(sql, oc)
-    # Check if data already exist
-    if data_check is None:
-      cur.execute(sql, oc)
-      conn.commit()
-    else:
-      conn.commit()
-      return cur.lastrowid
+    cur.execute(sql, oc)
+    conn.commit()
+
 
 #Insert data into Session table
 def insert_session(conn, session):
-    sql = ''' Insert into Session(SessionName,SessionType)
+    sql = ''' Insert OR IGNORE into Session(SessionName,SessionType)
               VALUES(?,?) '''
     cur = conn.cursor()
-    data_check=cur.execute(sql, session)
-    # Check if data already exist
-    if data_check is None:
-      cur.execute(sql, session)
-    else:
-      conn.commit()
-      return cur.lastrowid
+    cur.execute(sql, session)
+    conn.commit()
 
 #Insert data into Staff table
 def insert_staff(conn, staff):
-    sql = ''' Insert into Staff(TeachingCode,Name,Position)
+    sql = ''' Insert OR IGNORE into Staff(TeachingCode,Name,Position)
               VALUES(?,?,?) '''
     cur = conn.cursor()
-    data_check=cur.execute(sql, staff)
-    # Check if data already exist
-    if data_check is None:
-      cur.execute(sql, staff)
-      conn.commit()
-    else:
-      conn.commit()
-      return cur.lastrowid
+    cur.execute(sql, staff)
+    conn.commit()
 
 #Insert data into TeachingCode table
 def insert_teachingcode(conn, TeachingCode):
-    sql = ''' Insert into TeachingCode(TeachingName)
+    sql = ''' Insert OR IGNORE into TeachingCode(TeachingName)
               VALUES(?) '''
     cur = conn.cursor()
-    data_check=cur.execute(sql, TeachingCode)
-    # Check if data already exist
-    if data_check is None:
-      cur.execute(sql, TeachingCode)
-    else:
-      conn.commit()
-      return cur.lastrowid
+    cur.execute(sql, TeachingCode)
+    conn.commit()
 
 #Insert data into Unit table
 def insert_unit(conn, unit):
-    sql = ''' INSERT INTO Unit(UnitName,UnitCode,Semester,Year)
+    sql = ''' INSERT OR IGNORE INTO Unit(UnitName,UnitCode,Semester,Year)
               VALUES(?,?,?,?) '''
     cur = conn.cursor()
-    data_check=cur.execute(sql, unit)
-    # Check if data already exist
-    if data_check is None:
-      cur.execute(sql, unit)
-    else:
-      conn.commit()
-      return cur.lastrowid
+    cur.execute(sql, unit)
+    conn.commit()
 
 
-# check if a session is makring session or not 
-def check_session(SessionName):
-  if 'mark' in SessionName.lower():
-    return 'M'
-  else:
-    return 'NM'
+# # check if a session is makring session or delivery section
+# def check_session(SessionName):
+#   if 'mark' in SessionName.lower():
+#     return 'Marking'
+#   else:
+#     return 'Delivery'
 
 # check if this value is numberic
 def check_numbers(number):
@@ -196,24 +150,29 @@ def select_TeachingCode(conn,TeachingName):
 def main():
   pd.set_option("max_columns", 10)
   excel_file ="New Template v0.2.xlsx"
-  unit_detail,teaching_team,unit_strcture,resourcing,NSC = Configure.get_details(excel_file)
+  unit_detail,teaching_team,delivery,marking,NSC = Configure.get_details(excel_file)
 
 
   UnitName = unit_detail.iloc[2,1]
   UnitCode =unit_detail.iloc[0,1]
   Semester=unit_detail.iloc[1,1]
   Year =unit_detail.iloc[4,1]
+  max_staff = unit_detail.iloc[5,1]
+
+  teachingcodes = teaching_team.iloc[2,1:max_staff+1]
+
+  payrates = teaching_team.iloc[3,1:max_staff+1]
+
+  delivery_session =delivery.iloc[:14,0]
+
+  marking_session = marking.iloc[1:4,0]
 
   thisyear_detail = unit_detail.iloc[:,2:4]
   lastyear_detail = unit_detail.iloc[:,4:6]
-
-
-  
   
 
-  teachingcodes = resourcing.iloc[0:7,3]
+  
 
-  sessionNames =unit_strcture.iloc[0:12,0]
 
   NSCNames = NSC.iloc[:3,0]
   NSCHours = NSC.iloc[:3,3]
@@ -238,60 +197,23 @@ def main():
         insert_teachingcode(conn,TeachingCode)
 
 
-      #Insert Staff table
-
-
-
       #Insert Session table
-      for SessionName in sessionNames:
-        SessionType = check_session(SessionName)
+      for SessionName in delivery_session:
+        SessionType = 'Delivery'
         session = (SessionName,SessionType)
+        print(session)
         insert_session(conn,session)
 
+      for SessionName in marking_session:
+        SessionType = 'Marking'
+        session = (SessionName,SessionType)
+        insert_session(conn,session)
+        
+        
 
-      #Insert NonSalaryCost table & OtherCost Table
-      for i in range(len(NSCCost)):
-        NSCName = NSCNames[i]
-        Hours = NSCHours[i]
-        CostPerHour = NSCRates[i]
-        TotalCost = int(NSCCost[i])
-        nsc = (NSCName,Hours,CostPerHour,TotalCost)
-        NSCID = insert_nsc(conn,nsc)
+      
 
-        otherCost = (NSCID,UnitID)
-        insert_otherCost(conn,otherCost)
 
-      #Insert Enrolment table & Budget Table
-      for i in range(len(thisyear_detail.index)):
-        if 'estimated enrolment' in thisyear_detail.iloc[:,0][i].lower():
-          if check_numbers(thisyear_detail.iloc[:,3][i]):
-            enrol = (UnitID,thisyear_detail.iloc[:,3][i],'Yes','No')
-            insert_enrolment(conn,enrol)
-        if 'budget' in thisyear_detail.iloc[:,0][i].lower():
-          if check_numbers(thisyear_detail.iloc[:,3][i]):
-            budget = (UnitID,thisyear_detail.iloc[:,3][i],'Yes','No')
-            insert_budget(conn,budget)
-
-      for i in range(len(lastyear_detail.index)):
-        if 'estimated enrolment' in lastyear_detail.iloc[:,0][i].lower():
-          if check_numbers(lastyear_detail.iloc[:,3][i]):
-            enrol = (UnitID,lastyear_detail.iloc[:,3][i],'Yes','Yes')
-            insert_enrolment(conn,enrol)
-
-        if 'actual enrolment' in lastyear_detail.iloc[:,0][i].lower():
-          if check_numbers(lastyear_detail.iloc[:,3][i]):
-            enrol = (UnitID,lastyear_detail.iloc[:,3][i],'No','Yes')
-            insert_enrolment(conn,enrol)
-
-        if 'budget' in lastyear_detail.iloc[:,0][i].lower():
-          if check_numbers(lastyear_detail.iloc[:,3][i]):
-            budget = (UnitID,lastyear_detail.iloc[:,3][i],'Yes','Yes')
-            insert_enrolment(conn,enrol)
-
-        if 'actual expense' in lastyear_detail.iloc[:,0][i].lower():
-          if check_numbers(lastyear_detail.iloc[:,3][i]):
-            budget = (UnitID,lastyear_detail.iloc[:,3][i],'No','Yes')
-            insert_enrolment(conn,enrol)
 
 
     print("Dummy Unit data has been inserted")

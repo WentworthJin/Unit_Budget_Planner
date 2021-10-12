@@ -1,3 +1,4 @@
+import pandas as pd
 # This is the file for keep all the constant variables.
 
 
@@ -19,9 +20,9 @@ max_NSC = 6
 def get_details(file):
   unit_detail = pd.read_excel(file,usecols ="A:F",header =5,nrows=6)
   teaching_team = pd.read_excel(file,usecols ="A:Z",header =15,nrows=4)
-  unit_strcture = pd.read_excel(file,usecols ="A:Z",header =24,nrows=16)
-  resourcing = pd.read_excel(file,usecols ="A:Z",header =43,nrows=6)
+  delivery = pd.read_excel(file,usecols ="A:Z",header =24,nrows=16)
+  marking = pd.read_excel(file,usecols ="A:Z",header =43,nrows=6)
   NSC = pd.read_excel(file,usecols ="A:Z",header =53,nrows=6)
-  return unit_detail,teaching_team,unit_strcture,resourcing,NSC
+  return unit_detail,teaching_team,delivery,marking,NSC
 
 
