@@ -247,13 +247,13 @@ Button.comment {
   color: white;
 }
 
-#table_comment {
+#table_comments {
   display:none;
   margin-top: 5px;
   margin-bottom: 0px;
 }
 
-#unitcode {
+#unitcodes {
   display:none;
   font-size: 12pt;
   padding: 6px;
@@ -264,7 +264,7 @@ Button.comment {
   background-color: blanchedalmond;
 }
 
-#unitcodelabel {
+#unitcodelabels {
   display:none;
   font-size: 17pt;
   margin-top: 5px;
@@ -315,7 +315,4 @@ Button.comment {
   align-items: center;
   background-color: blanchedalmond;
 }
-
-
-
 

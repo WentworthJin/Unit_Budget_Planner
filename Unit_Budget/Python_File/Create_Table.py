@@ -50,13 +50,13 @@ def Schema():
 
     # This is the Database schema command lines
 
-    sql_create_unit_table = """ CREATE TABLE IF NOT EXISTS Unit (
-                                        UnitID INTEGER PRIMARY KEY AUTOINCREMENT,
+    sql_create_unit_table = """ CREATE TABLE Unit (
+                                        UnitID   INTEGER       PRIMARY KEY AUTOINCREMENT,
                                         UnitName VARCHAR (100),
                                         UnitCode VARCHAR (10),
                                         Semester VARCHAR (10),
-                                        Year INT (4),
-                                        Comment VARCHAR (300)
+                                        Year     INT (4),
+                                        Comment  VARCHAR (300) DEFAULT NoRecord
                                 );"""
 
     sql_create_teachingcode_table = """ CREATE TABLE IF NOT EXISTS TeachingCode (
@@ -87,11 +87,13 @@ def Schema():
                                                 UNIQUE (NSCName, CostPerHour) ON CONFLICT FAIL
                                         );"""
 
-    sql_create_othercost_table = """ CREATE TABLE IF NOT EXISTS OtherCost (
-                                            OCID INTEGER PRIMARY KEY AUTOINCREMENT,
-                                            NSCID INT REFERENCES NonSalaryCosts (NSCID) ON DELETE RESTRICT ON UPDATE CASCADE,
-                                            UnitID INT REFERENCES Unit (UnitID) ON DELETE RESTRICT ON UPDATE CASCADE,
-                                            Comment VARCHAR (300)
+    sql_create_othercost_table = """ CREATE TABLE OtherCost (
+                                            OCID    INTEGER       PRIMARY KEY AUTOINCREMENT,
+                                            NSCID   INT           REFERENCES NonSalaryCosts (NSCID) ON DELETE RESTRICT
+                                                                                                    ON UPDATE CASCADE,
+                                            UnitID  INT           REFERENCES Unit (UnitID) ON DELETE RESTRICT
+                                                                                        ON UPDATE CASCADE,
+                                            Comment VARCHAR (300) DEFAULT NoRecord
                                     );"""
 
     sql_create_enrollment_table = """ CREATE TABLE IF NOT EXISTS Enrolment (
@@ -110,16 +112,19 @@ def Schema():
                                         IsLastSemester VARCHAR (3) 
                                 );"""
 
-    sql_create_activities_table = """ CREATE TABLE IF NOT EXISTS Activities (
-                                        ActivitiesID INTEGER PRIMARY KEY AUTOINCREMENT,
-                                        UnitID INT REFERENCES Unit (UnitID) ON DELETE RESTRICT ON UPDATE CASCADE,
-                                        StaffID INT REFERENCES Staff (StaffID) ON DELETE RESTRICT ON UPDATE CASCADE,
-                                        SessionID INT REFERENCES Session (SessionID) ON DELETE RESTRICT ON UPDATE CASCADE,
-                                        HourPerSession INT,
-                                        MarkingHourPS REAL,
-                                        PayRate REAL,
-                                        Hour REAL,
-                                        Comment VARCHAR (300) 
+    sql_create_activities_table = """ CREATE TABLE Activities (
+                                            ActivitiesID   INTEGER       PRIMARY KEY AUTOINCREMENT,
+                                            UnitID         INT           REFERENCES Unit (UnitID) ON DELETE RESTRICT
+                                                                                                ON UPDATE CASCADE,
+                                            StaffID        INT           REFERENCES Staff (StaffID) ON DELETE RESTRICT
+                                                                                                    ON UPDATE CASCADE,
+                                            SessionID      INT           REFERENCES Session (SessionID) ON DELETE RESTRICT
+                                                                                                        ON UPDATE CASCADE,
+                                            HourPerSession INT,
+                                            MarkingHourPS  REAL,
+                                            PayRate        REAL,
+                                            Hour           REAL,
+                                            Comment        VARCHAR (300) DEFAULT NoRecord
                                     );"""
 
     # create a database connection

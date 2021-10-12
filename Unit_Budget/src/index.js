@@ -37,8 +37,9 @@ function showAndHide() {
  * @param year The year when a report is created.
  * @param semester The semester a report targets to.
  * @param unitcode The Unit code a report targets to.
+ * @param unitLevel Level of the unit.
  */
-const buildSearchParams = (year, semester, unitcode) => {
+const buildSearchParams = (year, semester, unitcode, unitLevel) => {
   const queryParams = new URLSearchParams();
   if(year) {
     queryParams.append("year", year);
@@ -49,20 +50,39 @@ const buildSearchParams = (year, semester, unitcode) => {
   if(unitcode) {
     queryParams.append("unitcode", unitcode);
   }
+  if(unitLevel) {
+    queryParams.append("unitLevel", unitLevel);
+  }
 
   return queryParams;
 }
 
+
+const buildCommentParams = (year, semester, unitcode) => {
+  const requestParams = new URLSearchParams();
+  if(year) {
+    requestParams.append("year", year);
+  }
+  if(semester) {
+    requestParams.append("semester", semester);
+  }
+  if(unitcode) {
+    requestParams.append("unitcode", unitcode);
+  }
+
+  return requestParams;
+}
 /**
  * function fetch the data and return a response of an array of data 
  * pass into the window.onload for plot the bar graph
  * 
- * @param {*} year The year when the report is created.
- * @param {*} semester The semester which the report targets to.
- * @param {*} unitcode The Unit code which the report targets to.
+ * @param year The year when the report is created.
+ * @param semester The semester which the report targets to.
+ * @param unitcode The Unit code which the report targets to.
+ * @param unitLevel Level of the unit.
  */ 
-const getAllData = async(year, semester, unitcode) => {
-  const queryParams = buildSearchParams(year, semester, unitcode);
+const getAllData = async(year, semester, unitcode, unitLevel) => {
+  const queryParams = buildSearchParams(year, semester, unitcode, unitLevel);
   const result = await fetch('http://127.0.0.1:5000/get_all_data?' + queryParams, {
     method:"GET",
     headers:{
@@ -117,9 +137,10 @@ const getAllData = async(year, semester, unitcode) => {
  * @param year The year when the report is created.
  * @param semester The semester which the report targets to.
  * @param unitcode The Unit code which the report targets to.
+ * @param unitLevel Level of the unit.
  */ 
-const getEmployeeData = (year, semester, unitcode) => {
-  const queryParams = buildSearchParams(year, semester, unitcode);
+const getEmployeeData = (year, semester, unitcode, unitLevel) => {
+  const queryParams = buildSearchParams(year, semester, unitcode, unitLevel);
   fetch('http://127.0.0.1:5000/employee_budget?' + queryParams, {
     method:"GET",
     headers:{
@@ -176,9 +197,10 @@ const horizontalbarchart = function (data) {
  * @param year The year when the report is created.
  * @param semester The semester which the report targets to.
  * @param unitcode The Unit code which the report targets to.
- */ 
-const getWorkLoadData = function (year, semester, unitcode) {
-  const queryParams = buildSearchParams(year, semester, unitcode);
+ * @param unitLevel Level of the unit.
+*/ 
+const getWorkLoadData = function (year, semester, unitcode, unitLevel) {
+  const queryParams = buildSearchParams(year, semester, unitcode, unitLevel);
   fetch('http://127.0.0.1:5000/workload?' + queryParams, {
     method:"GET",
     headers:{
@@ -274,24 +296,16 @@ function sampleInformation() {
   For example: "file1.xlsx" or "file1.xls"')
 }
 
-
-// handle the hidden and show of the comment function 
 $('#comment').on('click', function(event) {
   event.preventDefault()
   $('#table_comment').toggle();
   $('#unitcode').toggle();
   $('#unitcodelabel').toggle();
-  $('#years').toggle();
-  $('#yearlabels').toggle();
-  $('.clear').toggle();
-  $('#semester').toggle();
-  $('#semesterlabel').toggle();
 })
 
-// get comment pass parameter into the url 
-const sendComment = async(year,semester, unitcode) => {
-  const queryParams = buildSearchParams(year, semester, unitcode);
-  const result = await fetch('http://127.0.0.1:5000/comment?' + queryParams , {
+
+function sendComment(unit) {
+  fetch('http://127.0.0.1:5000/comment/' + unit, {
     method:"GET",
     headers:{
       headers: {
@@ -299,21 +313,15 @@ const sendComment = async(year,semester, unitcode) => {
       }
     }
   })
-  const data = await result.json()
-  create_table(data)
-  return data;
-
+  .then(resp => resp.json())
+  .then((data) =>
+    create_table(data)
+  )
+  .catch(error => 
+    console.log(error))
 }
 
-// function to clear input field and table 
-function clearFunction() {
-  $("#table_comment tr>td").remove();
-  document.getElementById('unitcode').value='';
-  document.getElementById('years').value='';
-  document.getElementById('semester').value='';
-}
 
-// function to create the table and insert the data into the table 
 function create_table(data) {
   const name = document.getElementById('table_comment')
   for(var i = 0; i < data.length; i++)
@@ -324,13 +332,65 @@ function create_table(data) {
       cell.innerHTML = data[i][j]
     }
   }
+}
+
+// handle the hidden and show of the comment function 
+$('#comment').on('click', function(event) {
+  event.preventDefault()
+  $('#table_comments').toggle();
+  $('#unitcodes').toggle();
+  $('#unitcodelabels').toggle();
+  $('#years').toggle();
+  $('#yearlabels').toggle();
+  $('.clear').toggle();
+  $('#semester').toggle();
+  $('#semesterlabel').toggle();
+})
+
+// function to create the table and insert the data into the table 
+function create_table(data) {
+  const name = document.getElementById('table_comments')
+  for(var i = 0; i < data.length; i++)
+  {
+    var newRow = name.insertRow(name.length);
+    for(var j = 0; j < data[i].length; j++) {
+      var cell = newRow.insertCell(j);
+      cell.innerHTML = data[i][j]
+    }
+  }
 }  
+
+// get comment pass parameter into the url 
+var sendComment = async(year,semester, unitcode) => {
+  const requestParams = buildCommentParams(year, semester, unitcode);
+  const result = await fetch('http://127.0.0.1:5000/comment?' + requestParams , {
+    method:"GET",
+    headers:{
+      headers: {
+        "Content-Type":"application/json"
+      }
+    }
+  })
+  const data = await result.json()
+  create_table(data)
+  return data;
+}
+
+
+// function to clear input field and table 
+function clearFunction() {
+  $("#table_comments tr>td").remove();
+  document.getElementById('unitcodes').value='';
+  document.getElementById('years').value='';
+  document.getElementById('semester').value='';
+}
+
 
 // function to get the data when the user field the input variable and pass into the send comment function 
 const updateComment = async() => {
   const yearValue = $("#years").val().toString();
   const semesterValue = $("#semester").val().toString();
-  const unitValue = $("#unitcode").val().toString();
+  const unitValue = $("#unitcodes").val().toString();
 
   sendComment(yearValue,semesterValue,unitValue)
 }
@@ -342,23 +402,23 @@ const handleClick = (e)=>{
   }
 }
 
-const unit= document.getElementById('unitcode');
+const unit= document.getElementById('unitcodes');
 const year = document.getElementById('years')
 const semester = document.getElementById('semester')
 unit.onkeydown = function() {
     var key = event.keyCode || event.charCode
     if( key == 8 || key == 46 )
-      $("#table_comment tr>td").remove();
+      $("#table_comments tr>td").remove();
 };
 year.onkeydown = function() {
   var key = event.keyCode || event.charCode
   if( key == 8 || key == 46 )
-    $("#table_comment tr>td").remove();
+    $("#table_comments tr>td").remove();
 };
 semester.onkeydown = function() {
   var key = event.keyCode || event.charCode
   if( key == 8 || key == 46 )
-    $("#table_comment tr>td").remove();
+    $("#table_comments tr>td").remove();
 };
 
 

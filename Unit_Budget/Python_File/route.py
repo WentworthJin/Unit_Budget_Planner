@@ -36,12 +36,26 @@ def buildWhereClause(data):
   s1 = 'U.UnitCode ="{}" '.format(data['unitcode']) if 'unitcode' in params else ''
   s2 = 'U.Year = ' + data['year'] if 'year' in params else ''
   s3 = 'U.Semester = ' + data['semester'] if 'semester' in params else ''
+  s4 = 'substr(U.UnitCode, 5, 1) ="{}" '.format(data['unitLevel']) if 'unitLevel' in params else '' 
   s = list()
-  for x in [s1, s2, s3]:
+  for x in [s1, s2, s3, s4]:
       if x:
           s.append(x)
   queryStrings = ' and '.join(s) 
   return queryStrings
+
+def buildJoinClause(data): 
+  data = request.args.to_dict()
+  params = data.keys()
+  s1 = 'U.UnitCode ="{}" '.format(data['unitcode']) if 'unitcode' in params else ''
+  s2 = 'U.Year = ' + data['year'] if 'year' in params else ''
+  s3 = 'U.Semester = ' + data['semester'] if 'semester' in params else ''
+  s = list()
+  for x in [s1, s2, s3]:
+      if x:
+          s.append(x)
+  requestStrings = ' and '.join(s) 
+  return requestStrings
 
 
 
@@ -212,14 +226,14 @@ def allowed_file(filename):
            
 @app.route("/comment", methods=["GET"])
 def get_comment():
-  queryStrings = buildWhereClause(request.args.to_dict())
+  requestStrings = buildJoinClause(request.args.to_dict())
   con = sqlite3.connect(db_path)
   cur = con.cursor()
   sql = "Select U.UnitCode, A.Comment \
         from Activities A \
         JOIN Unit U USING (UnitID)"
-  if queryStrings:
-    sql = sql + ''' where ''' + queryStrings 
+  if requestStrings:
+    sql = sql + ''' where ''' + requestStrings 
   sql = sql + " and A.Comment IS NOT NULL"
   cur.execute(sql)
   result = cur.fetchall()

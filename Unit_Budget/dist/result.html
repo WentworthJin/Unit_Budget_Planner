@@ -15,7 +15,8 @@
         const yearValue = $("#_year").val().toString();
         const semesterValue = $("#_semester").val().toString();
         const unitValue = $("#_unit").val().toString();
-        const reports = await getAllData(yearValue, semesterValue, unitValue);
+        const unitLevelValue = $("#_level").val().toString();
+        const reports = await getAllData(yearValue, semesterValue, unitValue, unitLevelValue);
         for (var i=0; i< reports.length; i++) {
           reports[i].splice(1,1)
           reports[i].splice(10,1)
@@ -23,8 +24,8 @@
         const rows = reports.map(r => `<tr>${buildRow(r)}</tr>`)
         rows.map(r => list.append(r));
 
-        getEmployeeData(yearValue, semesterValue, unitValue);
-        getWorkLoadData(yearValue, semesterValue, unitValue);
+        getEmployeeData(yearValue, semesterValue, unitValue, unitLevelValue);
+        getWorkLoadData(yearValue, semesterValue, unitValue, unitLevelValue);
       }
 
       // Handler for the Unit code input. Fire 'updateReportList' when 
@@ -67,20 +68,28 @@
           </select>   
           <label for="unit">Unit</label>      
            <input type="text" name="unit" id="_unit" onkeypress="handleUnitCode(event)">
-        </div>
+           <label for="level">Unit level</label>
+           <select name="level" id="_level" onchange="updateReportList()">
+             <option value="">All</option>
+             <option value="1">1</option>
+             <option value="2">2</option>
+             <option value="3">3</option>
+             <option value="4">4</option>
+             <option value="5">5</option>
+           </select>  
+          </div>
         <hr>
-        <table class='tables' id="table_comment">
-          <br>
-          <label for="semester" id="semesterlabel">Semester</label>      
+        <label for="semester" id="semesterlabel">Semester</label>      
           <input type="text" name="semester" id="semester" placeholder="Enter Semester" onkeypress="handleClick(event)">
           <label for="year" id="yearlabels">Year</label>      
           <input type="text" name="year" id="years" placeholder="Enter Year" onkeypress="handleClick(event)">
-          <label for="unit" id="unitcodelabel">Unit</label>      
-          <input type="text" name="unit" id="unitcode" placeholder="Unit Code" onkeypress="handleClick(event)">
+          <label for="units" id="unitcodelabels">Unit</label>      
+          <input type="text" name="units" id="unitcodes" placeholder="Unit Code" onkeypress="handleClick(event)">
+          <button class='clear' onclick="clearFunction()">Clear</button>
+        <table class='tables' id="table_comments">
           <thead>
             <th>Unit Code</th><th>Comment</th>
           </thead>
-          <button class='clear' onclick="clearFunction()">Clear</button>
         </table>
         <br><hr>
           <table class="tables" name="_tables">

@@ -8,4 +8,4 @@ venv
 BudgetSample (1).db
 BudgetSample.db
 Unit_Budget.db
-__pycache__/
+**/__pycache__
