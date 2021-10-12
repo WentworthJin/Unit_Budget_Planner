@@ -78,13 +78,18 @@ def Schema():
                                         SessionType VARCHAR (10) 
                                 );"""
 
-    sql_create_nonsalarycost_table = """ CREATE TABLE IF NOT EXISTS NonSalaryCosts (
-                                                NSCID INTEGER PRIMARY KEY AUTOINCREMENT,
-                                                NSCName VARCHAR (50),
-                                                Hours REAL,
+    sql_create_nonsalarycost_table = """ CREATE TABLE NonSalaryCosts (
+                                                NSCID       INTEGER      PRIMARY KEY AUTOINCREMENT,
+                                                NSCName     VARCHAR (50),
+                                                Hours       REAL,
                                                 CostPerHour REAL,
-                                                TotalCost REAL,
-                                                UNIQUE (NSCName, CostPerHour) ON CONFLICT FAIL
+                                                TotalCost   REAL         DEFAULT (0),
+                                                UNIQUE (
+                                                    NSCName,
+                                                    Hours,
+                                                    CostPerHour
+                                                )
+                                                ON CONFLICT FAIL
                                         );"""
 
     sql_create_othercost_table = """ CREATE TABLE OtherCost (
