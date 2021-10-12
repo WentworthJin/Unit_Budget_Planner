@@ -7,7 +7,7 @@ app = Flask(__name__,template_folder='../dist',static_folder='../src')
 # get the absolute path for the current directory
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 # get the whole path to database
-db_path = os.path.join(BASE_DIR, "BudgetSample (1).db")
+db_path = os.path.join(BASE_DIR, "BudgetSample (2).db")
 
 @app.route("/", methods=["GET"])
 def render():
@@ -116,7 +116,7 @@ def get_employee_budget():
   return jsonify(result)
  
 
-@app.route("/upload",methods=["GET"])
+@app.route("/upload",methods=["GET","POST"])
 def get_upload():
   query = 'Select U.UnitCode, SUM(A.Hour) AS TotalLoad, U.Semester,U.Year, \
           (Select COUNT(DISTINCT P.Name) \
