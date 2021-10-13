@@ -56,7 +56,8 @@ def Schema():
                                         UnitCode VARCHAR (10),
                                         Semester VARCHAR (10),
                                         Year     INT (4),
-                                        Comment  VARCHAR (300) DEFAULT NoRecord
+                                        Comment  VARCHAR (300) DEFAULT NoRecord,
+                                        UNIQUE (UniName,UnitCode,Semester,Year)ON CONFLICT FAIL
                                 );"""
 
     sql_create_teachingcode_table = """ CREATE TABLE IF NOT EXISTS TeachingCode (
@@ -98,7 +99,8 @@ def Schema():
                                                                                                     ON UPDATE CASCADE,
                                             UnitID  INT           REFERENCES Unit (UnitID) ON DELETE RESTRICT
                                                                                         ON UPDATE CASCADE,
-                                            Comment VARCHAR (300) DEFAULT NoRecord
+                                            Comment VARCHAR (300) DEFAULT NoRecord,
+                                            UNIQUE (NSCID,UnitID)ON CONFLICT FAIL
                                     );"""
 
     sql_create_enrollment_table = """ CREATE TABLE IF NOT EXISTS Enrolment (
@@ -106,7 +108,8 @@ def Schema():
                                             UnitID INT REFERENCES Unit (UnitID) ON DELETE RESTRICT ON UPDATE CASCADE,
                                             EnrolmentNumber INT,
                                             IsEstimated VARCHAR (3),
-                                            IsLastSemester VARCHAR (3) 
+                                            IsLastSemester VARCHAR (3) ,
+                                            UNIQUE (UnitID, IsEstimated,IsLastSemester)ON CONFLICT FAIL
                                     );"""
 
     sql_create_budget_table = """ CREATE TABLE IF NOT EXISTS Budget (
@@ -114,7 +117,8 @@ def Schema():
                                         UnitID INT REFERENCES Unit (UnitID) ON DELETE RESTRICT ON UPDATE CASCADE,
                                         Cost INT,
                                         IsEstimated VARCHAR (3),
-                                        IsLastSemester VARCHAR (3) 
+                                        IsLastSemester VARCHAR (3),
+                                        UNIQUE (UnitID, IsEstimated,IsLastSemester)ON CONFLICT FAIL
                                 );"""
 
     sql_create_activities_table = """ CREATE TABLE Activities (
@@ -129,7 +133,8 @@ def Schema():
                                             MarkingHourPS  REAL,
                                             PayRate        REAL,
                                             Hour           REAL,
-                                            Comment        VARCHAR (300) DEFAULT NoRecord
+                                            Comment        VARCHAR (300) DEFAULT NoRecord,
+                                            UNIQUE (UnitID, StaffID,SessionID)ON CONFLICT FAIL
                                     );"""
 
     # create a database connection
