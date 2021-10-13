@@ -57,7 +57,7 @@ def Schema():
                                         Semester VARCHAR (10),
                                         Year     INT (4),
                                         Comment  VARCHAR (300) DEFAULT NoRecord,
-                                        UNIQUE (UniName,UnitCode,Semester,Year)ON CONFLICT FAIL
+                                        UNIQUE (UnitName,UnitCode,Semester,Year)ON CONFLICT FAIL
                                 );"""
 
     sql_create_teachingcode_table = """ CREATE TABLE IF NOT EXISTS TeachingCode (
