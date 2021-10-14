@@ -5,7 +5,7 @@
 
 <br><hr><br>
 
-## 1. Create Table Function
+## 1. Create Table 
 
 ### I. Functionality
 - The [<b>Create_Table.py<b>](./Python_File/Create_Table.py) aims to create a database named: Unit_Budget.db at the current directory.
