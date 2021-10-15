@@ -36,26 +36,12 @@ def buildWhereClause(data):
   s1 = 'U.UnitCode ="{}" '.format(data['unitcode']) if 'unitcode' in params else ''
   s2 = 'U.Year = ' + data['year'] if 'year' in params else ''
   s3 = 'U.Semester = ' + data['semester'] if 'semester' in params else ''
-  s4 = 'substr(U.UnitCode, 5, 1) ="{}" '.format(data['unitLevel']) if 'unitLevel' in params else '' 
-  s = list()
-  for x in [s1, s2, s3, s4]:
-      if x:
-          s.append(x)
-  queryStrings = ' and '.join(s) 
-  return queryStrings
-
-def buildJoinClause(data): 
-  data = request.args.to_dict()
-  params = data.keys()
-  s1 = 'U.UnitCode ="{}" '.format(data['unitcode']) if 'unitcode' in params else ''
-  s2 = 'U.Year = ' + data['year'] if 'year' in params else ''
-  s3 = 'U.Semester = ' + data['semester'] if 'semester' in params else ''
   s = list()
   for x in [s1, s2, s3]:
       if x:
           s.append(x)
-  requestStrings = ' and '.join(s) 
-  return requestStrings
+  queryStrings = ' and '.join(s) 
+  return queryStrings
 
 
 
@@ -165,12 +151,13 @@ def get_main_data():
                       Where B.IsEstimated="YES" and B.IsLastSemester="NO" and En.IsEstimated="YES" \
                       and En.IsLastSemester="NO" and En.UnitID = U.UnitID) AS Cost_per_student \
                       From Activities A JOIN Staff S USING (StaffID)  \
-                                                    JOIN Session E USING (SessionID) \
-                                                    JOIN Unit U USING (UnitID) \
-                      '
+                          JOIN Session E USING (SessionID) \
+                          JOIN Unit U USING (UnitID) \
+                      '         
   if queryStrings:
     sql = sql + ''' where ''' + queryStrings    
-  cur.execute(sql + " Group by U.UnitID ") 
+
+  cur.execute(sql + " Group By U.UnitID ") 
   result = cur.fetchall()
   con.close()
   return jsonify(result)
@@ -186,7 +173,7 @@ def get_employee_budget():
   queryStrings = buildWhereClause(request.args.to_dict())
   con = sqlite3.connect(db_path)
   cur = con.cursor()
-  sql = "Select S.Name, U.UnitCode, U.Semester, U.Year, SUM(A.Hour*A.PayRate) AS TotalCost \
+  sql = "Select S.Name, U.UnitCode, U.Semester, U.Year, SUM(A.Hour*A.HourlyRate) AS TotalCost \
         From Activities A JOIN Staff S USING (StaffID) \
         JOIN Session E USING (SessionID) \
         JOIN Unit U USING (UnitID) "
@@ -207,7 +194,7 @@ def get_semester_budget():
   queryStrings = buildWhereClause(request.args.to_dict())
   con = sqlite3.connect(db_path)
   cur = con.cursor()
-  sql = "Select U.UnitCode, SUM(A.Hour) AS TotalLoad, SUM(A.Hour * A.PayRate) AS StaffCost \
+  sql = "Select U.UnitCode, SUM(A.Hour) AS TotalLoad, SUM(A.Hour * A.HourlyRate) AS StaffCost \
               From Activities A JOIN Staff S USING (StaffID) \
                 JOIN Session E USING (SessionID) \
                 JOIN Unit U USING (UnitID) \
@@ -254,7 +241,7 @@ def upload_file():
         Unit_ID = filename [0:8]
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
     # Insert mock data
-    ID = Unit_ID
+    ID = 'CITS4401'
     con = sqlite3.connect(db_path)
     cur = con.cursor()
     cur.execute('Select U.UnitCode, SUM(A.Hour) AS TotalLoad, U.Semester,U.Year, \
@@ -263,7 +250,7 @@ def upload_file():
                       JOIN Unit R USING (UnitID) \
                       Where R.UnitCode = U.UnitCode \
                       ) AS Num_of_Staff, \
-                      SUM(A.Hour * A.PayRate) AS StaffCost, \
+                      SUM(A.Hour * A.HourlyRate) AS StaffCost, \
                       (Select SUM(N.TotalCost) \
                       From OtherCost O JOIN NonSalaryCosts N USING (NSCID) \
                       JOIN UNIT Z USING (UnitID) \
@@ -309,7 +296,7 @@ def sqlquery():
         content = c.fetchall()
         conn.commit()
         conn.close()
-        r = {'success':'true','data':list()}
+        r = {'success':'ture','data':list()}
         for row in content:
             d = dict(zip(col_name_list, row))
             r['data'].append(d)

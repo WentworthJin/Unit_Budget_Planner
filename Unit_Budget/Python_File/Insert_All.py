@@ -25,6 +25,20 @@ def select_query(conn,query):
   return cur.fetchall()
 
 
+#Insert data into Unit table
+def insert_unit(conn, unit):
+    sql = ''' INSERT INTO Unit(UnitCode,Semester,Year)
+              VALUES(?,?,?) '''
+    cur = conn.cursor()
+    data_check=cur.execute(sql, unit)
+    # Check if data already exist
+    if data_check is None:
+      cur.execute(sql, unit)
+      conn.commit()
+    else:
+      return cur.lastrowid
+
+
 def insert_activities(conn, act):
     sql = '''INSERT OR IGNORE INTO Activities (UnitID, StaffID, SessionID, HourPerSession, MarkingHourPS, PayRate, Hour) 
     VALUES(?, ?, ?, ?, ?, ?, ?);'''

@@ -2,15 +2,15 @@ import sqlite3
 import sys
 from sqlite3 import Error
 
-activity = [1,1,1,4,0.25,30,60]
+activity = [1,1,1,4,0.25,60,"Good"]
 budget = [1,30000,'YES','NO']
 enrol = [1,200,'Yes','No']
 nsc = ["Lecture",6,10,60]
-oc = [1,6]
+oc = [1,6,"Good"]
 session = ["Lecture","NM"]
 staff = [1,"Racheal","Lecture"]
-TeachingCode = ["ORAA"]
-Unit = ["Computing","CITS2021","SEM-2",2020]
+TeachingCode = ["ORAA",100]
+Unit = ["Computing","CITS2021","SEM-2",2020,"Fail"]
 
 '''
     Functionality: The Insert_All_Liangbo_Version.py.py is a framework that provides various functions for other users 
@@ -40,9 +40,9 @@ def create_connection(db_file):
 
 
 #Insert data into Activities table
-activity = [1,1,1,4,0.25,30,60]
+activity = [1,1,1,4,0.25,60,"Good"]
 def insert_activities(conn, act):
-    sql = '''INSERT INTO Activities (UnitID, StaffID, SessionID, HourPerSession, MarkingHourPS, PayRate, Hour) 
+    sql = ''' INSERT INTO Activities (UnitID, StaffID, SessionID, HourPerSession, MarkingHourPS, Hour, Comment) 
     VALUES(?, ?, ?, ?, ?, ?, ?);'''
     cur = conn.cursor()
     data_check=cur.execute(sql, act)
@@ -100,10 +100,10 @@ def insert_nsc(conn, nsc):
       return cur.lastrowid
 
 #Insert data into OtherCost table
-oc = [1,6]
+oc = [1,6,"Good"]
 def insert_oc(conn, oc):
-    sql = ''' INSERT INTO OtherCost(NSCID, UnitID) 
-    VALUES (?,?); '''
+    sql = ''' INSERT INTO OtherCost(NSCID, UnitID, Comment) 
+    VALUES (?,?,?); '''
     cur = conn.cursor()
     data_check=cur.execute(sql, oc)
     # Check if data already exist
@@ -144,10 +144,10 @@ def insert_staff(conn, staff):
       return cur.lastrowid
 
 #Insert data into TeachingCode table
-TeachingCode = ["ORAA"]
+TeachingCode = ["ORAA",100]
 def insert_teachingcode(conn, TeachingCode):
-    sql = ''' Insert into TeachingCode(TeachingName)
-              VALUES(?) '''
+    sql = ''' Insert into TeachingCode(TeachingName, PayRate)
+              VALUES(?,?) '''
     cur = conn.cursor()
     data_check=cur.execute(sql, TeachingCode)
     # Check if data already exist
@@ -158,10 +158,10 @@ def insert_teachingcode(conn, TeachingCode):
       return cur.lastrowid
 
 #Insert data into Unit table
-Unit = ["Computing","CITS2021","SEM-2",2020]
+Unit = ["Computing","CITS2021","SEM-2",2020,"Fail"]
 def insert_unit(conn, unit):
-    sql = ''' INSERT INTO Unit(UnitName,UnitCode,Semester,Year)
-              VALUES(?,?,?,?) '''
+    sql = ''' INSERT INTO Unit(UnitName,UnitCode,Semester,Year,Comment)
+              VALUES(?,?,?,?,?) '''
     cur = conn.cursor()
     data_check=cur.execute(sql, unit)
     # Check if data already exist
