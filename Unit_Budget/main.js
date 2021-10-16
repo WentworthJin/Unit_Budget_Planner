@@ -1,6 +1,23 @@
 const {app, BrowserWindow} = require('electron')
 const path = require('path')
+// if (process.env.NODE_ENV === 'development') { require('electron-reload')(__dirname) };
 require("electron-reload")(__dirname)
+
+var python = require("child_process").spawn('python',["./Python_File/route.py"]);
+// var python = require("child_process").execFile("./Python_File/dist/route/route");
+
+python.stdout.on("data", function (data) {
+  // Do some process here
+});
+
+python.stderr.on("data", (data) => {
+    console.error(`stderr: ${data}`);
+    console.log(`stderr: ${data}`);
+});
+
+python.on("close", (code) => {
+    console.log(`child process exited with code ${code}`);
+}); 
 
 function createWindow () {
   // Create the browser window.
@@ -8,16 +25,17 @@ function createWindow () {
     width: 800,
     height: 600,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js')
+      preload: path.join(__dirname, 'preload.js'),
+      sandbox: true
     }
   })
 
   mainWindow.loadFile('./dist/index.html')
 
-  var pyshell =  require('python-shell');
-  pyshell.run('./Python_File/route.py',  function  (err, results)  {
-  if  (err)  console.log(err);
-  }); 
+  // var pyshell =  require('python-shell');
+  // pyshell.run('./Python_File/route.py',  function  (err, results)  {
+  // if  (err)  console.log(err);
+  // }); 
 
   // Initializing the Database
   // const sqlite3 = require('sqlite3').verbose();
