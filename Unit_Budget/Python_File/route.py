@@ -271,7 +271,7 @@ def upload_file():
                       (Select SUM(A.Hour) \
                       From Activities A JOIN Unit N USING (UnitID) \
                       Where N.UnitID = U.UnitID \
-                      Group by N.UnitID) AS Total_WorkLoad \
+                      Group by N.UnitID) AS Total_WorkLoad, U.Comment \
                       From Activities A JOIN Staff S USING (StaffID)  \
                                                     JOIN Session E USING (SessionID) \
                                                     JOIN Unit U USING (UnitID) \
