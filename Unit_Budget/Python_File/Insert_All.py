@@ -221,12 +221,12 @@ def main():
 
       #Insert Session table
       for SessionName in delivery_session:
-        SessionType = 'Delivery'
+        SessionType = 'NM'
         session = (SessionName,SessionType)
         insert_session(conn,session)
 
       for SessionName in marking_session:
-        SessionType = 'Marking'
+        SessionType = 'M'
         session = (SessionName,SessionType)
         insert_session(conn,session)
 
