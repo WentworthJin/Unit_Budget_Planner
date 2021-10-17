@@ -3,8 +3,8 @@
 
 
 ## Supported System
-- <b>Windows</b> [Access the Windows setup guide](#windows_setup_guide)
-- <b>MacOS & Linux </b> [Access the Mac setup guide](#macos/linux_setup_guide)
+- <b>Windows</b> [Access the Windows setup guide](#windows-setup-guide)
+- <b>MacOS & Linux </b> [Access the Mac setup guide](#macos/linux-setup-guide)
 
 ## Software Requirements
 - <b>Python</b>: Click [Here](https://www.python.org/downloads/) to download the latest Python
