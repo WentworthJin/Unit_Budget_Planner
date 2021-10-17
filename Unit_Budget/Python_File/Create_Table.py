@@ -61,8 +61,7 @@ def Schema():
 
     sql_create_teachingcode_table = """ CREATE TABLE IF NOT EXISTS TeachingCode (
                                                 TeachingCode INTEGER PRIMARY KEY AUTOINCREMENT,
-                                                TeachingName VARCHAR (50) UNIQUE,
-                                                PayRate REAL
+                                                TeachingName VARCHAR (50) UNIQUE
                                         );"""
     
     sql_create_staff_table = """ CREATE TABLE IF NOT EXISTS Staff (
@@ -118,6 +117,7 @@ def Schema():
                                         SessionID INT REFERENCES Session (SessionID) ON DELETE RESTRICT ON UPDATE CASCADE,
                                         HourPerSession INT,
                                         MarkingHourPS REAL,
+                                        PayRate REAL,
                                         Hour REAL,
                                         Comment VARCHAR (300) 
                                     );"""
