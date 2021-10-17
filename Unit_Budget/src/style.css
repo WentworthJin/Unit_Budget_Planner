@@ -96,18 +96,12 @@ Button.next {
   padding: 6px;
   font-size: 12pt;
   background-color: #cfdbce;
-<<<<<<< HEAD
-  font-family: 'Bebas Neue', cursive;
-=======
->>>>>>> 6a383dd1c149ade6180e78889abb5019a09fab5c
 }
 
 #summary {
   padding: 6px;
   background-color: #cfdbce;
   font-size: 12pt;
-  border-radius: 12px;
-  font-family: 'Bebas Neue', cursive;
 }
 
 #myFile {
