@@ -2,14 +2,10 @@ import sqlite3
 import sys
 import pandas as pd
 import numbers
+import math
+import Configure
 from sqlite3 import Error
 
-TeachingCode = ["TeachingName"]
-Unit = ["CITS2021","SEN-2",2020]
-session = ["Lecture","Non-Mark"]
-nsc = ["Lecture",6,10,60]
-enrol = [1,200,'Yes','No']
-budget = [1,6,"Yes","No"]
 
 #create a database connection to a SQLite database
 def create_connection(db_file):
@@ -42,114 +38,91 @@ def insert_unit(conn, unit):
     else:
       return cur.lastrowid
 
-#Insert data into TeachingCode table
-def insert_teachingcode(conn, TeachingCode):
-    sql = ''' Insert into TeachingCode(TeachingName)
-              VALUES(?) '''
-    cur = conn.cursor()
-    data_check=cur.execute(sql, TeachingCode)
-    # Check if data already exist
-    if data_check is None:
-      cur.execute(sql, TeachingCode)
-      conn.commit()
-    else:
-      return cur.lastrowid
 
-#Insert data into Session table
-def insert_session(conn, session):
-    sql = ''' Insert into Session(SessionName,SessionType)
-              VALUES(?,?) '''
+def insert_activities(conn, act):
+    sql = '''INSERT OR IGNORE INTO Activities (UnitID, StaffID, SessionID, HourPerSession, MarkingHourPS, PayRate, Hour) 
+    VALUES(?, ?, ?, ?, ?, ?, ?);'''
     cur = conn.cursor()
-    data_check=cur.execute(sql, session)
-    # Check if data already exist
-    if data_check is None:
-      cur.execute(sql, session)
-      conn.commit()
-    else:
-      return cur.lastrowid
-
-#Insert data into NonSalaryCosts table
-def insert_nsc(conn, nsc):
-    sql = ''' Insert into NonSalaryCosts(NSCName,Hours,CostPerHour,TotalCost)
-              VALUES(?,?,?,?) '''
-    cur = conn.cursor()
-    data_check=cur.execute(sql, nsc)
-    # Check if data already exist
-    if data_check is None:
-      cur.execute(sql, nsc)
-      conn.commit()
-    else:
-      return cur.lastrowid
-
-#Insert data into Enrolment table
-def insert_enrolment(conn, enrol):
-    sql = ''' Insert into Enrolment(UnitID,EnrolmentNumber,IsEstimated,IsLastSemester)
-              VALUES(?,?,?,?) '''
-    cur = conn.cursor()
-    data_check=cur.execute(sql, enrol)
-    # Check if data already exist
-    if data_check is None:
-      cur.execute(sql, enrol)
-      conn.commit()
-    else:
-      return cur.lastrowid
+    cur.execute(sql, act)
+    conn.commit()
+    #return cur.lastrowid
 
 #Insert data into Budget table
 def insert_budget(conn, budget):
-    sql = ''' Insert into Budget(UnitID,Cost,IsEstimated,IsLastSemester)
+    sql = ''' INSERT OR IGNORE INTO Budget(UnitID, Cost, IsEstimated, IsLastSemester) 
+    VALUES(?,?,?,?); '''
+    cur = conn.cursor()
+    cur.execute(sql, budget)
+    conn.commit()
+
+
+#Insert data into Enrolment table
+def insert_enrolment(conn, enrol):
+    sql = ''' Insert OR IGNORE into Enrolment(UnitID,EnrolmentNumber,IsEstimated,IsLastSemester)
               VALUES(?,?,?,?) '''
     cur = conn.cursor()
-    data_check=cur.execute(sql, budget)
-    # Check if data already exist
-    if data_check is None:
-      cur.execute(sql, budget)
-      conn.commit()
-    else:
-      return cur.lastrowid
+    cur.execute(sql, enrol)
+    conn.commit()
 
+
+#Insert data into NonSalaryCosts table
+def insert_nsc(conn, nsc):
+    sql = ''' Insert OR IGNORE into NonSalaryCosts(NSCName,Hours,CostPerHour,TotalCost)
+              VALUES(?,?,?,?) '''
+    cur = conn.cursor()
+    cur.execute(sql, nsc)
+    conn.commit()
+    return cur.lastrowid
 
 #Insert data into OtherCost table
-def insert_otherCost(conn, otherCost):
-    sql = ''' Insert into OtherCost(NSCID,UnitID)
+def insert_oc(conn, oc):
+    sql = ''' INSERT OR IGNORE INTO OtherCost(NSCID, UnitID) 
+    VALUES (?,?); '''
+    cur = conn.cursor()
+    cur.execute(sql, oc)
+    conn.commit()
+
+
+#Insert data into Session table
+def insert_session(conn, session):
+    sql = ''' Insert OR IGNORE into Session(SessionName,SessionType)
               VALUES(?,?) '''
     cur = conn.cursor()
-    data_check=cur.execute(sql, otherCost)
-    # Check if data already exist
-    if data_check is None:
-      cur.execute(sql, otherCost)
-      conn.commit()
-    else:
-      return cur.lastrowid
-
-
+    cur.execute(sql, session)
+    conn.commit()
 
 #Insert data into Staff table
 def insert_staff(conn, staff):
-    sql = ''' Insert into Staff(TeachingID,Name,Position)
+    sql = ''' Insert OR IGNORE into Staff(TeachingCode,Name,Position)
               VALUES(?,?,?) '''
     cur = conn.cursor()
-    data_check=cur.execute(sql, staff)
-    # Check if data already exist
-    if data_check is None:
-      cur.execute(sql, staff)
-      conn.commit()
-    else:
-      return cur.lastrowid
+    cur.execute(sql, staff)
+    conn.commit()
 
-# retrieve information from excel file to dataframe 
-def get_details(file):
-  unit_detail = pd.read_excel(file,usecols ="A:L",header =8,nrows=5)
-  unit_strcture = pd.read_excel(file,usecols ="A:J",header =29,nrows=13)
-  resourcing = pd.read_excel(file,usecols ="A:L",header =46,nrows=9)
-  NSC = pd.read_excel(file,usecols ="A:F",header =62,nrows=4)
-  return unit_detail,unit_strcture,resourcing,NSC
+#Insert data into TeachingCode table
+def insert_teachingcode(conn, TeachingCode):
+    sql = ''' Insert OR IGNORE into TeachingCode(TeachingName)
+              VALUES(?) '''
+    cur = conn.cursor()
+    cur.execute(sql, TeachingCode)
+    conn.commit()
 
-# check if a session is makring session or not 
-def check_session(SessionName):
-  if 'mark' in SessionName.lower():
-    return 'M'
-  else:
-    return 'NM'
+#Insert data into Unit table
+def insert_unit(conn, unit):
+    sql = ''' INSERT OR IGNORE INTO Unit(UnitName,UnitCode,Semester,Year)
+              VALUES(?,?,?,?) '''
+    cur = conn.cursor()
+    cur.execute(sql, unit)
+    conn.commit()
+    return cur.lastrowid
+
+
+# # check if a session is makring session or delivery section
+# def check_session(SessionName):
+#   if 'mark' in SessionName.lower():
+#     return 'Marking'
+#   else:
+#     return 'Delivery'
 
 # check if this value is numberic
 def check_numbers(number):
@@ -190,28 +163,43 @@ def select_TeachingCode(conn,TeachingName):
 
 
 
-def main():
+def main(args):
   pd.set_option("max_columns", 10)
-  excel_file ="CITS1001_Sem1,2021 budget v3.xlsx"
-  unit_detail,unit_strcture,resourcing,NSC = get_details(excel_file)
-
-  thisyear_detail = unit_detail.iloc[:,3:7]
-
-  lastyear_detail = unit_detail.iloc[:,8:12]
+  #excel_file ="New Template v0.2.xlsx"
+  unit_detail,teaching_team,delivery,marking,NSC = Configure.get_details(args[0])
 
 
+  UnitName = unit_detail.iloc[2,1]
   UnitCode =unit_detail.iloc[0,1]
   Semester=unit_detail.iloc[1,1]
   Year =unit_detail.iloc[4,1]
+  max_staff = unit_detail.iloc[5,1]
+  max_NSC = unit_detail.iloc[6,1]
 
-  teachingcodes = resourcing.iloc[0:7,3]
+  teachingcodes = teaching_team.iloc[2,1:max_staff+1]
+  staffnames = teaching_team.iloc[0,1:max_staff+1]
+  staffpositions = teaching_team.iloc[1,1:max_staff+1]
+  staffrate = teaching_team.iloc[3,1:max_staff+1]
 
-  sessionNames =unit_strcture.iloc[0:12,0]
 
-  NSCNames = NSC.iloc[:3,0]
-  NSCHours = NSC.iloc[:3,3]
-  NSCRates = NSC.iloc[:3,4]
-  NSCCost = NSC.iloc[:3,5]
+  payrates = teaching_team.iloc[3,1:max_staff+1]
+
+  delivery_session =delivery.iloc[1:14,0]
+
+  marking_session = marking.iloc[1:4,0]
+
+  NSCNames = NSC.iloc[1:,0]
+  NSCHours = NSC.iloc[1:,1]
+  NSCRates = NSC.iloc[1:,2]
+  NSCCost = NSC.iloc[1:,3]
+
+  thisyear_detail = unit_detail.iloc[:,3]
+  lastyear_detail = unit_detail.iloc[:,5]
+  
+  
+
+
+
 
   try:
     database = "Unit_Budget.db"
@@ -222,7 +210,7 @@ def main():
     with conn:
 
       #Insert Unit table
-      Unit = (UnitCode,Semester,Year)
+      Unit = (UnitName,UnitCode,Semester,Year)
       UnitID = insert_unit(conn,Unit)
 
       #Insert TeachingCode table
@@ -231,65 +219,113 @@ def main():
         insert_teachingcode(conn,TeachingCode)
 
 
-      #Insert Staff table
-      for i in range(len(teachingcodes)):
-        teachingID = select_StaffID(conn,resourcing.iloc[0:7,3][i])
-        teacherName = resourcing.iloc[0:7,0][i]
-        teacherPostion = resourcing.iloc[0:7,1][i]
-        staff = (teachingID,teacherName,teacherPostion)
-        insert_session(conn,staff)
-
-
       #Insert Session table
-      for SessionName in sessionNames:
-        SessionType = check_session(SessionName)
+      for SessionName in delivery_session:
+        SessionType = 'NM'
         session = (SessionName,SessionType)
         insert_session(conn,session)
 
+      for SessionName in marking_session:
+        SessionType = 'M'
+        session = (SessionName,SessionType)
+        insert_session(conn,session)
 
-      #Insert NonSalaryCost table & OtherCost Table
-      for i in range(len(NSCCost)):
-        NSCName = NSCNames[i]
-        Hours = NSCHours[i]
-        CostPerHour = NSCRates[i]
-        TotalCost = int(NSCCost[i])
-        nsc = (NSCName,Hours,CostPerHour,TotalCost)
-        NSCID = insert_nsc(conn,nsc)
+      #insert into NonSalaryCost table and otherCost table
 
-        otherCost = (NSCID,UnitID)
-        insert_session(conn,otherCost)
+      for i in range(max_NSC):
+        nonsalarycost = (NSCNames[i+1],NSCHours[i+1],NSCRates[i+1],NSCCost[i+1])
+        nscid =insert_nsc(conn,nonsalarycost)
+        oc = (nscid,UnitID)
+        if oc !=0:
+          insert_oc(conn,oc)
 
-      #Insert Enrolment table & Budget Table
-      for i in range(len(thisyear_detail.index)):
-        if 'estimated enrolment' in thisyear_detail.iloc[:,0][i].lower():
-          if check_numbers(thisyear_detail.iloc[:,3][i]):
-            enrol = (UnitID,thisyear_detail.iloc[:,3][i],'Yes','No')
-            insert_enrolment(conn,enrol)
-        if 'budget' in thisyear_detail.iloc[:,0][i].lower():
-          if check_numbers(thisyear_detail.iloc[:,3][i]):
-            budget = (UnitID,thisyear_detail.iloc[:,3][i],'Yes','No')
-            insert_budget(conn,budget)
+      #insert into budget table and enrolment table
 
-      for i in range(len(lastyear_detail.index)):
-        if 'estimated enrolment' in lastyear_detail.iloc[:,0][i].lower():
-          if check_numbers(lastyear_detail.iloc[:,3][i]):
-            enrol = (UnitID,lastyear_detail.iloc[:,3][i],'Yes','Yes')
-            insert_enrolment(conn,enrol)
+      if check_numbers(thisyear_detail[1]):
+        enrolment = (UnitID,thisyear_detail[1],'Yes','No')
+        insert_enrolment(conn,enrolment)
+      if check_numbers(thisyear_detail[3]):
+        budget = (UnitID,thisyear_detail[3],'Yes','No')
+        insert_budget(conn,budget)
 
-        if 'actual enrolment' in lastyear_detail.iloc[:,0][i].lower():
-          if check_numbers(lastyear_detail.iloc[:,3][i]):
-            enrol = (UnitID,lastyear_detail.iloc[:,3][i],'No','Yes')
-            insert_enrolment(conn,enrol)
+      if check_numbers(lastyear_detail[1]):
+        enrolment = (UnitID,lastyear_detail[1],'Yes','Yes')
+        insert_enrolment(conn,enrolment)
+      if check_numbers(lastyear_detail[2]):
+        enrolment = (UnitID,lastyear_detail[2],'No','Yes')
+        insert_enrolment(conn,enrolment)
 
-        if 'budget' in lastyear_detail.iloc[:,0][i].lower():
-          if check_numbers(lastyear_detail.iloc[:,3][i]):
-            budget = (UnitID,lastyear_detail.iloc[:,3][i],'Yes','Yes')
-            insert_enrolment(conn,enrol)
+      if check_numbers(lastyear_detail[3]):
+        budget = (UnitID,lastyear_detail[3],'Yes','Yes')
+        insert_budget(conn,budget)
+      if check_numbers(lastyear_detail[4]):
+        budget = (UnitID,lastyear_detail[4],'No','Yes')
+        insert_budget(conn,budget)
 
-        if 'actual expense' in lastyear_detail.iloc[:,0][i].lower():
-          if check_numbers(lastyear_detail.iloc[:,3][i]):
-            budget = (UnitID,lastyear_detail.iloc[:,3][i],'No','Yes')
-            insert_enrolment(conn,enrol)
+
+      #insert into staff table
+
+      for i in range(len(staffnames)):
+        result = select_query(conn,'Select * from TeachingCode')
+        for j in result:
+          if j[1] == teachingcodes[i]:
+            teachingid = j[0]
+            break
+        staff = (teachingid,staffnames[i],staffpositions[i])
+        insert_staff(conn,staff)
+
+
+      #insert into activities table
+
+
+      for i in range(len(staffnames)):
+        staffresult = select_query(conn,'Select StaffID,Name from Staff')
+        for j in staffresult:
+          if j[1] ==staffnames[i]:
+            StaffID = j[0]
+            break
+        dsresult = select_query(conn,'Select SessionID, SessionName from Session')
+        for k in range(len(delivery_session)):
+          for a in dsresult:
+            if a[1] == delivery_session[k+1]:
+              SessionID = a[0]
+              break
+          if math.isnan(delivery.iloc[k+1,i+3]):
+            continue
+          else:
+            activity = (UnitID, StaffID, SessionID, delivery.iloc[k+1,1], 0, payrates[i], delivery.iloc[k+1,i+3])
+            insert_activities(conn,activity)
+
+        for b in range(len(marking_session)):
+          for c in dsresult:
+            if c[1]  == marking_session[b+1]:
+              SessionID = c[0]
+              break
+            if math.isnan(marking.iloc[b+1,i+3]):
+              continue
+            else:
+              activity = (UnitID, StaffID, SessionID, 0, marking.iloc[b+1,2], payrates[i], marking.iloc[b+1,i+3])
+              insert_activities(conn,activity)
+
+
+
+
+
+
+
+        # activity = (UnitID, StaffID, SessionID, HourPerSession, MarkingHourPS, PayRate, Hour)
+        # insert_activities(conn,activity)
+
+
+
+        
+
+        
+        
+
+      
+
+
 
 
     print("Dummy Unit data has been inserted")
@@ -298,5 +334,6 @@ def main():
     print(e)
 
 if __name__ == '__main__':
-  main()
+  import sys
+  main(sys.argv[1:])
 

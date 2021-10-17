@@ -61,8 +61,7 @@ def Schema():
 
     sql_create_teachingcode_table = """ CREATE TABLE IF NOT EXISTS TeachingCode (
                                                 TeachingCode INTEGER PRIMARY KEY AUTOINCREMENT,
-                                                TeachingName VARCHAR (50) UNIQUE,
-                                                PayRate REAL
+                                                TeachingName VARCHAR (50) UNIQUE
                                         );"""
     
     sql_create_staff_table = """ CREATE TABLE IF NOT EXISTS Staff (
@@ -118,10 +117,53 @@ def Schema():
                                         SessionID INT REFERENCES Session (SessionID) ON DELETE RESTRICT ON UPDATE CASCADE,
                                         HourPerSession INT,
                                         MarkingHourPS REAL,
+                                        PayRate REAL,
                                         Hour REAL,
                                         Comment VARCHAR (300) 
                                     );"""
+    sql_create_staff_view = ''' CREATE VIEW StaffDetail AS
+                                    Select UnitName, UnitCode, Semester, Year, T1.Name AS Staff_Name, T1.Position AS Staff_Position, 
+                                    (Select COUNT(T1.StaffID) AS Total_Sessions_Teached
+                                    From Activities A5 JOIN Session S5 USING (SessionID)
+                                                    JOIN Staff T5 USING (StaffID)
+                                                    JOIN Unit U5 USING (UnitID)
+                                                    JOIN TeachingCode P5 USING (TeachingCode)
+                                    Where A5.StaffID = A1.StaffID
+                                    Group By T5.StaffID) AS Number_of_Sessions_Teached
+                                    ,A1.PayRate, 
+                                    round((Select SUM(Hour) as NonMarking_Workload
+                                    From Activities A2 JOIN Session S2 USING (SessionID)
+                                                    JOIN Staff T2 USING (StaffID)
+                                                    JOIN Unit U2 USING (UnitID)
+                                                    JOIN TeachingCode P2 USING (TeachingCode)
+                                    Where S2.SessionType = "NM" and A2.StaffID = A1.StaffID
+                                    Group by T2.StaffID),0) AS NonMarking_Workload_Hour,
+                                    round((Select SUM(Hour) as NonMarking_Workload
+                                    From Activities A3 JOIN Session S3 USING (SessionID)
+                                                    JOIN Staff T3 USING (StaffID)
+                                                    JOIN Unit U3 USING (UnitID)
+                                                    JOIN TeachingCode P3 USING (TeachingCode)
+                                    Where S3.SessionType = "M" and A3.StaffID = A1.StaffID
+                                    Group by T3.StaffID),0) AS Marking_Workload_Hour,
+                                    round(SUM(Hour),0) as Total_WorkLoad_Hour, round(A1.PayRate*SUM(Hour),0) AS Total_Cost
+                                    From Activities A1 JOIN Session S1 USING (SessionID)
+                                                    JOIN Staff T1 USING (StaffID)
+                                                    JOIN Unit U1 USING (UnitID)
+                                                    JOIN TeachingCode P1 USING (TeachingCode)
+                                    Group by T1.StaffID;'''
 
+    sql_create_unit_view = '''CREATE VIEW UnitDetail AS
+                                SELECT U.UnitCode, U.UnitName, U.Semester, U.Year, 
+                                (SELECT COUNT(DISTINCT P.Name) FROM Activities A JOIN Staff P USING (StaffID) JOIN Unit R USING (UnitID) WHERE R.UnitCode = U.UnitCode) AS Staff_Number, 
+                                (SELECT EnrolmentNumber FROM Enrolment JOIN Unit USING (UnitID) WHERE IsEstimated = "YES" and IsLastSemester = "NO" and Unit.UnitID = U.UnitID) AS Estimate_StudentNumber, 
+                                round((SELECT SUM(N.TotalCost) FROM OtherCost O JOIN NonSalaryCosts N USING (NSCID) JOIN Unit Z USING (UnitID) WHERE Z.UnitID = U.UnitID GROUP BY Z.UnitID),0) AS Total_NonSalaryCost, 
+                                round((SELECT SUM(A1.PayRate * Hour) AS Total_Cost FROM Activities A1 JOIN Session S1 USING (SessionID) JOIN Staff T1 USING (StaffID) JOIN Unit U1 USING (UnitID) JOIN TeachingCode P1 USING (TeachingCode) WHERE U1.UnitID = U.UnitID GROUP BY U1.UnitID),0) AS Total_SalaryCost, 
+                                round((SELECT SUM(N.TotalCost) FROM OtherCost O JOIN NonSalaryCosts N USING (NSCID) JOIN Unit Z USING (UnitID) WHERE Z.UnitID = U.UnitID GROUP BY Z.UnitID) + (SELECT SUM(A1.PayRate * Hour) AS Total_Cost FROM Activities A1 JOIN Session S1 USING (SessionID) JOIN Staff T1 USING (StaffID) JOIN Unit U1 USING (UnitID) JOIN TeachingCode P1 USING (TeachingCode) WHERE U1.UnitID = U.UnitID GROUP BY U1.UnitID),0) AS Total_Cost, 
+                                (SELECT B.Cost FROM Unit G JOIN Budget B USING (UnitID) WHERE IsEstimated = "YES" and B.IsLastSemester = "NO" and G.UnitID = U.UnitID) AS Estimate_Budget, (SELECT COUNT(DISTINCT (SessionID)) FROM Activities WHERE Activities.UnitID = U.UnitID GROUP BY UnitID) AS Number_of_Assigned_Seesion, 
+                                (SELECT COUNT(*) FROM OtherCost O JOIN Unit L USING (UnitID) JOIN NonSalaryCosts USING (NSCID) WHERE L.UnitID = U.UnitID GROUP BY L.UnitID) AS Total_Number_of_NSC, 
+                                round((SELECT SUM(A.Hour) FROM Activities A JOIN Unit N USING (UnitID) WHERE N.UnitID = U.UnitID GROUP BY N.UnitID),0) AS Total_Staff_WorkLoad 
+                                FROM Activities A JOIN Staff S USING (StaffID) JOIN Session E USING (SessionID) JOIN Unit U USING (UnitID) 
+                                GROUP BY U.UnitID;'''
     # create a database connection
     conn = create_connection(database)
 
@@ -145,6 +187,10 @@ def Schema():
         create_table(conn,sql_create_budget_table)
 
         create_table(conn,sql_create_activities_table)
+
+        create_table(conn,sql_create_unit_view)
+
+        create_table(conn,sql_create_staff_view)
 
         print("DB has been initialized")
     else:

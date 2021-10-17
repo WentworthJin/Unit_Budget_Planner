@@ -8,4 +8,8 @@ venv
 BudgetSample (1).db
 BudgetSample.db
 Unit_Budget.db
+<<<<<<< HEAD
+**/__pycache__
+=======
 __pycache__/
+>>>>>>> master
