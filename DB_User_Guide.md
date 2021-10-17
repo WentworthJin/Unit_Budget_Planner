@@ -615,30 +615,22 @@ From Activities A5 JOIN Session S5 USING (SessionID)
                 JOIN TeachingCode P5 USING (TeachingCode)
 Where A5.StaffID = A1.StaffID
 Group By T5.StaffID) AS Number_of_Sessions_Teached
-<<<<<<< HEAD
 ,A1.PayRate, 
-=======
-,PayRate, 
->>>>>>> master
-(Select SUM(Hour) as NonMarking_Workload
+round((Select SUM(Hour) as NonMarking_Workload
 From Activities A2 JOIN Session S2 USING (SessionID)
                 JOIN Staff T2 USING (StaffID)
                 JOIN Unit U2 USING (UnitID)
                 JOIN TeachingCode P2 USING (TeachingCode)
 Where S2.SessionType = "NM" and A2.StaffID = A1.StaffID
-Group by T2.StaffID) AS NonMarking_Workload_Hour,
-(Select SUM(Hour) as NonMarking_Workload
+Group by T2.StaffID),0) AS NonMarking_Workload_Hour,
+round((Select SUM(Hour) as NonMarking_Workload
 From Activities A3 JOIN Session S3 USING (SessionID)
                 JOIN Staff T3 USING (StaffID)
                 JOIN Unit U3 USING (UnitID)
                 JOIN TeachingCode P3 USING (TeachingCode)
 Where S3.SessionType = "M" and A3.StaffID = A1.StaffID
-Group by T3.StaffID) AS Marking_Workload_Hour,
-<<<<<<< HEAD
-SUM(Hour) as Total_WorkLoad_Hour, A1.PayRate*SUM(Hour) AS Total_Cost
-=======
-SUM(Hour) as Total_WorkLoad_Hour, PayRate*SUM(Hour) AS Total_Cost
->>>>>>> master
+Group by T3.StaffID),0) AS Marking_Workload_Hour,
+round(SUM(Hour),0) as Total_WorkLoad_Hour, round(A1.PayRate*SUM(Hour),0) AS Total_Cost
 From Activities A1 JOIN Session S1 USING (SessionID)
                 JOIN Staff T1 USING (StaffID)
                 JOIN Unit U1 USING (UnitID)
