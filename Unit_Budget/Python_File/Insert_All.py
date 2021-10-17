@@ -163,11 +163,10 @@ def select_TeachingCode(conn,TeachingName):
 
 
 
-def main():
-  args = sys.argv[1]
+def main(args):
   pd.set_option("max_columns", 10)
   #excel_file ="New Template v0.2.xlsx"
-  unit_detail,teaching_team,delivery,marking,NSC = Configure.get_details(args)
+  unit_detail,teaching_team,delivery,marking,NSC = Configure.get_details(args[0])
 
 
   UnitName = unit_detail.iloc[2,1]
@@ -335,5 +334,6 @@ def main():
     print(e)
 
 if __name__ == '__main__':
-  main()
+  import sys
+  main(sys.argv[1:])
 
