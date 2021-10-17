@@ -44,7 +44,7 @@ def create_table(conn, create_table_sql):
 def Schema():
 
     # The name of database
-    database = "Unit_Budget.db"
+    database = "BudgetSample.db"
 
     FirstRun = True
 

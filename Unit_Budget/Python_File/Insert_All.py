@@ -202,7 +202,7 @@ def main(args):
 
 
   try:
-    database = "Unit_Budget.db"
+    database = "BudgetSample.db"
 
     #Create a database connection
     conn = create_connection(database)
