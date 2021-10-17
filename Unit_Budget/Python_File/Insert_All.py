@@ -164,9 +164,10 @@ def select_TeachingCode(conn,TeachingName):
 
 
 def main():
+  args = sys.argv[1]
   pd.set_option("max_columns", 10)
-  excel_file ="New Template v0.2.xlsx"
-  unit_detail,teaching_team,delivery,marking,NSC = Configure.get_details(excel_file)
+  #excel_file ="New Template v0.2.xlsx"
+  unit_detail,teaching_team,delivery,marking,NSC = Configure.get_details(args)
 
 
   UnitName = unit_detail.iloc[2,1]

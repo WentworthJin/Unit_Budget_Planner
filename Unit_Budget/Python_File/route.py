@@ -2,6 +2,7 @@ from flask import Flask, render_template, jsonify, request, redirect, url_for, f
 from werkzeug.utils import secure_filename
 from Create_Table import Schema
 from Insert_All_Liangbo_Version import sample_insert
+import Insert_All
 import sqlite3 
 import os.path
 
@@ -240,6 +241,8 @@ def upload_file():
         filename = secure_filename(file.filename)
         Unit_ID = filename [0:8]
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        Insert_All.main([os.path.join(app.config['UPLOAD_FOLDER'], filename)])
+
     # Insert mock data
     ID = 'CITS4401'
     con = sqlite3.connect(db_path)
