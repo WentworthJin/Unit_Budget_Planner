@@ -44,7 +44,7 @@ npm install
 npm start
 </pre>
 
-3. <b>If you encountered any erroes and the application closed, just re-type 'npm start' in PowerShell</b>
+3. <b>If you encountered any errors and the application closed, just re-type 'npm start' in PowerShell</b>
 <br><br>
 ![image info](./Resources/PowerShell_Restartnpm.png)
 <br><br>
@@ -95,7 +95,7 @@ npm install
 npm start
 </pre>
 
-3. <b>If you encountered any erroes and the application closed, just re-type 'npm start' in PowerShell</b>
+3. <b>If you encountered any errors and the application closed, just re-type 'npm start' in PowerShell</b>
 <br><br>
 ![image info](./Resources/terminal_restart_mpm.png)
 <br><br>
