@@ -82,7 +82,7 @@ const getAllData = async(year, semester, unitcode) => {
  * @param data type=array, receive data from server 
  * plot the data dynamically based on data from database 
  */
- window.onload = function (data) {
+window.onload = function (data) {
   const dataArray = []
   for(var i = 0; i < data.length; i++){
     dataArray.push({"label":data[i][0], "y":data[i][12]})
@@ -92,17 +92,16 @@ const getAllData = async(year, semester, unitcode) => {
     title:{
       text: "Unit Budget"              
     },
-    data: [//array of dataSeries              
-      { //dataSeries object
-
-       /*** Change type "column" to "bar", "area", "line" or "pie"***/
+    data: [              
+      { 
        type: "column",
        dataPoints: dataArray
      }
      ],
     axisY:{
-      minimum:0,
-      prefix: "$",
+      minimum: 0,
+      prefix: "$ ",
+      suffix:"/student"
     }     
     
   });
@@ -282,6 +281,9 @@ getAllData()
 getWorkLoadData()
 getEmployeeData()
 graphing()
+
+
+
 
 
 

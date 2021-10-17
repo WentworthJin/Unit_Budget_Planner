@@ -2,14 +2,14 @@ import sqlite3
 import sys
 from sqlite3 import Error
 
-activity = [1,1,1,4,0.25,30,60,"Good"]
+activity = [1,1,1,4,0.25,60,"Good"]
 budget = [1,30000,'YES','NO']
 enrol = [1,200,'Yes','No']
 nsc = ["Lecture",6,10,60]
 oc = [1,6,"Good"]
 session = ["Lecture","NM"]
 staff = [1,"Racheal","Lecture"]
-TeachingCode = ["ORAA"]
+TeachingCode = ["ORAA",100]
 Unit = ["Computing","CITS2021","SEM-2",2020,"Fail"]
 
 '''
@@ -40,10 +40,10 @@ def create_connection(db_file):
 
 
 #Insert data into Activities table
-activity = [1,1,1,4,0.25,30,60,"Good"]
+activity = [1,1,1,4,0.25,60,"Good"]
 def insert_activities(conn, act):
-    sql = '''INSERT INTO Activities (UnitID, StaffID, SessionID, HourPerSession, MarkingHourPS, PayRate, Hour, Comment) 
-    VALUES(?, ?, ?, ?, ?, ?, ?,?);'''
+    sql = ''' INSERT INTO Activities (UnitID, StaffID, SessionID, HourPerSession, MarkingHourPS, Hour, Comment) 
+    VALUES(?, ?, ?, ?, ?, ?, ?);'''
     cur = conn.cursor()
     data_check=cur.execute(sql, act)
     # Check if data already exist
@@ -144,10 +144,10 @@ def insert_staff(conn, staff):
       return cur.lastrowid
 
 #Insert data into TeachingCode table
-TeachingCode = ["ORAA"]
+TeachingCode = ["ORAA",100]
 def insert_teachingcode(conn, TeachingCode):
-    sql = ''' Insert into TeachingCode(TeachingName)
-              VALUES(?) '''
+    sql = ''' Insert into TeachingCode(TeachingName, PayRate)
+              VALUES(?,?) '''
     cur = conn.cursor()
     data_check=cur.execute(sql, TeachingCode)
     # Check if data already exist

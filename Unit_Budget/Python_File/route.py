@@ -59,7 +59,7 @@ def get_all_data():
           JOIN Unit R USING (UnitID) \
           Where R.UnitCode = U.UnitCode \
           ) AS Num_of_Staff, \
-          SUM(A.Hour * A.HourlyRate) AS StaffCost, \
+          SUM(A.Hour * A.PayRate) AS StaffCost, \
           (Select SUM(N.TotalCost) \
           From OtherCost O JOIN NonSalaryCosts N USING (NSCID) \
           JOIN UNIT Z USING (UnitID) \
@@ -102,7 +102,6 @@ def get_all_data():
   names = [description[0] for description in cursor.description]
   cur.execute(query)
   rows = cur.fetchall()
-  print(rows)
   # clost the connection to database
   con.close()
   
@@ -122,7 +121,7 @@ def get_main_data():
                       JOIN Unit R USING (UnitID) \
                       Where R.UnitCode = U.UnitCode \
                       ) AS Num_of_Staff, \
-                      SUM(A.Hour * A.HourlyRate) AS StaffCost, \
+                      SUM(A.Hour * A.PayRate) AS StaffCost, \
                       (Select SUM(N.TotalCost) \
                       From OtherCost O JOIN NonSalaryCosts N USING (NSCID) \
                       JOIN UNIT Z USING (UnitID) \
@@ -152,13 +151,15 @@ def get_main_data():
                       Where B.IsEstimated="YES" and B.IsLastSemester="NO" and En.IsEstimated="YES" \
                       and En.IsLastSemester="NO" and En.UnitID = U.UnitID) AS Cost_per_student \
                       From Activities A JOIN Staff S USING (StaffID)  \
-                                                    JOIN Session E USING (SessionID) \
-                                                    JOIN Unit U USING (UnitID) \
-                      '
+                          JOIN Session E USING (SessionID) \
+                          JOIN Unit U USING (UnitID) \
+                      '         
   if queryStrings:
     sql = sql + ''' where ''' + queryStrings    
-  cur.execute(sql + " Group by U.UnitID ") 
+
+  cur.execute(sql + " Group By U.UnitID ") 
   result = cur.fetchall()
+  con.close()
   return jsonify(result)
 
 
@@ -180,6 +181,7 @@ def get_employee_budget():
     sql = sql + ''' where ''' + queryStrings         
   cur.execute(sql + " Group by S.StaffID ") 
   result = cur.fetchall()
+  con.close()
   return jsonify(result)
 
 # get workload and total cost for each unit 
@@ -202,11 +204,28 @@ def get_semester_budget():
   sql = sql + " Group By U.UnitID "
   cur.execute(sql)
   result = cur.fetchall()
+  con.close()
   return jsonify(result)
 
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+           
+@app.route("/comment", methods=["GET"])
+def get_comment():
+  requestStrings = buildJoinClause(request.args.to_dict())
+  con = sqlite3.connect(db_path)
+  cur = con.cursor()
+  sql = "Select U.UnitCode, A.Comment \
+        from Activities A \
+        JOIN Unit U USING (UnitID)"
+  if requestStrings:
+    sql = sql + ''' where ''' + requestStrings 
+  sql = sql + " and A.Comment IS NOT NULL"
+  cur.execute(sql)
+  result = cur.fetchall()
+  con.close()
+  return jsonify(result)
 
 @app.route("/table",methods=['GET','POST'])
 def upload_file():
@@ -219,6 +238,7 @@ def upload_file():
             return render()
       if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
+        Unit_ID = filename [0:8]
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
     # Insert mock data
     ID = 'CITS4401'
@@ -276,7 +296,7 @@ def sqlquery():
         content = c.fetchall()
         conn.commit()
         conn.close()
-        r = {'success':'true','data':list()}
+        r = {'success':'ture','data':list()}
         for row in content:
             d = dict(zip(col_name_list, row))
             r['data'].append(d)
