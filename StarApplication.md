@@ -4,7 +4,7 @@
 
 ## Supported System
 - <b>Windows</b> [Access the Windows setup guide](#windows-setup-guide)
-- <b>MacOS & Linux </b> [Access the Mac setup guide](#macos/linux-setup-guide)
+- <b>MacOS & Linux </b> [Access the Mac setup guide](#macos-and-linux-setup-guide)
 
 ## Software Requirements
 - <b>Python</b>: Click [Here](https://www.python.org/downloads/) to download the latest Python
@@ -63,7 +63,7 @@ npm start
 
 <br><hr><br>
 
-# MacOS/Linux Setup Guide
+# MacOS and Linux Setup Guide
 ![image info](./Resources/mac_icon.png) ![image info](./Resources/Linux_icon.ico)
 <br><hr><br>
 ## You need to download [Python](https://www.python.org/downloads/) and [Node.js](https://nodejs.org/en/download/)
