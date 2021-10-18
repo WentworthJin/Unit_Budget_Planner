@@ -16,8 +16,8 @@ def create_connection(db_file):
 
 #Insert data into Unit table
 def insert_unit(conn, unit):
-    sql = ''' INSERT INTO Unit(UnitCode,Semester,Year)
-              VALUES(?,?,?) '''
+    sql = ''' INSERT INTO Unit(UnitName,UnitCode,Semester,Year)
+              VALUES(?,?,?,?) '''
     cur = conn.cursor()
     data_check=cur.execute(sql, unit)
     # Check if data already exist

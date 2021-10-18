@@ -21,20 +21,20 @@ class TestCreate(unittest.TestCase):
   # database has been successfuly created
   def test_schema(self):
     Create_Table.Schema()
-    result = Create_Table.create_connection("Unit_Budget.db") 
+    result = Create_Table.create_connection("BudgetSample.db") 
     self.assertIsNotNone(result)
   
   # Check if create_table fucntion works
   # If result is None, then means this function works properly
   def test_createtable(self):
-    conn = Create_Table.create_connection("Unit_Budget.db") 
+    conn = Create_Table.create_connection("BudgetSample.db") 
     result = Create_Table.create_table(conn,'''CREATE TABLE IF NOT EXISTS Test''')
     self.assertIsNone(result)
   
   # Test Table and single data Inseration
   def test_insert_unit(self):
     Create_Table.Schema()
-    conn = sqlite3.connect("Unit_Budget.db")
+    conn = sqlite3.connect("BudgetSample.db")
 
      # Test Unit Table
     sample_unit = ["Computing","CITS2021","SEM-2",2020]
@@ -75,7 +75,7 @@ class TestCreate(unittest.TestCase):
 
   @classmethod
   def tearDownClass(cls):
-    os.remove('Unit_Budget.db')
+    os.remove('BudgetSample.db')
 
 if __name__ == '__main__':
   unittest.main()

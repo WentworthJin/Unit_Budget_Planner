@@ -159,14 +159,14 @@ def insert_teachingcode(conn, TeachingCode):
 
 #Insert data into Unit table
 Unit = ["Computing","CITS2021","SEM-2",2020]
-def insert_unit(conn, unit):
+def insert_unit(conn, Unit):
     sql = ''' INSERT INTO Unit(UnitName,UnitCode,Semester,Year)
               VALUES(?,?,?,?) '''
     cur = conn.cursor()
-    data_check=cur.execute(sql, unit)
+    data_check=cur.execute(sql, Unit)
     # Check if data already exist
     if data_check is None:
-      cur.execute(sql, unit)
+      cur.execute(sql, Unit)
     else:
       conn.commit()
       return cur.lastrowid
@@ -174,7 +174,7 @@ def insert_unit(conn, unit):
 def sample_insert():
 
   try:
-    database = "Unit_Budget.db"
+    database = "BudgetSample.db"
 
     #Create a database connection
     conn = create_connection(database)

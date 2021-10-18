@@ -34,17 +34,20 @@
 
 <pre>
 
-CREATE TABLE IF NOT EXISTS Activities (
-                                        ActivitiesID INTEGER PRIMARY KEY AUTOINCREMENT,
-                                        UnitID INT REFERENCES Unit (UnitID) ON DELETE RESTRICT ON UPDATE CASCADE,
-                                        StaffID INT REFERENCES Staff (StaffID) ON DELETE RESTRICT ON UPDATE CASCADE,
-                                        SessionID INT REFERENCES Session (SessionID) ON DELETE RESTRICT ON UPDATE CASCADE,
-                                        HourPerSession INT,
-                                        MarkingHourPS REAL,
-                                        PayRate REAL,
-                                        Hour REAL,
-                                        Comment VARCHAR (300) 
-                                    );
+CREATE TABLE IF NOT EXISTS Unit(
+                                            UnitID   INTEGER       PRIMARY KEY AUTOINCREMENT,
+                                            UnitName VARCHAR (100),
+                                            UnitCode VARCHAR (10),
+                                            Semester VARCHAR (10),
+                                            Year     INT (4),
+                                            Comment  VARCHAR (300) DEFAULT NoRecord,
+                                            UNIQUE(
+                                                UnitName,
+                                                UnitCode,
+                                                Semester,
+                                                Year
+                                            )
+                                );
 </pre>
 
 - Insert Data DDL
@@ -99,12 +102,18 @@ def insert_activities(conn, act):
 
 <pre>
 
-CREATE TABLE IF NOT EXISTS Budget (
+CREATE TABLE IF NOT EXISTS Budget(
                                         BudgetID INTEGER PRIMARY KEY AUTOINCREMENT,
                                         UnitID INT REFERENCES Unit (UnitID) ON DELETE RESTRICT ON UPDATE CASCADE,
                                         Cost INT,
                                         IsEstimated VARCHAR (3),
-                                        IsLastSemester VARCHAR (3) 
+                                        IsLastSemester VARCHAR (3), 
+                                            UNIQUE(
+                                                UnitID,
+                                                Cost,
+                                                IsEstimated,
+                                                IsLastSemester
+                                            )
                                 );
 </pre>
 
@@ -158,12 +167,18 @@ def insert_budget(conn, budget):
 
 <pre>
 
-CREATE TABLE IF NOT EXISTS Enrolment (
+CREATE TABLE IF NOT EXISTS Enrolment(
                                             EnrolmentID INTEGER PRIMARY KEY AUTOINCREMENT,
                                             UnitID INT REFERENCES Unit (UnitID) ON DELETE RESTRICT ON UPDATE CASCADE,
                                             EnrolmentNumber INT,
                                             IsEstimated VARCHAR (3),
-                                            IsLastSemester VARCHAR (3) 
+                                            IsLastSemester VARCHAR (3),
+                                            UNIQUE (
+                                                UnitID,
+                                                EnrolmentNumber,
+                                                IsEstimated,
+                                                IsLastSemester
+                                            )
                                     );
 </pre>
 
@@ -218,13 +233,18 @@ def insert_enrolment(conn, enrol):
 
 <pre>
 
-CREATE TABLE IF NOT EXISTS NonSalaryCosts (
-                                                NSCID INTEGER PRIMARY KEY AUTOINCREMENT,
-                                                NSCName VARCHAR (50),
-                                                Hours REAL,
-                                                CostPerHour REAL,
-                                                TotalCost REAL,
-                                                UNIQUE (NSCName, CostPerHour) ON CONFLICT FAIL
+CREATE TABLE IF NOT EXISTS NonSalaryCosts(
+                                            NSCID       INTEGER      PRIMARY KEY AUTOINCREMENT,
+                                            NSCName     VARCHAR (50),
+                                            Hours       REAL,
+                                            CostPerHour REAL,
+                                            TotalCost   REAL         DEFAULT (0),
+                                            UNIQUE(
+                                                NSCName,
+                                                Hours,
+                                                CostPerHour
+                                            )
+                                            ON CONFLICT FAIL
                                         );
 </pre>
 
@@ -276,11 +296,17 @@ def insert_nsc(conn, nsc):
 
 <pre>
 
-CREATE TABLE IF NOT EXISTS OtherCost (
-                                            OCID INTEGER PRIMARY KEY AUTOINCREMENT,
-                                            NSCID INT REFERENCES NonSalaryCosts (NSCID) ON DELETE RESTRICT ON UPDATE CASCADE,
-                                            UnitID INT REFERENCES Unit (UnitID) ON DELETE RESTRICT ON UPDATE CASCADE,
-                                            Comment VARCHAR (300)
+CREATE TABLE IF NOT EXISTS OtherCost(
+                                        OCID    INTEGER       PRIMARY KEY AUTOINCREMENT,
+                                        NSCID   INT           REFERENCES NonSalaryCosts (NSCID) ON DELETE RESTRICT
+                                                                                                ON UPDATE CASCADE,
+                                        UnitID  INT           REFERENCES Unit (UnitID) ON DELETE RESTRICT
+                                                                                    ON UPDATE CASCADE,
+                                        Comment VARCHAR (300) DEFAULT NoRecord,
+                                        UNIQUE(
+                                            NSCID,
+                                            UnitID
+                                        )
                                     );
 </pre>
 
@@ -485,13 +511,19 @@ def insert_teachingcode(conn, TeachingCode):
 
 <pre>
 
-CREATE TABLE IF NOT EXISTS Unit (
-                                        UnitID INTEGER PRIMARY KEY AUTOINCREMENT,
-                                        UnitName VARCHAR (100),
-                                        UnitCode VARCHAR (10),
-                                        Semester VARCHAR (10),
-                                        Year INT (4),
-                                        Comment VARCHAR (300)
+CREATE TABLE IF NOT EXISTS Unit(
+                                            UnitID   INTEGER       PRIMARY KEY AUTOINCREMENT,
+                                            UnitName VARCHAR (100),
+                                            UnitCode VARCHAR (10),
+                                            Semester VARCHAR (10),
+                                            Year     INT (4),
+                                            Comment  VARCHAR (300) DEFAULT NoRecord,
+                                            UNIQUE(
+                                                UnitName,
+                                                UnitCode,
+                                                Semester,
+                                                Year
+                                            )
                                 );
 </pre>
 
