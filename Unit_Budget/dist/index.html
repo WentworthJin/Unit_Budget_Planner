@@ -11,7 +11,7 @@
     <h1>Welcome back to the Unit Budget Planner!</h1>
     </br>
     <!-- Role selection for future functionality development -->
-    <p>Please select your role before action.</p>
+    <p class=text>Please select your role before action.</p>
     </br>
     <button id="Head of Department" class="dabutton" onClick="GFG_click(this.id)">Head of Department</button> <button id="Unit Coordinator" class="dabutton" onClick="GFG_click(this.id)">Unit Coordinator</button> <button id="Head of Finance" class="dabutton" onClick="GFG_click(this.id)">Head of Finance</button>
     </br>
@@ -20,15 +20,22 @@
     </p>
     </br>
     <!-- Upload file function -->
-    <p>Click on the "Choose File" button to upload the unit budget spreadsheet, it should be in format of .xlsx:</p>
-    <form method="POST" action="http://127.0.0.1:5000/table" enctype="multipart/form-data">
-      <input type="file" id="myFile" name="filename">
-      <input type="submit" value="Upload"> 
-    </form>
+    <div class="upload">
+      <p class="text" id="text">Please Upload Excel File</p>
+      <form method="POST" action="http://127.0.0.1:5000/table" enctype="multipart/form-data">
+        <input type="file" id="myFile" name="filename" onchange="checkFile(this);"/>
+        <input type="file" id="myFile1" name="filename" onchange="checkFile(this);" webkitdirectory mozdirectory/>
+        <p class='text' id="text1">Please Select the correct file format</p>
+        <input type="submit" value="Upload" id='bttn'> 
+        <input type="button" value="Not Sure?" id='bttn' onclick="sampleInformation();"> 
+      </form>
+    </div>
     </br>
     <!-- Summary report function -->
-    <button onclick="location.href='http://127.0.0.1:5000/get';" id="summary" class="summary">Summary Report</button>
+    <button onclick="location.href='http\://127.0.0.1:5000/get';" id="summary" class="summary">Summary Report</button>
     <!-- Link to the Javascript file to run this application -->
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"> </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="../src/index.js"></script>
   </body>
 </html>
