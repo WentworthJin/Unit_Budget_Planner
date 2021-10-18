@@ -28,7 +28,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 # get the absolute path for the current directory
 BASE_DIR = os.path.dirname(os.path.abspath(__file__)) 
 # get the whole path to database
-db_path = os.path.join(BASE_DIR, "../BudgetSample (1).db")
+db_path = os.path.join(BASE_DIR, "../BudgetSample.db")
 
 @app.route("/", methods=["GET"])
 def render():
@@ -259,6 +259,7 @@ def upload_file():
       if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
         Unit_ID = filename [0:8]
+        Schema()
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         Insert_All.main([os.path.join(app.config['UPLOAD_FOLDER'], filename)])
         print("Status")
