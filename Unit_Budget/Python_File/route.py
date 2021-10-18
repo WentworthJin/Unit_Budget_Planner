@@ -22,19 +22,13 @@ def resource_path(relative_path):
   base_path = getattr(sys, '_MEIPASS', os.path.dirname(os.path.dirname(__file__)))
   return os.path.join(base_path, relative_path) 
 
-
-if hasattr(sys, '_MEIPASS'):
-  template_folder =resource_path('dist')
-  static_folder = resource_path('src')
-  app = Flask(__name__, template_folder=template_folder, static_folder=static_folder)
-else: 
-  app = Flask(__name__,template_folder=resource_path('dist'),static_folder=resource_path('src'))
+app = Flask(__name__,template_folder=resource_path('dist'),static_folder=resource_path('src'))
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 # get the absolute path for the current directory
 BASE_DIR = os.path.dirname(os.path.abspath(__file__)) 
 # get the whole path to database
-db_path = os.path.join(BASE_DIR, "../BudgetSample.db")
+db_path = os.path.join(BASE_DIR, "../BudgetSample (1).db")
 
 @app.route("/", methods=["GET"])
 def render():
@@ -50,10 +44,8 @@ def buildWhereClause(data):
   s4 = 'substr(U.UnitCode, 5, 1) ="{}" '.format(data['unitLevel']) if 'unitLevel' in params else '' 
   s = list()
   for x in [s1, s2, s3, s4]:
-  s = list()
-  for x in [s1, s2, s3]:
-      if x:
-          s.append(x)
+    if x:
+        s.append(x)
   queryStrings = ' and '.join(s) 
   return queryStrings
 
@@ -66,8 +58,8 @@ def buildJoinClause(data):
   s3 = 'U.Semester = ' + data['semester'] if 'semester' in params else ''
   s = list()
   for x in [s1, s2, s3]:
-      if x:
-          s.append(x)
+    if x:
+        s.append(x)
   requestStrings = ' and '.join(s) 
   return requestStrings
 
