@@ -3,7 +3,7 @@
 # Client
 <b>Rachel Cardell-Oliver</b> - Head of Department, UWA Computer Science
 # User Manual
-- [<b>How to Start the Application</b>](./StarApplication.md)
+- [<b>How to Start the Application</b>](./StartApplication.md)
 - [<b>Group Details</b>](#group-details)
   - [<b>Group Member</b>](#team-member)
   - [<b>Group Meeting files</b>](#group-meeting)
