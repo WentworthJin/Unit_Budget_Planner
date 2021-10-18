@@ -251,10 +251,11 @@ def upload_file():
             return render()
       if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
-        Unit_ID = filename [0:8]
+        Schema()
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        Insert_All.main([os.path.join(app.config['UPLOAD_FOLDER'], filename)])
     # Insert mock data
-    ID = Unit_ID
+    ID = 'CITS4401'
     con = sqlite3.connect(db_path)
     cur = con.cursor()
     cur.execute('Select U.UnitCode, SUM(A.Hour) AS TotalLoad, U.Semester,U.Year, \
@@ -284,7 +285,7 @@ def upload_file():
                       (Select SUM(A.Hour) \
                       From Activities A JOIN Unit N USING (UnitID) \
                       Where N.UnitID = U.UnitID \
-                      Group by N.UnitID) AS Total_WorkLoad \
+                      Group by N.UnitID) AS Total_WorkLoad, U.Comment \
                       From Activities A JOIN Staff S USING (StaffID)  \
                                                     JOIN Session E USING (SessionID) \
                                                     JOIN Unit U USING (UnitID) \
