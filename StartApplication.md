@@ -22,7 +22,8 @@
 
 ![image info](./Resources/OpenPowershell.png)
 <br><br>
-2. <b>Copy the following commands in PowerShell, and start the application.</b>
+2. <b>Copy the following commands in PowerShell, and start the application.</b> <br>
+<b> Tips: You can copy all codes in once and paste into powershell</b>
 <pre>
 
 cd .\Desktop\
