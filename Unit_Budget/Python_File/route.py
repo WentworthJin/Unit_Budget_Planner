@@ -245,6 +245,7 @@ def upload_file():
     ID = Unit_ID
     con = sqlite3.connect(db_path)
     cur = con.cursor()
+    cur1 = con.cursor()
     cur.execute('Select U.UnitCode, SUM(A.Hour) AS TotalLoad, U.Semester,U.Year, \
                       (Select COUNT(DISTINCT P.Name) \
                       From Activities A JOIN Staff P USING (StaffID) \
@@ -277,11 +278,19 @@ def upload_file():
                                                     JOIN Session E USING (SessionID) \
                                                     JOIN Unit U USING (UnitID) \
                       Group By U.UnitID')
+    cur1.execute('Select S.UnitCode, S.Staff_Name, S.Number_of_Sessions_Teached, S.PayRate,\
+                  S.NonMarking_Workload_Hour, S.Marking_Workload_Hour, S.Total_Cost\
+                  From StaffDetail S JOIN Unit U USING (UnitCode)\
+                  AND S.Staff_Position = "Academic staff"')
     rows = cur.fetchall()
+    rows1 = cur1.fetchall()
     for row in rows:
       if row[0] == ID:
         data = row
-    return render_template('table.html',data = data)
+    for row1 in rows1:
+      if row1[0] == ID:
+        data1 = row1
+    return render_template('table.html',data = data, data1=data1)
   except:
     return render()
 
