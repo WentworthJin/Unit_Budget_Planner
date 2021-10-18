@@ -57,6 +57,8 @@ npm start
 
 cd .\Desktop\Unit_Budget_Planner\Unit_Budget\
 
+Set-ExecutionPolicy Unrestricted -Scope Process
+
 .\venv\Scripts\activate
 
 npm start
