@@ -6,8 +6,6 @@ import Insert_All
 import sqlite3 
 import os.path
 
-# Initilize the Database
-Schema()
 
 # Insert mock data
 # sample_insert()
@@ -243,6 +241,7 @@ def upload_file():
         Schema()
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         Insert_All.main([os.path.join(app.config['UPLOAD_FOLDER'], filename)])
+        print("Status")
         
     # Insert mock data
     ID = Unit_ID
