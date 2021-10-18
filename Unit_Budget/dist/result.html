@@ -46,7 +46,7 @@
     <div>
       <h3 class="report">Summary Report</h3>
       <div class="query">
-        <button class="filter" onclick=showAndHide()>Filter</button>
+        <button class="filter" id="filter" onclick=showAndHide()>Filter</button>
         <input type="text" placeholder="Enter your query" class="search">
         <input type="submit" value="Search" class="enter">
         <button class="comment" id="comment">Comment</button>
@@ -85,7 +85,7 @@
           <input type="text" name="year" id="years" placeholder="Enter Year" onkeypress="handleClick(event)">
           <label for="units" id="unitcodelabels">Unit</label>      
           <input type="text" name="units" id="unitcodes" placeholder="Unit Code" onkeypress="handleClick(event)">
-          <button class='clear' onclick="clearFunction()">Clear</button>
+          <button class='clear' onclick="clearFunction()" id="clear">Clear</button>
         <table class='tables' id="table_comments">
           <thead>
             <th>Unit Code</th><th>Comment</th>
@@ -114,7 +114,7 @@
         <div id="horizontal" style="height: 370px; width: 80%;" class="chart"></div>
       </div> 
       <br>
-    <Button class="next"><a href="http://127.0.0.1:5000/">Back</a></Button>
+    <Button class="next" id='back'><a href="http://127.0.0.1:5000/">Back</a></Button>
     </div>
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"> </script>
     <script src="../src/index.js"></script>
