@@ -35,6 +35,8 @@ pip3 install --upgrade pip
 
 python3 -m venv venv
 
+Set-ExecutionPolicy Unrestricted -Scope Process
+
 .\venv\Scripts\activate
 
 pip3 install -r .\Python_File\requirements.txt
