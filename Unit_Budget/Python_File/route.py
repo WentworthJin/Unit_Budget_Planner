@@ -240,7 +240,10 @@ def upload_file():
       if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
         Unit_ID = filename [0:8]
+        Schema()
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        Insert_All.main([os.path.join(app.config['UPLOAD_FOLDER'], filename)])
+        
     # Insert mock data
     ID = Unit_ID
     con = sqlite3.connect(db_path)
