@@ -2,12 +2,11 @@ from flask import Flask, render_template, jsonify, request, redirect, url_for, f
 from werkzeug.utils import secure_filename
 from Create_Table import Schema
 from Insert_All_Liangbo_Version import sample_insert
+import Insert_All
 import sqlite3 
 import os.path
 import sys
 
-# Initilize the Database
-Schema()
 
 # Insert mock data
 # sample_insert()
@@ -35,7 +34,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 # get the absolute path for the current directory
 BASE_DIR = os.path.dirname(os.path.abspath(__file__)) 
 # get the whole path to database
-db_path = os.path.join(BASE_DIR, "BudgetSample (1).db")
+db_path = os.path.join(BASE_DIR, "../BudgetSample.db")
 
 @app.route("/", methods=["GET"])
 def render():
@@ -47,13 +46,17 @@ def buildWhereClause(data):
   s1 = 'U.UnitCode ="{}" '.format(data['unitcode']) if 'unitcode' in params else ''
   s2 = 'U.Year = ' + data['year'] if 'year' in params else ''
   s3 = 'U.Semester = ' + data['semester'] if 'semester' in params else ''
+
   s4 = 'substr(U.UnitCode, 5, 1) ="{}" '.format(data['unitLevel']) if 'unitLevel' in params else '' 
   s = list()
   for x in [s1, s2, s3, s4]:
+  s = list()
+  for x in [s1, s2, s3]:
       if x:
           s.append(x)
   queryStrings = ' and '.join(s) 
   return queryStrings
+
 
 def buildJoinClause(data): 
   data = request.args.to_dict()
@@ -176,12 +179,13 @@ def get_main_data():
                       Where B.IsEstimated="YES" and B.IsLastSemester="NO" and En.IsEstimated="YES" \
                       and En.IsLastSemester="NO" and En.UnitID = U.UnitID) AS Cost_per_student \
                       From Activities A JOIN Staff S USING (StaffID)  \
-                                                    JOIN Session E USING (SessionID) \
-                                                    JOIN Unit U USING (UnitID) \
-                      '
+                          JOIN Session E USING (SessionID) \
+                          JOIN Unit U USING (UnitID) \
+                      '         
   if queryStrings:
     sql = sql + ''' where ''' + queryStrings    
-  cur.execute(sql + " Group by U.UnitID ") 
+
+  cur.execute(sql + " Group By U.UnitID ") 
   result = cur.fetchall()
   con.close()
   return jsonify(result)
@@ -264,10 +268,14 @@ def upload_file():
         filename = secure_filename(file.filename)
         Unit_ID = filename [0:8]
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        Insert_All.main([os.path.join(app.config['UPLOAD_FOLDER'], filename)])
+        print("Status")
+        
     # Insert mock data
     ID = Unit_ID
     con = sqlite3.connect(db_path)
     cur = con.cursor()
+    cur1 = con.cursor()
     cur.execute('Select U.UnitCode, SUM(A.Hour) AS TotalLoad, U.Semester,U.Year, \
                       (Select COUNT(DISTINCT P.Name) \
                       From Activities A JOIN Staff P USING (StaffID) \
@@ -295,16 +303,30 @@ def upload_file():
                       (Select SUM(A.Hour) \
                       From Activities A JOIN Unit N USING (UnitID) \
                       Where N.UnitID = U.UnitID \
-                      Group by N.UnitID) AS Total_WorkLoad \
+                      Group by N.UnitID) AS Total_WorkLoad, U.Comment \
                       From Activities A JOIN Staff S USING (StaffID)  \
                                                     JOIN Session E USING (SessionID) \
                                                     JOIN Unit U USING (UnitID) \
                       Group By U.UnitID')
+
     rows = cur.fetchall()
     for row in rows:
       if row[0] == ID:
         data = row
     return render_template('table.html',data = data)
+    cur1.execute('Select S.UnitCode, S.Staff_Name, S.Number_of_Sessions_Teached, S.PayRate,\
+                  S.NonMarking_Workload_Hour, S.Marking_Workload_Hour, S.Total_Cost\
+                  From StaffDetail S JOIN Unit U USING (UnitCode)\
+                  AND S.Staff_Position = "Academic staff"')
+    rows = cur.fetchall()
+    rows1 = cur1.fetchall()
+    for row in rows:
+      if row[0] == ID:
+        data = row
+    for row1 in rows1:
+      if row1[0] == ID:
+        data1 = row1
+    return render_template('table.html',data = data, data1=data1)
   except:
     return render()
 
@@ -320,7 +342,7 @@ def sqlquery():
         content = c.fetchall()
         conn.commit()
         conn.close()
-        r = {'success':'true','data':list()}
+        r = {'success':'ture','data':list()}
         for row in content:
             d = dict(zip(col_name_list, row))
             r['data'].append(d)

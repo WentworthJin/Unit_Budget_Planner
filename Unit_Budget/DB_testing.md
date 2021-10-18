@@ -1,7 +1,4 @@
-# Unit Budget Planning Project Individual Part
-
-## Student:
-- Liangbo Jin 23078811
+# Database Related Testing User guide
 
 <br><hr><br>
 

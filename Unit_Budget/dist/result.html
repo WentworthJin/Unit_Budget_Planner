@@ -3,6 +3,7 @@
   <head>
     <title>Summary Report</title>
     <link href="../src/style.css" rel="stylesheet">
+    <script src="../src/index.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
       // Get all reports and dynamically add to the table.
@@ -15,6 +16,7 @@
         const yearValue = $("#_year").val().toString();
         const semesterValue = $("#_semester").val().toString();
         const unitValue = $("#_unit").val().toString();
+
         const unitLevelValue = $("#_level").val().toString();
         const reports = await getAllData(yearValue, semesterValue, unitValue, unitLevelValue);
         for (var i=0; i< reports.length; i++) {
@@ -53,6 +55,7 @@
         <br><br>
         <div class="radio" id="radio">
           <label for="year" id="yearlabel">Year</label>
+          <label for="year">Year</label>
           <select name="year" id="_year" onchange="updateReportList()">
             <option value="">All</option>
             <option value="2021">2021</option>
@@ -92,6 +95,9 @@
           </thead>
         </table>
         <br><hr>
+        </div>
+        <br>
+
           <table class="tables" name="_tables">
             <thead>
               <th>{{names[0]}}</th><th>{{names[2]}}</th>
@@ -100,12 +106,14 @@
               <th>{{names[9]}}</th><th>{{names[11]}}</th><th>{{names[12]}}</th>
             </thead>
             <tbody id="report_list">
-                {% for row in rows %}
-                <td>{{row[0]}}</td><td>{{row[2]}}</td><td>{{row[3]}}</td><td>{{row[4]}}</td>
-                <td>{{row[5]}}</td><td>{{row[6]}}</td><td>{{row[7]}}</td><td>{{row[8]}}</td>
-                <td>{{row[9]}}</td><td>{{row[11]}}</td><td>{{row[12]}}</td>
-                {% endfor %}
-            </tbody>
+            {% for row in rows %}
+            <tr>
+              <td>{{row[0]}}</td><td>{{row[2]}}</td><td>{{row[3]}}</td><td>{{row[4]}}</td>
+              <td>{{row[5]}}</td><td>{{row[6]}}</td><td>{{row[7]}}</td><td>{{row[8]}}</td>
+              <td>{{row[9]}}</td><td>{{row[11]}}</td><td>{{row[12]}}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
           </table>
         <div id="barchart" style="height: 370px; width: 80%;" class="chart"></div>
         <br>
@@ -117,7 +125,6 @@
     <Button class="next"><a href="http://127.0.0.1:5000/">Back</a></Button>
     </div>
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"> </script>
-    <script src="../src/index.js"></script>
   </body>
 </html>
 

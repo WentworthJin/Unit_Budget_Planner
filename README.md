@@ -1,60 +1,22 @@
-# Deliverable 2
-
-## How to Launch the Application
-
-<b>1. Set up<b>
-
-### Requirement 
-
-**In order to use the interface, will require to install node.js at https://nodejs.org/en/download/ and install python3 (require to have python(3.5 and above), can be find at https://www.python.org/downloads/**
-
-You need to install the packages inside the [<b>requirements.txt<b>](./Unit_Budget/Python_File/requirements.txt). Run the following codes.
-
-<pre>
-
-**Install virtual Environment**
-
-**For MacOS and Linux User**
-
-cd Unit_Budget
-
-python3 -m venv venv 
-
-source venv/bin/activate
-
-pip3 install -r ./Python_File/requirements.txt
-
-npm install
-
-npm start
-
-**For Windows User**
-
-cd Unit_Budget
-
-python3 -m venv venv OR py -m venv venv
-
-Set-ExecutionPolicy Unrestricted -Scope Process
-
-venv/Scripts/activate
-
-pip3 install -r ./Python_File/requirements.txt
-
-npm install
-
-npm start
-
-</pre>
-
-<hr>
-
+![image info](./Resources/main_page.png)
 # CITS5206 Professional Computing Project - Unit Budget Planner
-
-![image info](./Resources/Prototype.png)
-
-## Client
+# Client
 <b>Rachel Cardell-Oliver</b> - Head of Department, UWA Computer Science
+# User Manual
+- [<b>How to Start the Application</b>](./StarApplication.md)
+- [<b>Group Details</b>](#group-details)
+  - [<b>Group Member</b>](#team-member)
+  - [<b>Group Meeting files</b>](#group-meeting)
+  - [<b>Group Contribution</b>](#group-project-contribution)
+- [<b>Project Detail</b>](#project-details)
+- [<b>Database Structure</b>](./DB_User_Guide.md)
+- [<b>Supported Testing</b>](#support-testing-files)
+  - [<b>Database Related Testing</b>](./Unit_Budget/DB_testing.md)
+  - [<b>User Interface Related Testing</b>](./Unit_Budget/tests/User_Interface_testing.md)
 
+<br><hr><br>
+
+# Group Details
 ## Team Member
 - Ethan Chen 23067035
 - Liangbo Jin 23078811
@@ -63,21 +25,31 @@ npm start
 - Nara Eam 22805226
 - Keli Yin 22450718
 
-<hr>
-
 ## Group Meeting
 
-- Schedule
-  - Every <b>Thursday 4pm</b>, details can be accessed [<b>here</b>](./Group_Meeting/Meeting_Record/20210729_Meeting_Minutes).
+- Meeting Schedule
+  - Every <b>Thursday 4pm</b>, details can be accessed [<b>Here</b>](./Group_Meeting/Meeting_Record/20210729_Meeting_Minutes).
 
-- Meeting Agenda (Accessed [Here](./Group_Meeting))
-- Group Meeting Record, access files [here](./Group_Meeting/Meeting_Record)
+- All Meeting Agenda file (Accesses [<b>Here</b>](./Group_Meeting))
 
-<hr>
+- All Group Meeting Records (Accesses [<b>Here</b>](./Group_Meeting/Meeting_Record))
 
-## Resources
+## Group Project Contribution
 
-### Project Details
+|     Name     |      Contribution     | 
+|--------------|:---------------------:|
+| Liangbo Jin 23078811 |  0%       |
+| Ethan Chen 23067035 |    0%          |
+| Lida Tong 22957193 | 0%       |
+| Nara Eam 22805226 | 0%       |
+| Yu Zhu 23053734 | 0%       |
+| Keli Yin 22450718 | 0%       |
+
+See details and evidence [<b>Here</b>](./Group_Conbtribution.pdf)
+
+<br><hr><br>
+
+# Project Details
 
 Every unit taught in the School of PMC has a unit budget each semester to document the hours allocated to preparation and delivery of teaching activities and marking. It also documents casual salary costs and any software or hardware costs. The current system is based on individual spreadsheets for each unit. The spreadsheet system is cumbersome to set up for every unit each semester and it is difficult to break down the hours and costs of different types of activities for delivering units. Summary reports are needed in order to understand the costs in workload hours and paid casual teaching, for comparing the budgets of different groups of units and to track budget expenditure during the semester.
 
@@ -92,24 +64,9 @@ The software will:
 - Import cost information in order to track unit expenditure against the budget.
 - Visualise and export reports on historical trends of enrolments and budgets.
 
-### Marking Criteria
+<br><hr><br>
 
-- [Deliverable 1](./Project_Details/Deliverable_1_Details.docx) 15% ( 10% Group, 5% Individual ) <b>Due: 27/08/2021</b>
-- [Deliverable 2](./Project_Details/) 25% ( 25% Individual ) <b>Due: Week 8</b>
-- [Deliverable 3](./Project_Details/) 30% ( 20% Group, 10% Individual ) <b>Due: Week 12</b>
+# Support Testing Files
 
-### Client Requirements
-- The app should be in a desktop format 
-- The system shall allow the user to import the spreadsheet, or group of spreadsheets
-- The system should be able to produce and filter summary report  
-- The system shall allow user to type in their own SQL query
-- The system should be able to store the comment from the spreadsheet  
-- The system should allow the user to pull up the comment and check if there is actual anomaly happen.
-- The system shall be able to track the historical budget for user
-- The system shall provide different interface for different users according to their roles such as Unit Coordinator and Head of department
-
-
-
-<hr>
-
-
+- Database related testing guide, refer to [<b>Here</b>](./Unit_Budget/DB_testing.md)
+- User Interface related testing guide, refer to [<b>Here</b>](./Unit_Budget/tests/User_Interface_testing.md)

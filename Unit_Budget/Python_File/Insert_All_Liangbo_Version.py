@@ -2,15 +2,15 @@ import sqlite3
 import sys
 from sqlite3 import Error
 
-TeachingCode = ["TeachingName"]
-Unit = ["CITS2021","SEN-2",2020]
-session = ["Lecture","Non-Mark"]
-nsc = ["Lecture",6,10,60]
+activity = [1, 1, 1, 4, 0.25, 20, 40]
+budget = [1,30000,'YES','NO']
 enrol = [1,200,'Yes','No']
-budget = [1,6,"Yes","No"]
-activities = [1,6,3,50,12]
-oc = [1,6]
+nsc = ["Lecture",6,10,60]
+oc = [1,6,"Good"]
+session = ["Lecture","NM"]
 staff = [1,"Racheal","Lecture"]
+TeachingCode = ["ORAA"]
+Unit = ["Computing","CITS2021","SEM-2",2020]
 
 '''
     Functionality: The Insert_All_Liangbo_Version.py.py is a framework that provides various functions for other users 
@@ -39,60 +39,38 @@ def create_connection(db_file):
     return conn
 
 
-#Insert data into Unit table
-def insert_unit(conn, unit):
-    sql = ''' INSERT INTO Unit(UnitCode,Semester,Year)
-              VALUES(?,?,?) '''
+#Insert data into Activities table
+activity = [1, 1, 1, 4, 0.25, 20, 40]
+def insert_activities(conn, act):
+    sql = ''' INSERT INTO Activities(UnitID, StaffID, SessionID, HourPerSession, MarkingHourPS, PayRate, Hour) 
+    VALUES(?, ?, ?, ?, ?, ?, ?);'''
     cur = conn.cursor()
-    data_check=cur.execute(sql, unit)
+    data_check=cur.execute(sql, act)
     # Check if data already exist
     if data_check is None:
-      cur.execute(sql, unit)
+      cur.execute(sql, act)
+      conn.commit()
     else:
       conn.commit()
       return cur.lastrowid
 
-#Insert data into TeachingCode table
-def insert_teachingcode(conn, TeachingCode):
-    sql = ''' Insert into TeachingCode(TeachingName)
-              VALUES(?) '''
+#Insert data into Budget table
+budget = [1,30000,'YES','NO']
+def insert_budget(conn, budget):
+    sql = ''' INSERT INTO Budget(UnitID, Cost, IsEstimated, IsLastSemester) 
+    VALUES(?,?,?,?); '''
     cur = conn.cursor()
-    data_check=cur.execute(sql, TeachingCode)
+    data_check=cur.execute(sql, budget)
     # Check if data already exist
     if data_check is None:
-      cur.execute(sql, TeachingCode)
-    else:
-      conn.commit()
-      return cur.lastrowid
-
-#Insert data into Session table
-def insert_session(conn, session):
-    sql = ''' Insert into Session(SessionName,SessionType)
-              VALUES(?,?) '''
-    cur = conn.cursor()
-    data_check=cur.execute(sql, session)
-    # Check if data already exist
-    if data_check is None:
-      cur.execute(sql, session)
-    else:
-      conn.commit()
-      return cur.lastrowid
-
-#Insert data into NonSalaryCosts table
-def insert_nsc(conn, nsc):
-    sql = ''' Insert into NonSalaryCosts(NSCName,Hours,CostPerHour,TotalCost)
-              VALUES(?,?,?,?) '''
-    cur = conn.cursor()
-    data_check=cur.execute(sql, nsc)
-    # Check if data already exist
-    if data_check is None:
-      cur.execute(sql, nsc)
+      cur.execute(sql, budget)
       conn.commit()
     else:
       conn.commit()
       return cur.lastrowid
 
 #Insert data into Enrolment table
+enrol = [1,200,'Yes','No']
 def insert_enrolment(conn, enrol):
     sql = ''' Insert into Enrolment(UnitID,EnrolmentNumber,IsEstimated,IsLastSemester)
               VALUES(?,?,?,?) '''
@@ -106,38 +84,26 @@ def insert_enrolment(conn, enrol):
       conn.commit()
       return cur.lastrowid
 
-#Insert data into Budget table
-def insert_budget(conn, budget):
-    sql = ''' Insert into Budget(UnitID,Cost,IsEstimated,IsLastSemester)
+#Insert data into NonSalaryCosts table
+nsc = ["Lecture",6,10,60]
+def insert_nsc(conn, nsc):
+    sql = ''' Insert into NonSalaryCosts(NSCName,Hours,CostPerHour,TotalCost)
               VALUES(?,?,?,?) '''
     cur = conn.cursor()
-    data_check=cur.execute(sql, budget)
+    data_check=cur.execute(sql, nsc)
     # Check if data already exist
     if data_check is None:
-      cur.execute(sql, budget)
-      conn.commit()
-    else:
-      conn.commit()
-      return cur.lastrowid
-
-#Insert data into Activities table
-def insert_activities(conn, activities):
-    sql = ''' Insert into Activities(UnitID,StaffID,SessionID,HourlyRate,Hour)
-              VALUES(?,?,?,?,?) '''
-    cur = conn.cursor()
-    data_check=cur.execute(sql, activities)
-    # Check if data already exist
-    if data_check is None:
-      cur.execute(sql, activities)
+      cur.execute(sql, nsc)
       conn.commit()
     else:
       conn.commit()
       return cur.lastrowid
 
 #Insert data into OtherCost table
+oc = [1,6]
 def insert_oc(conn, oc):
-    sql = ''' Insert into OtherCost(NSCID,UnitID)
-              VALUES(?,?) '''
+    sql = ''' INSERT INTO OtherCost(NSCID, UnitID) 
+    VALUES (?,?); '''
     cur = conn.cursor()
     data_check=cur.execute(sql, oc)
     # Check if data already exist
@@ -148,9 +114,24 @@ def insert_oc(conn, oc):
       conn.commit()
       return cur.lastrowid
 
+#Insert data into Session table
+session = ["Lecture","NM"]
+def insert_session(conn, session):
+    sql = ''' Insert into Session(SessionName,SessionType)
+              VALUES(?,?) '''
+    cur = conn.cursor()
+    data_check=cur.execute(sql, session)
+    # Check if data already exist
+    if data_check is None:
+      cur.execute(sql, session)
+    else:
+      conn.commit()
+      return cur.lastrowid
+
 #Insert data into Staff table
+staff = [1,"Racheal","Lecture"]
 def insert_staff(conn, staff):
-    sql = ''' Insert into Staff(TeachingID,Name,Position)
+    sql = ''' Insert into Staff(TeachingCode,Name,Position)
               VALUES(?,?,?) '''
     cur = conn.cursor()
     data_check=cur.execute(sql, staff)
@@ -162,10 +143,38 @@ def insert_staff(conn, staff):
       conn.commit()
       return cur.lastrowid
 
+#Insert data into TeachingCode table
+TeachingCode = ["ORAA"]
+def insert_teachingcode(conn, TeachingCode):
+    sql = ''' Insert into TeachingCode(TeachingName)
+              VALUES(?) '''
+    cur = conn.cursor()
+    data_check=cur.execute(sql, TeachingCode)
+    # Check if data already exist
+    if data_check is None:
+      cur.execute(sql, TeachingCode)
+    else:
+      conn.commit()
+      return cur.lastrowid
+
+#Insert data into Unit table
+Unit = ["Computing","CITS2021","SEM-2",2020]
+def insert_unit(conn, Unit):
+    sql = ''' INSERT INTO Unit(UnitName,UnitCode,Semester,Year)
+              VALUES(?,?,?,?) '''
+    cur = conn.cursor()
+    data_check=cur.execute(sql, Unit)
+    # Check if data already exist
+    if data_check is None:
+      cur.execute(sql, Unit)
+    else:
+      conn.commit()
+      return cur.lastrowid
+
 def sample_insert():
 
   try:
-    database = "Unit_Budget.db"
+    database = "BudgetSample.db"
 
     #Create a database connection
     conn = create_connection(database)
@@ -198,7 +207,7 @@ def sample_insert():
 
       # Insert Activities table
       # activities = (UnitID, StaffID, SessionID, HourlyRate, Hour)
-      insert_activities(conn, activities)
+      insert_activities(conn, activity)
 
       # Insert Staff table
       # staff = (TeachingID, Name, Position)

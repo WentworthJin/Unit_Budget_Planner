@@ -36,10 +36,10 @@ function showAndHide() {
  * @param year The year when a report is created.
  * @param semester The semester a report targets to.
  * @param unitcode The Unit code a report targets to.
+<<<<<<< HEAD
  * @param unitLevel Level of the unit.
  */
 const buildSearchParams = (year, semester, unitcode, unitLevel) => {
-  const queryParams = new URLSearchParams();
   if(year) {
     queryParams.append("year", year);
   }
@@ -52,7 +52,6 @@ const buildSearchParams = (year, semester, unitcode, unitLevel) => {
   if(unitLevel) {
     queryParams.append("unitLevel", unitLevel);
   }
-
   return queryParams;
 }
 
@@ -101,7 +100,7 @@ const getAllData = async(year, semester, unitcode, unitLevel) => {
  * @param data type=array, receive data from server 
  * plot the data dynamically based on data from database 
  */
- window.onload = function (data) {
+window.onload = function (data) {
   const dataArray = []
   for(var i = 0; i < data.length; i++){
     dataArray.push({"label":data[i][0], "y":data[i][12]})
@@ -111,17 +110,16 @@ const getAllData = async(year, semester, unitcode, unitLevel) => {
     title:{
       text: "Unit Budget"              
     },
-    data: [//array of dataSeries              
-      { //dataSeries object
-
-       /*** Change type "column" to "bar", "area", "line" or "pie"***/
+    data: [              
+      { 
        type: "column",
        dataPoints: dataArray
      }
      ],
     axisY:{
-      minimum:0,
-      prefix: "$",
+      minimum: 0,
+      prefix: "$ ",
+      suffix:"/student"
     }     
     
   });
@@ -136,6 +134,7 @@ const getAllData = async(year, semester, unitcode, unitLevel) => {
  * @param year The year when the report is created.
  * @param semester The semester which the report targets to.
  * @param unitcode The Unit code which the report targets to.
+<<<<<<< HEAD
  * @param unitLevel Level of the unit.
  */ 
 const getEmployeeData = (year, semester, unitcode, unitLevel) => {
@@ -167,7 +166,6 @@ const horizontalbarchart = function (data) {
   for(var i = 0; i < data.length; i++){
     if (data[i][4]!==0) {dataArray.push({"y":data[i][4], "label":data[i][0]}) }
   };
-
   var horizontal = document.getElementById("horizontal")
   var bar_chart = new CanvasJS.Chart(horizontal, {
     title:{
@@ -196,6 +194,7 @@ const horizontalbarchart = function (data) {
  * @param year The year when the report is created.
  * @param semester The semester which the report targets to.
  * @param unitcode The Unit code which the report targets to.
+<<<<<<< HEAD
  * @param unitLevel Level of the unit.
 */ 
 const getWorkLoadData = function (year, semester, unitcode, unitLevel) {
@@ -423,6 +422,29 @@ semester.onkeydown = function() {
     $("#table_comments tr>td").remove();
 };
 
+
+// function to check whether file has a specific extension 
+function checkFile(send) {
+  const extension = new Array('.xlsx','.xls'); 
+  var fileExtension = send.value;
+  // get the file extension 
+  fileExtension = fileExtension.substring(fileExtension.lastIndexOf('.'));
+  if (!extension.includes(fileExtension)) {
+    alert("Invalid file selected, valid files are of " +extension.toString() + " types.")
+    send.value='';
+    return false;
+  }
+  else {
+    return true
+  }
+
+}
+
+// click to show user information 
+function sampleInformation() {
+  alert('Excel files includes files that have extension .xlsx and .xls. \
+  For example: "file1.xlsx" or "file1.xls"')
+}
 
 
 getAllData()
