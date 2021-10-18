@@ -15,6 +15,10 @@ function GFG_click(clicked) {
     document.getElementById('myFile').style.display="inline-block"
     document.getElementById('myFile1').style.display="none"
   }
+
+  if(clicked == "Unit Coordinator") {
+    document.getElementById('btn_view_table').style.display="initial";
+  }
 }
 
 // document.getElementById('role1').onclick = function(){
