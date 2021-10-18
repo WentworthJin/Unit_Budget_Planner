@@ -16,7 +16,7 @@ ALLOWED_EXTENSIONS = {'xlsx'}
 
 # Specify Path
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
-UPLOAD_FOLDER = os.path.join(APP_ROOT, './uploads')
+UPLOAD_FOLDER = os.path.join(APP_ROOT, 'uploads')
 
 def resource_path(relative_path):
   base_path = getattr(sys, '_MEIPASS', os.path.dirname(os.path.dirname(__file__)))
@@ -261,6 +261,7 @@ def upload_file():
         Unit_ID = filename [0:8]
         Schema()
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        print(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         Insert_All.main([os.path.join(app.config['UPLOAD_FOLDER'], filename)])
         print("Status")
         
