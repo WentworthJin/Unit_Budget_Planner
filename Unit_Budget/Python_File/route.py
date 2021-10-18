@@ -261,7 +261,7 @@ def upload_file():
         Unit_ID = filename [0:8]
         Schema()
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        Insert_All.main([os.path.join(app.config['UPLOAD_FOLDER'], filename)])
+        Insert_All.main(['/Users/liangbojin/Desktop/Unit Budget/Unit_Budget_Planner/Unit_Budget/Python_File/uploads'])
         print("Status")
         
     # Insert mock data
