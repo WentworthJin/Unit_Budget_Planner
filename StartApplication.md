@@ -79,6 +79,7 @@ npm start
 ![image info](./Resources/search_terminal.png)
 <br><br>
 2. <b>Copy the following commands in Terminal, and start the application.</b>
+<b> Tips: You can copy all codes in once and paste into powershell</b>
 <pre>
 
 cd Desktop/
