@@ -15,8 +15,10 @@
         const yearValue = $("#_year").val().toString();
         const semesterValue = $("#_semester").val().toString();
         const unitValue = $("#_unit").val().toString();
+
         const unitLevelValue = $("#_level").val().toString();
         const reports = await getAllData(yearValue, semesterValue, unitValue, unitLevelValue);
+        console.log(reports)
         for (var i=0; i< reports.length; i++) {
           reports[i].splice(1,1)
           reports[i].splice(10,1)
@@ -46,13 +48,14 @@
     <div>
       <h3 class="report">Summary Report</h3>
       <div class="query">
-        <button class="filter" id="filter" onclick=showAndHide()>Filter</button>
+        <button class="filter" onclick=showAndHide()>Filter</button>
         <input type="text" placeholder="Enter your query" class="search">
         <input type="submit" value="Search" class="enter">
         <button class="comment" id="comment">Comment</button>
         <br><br>
         <div class="radio" id="radio">
           <label for="year" id="yearlabel">Year</label>
+          <label for="year">Year</label>
           <select name="year" id="_year" onchange="updateReportList()">
             <option value="">All</option>
             <option value="2021">2021</option>
@@ -85,13 +88,16 @@
           <input type="text" name="year" id="years" placeholder="Enter Year" onkeypress="handleClick(event)">
           <label for="units" id="unitcodelabels">Unit</label>      
           <input type="text" name="units" id="unitcodes" placeholder="Unit Code" onkeypress="handleClick(event)">
-          <button class='clear' onclick="clearFunction()" id="clear">Clear</button>
+          <button class='clear' onclick="clearFunction()">Clear</button>
         <table class='tables' id="table_comments">
           <thead>
             <th>Unit Code</th><th>Comment</th>
           </thead>
         </table>
         <br><hr>
+        </div>
+        <br>
+
           <table class="tables" name="_tables">
             <thead>
               <th>{{names[0]}}</th><th>{{names[2]}}</th>
@@ -100,12 +106,14 @@
               <th>{{names[9]}}</th><th>{{names[11]}}</th><th>{{names[12]}}</th>
             </thead>
             <tbody id="report_list">
-                {% for row in rows %}
-                <td>{{row[0]}}</td><td>{{row[2]}}</td><td>{{row[3]}}</td><td>{{row[4]}}</td>
-                <td>{{row[5]}}</td><td>{{row[6]}}</td><td>{{row[7]}}</td><td>{{row[8]}}</td>
-                <td>{{row[9]}}</td><td>{{row[11]}}</td><td>{{row[12]}}</td>
-                {% endfor %}
-            </tbody>
+            {% for row in rows %}
+            <tr>
+              <td>{{row[0]}}</td><td>{{row[2]}}</td><td>{{row[3]}}</td><td>{{row[4]}}</td>
+              <td>{{row[5]}}</td><td>{{row[6]}}</td><td>{{row[7]}}</td><td>{{row[8]}}</td>
+              <td>{{row[9]}}</td><td>{{row[11]}}</td><td>{{row[12]}}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
           </table>
         <div id="barchart" style="height: 370px; width: 80%;" class="chart"></div>
         <br>
@@ -114,10 +122,10 @@
         <div id="horizontal" style="height: 370px; width: 80%;" class="chart"></div>
       </div> 
       <br>
-    <Button class="next" id='back'><a href="http://127.0.0.1:5000/">Back</a></Button>
+    <Button class="next"><a href="http://127.0.0.1:5000/">Back</a></Button>
     </div>
-    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"> </script>
     <script src="../src/index.js"></script>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"> </script>
   </body>
 </html>
 
