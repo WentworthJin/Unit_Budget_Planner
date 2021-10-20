@@ -212,7 +212,7 @@ describe('Application Launch', function () {
    * @param done, which is used for asynchronouse, call done when the function is finished, 
    * return a promise 
   */
-  it("Check filter and choose option", function (done)  {
+  it("Check filter and use the unit filter", function (done)  {
     app.client.$('#summary').then(function (element) {
       element.click().then(function(done) {
         app.client.$('#filter').then(function(filter) {
