@@ -4,6 +4,8 @@ function GFG_click(clicked) {
   el_down.innerHTML = "You are the "+clicked+".";
   if (clicked=="Head of Department") {
     document.getElementById('text').innerHTML="Please Upload an Excel Folder"
+    document.getElementById('progress').style.display="inline-block"
+    document.getElementById('progress').style.color="red"
     document.getElementById('text1').innerHTML="Please Choose the Folder"
     document.getElementById('myFile1').style.display="inline-block"
     document.getElementById('myFile').style.display="none"
@@ -224,8 +226,9 @@ const getWorkLoadData = function (year, semester, unitcode, unitLevel) {
 const graphing =  function(data) {
   const workload = []
   const staffCost = []
+  console.log(data)
   for(var i = 0; i < data.length; i++){
-    workload.push({"label":data[i][0], "y":data[i][1]})
+    workload.push({"label":data[i][0], "y":parseInt(data[i][1])})
     staffCost.push({"label":data[i][0], "y":data[i][2]})
   };
   var stack = document.getElementById("stack")

@@ -79,7 +79,7 @@ def get_all_data():
           JOIN Unit R USING (UnitID) \
           Where R.UnitCode = U.UnitCode \
           ) AS Num_of_Staff, \
-          SUM(A.Hour * A.PayRate) AS StaffCost, \
+          ROUND(SUM(A.Hour * A.PayRate)) AS StaffCost, \
           (Select SUM(N.TotalCost) \
           From OtherCost O JOIN NonSalaryCosts N USING (NSCID) \
           JOIN UNIT Z USING (UnitID) \
@@ -87,7 +87,7 @@ def get_all_data():
           Group by Z.UnitID) AS NonSalaryCost, \
           (Select B.Cost \
           From Unit G JOIN Budget B USING (UnitID) \
-          Where IsEstimated = "YES" and B.IsLastSemester = "NO" and G.UnitID = U.UnitID ) AS Budget, \
+          Where IsEstimated = "Yes" and B.IsLastSemester = "No" and G.UnitID = U.UnitID ) AS Budget, \
           (Select COUNT(*) \
           From Activities A JOIN Unit P USING (UnitID) \
           Where P.UnitID = U.UnitID \
@@ -104,14 +104,14 @@ def get_all_data():
           (Select En.EnrolmentNumber \
           FROM Enrolment En \
           JOIN Budget B USING (UnitID) \
-          Where En.IsEstimated = "YES" and En.IsLastSemester = "NO" and En.UnitID = U.UnitID ) AS Enrolment_number, \
+          Where En.IsEstimated = "Yes" and En.IsLastSemester = "No" and En.UnitID = U.UnitID ) AS Enrolment_number, \
           (Select B.cost / En.EnrolmentNumber from Budget B JOIN Enrolment En USING (UnitID) \
-          Where B.IsEstimated="YES" and B.IsLastSemester="NO" and En.IsEstimated="YES" \
-          and En.IsLastSemester="NO" and En.UnitID = U.UnitID) AS Cost_per_student \
+          Where B.IsEstimated="Yes" and B.IsLastSemester="No" and En.IsEstimated="Yes" \
+          and En.IsLastSemester="No" and En.UnitID = U.UnitID) AS Cost_per_student \
           From Activities A JOIN Staff S USING (StaffID)  \
-                                        JOIN Session E USING (SessionID) \
-                                        JOIN Unit U USING (UnitID) \
-          Group By U.UnitID'
+          JOIN Session E USING (SessionID) \
+          JOIN Unit U USING (UnitID) \
+          Group By U.UnitID; '
 
   # connect to database 
   con = sqlite3.connect(db_path)
@@ -124,7 +124,6 @@ def get_all_data():
   rows = cur.fetchall()
   # clost the connection to database
   con.close()
-  
   return render_template("result.html", rows=rows, names=names)
 
 @app.route("/get_all_data", methods=["GET"])
@@ -141,7 +140,7 @@ def get_main_data():
                       JOIN Unit R USING (UnitID) \
                       Where R.UnitCode = U.UnitCode \
                       ) AS Num_of_Staff, \
-                      SUM(A.Hour * A.PayRate) AS StaffCost, \
+                      ROUND(SUM(A.Hour * A.PayRate)) AS StaffCost, \
                       (Select SUM(N.TotalCost) \
                       From OtherCost O JOIN NonSalaryCosts N USING (NSCID) \
                       JOIN UNIT Z USING (UnitID) \
@@ -149,7 +148,7 @@ def get_main_data():
                       Group by Z.UnitID) AS NonSalaryCost, \
                       (Select B.Cost \
                       From Unit G JOIN Budget B USING (UnitID) \
-                      Where IsEstimated = "YES" and B.IsLastSemester = "NO" and G.UnitID = U.UnitID ) AS Budget, \
+                      Where IsEstimated = "Yes" and B.IsLastSemester = "No" and G.UnitID = U.UnitID ) AS Budget, \
                       (Select COUNT(*) \
                       From Activities A JOIN Unit P USING (UnitID) \
                       Where P.UnitID = U.UnitID \
@@ -166,10 +165,10 @@ def get_main_data():
                       (Select En.EnrolmentNumber \
                       FROM Enrolment En \
                       JOIN Budget B USING (UnitID) \
-                      Where En.IsEstimated = "YES" and En.IsLastSemester = "NO" and En.UnitID = U.UnitID ) AS Enrolment_number, \
+                      Where En.IsEstimated = "Yes" and En.IsLastSemester = "No" and En.UnitID = U.UnitID ) AS Enrolment_number, \
                       (Select B.cost / En.EnrolmentNumber from Budget B JOIN Enrolment En USING (UnitID) \
-                      Where B.IsEstimated="YES" and B.IsLastSemester="NO" and En.IsEstimated="YES" \
-                      and En.IsLastSemester="NO" and En.UnitID = U.UnitID) AS Cost_per_student \
+                      Where B.IsEstimated="Yes" and B.IsLastSemester="No" and En.IsEstimated="Yes" \
+                      and En.IsLastSemester="No" and En.UnitID = U.UnitID) AS Cost_per_student \
                       From Activities A JOIN Staff S USING (StaffID)  \
                           JOIN Session E USING (SessionID) \
                           JOIN Unit U USING (UnitID) \
@@ -193,7 +192,7 @@ def get_employee_budget():
   queryStrings = buildWhereClause(request.args.to_dict())
   con = sqlite3.connect(db_path)
   cur = con.cursor()
-  sql = "Select S.Name, U.UnitCode, U.Semester, U.Year, SUM(A.Hour*A.PayRate) AS TotalCost \
+  sql = "Select S.Name, U.UnitCode, U.Semester, U.Year, ROUND(SUM(A.Hour*A.PayRate)) AS TotalCost \
         From Activities A JOIN Staff S USING (StaffID) \
         JOIN Session E USING (SessionID) \
         JOIN Unit U USING (UnitID) "
@@ -214,7 +213,7 @@ def get_semester_budget():
   queryStrings = buildWhereClause(request.args.to_dict())
   con = sqlite3.connect(db_path)
   cur = con.cursor()
-  sql = "Select U.UnitCode, SUM(A.Hour) AS TotalLoad, SUM(A.Hour * A.PayRate) AS StaffCost \
+  sql = "Select U.UnitCode, ROUND(SUM(A.Hour)) AS TotalLoad, ROUND(SUM(A.Hour * A.PayRate)) AS StaffCost \
               From Activities A JOIN Staff S USING (StaffID) \
                 JOIN Session E USING (SessionID) \
                 JOIN Unit U USING (UnitID) \

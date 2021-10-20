@@ -20,7 +20,7 @@
         const reports = await getAllData(yearValue, semesterValue, unitValue, unitLevelValue);
         for (var i=0; i< reports.length; i++) {
           reports[i].splice(1,1)
-          reports[i].splice(10,1)
+          reports[i].splice(9,1)
         }
         const rows = reports.map(r => `<tr>${buildRow(r)}</tr>`)
         rows.map(r => list.append(r));
@@ -107,8 +107,9 @@
             <tbody id="report_list">
             {% for row in rows %}
             <tr>
-              <td>{{row[0]}}</td><td>{{row[2]}}</td><td>{{row[3]}}</td><td>{{row[4]}}</td>
-              <td>{{row[5]}}</td><td>{{row[6]}}</td><td>{{row[7]}}</td><td>{{row[8]}}</td>
+              <td>{{row[0]}}</td><td>{{row[2]}}</td>
+              <td>{{row[3]}}</td><td>{{row[4]}}</td><td>{{row[5]}}</td>
+              <td>{{row[6]}}</td><td>{{row[7]}}</td><td>{{row[8]}}</td>
               <td>{{row[9]}}</td><td>{{row[11]}}</td><td>{{row[12]}}</td>
             </tr>
             {% endfor %}
