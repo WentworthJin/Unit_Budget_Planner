@@ -64,6 +64,15 @@ The software will:
 - Import cost information in order to track unit expenditure against the budget.
 - Visualise and export reports on historical trends of enrolments and budgets.
 
+
+<br><hr><br>
+
+# Excel Template
+
+Currently, the program only support one excel Template which specified in Configure.py, anything changes made in excel template, need change the Configure.py accordingly.
+
+
+
 <br><hr><br>
 
 # Support Testing Files
