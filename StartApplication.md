@@ -72,7 +72,7 @@ npm start
 # MacOS Setup Guide
 ![image info](./Resources/mac_icon.png)
 <br><hr><br>
-## You need to download [Python](https://www.python.org/downloads/) and [Node.js](https://nodejs.org/dist/v14.18.1/node-v14.18.1.pkg)
+## You need to download [Python](https://www.python.org/ftp/python/3.10.0/python-3.10.0-macos11.pkg) and [Node.js](https://nodejs.org/dist/v14.18.1/node-v14.18.1.pkg)
 <br><br>
 
 1. <b>Hold 'command + space' and search for 'Terminal', and open the Terminal </b>
