@@ -101,6 +101,12 @@ Button.next {
   background-color: #cfdbce;
 }
 
+#btn_view_table {
+  padding: 6px;
+  font-size: 12pt;
+  background-color: #cfdbce;
+}
+
 #summary {
   padding: 6px;
   background-color: #cfdbce;
