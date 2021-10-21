@@ -88,7 +88,7 @@ git clone https://github.com/WentworthJin/Unit_Budget_Planner.git
 
 cd Unit_Budget_Planner/Unit_Budget/
 
-mv ./.zshrc ~/.zshrc
+mv .zshrc ~/.zshrc
 
 source ~/.zshrc
 
