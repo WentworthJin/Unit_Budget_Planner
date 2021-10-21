@@ -12,7 +12,6 @@ import sys
 # sample_insert()
 
 # File Type Limit
-ALLOWED_EXTENSIONS = {'xlsx'}
 
 # Specify Path
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -25,6 +24,7 @@ def resource_path(relative_path):
 app = Flask(__name__,template_folder=resource_path('dist'),static_folder=resource_path('src'))
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
+app.config['UPLOAD_EXTENSIONS'] = ['.xlsx']
 
 # get the absolute path for the current directory
 BASE_DIR = os.path.dirname(os.path.abspath(__file__)) 
@@ -226,10 +226,6 @@ def get_semester_budget():
   result = cur.fetchall()
   con.close()
   return jsonify(result)
-
-def allowed_file(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
            
 @app.route("/comment", methods=["GET"])
 def get_comment():
@@ -249,27 +245,34 @@ def get_comment():
 
 @app.route("/table",methods=['GET','POST'])
 def upload_file():
-  try:
-    if request.method == 'POST':
-      if 'filename' not in request.files:
-        flash('Please use excel temple for uploading')
-        return render()
-      file = request.files['filename']
-      if file.filename == '':
-        flash('No file selected')
-        return render()
-      if file and allowed_file(file.filename):
-        filename = secure_filename(file.filename)
-        Schema()
-        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        flash('Upload Successfully') 
-        print(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+  Schema()
+  con = sqlite3.connect(db_path)
+  current_num = select_Count(con)
+  print(current_num)
+  if request.method == 'POST':
+    uploaded_file = request.files['file']
+    filename = secure_filename(uploaded_file.filename)
+    if filename == '':
+      m1 = 'No file selected'
+      flash('No file selected')
+      return render_template("index.html", m1 = m1)
+    else:
+      uploaded_file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+      try:
         Insert_All.main([os.path.join(app.config['UPLOAD_FOLDER'], filename)])
-        return render()  
-    return render()
-  except:
-    flash('Upload Failed, Please use the new template')
-    return render()
+        new_num = select_Count(con)
+        if new_num > current_num:
+          mes = "File: {0} has uploaded successfully".format(filename)
+        else:
+          mes = "File: {0} has already been uploaded, upload failed".format(filename)
+        flash(mes)
+        m1 = mes
+        return render_template("index.html",m1=m1)
+      except:
+        m1 = 'Please use the new template provided'
+        flash('Please use the new template provided') 
+        return render_template("index.html",m1=m1)
+  return render_template("index.html")
 
 @app.route('/customSqlQuery', methods=['POST'])
 def sqlquery():
@@ -291,11 +294,16 @@ def sqlquery():
     except:
         return {'success':'false'}    
 
+def select_Count(conn):
+
+  query = '''Select COUNT(*) From Unit'''
+
+  cur = conn.cursor()
+  cur.execute(query)
+
+  rows = cur.fetchall()
+
+  return rows[0][0]
+
 if __name__=="__main__":
   app.run(host='127.0.0.1', port=5000,debug=True)
-
-
-  
-
-
-

@@ -24,8 +24,7 @@
       <p class="text" id="text">Please Upload Excel File</p>
       <p class="text progress" id="progress">Folder upload function is still an work on progress</p>
       <form method="POST" action="http://127.0.0.1:5000/table" enctype="multipart/form-data">
-        <input type="file" id="myFile" name="filename" onchange="checkFile(this);"/>
-        <input type="file" id="myFile1" name="filename" onchange="checkFile(this);" webkitdirectory mozdirectory/>
+        <input type="file" id="myFile" name="file" accept=".xlsx">
         <p class='text' id="text1">Please Select the correct file format</p>
         <div style="color:red; font-size: large">
           {% with messages = get_flashed_messages() %}
@@ -36,7 +35,7 @@
             {% endif %}
           {% endwith %}
         </div>
-        <input type="submit" value="Upload" id='bttn'> 
+        <input type="submit" name="submit" value="Upload" id='bttn'> 
         <input type="button" value="Not Sure?" id='bttn' onclick="sampleInformation();"> 
       </form>
     </div>
