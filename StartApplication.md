@@ -80,12 +80,9 @@ npm start
 <br><br>
 2. <b>Copy the following commands in Terminal, and start the application.</b><br>
 <b> Tips: You can copy all codes in once and paste into Terminal</b><br>
-<b> Tips: The second step: sudo apt-get install npm, requires you to enter your laptop password</b>
 <pre>
 
 cd Desktop/
-
-sudo apt-get install npm 
 
 git clone https://github.com/WentworthJin/Unit_Budget_Planner.git
 
