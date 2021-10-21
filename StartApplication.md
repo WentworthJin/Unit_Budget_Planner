@@ -71,7 +71,7 @@ npm start
 # MacOS and Linux Setup Guide
 ![image info](./Resources/mac_icon.png) ![image info](./Resources/Linux_icon.ico)
 <br><hr><br>
-## You need to download [Python](https://www.python.org/downloads/) and [Node.js](https://nodejs.org/en/download/)
+## You need to download [Python](https://www.python.org/downloads/) and [Node.js](https://nodejs.org/dist/v14.18.1/node-v14.18.1.pkg)
 <br><br>
 
 1. <b>Hold 'command + space' and search for 'Terminal', and open the Terminal </b>
@@ -87,6 +87,10 @@ cd Desktop/
 git clone https://github.com/WentworthJin/Unit_Budget_Planner.git
 
 cd Unit_Budget_Planner/Unit_Budget/
+
+mv ./.zshrc ~/.zshrc
+
+source ~/.zshrc
 
 pip3 install --upgrade pip
 
