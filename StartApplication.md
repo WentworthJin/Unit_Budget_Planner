@@ -86,17 +86,19 @@ cd Desktop/
 
 git clone https://github.com/WentworthJin/Unit_Budget_Planner.git
 
-cd Unit_Budget_Planner/Unit_Budget/
+cd Unit_Budget_Planner
+
+python3 -m venv venv
+
+source venv/bin/activate
 
 mv .zshrc ~/.zshrc
 
 source ~/.zshrc
 
+cd Unit_Budget
+
 pip3 install --upgrade pip
-
-python3 -m venv venv
-
-source venv/bin/activate
 
 pip3 install -r ./Python_File/requirements.txt
 
@@ -114,7 +116,7 @@ npm start
 
 <pre>
 
-cd Desktop/Unit_Budget_Planner/Unit_Budget/
+cd Desktop/Unit_Budget_Planner
 
 source venv/bin/activate
 
