@@ -27,7 +27,15 @@
         <input type="file" id="myFile" name="filename" onchange="checkFile(this);"/>
         <input type="file" id="myFile1" name="filename" onchange="checkFile(this);" webkitdirectory mozdirectory/>
         <p class='text' id="text1">Please Select the correct file format</p>
-
+        <div style="color:red; font-size: large">
+          {% with messages = get_flashed_messages() %}
+            {% if messages %}
+              {% for message in messages %}
+                {{ message }}
+              {% endfor %}
+            {% endif %}
+          {% endwith %}
+        </div>
         <input type="submit" value="Upload" id='bttn'> 
         <input type="button" value="Not Sure?" id='bttn' onclick="sampleInformation();"> 
       </form>
