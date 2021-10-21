@@ -83,7 +83,7 @@ npm start
 <b> Tips: You can copy all codes in once and paste into Terminal</b><br>
 <pre>
 
-cd ./Desktop/
+cd ~/Desktop
 
 git clone https://github.com/WentworthJin/Unit_Budget_Planner.git
 
