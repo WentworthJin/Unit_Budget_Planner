@@ -13,7 +13,7 @@
 - [<b>Supported Testing</b>](#support-testing-files)
   - [<b>Database Related Testing</b>](./Unit_Budget/DB_testing.md)
   - [<b>User Interface Related Testing</b>](./Unit_Budget/tests/User_Interface_testing.md)
-- [<b>Remaining Issues/Bugs</b>](#support-testing-files)
+- [<b>Remaining Issues/Bugs</b>](./RemainingIssue.md)
 
 <br><hr><br>
 
