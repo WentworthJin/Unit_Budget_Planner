@@ -13,6 +13,7 @@
 - [<b>Supported Testing</b>](#support-testing-files)
   - [<b>Database Related Testing</b>](./Unit_Budget/DB_testing.md)
   - [<b>User Interface Related Testing</b>](./Unit_Budget/tests/User_Interface_testing.md)
+- [<b>Remaining Issues/Bugs</b>](./RemainingIssue.md)
 
 <br><hr><br>
 
@@ -38,12 +39,12 @@
 
 |     Name     |      Contribution     | 
 |--------------|:---------------------:|
-| Liangbo Jin 23078811 |  0%       |
-| Ethan Chen 23067035 |    0%          |
-| Lida Tong 22957193 | 0%       |
-| Nara Eam 22805226 | 0%       |
-| Yu Zhu 23053734 | 0%       |
-| Keli Yin 22450718 | 0%       |
+| Liangbo Jin 23078811 |  100%       |
+| Ethan Chen 23067035 |    100%          |
+| Lida Tong 22957193 | 100%       |
+| Nara Eam 22805226 | 100%       |
+| Yu Zhu 23053734 | 100%       |
+| Keli Yin 22450718 | 80%       |
 
 See details and evidence [<b>Here</b>](./Group_Conbtribution.pdf)
 
@@ -63,6 +64,15 @@ The software will:
 - Import enrolment numbers in order to update automatically budget items that depend on class size.
 - Import cost information in order to track unit expenditure against the budget.
 - Visualise and export reports on historical trends of enrolments and budgets.
+
+
+<br><hr><br>
+
+# Excel Template
+
+Currently, the program only support one excel Template which specified in Configure.py, anything changes made in excel template, need change the Configure.py accordingly.
+
+
 
 <br><hr><br>
 
