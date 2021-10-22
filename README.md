@@ -39,12 +39,12 @@
 
 |     Name     |      Contribution     | 
 |--------------|:---------------------:|
-| Liangbo Jin 23078811 |  0%       |
-| Ethan Chen 23067035 |    0%          |
-| Lida Tong 22957193 | 0%       |
-| Nara Eam 22805226 | 0%       |
-| Yu Zhu 23053734 | 0%       |
-| Keli Yin 22450718 | 0%       |
+| Liangbo Jin 23078811 |  100%       |
+| Ethan Chen 23067035 |    100%          |
+| Lida Tong 22957193 | 100%       |
+| Nara Eam 22805226 | 100%       |
+| Yu Zhu 23053734 | 100%       |
+| Keli Yin 22450718 | 80%       |
 
 See details and evidence [<b>Here</b>](./Group_Conbtribution.pdf)
 
