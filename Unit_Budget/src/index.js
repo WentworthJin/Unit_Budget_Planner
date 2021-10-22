@@ -9,12 +9,16 @@ function GFG_click(clicked) {
     document.getElementById('text1').innerHTML="Please Choose the Folder"
     document.getElementById('myFile1').style.display="inline-block"
     document.getElementById('myFile').style.display="none"
+    document.getElementById('bttn').disabled = true;
+    document.getElementById('myFile1').disabled=true;
   }
   else {
     document.getElementById('text').innerHTML="Please Upload Excel File"
     document.getElementById('text1').innerHTML="Please Select the correct file format"
     document.getElementById('myFile').style.display="inline-block"
     document.getElementById('myFile1').style.display="none"
+    document.getElementById('progress').style.display="none"
+    document.getElementById('bttn').disabled = false;
   }
 }
 
