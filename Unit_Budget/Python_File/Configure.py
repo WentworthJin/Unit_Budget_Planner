@@ -24,3 +24,13 @@ def get_details(file):
   return unit_detail,teaching_team,delivery,marking,NSC
 
 
+def check_template(file):
+    teaching_team = pd.read_excel(file,usecols ="A",header =15,nrows=1).iloc[0,0]
+    activity = pd.read_excel(file,usecols ="A",header =23,nrows=1).iloc[0,0]
+    assessment =pd.read_excel(file,usecols ="A",header =42,nrows=1).iloc[0,0]
+    if "teaching team" in teaching_team.lower() and "teaching activities and preparation" in activity.lower() and "assessments and marking" in assessment.lower():
+        return True
+    else:
+        return False
+
+
