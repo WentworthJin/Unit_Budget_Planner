@@ -247,6 +247,7 @@ def get_comment():
 
 @app.route("/table",methods=['GET','POST'])
 def upload_file():
+  Schema()
   con = sqlite3.connect(db_path)
   current_num = select_Count(con)
   print(current_num)
