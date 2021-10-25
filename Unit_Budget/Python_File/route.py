@@ -234,7 +234,7 @@ def get_comment():
   requestStrings = buildJoinClause(request.args.to_dict())
   con = sqlite3.connect(db_path)
   cur = con.cursor()
-  sql = "Select U.UnitCode, A.Comment \
+  sql = "Select DISTINCT U.UnitCode, A.Comment \
         from Activities A \
         JOIN Unit U USING (UnitID)"
   if requestStrings:
