@@ -33,7 +33,7 @@
 - To run the testing file, you need to be in the [<b>Python_File<b>](./Python_File) directory
   
   <pre>
-  python3 -m test_Create_Table
+  python3 Create_Table_test.py 
   </pre>
   
   And the testing result should be
@@ -81,17 +81,17 @@ order to insert data into the database.
 - To run the testing file, you need to be in the [<b>Python_File<b>](./Python_File) directory
   
   <pre>
-  python3 -m test_Insert_All
+  python3 test_DBSystem.py
   </pre>
   
   And the testing result should be
   
   <pre>
   DB has been initialized
-  .........
+  .
   ----------------------------------------------------------------------
-  Ran 9 tests in 0.009s
-
+  Ran 3 tests in 0.029s
+  
   OK
   </pre>
 
@@ -132,18 +132,17 @@ primary key of Staff, TeachingCode, and Non-Salary Cost table.
 - To run the testing file, you need to be in the [<b>Python_File<b>](./Python_File) directory
   
   <pre>
-  python3 -m test_getID
+  python3 test_DBSystem.py
   </pre>
   
   And the testing result should be
   
   <pre>
   DB has been initialized
-  All Dummy data has been inserted
-  ...
+  .
   ----------------------------------------------------------------------
-  Ran 3 tests in 0.001s
-
+  Ran 3 tests in 0.029s
+  
   OK
   </pre>
   
