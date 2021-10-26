@@ -25,23 +25,10 @@ def select_query(conn,query):
   return cur.fetchall()
 
 
-#Insert data into Unit table
-def insert_unit(conn, unit):
-    sql = ''' INSERT INTO Unit(UnitCode,Semester,Year)
-              VALUES(?,?,?) '''
-    cur = conn.cursor()
-    data_check=cur.execute(sql, unit)
-    # Check if data already exist
-    if data_check is None:
-      cur.execute(sql, unit)
-      conn.commit()
-    else:
-      return cur.lastrowid
-
 
 def insert_activities(conn, act):
-    sql = '''INSERT OR IGNORE INTO Activities (UnitID, StaffID, SessionID, HourPerSession, MarkingHourPS, PayRate, Hour) 
-    VALUES(?, ?, ?, ?, ?, ?, ?);'''
+    sql = '''INSERT OR IGNORE INTO Activities (UnitID, StaffID, SessionID, HourPerSession, MarkingHourPS, PayRate, Hour,Comment) 
+    VALUES(?, ?, ?, ?, ?, ?, ?, ?);'''
     cur = conn.cursor()
     cur.execute(sql, act)
     conn.commit()
@@ -76,8 +63,8 @@ def insert_nsc(conn, nsc):
 
 #Insert data into OtherCost table
 def insert_oc(conn, oc):
-    sql = ''' INSERT OR IGNORE INTO OtherCost(NSCID, UnitID) 
-    VALUES (?,?); '''
+    sql = ''' INSERT OR IGNORE INTO OtherCost(NSCID, UnitID,Comment) 
+    VALUES (?,?,?); '''
     cur = conn.cursor()
     cur.execute(sql, oc)
     conn.commit()
@@ -109,8 +96,8 @@ def insert_teachingcode(conn, TeachingCode):
 
 #Insert data into Unit table
 def insert_unit(conn, unit):
-    sql = ''' INSERT OR IGNORE INTO Unit(UnitName,UnitCode,Semester,Year)
-              VALUES(?,?,?,?) '''
+    sql = ''' INSERT OR IGNORE INTO Unit(UnitName,UnitCode,Semester,Year,Comment)
+              VALUES(?,?,?,?,?) '''
     cur = conn.cursor()
     cur.execute(sql, unit)
     conn.commit()
@@ -194,6 +181,7 @@ def main(args):
     NSCHours = NSC.iloc[1:,1]
     NSCRates = NSC.iloc[1:,2]
     NSCCost = NSC.iloc[1:,3]
+    NSCComment = NSC.iloc[1:,4]
 
     thisyear_detail = unit_detail.iloc[:,3]
     lastyear_detail = unit_detail.iloc[:,5]
@@ -212,7 +200,7 @@ def main(args):
       with conn:
 
         #Insert Unit table
-        Unit = (UnitName,UnitCode,Semester,Year)
+        Unit = (UnitName,UnitCode,Semester,Year,thisyear_detail[5])
         UnitID = insert_unit(conn,Unit)
 
         #Insert TeachingCode table
@@ -237,7 +225,7 @@ def main(args):
         for i in range(max_NSC):
           nonsalarycost = (NSCNames[i+1],NSCHours[i+1],NSCRates[i+1],NSCCost[i+1])
           nscid =insert_nsc(conn,nonsalarycost)
-          oc = (nscid,UnitID)
+          oc = (nscid,UnitID,NSCComment[i+1])
           if oc !=0:
             insert_oc(conn,oc)
 
@@ -295,7 +283,7 @@ def main(args):
             if math.isnan(delivery.iloc[k+1,i+3]):
               continue
             else:
-              activity = (UnitID, StaffID, SessionID, delivery.iloc[k+1,1], 0, payrates[i], delivery.iloc[k+1,i+3])
+              activity = (UnitID, StaffID, SessionID, delivery.iloc[k+1,1], 0, payrates[i], delivery.iloc[k+1,i+3],delivery.iloc[k+1,len(staffnames)+3])
               insert_activities(conn,activity)
 
           for b in range(len(marking_session)):
@@ -306,7 +294,7 @@ def main(args):
               if math.isnan(marking.iloc[b+1,i+3]):
                 continue
               else:
-                activity = (UnitID, StaffID, SessionID, 0, marking.iloc[b+1,2], payrates[i], marking.iloc[b+1,i+3])
+                activity = (UnitID, StaffID, SessionID, 0, marking.iloc[b+1,2], payrates[i], marking.iloc[b+1,i+3],marking.iloc[b+1,len(staffnames)+3])
                 insert_activities(conn,activity)
 
 
