@@ -151,7 +151,7 @@ primary key of Staff, TeachingCode, and Non-Salary Cost table.
 ## 4. File Upload function
 
 ### I. Functionality
-- The [<b>upload function<b>](./Python_File/route.py#L173-L189) is button, that when user upload a file and clicked this button, the functions inside will save 
+- The [<b>upload function<b>](./Python_File/route.py#L248-L277) is button, that when user upload a file and clicked this button, the functions inside will save 
 the uploaded file into the directory [<b>uploads<b>(./Python_File/uploads) 
 
 ### II. How to run this code
