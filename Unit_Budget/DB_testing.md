@@ -1,7 +1,9 @@
 # Database Related Testing User guide
 
 <br><hr><br>
+## Introduction
 
+Overall, the Database related testing is all in one file: [<b>test_DBSystem.py<b>](./Python_File/test_DBSystem.py)
 ## 1. Create Table Function
 
 ### I. Functionality
