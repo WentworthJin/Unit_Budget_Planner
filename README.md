@@ -10,6 +10,7 @@
   - [<b>Group Contribution</b>](#group-project-contribution)
 - [<b>Project Detail</b>](#project-details)
 - [<b>Database Structure</b>](./DB_User_Guide.md)
+- [<b>Template User Manual</b>](./Template_User_Manual.md)
 - [<b>Supported Testing</b>](#support-testing-files)
   - [<b>Database Related Testing</b>](./Unit_Budget/DB_testing.md)
   - [<b>User Interface Related Testing</b>](./Unit_Budget/tests/User_Interface_testing.md)
@@ -65,12 +66,6 @@ The software will:
 - Import cost information in order to track unit expenditure against the budget.
 - Visualise and export reports on historical trends of enrolments and budgets.
 
-
-<br><hr><br>
-
-# Excel Template
-
-Currently, the program only support one excel Template which specified in Configure.py, anything changes made in excel template, need change the Configure.py accordingly.
 
 
 
