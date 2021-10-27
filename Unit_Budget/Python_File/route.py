@@ -58,7 +58,7 @@ def buildJoinClause(data):
   params = data.keys()
   s1 = 'U.UnitCode ="{}" '.format(data['unitcode']) if 'unitcode' in params else ''
   s2 = 'U.Year = ' + data['year'] if 'year' in params else ''
-  s3 = 'U.Semester = ' + data['semester'] if 'semester' in params else ''
+  s3 = 'U.Semester ="{}" '.format(data['semester']) if 'semester' in params else ''
   s = list()
   for x in [s1, s2, s3]:
     if x:
@@ -240,8 +240,10 @@ def get_comment():
   if requestStrings:
     sql = sql + ''' where ''' + requestStrings 
   sql = sql + " and A.Comment IS NOT NULL"
+  print(sql)
   cur.execute(sql)
   result = cur.fetchall()
+  print(result)
   con.close()
   return jsonify(result)
 
