@@ -358,7 +358,6 @@ var sendComment = async(year,semester, unitcode) => {
     }
   })
   const data = await result.json()
-  console.log(data)
   create_table(data)
   return data;
 }
